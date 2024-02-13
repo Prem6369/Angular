@@ -1,0 +1,223 @@
+.background{
+  background-color: black;
+  width: 100%;
+  height: 56vh;
+  
+}
+.headcontainer {
+  display: flex;
+  align-items: center;
+
+}
+
+.cancelicon {
+  margin-right: 5px; 
+  margin-left: 40px; 
+  cursor: pointer;
+}
+
+.txthead {
+  color: white;
+  text-align: center;
+  font-weight: 400;
+  margin-top: 20px;
+  flex-grow: 1; 
+}
+
+.cancel {
+  color: white;
+  border: 2px solid rgb(99, 92, 92);
+  border-radius: 15px;
+  background-color: rgb(99, 92, 92);
+  font-size: 25px;
+  
+}
+
+.container1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 80px;
+}
+
+.square-box {
+  width: 400px;
+  height: 100px;
+  display: flex;
+  border: 1px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: white;
+
+}
+
+img {
+  width: 30%;
+  height: auto;
+}
+
+.text-container {
+  flex: 1;
+  padding: 10px;
+}
+
+.text-container p {
+  margin: 0;
+}
+
+.resort-name {
+  font-weight: bold;
+}
+
+.date-range,
+.total-days {
+  font-size: 14px;
+  color: #666;
+  font-weight: 600;
+}
+.container2 {
+  display: flex;
+  justify-content: space-around; 
+}
+
+.txtguest{
+  color: white;
+  padding: 10px;
+  font-weight: 500;
+  
+}
+.txtroom{
+  color: black;
+  border: 10px solid #f5fffe;
+  border-radius: 2px;
+  background-color: #f2fcfb;
+  padding: 4px;
+  font-weight: 500;
+}
+// .container {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 100vh;
+// }
+
+// .rectangle-box {
+//   border: 2px solid black;
+//   width: 800px; /* Adjust width as needed */
+//   padding: 20px;
+//   border-radius: 5px;
+//   display: flex;
+//   justify-content: space-between;
+// }
+
+// .left-section {
+//   display: flex;
+//   align-items: center;
+// }
+
+// .right-section {
+//   display: flex;
+//   align-items: center;
+// }
+
+// .check {
+//   margin-right: 10px;
+// }
+
+// .text {
+//   margin-right: 10px;
+// }
+
+// .sub-text {
+//   margin-bottom: 15px;
+// }
+
+// .increment,
+// .decrement {
+//   padding: 5px 10px;
+//   font-size: 18px;
+//   cursor: pointer;
+// }f2fcfb
+
+// .value {
+//   margin: 0 10px;
+// }
+.background1{
+  background-color: #f2fcfb;
+}
+.containerret {
+  border: 2px solid black;
+  border-radius: 4px;
+  width: 60%;
+  background-color:#f2fcfb ;
+  margin: 10px auto;
+}
+
+.icon,
+.txtroo,
+.incre {
+  padding: 10px;
+}
+
+.text, .sub-text {
+  text-align: center;
+  margin-bottom: 5px  0;
+  font-weight: 700;
+}
+
+
+.decrement {
+  padding: 5px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  border: 2px solid black;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #dff7f5;
+  font-weight: bold;
+
+  
+
+}
+.increment{
+  padding: 5px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  border: 2px solid black;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  background-color: #dff7f5;
+  font-weight: bold;
+
+
+}
+.value{
+  border-top: 2px solid black; 
+  border-bottom: 2px solid black;
+  padding: 6.5px 10px;
+
+}
+
+.check {
+  margin-right: 5px; 
+  border: 2px solid gray;
+  border-radius: 20px;
+  padding: 15px ;
+  background-color: #dff7f5;
+}
+
+.incre {
+  display: flex; 
+  align-items: center; 
+  margin: 10px;
+}
+.incre {
+  text-align: center; /* Aligns content to the right */
+} 
+.incre-row {
+  display: flex;
+  justify-content: flex-end;
+}
+.summary-box{
+  display: flex;
+justify-content: center}

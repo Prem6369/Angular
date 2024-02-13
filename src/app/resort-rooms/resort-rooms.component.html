@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="background">
+    <div class="headcontainer">
+      <div class="cancelicon" (click)="BackToResort()">
+        <i class="fa-solid fa-xmark cancel"></i>
+      </div>
+      <h4 class="txthead" (click)="nextpage()">Booking details</h4>
+    </div>
+
+    <div class="container1">
+      <div class="square-box">
+        <img src="assets/Image/Resort_image.jpg" alt="Resort Image">
+        <div class="text-container">
+          <p class="resort-name">{{resortname}}</p>
+          <p class="date-range">From: 13/12/2023 - To: 18/12/2023</p>
+          <p class="total-days">Total Days: 5, Total Nights: 5</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container2">
+      <div class="txtroom">
+        Room(s)
+      </div>
+      <div class="txtguest">
+        Guest
+      </div>
+    </div>
+
+    <!-- <div class="container">
+      <div class="rectangle-box">
+        <div class="left-section">
+          <i class="far fa-circle-check fa-2x check"></i>
+          <div class="sub-text">Single Room 1Balcony</div>
+        </div>
+        <div class="right-section">
+          <button class="increment">+</button>
+          <div class="value">1</div>
+          <button class="decrement">-</button>
+        </div>
+      </div>
+    </div> -->
+
+    
+  </div >
+  <div class="background1">
+    <table class="containerret">
+      <tr *ngFor="let room of rooms; let i = index">
+        <td class="icon">
+          <i class="{{room.icon}}"></i>
+        </td>
+        <td class="txtroo">
+          <div class="text">{{ room.name }}</div>
+          <div class="sub-text">1 Balcony</div>
+        </td>
+        <td class="incre-row">
+          <div class="incre">
+            <button class="increment" (click)="decrement(i)">-</button>
+            <div class="value">{{ room.value }}</div>
+            <button class="decrement" (click)="increment(i)">+</button>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <div class="summary-box">
+      <p>Total Rooms:</p>
+      <p>{{ totalSelectedRooms }}</p>
+    </div>
+  </div>
+  
+  
+  
+
+</body>
+</html>

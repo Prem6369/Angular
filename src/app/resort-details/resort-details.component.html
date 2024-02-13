@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="containerr">
+    <img src="{{img}}" alt="" class="img-fluid" style="height: 500px;" width="100%">
+    <a class="link" href=""><i class="fa-solid fa-arrow-left-long"></i></a>
+    <div class="container">
+      <div class="square-box">
+        <p>View Gallery</p>
+        <div class="photo-container">
+          <img src="assets/Image/Resort_image.jpg" alt="Image 1" style="height: 80px;">
+          <img src="assets/Image/Resort_mainImage.jpeg" alt="Image 2" style="height: 80px;">
+          <img src="{{img}}" alt="Image 3" style="height: 80px;">
+          <img src="assets/Image/Resort_image.jpg" alt="Image 4" style="height: 80px;">
+          <!-- Add more images as needed -->
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="background">
+    <div class="container2">
+      <h3 class="resortname">Resort Name</h3>
+      <div class="starcontainer"><i class="fa-solid fa-star star"></i>
+        <p class="reviewtext">4.8(1,230reviews)</p>
+      </div>
+      <div class="locationcontainer"><i class="fa-solid fa-location-dot location"></i>
+        <p class="locationtext">{{location}},Kerala</p>
+      </div>
+    </div>
+
+    <div class="row1">
+      <div class="bedcontainer">
+        <i class="fa-solid fa-bed fa-2xl bed"></i>
+        <p class="txtbed">bed</p>
+      </div>
+      <div class="bathcontainer">
+        <i class="fa-solid fa-bath fa-2xl bath"></i>
+        <p class="txtbath">bath</p>
+      </div>
+      <div class="wificontainer">
+        <i class="fa-solid fa-wifi fa-2xl wifi"></i>
+        <p class="txtwifi">wifi</p>
+      </div>
+    </div>
+
+    <div class="overviewcontainer">
+      <h3>Overview</h3>
+      <p class="txtoverview">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Sed nec dolor vel turpis sollicitudin semper. Integer id volutpat nisl.
+        Vivamus sit amet luctus leo. Sed ultricies scelerisque arcu, sed placerat
+        ipsum consequat id. Mauris ultrices felis id nulla convallis, ut dignissim
+        risus interdum. Integer commodo gravida metus, id aliquam nunc interdum nec.
+        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
+        turpis egestas. Proin dignissim mi nec dolor convallis, sed posuere nunc fermentum.
+        Morbi dictum elit vitae arcu rutrum, non fermentum sapien tempor. Phasellus sem dolor,
+        feugiat et eros ac, dictum gravida nulla. Donec rhoncus fringilla tellus, vitae dignissim nisi
+        fringilla nec. Aliquam eu ligula quis mi vehicula malesuada. In quis nisl sed odio rutrum venenatis
+        nec vel magna.
+      </p>
+    </div>
+
+    <div class="highlights">
+      <h3>Highlights</h3>
+      <div class="images">
+        <div class="montainimg">
+          <i class="fa-solid fa-mountain-sun fa-2xl sun"></i>
+          <p class="txtgreateview">Great View</p>
+        </div>
+        <div class="shieldimg">
+          <i class="fa-solid fa-shield-halved fa-2xl shield"></i>
+          <p class="txtshield">Hygiene Plus</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="facilities">
+      <h3>Facilities</h3>
+      <div class="facility">
+        <div class="checkimg">
+          <i class="fa-regular fa-circle-check fa-2xl check"></i>
+          <p class="txtblcycle">Blcycle rental</p>
+        </div>
+        <div class="checkimg">
+          <i class="fa-regular fa-circle-check fa-2xl check"></i>
+          <p class="txtblcycle">Valet Parking</p>
+        </div>
+        <div class="checkimg">
+          <i class="fa-regular fa-circle-check fa-2xl check"></i>
+          <p class="txtblcycle">Front Desk [24-hours]</p>
+        </div>
+        <div class="checkimg">
+          <i class="fa-regular fa-circle-check fa-2xl check"></i>
+          <p class="txtblcycle">Airport Transfer</p>
+        </div>
+      </div>
+    </div>
+  <div class="con">
+    <div class="containerbook">
+      <div>
+        <p class="txtdate">From:13/12/2023</p>
+        <p class="txtdate">To:18/12/2023</p>
+        <p class="txtchange">change</p>
+      </div>
+  </div>
+
+  <div class="book">
+    <p class="txtavailabel">12 Available Room </p>
+    <p class="txtbook btn-success btn " (click)="booknow()">Book Now </p>
+  </div>
+</div>
+  </div>
+</body>
+
+</html>

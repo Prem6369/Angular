@@ -1,0 +1,39 @@
+    // html, body {
+    //     height: 100%;
+    //     margin: 0;
+    //     padding: 0;
+    // }
+body{
+    background-color:  rgba(60, 179, 113, 1);
+
+    height: 100vh; 
+}
+.icon{
+    color: white;
+    text-align: center;
+}
+.check{
+    margin-top: 200px;
+}
+.txtvisiting{
+    color: white;
+    text-align: justify;
+    text-align: center;
+    margin-top: 20px;
+}
+.heading{
+    color: white;
+    text-align: center;
+    margin-top: 50px;
+}
+.btn{
+    border: 2px solid white;
+    border-radius: 4px;
+    background-color: white;
+    align-items: center;
+    color: black;
+    font-weight: 600;
+}
+.btn-container {
+    text-align: center;
+}

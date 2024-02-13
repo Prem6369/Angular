@@ -7,30 +7,31 @@
   <title>Image Above Text</title>
 </head>
 <body>
-<div class="row p-5">
-  <div class="card col-md-4 border-0" id="card">
-    <img class="card-img " src="assets/Image/Resort_image.jpg" alt="Image">
+<div class="row p-4">
+  <div class="card col-md-4 border-0" (click)="navigateToResort()" id="card">
+    <img class="card-img"  src="assets/Image/Resort_image.jpg" alt="Image">
     <div class="card-img-overlay d-flex flex-column justify-content-end"> 
-      <h5 class="card-text " id="text">Resort Booking</h5>  
+      <div class="card-text" id="text">Resort Booking</div>  
+   </div>
+  </div>
+
+  <div class="card col-md-4 border-0" (click)="navigateToResort()" id="card">
+    
+    <img class="card-img-top" src="assets/Image/Resort_image.jpg" alt="Image">
+    <div class="card-img-overlay  d-flex flex-column justify-content-end"> 
+      <div class="card-text" id="text">Resort Booking</div>  
    </div>  
   </div>
 
-  <div class="card col-md-4 border-0" id="card">
-    <img class="card-img-top" src="assets/Image/Resort_image.jpg" alt="Image">
-    <div class="card-img-overlay  d-flex flex-column justify-content-end"> 
-      <h5 class="card-text" id="text">Resort Booking</h5>  
-   </div>  
-  </div>
+  <div class="card col-md-4 border-0 justify-content-around" (click)="navigateToResort()" id="card">
 
-  <div class="card col-md-4 border-0 justify-content-around" id="card">
     <img class="card-img-top" src="assets/Image/Resort_image.jpg" alt="Image">
     <div class="card-img-overlay  d-flex flex-column justify-content-end"> 
-      <h5 class="card-text" id="text">Resort Booking</h5>  
+      <div class="card-text" id="text">Resort Booking</div>  
    </div>  
   </div>
 </div>
  
 </body>
-
 </html>
 
