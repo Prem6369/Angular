@@ -12,6 +12,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResortRoomsComponent } from './resort-rooms/resort-rooms.component';
 import { ResortThankyouComponent } from './resort-thankyou/resort-thankyou.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ResortLoginComponent } from './resort-login/resort-login.component';
+import { ResortListComponent } from './resort-list/resort-list.component';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDateRangeInput } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
@@ -21,16 +29,23 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ResortDetailsComponent,
     ResortRoomsComponent,
     ResortThankyouComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ResortLoginComponent,
+    ResortListComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatDateRangeInput,MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

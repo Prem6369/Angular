@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="logo">
+       <img src="assets/Image/claysys-logo.png" width="210px"/>
+    </div>
+    <h1>Let's sign in</h1>
+    <div class="paragraph">
+        Lorem ipsum dolor sit amet consectetur adipisicing
+        elit. Quis sunt sed modi
+    </div>
+ 
+    <form [formGroup]="signInForm" (ngSubmit)="returnToRespectivePage()">
+        
+        <fieldset>
+            <span class="icon"><i class="far fa-envelope"></i></span>
+            <input type="text" placeholder="Enter user name" formControlName="userName">
+            <legend>User name</legend>
+        </fieldset>
+        
+        <fieldset>
+            <span class="icon"><i class="fas fa-lock"></i></span>
+            <input type="password" placeholder="Enter password" formControlName="password" >
+            <legend>Password</legend>
+        </fieldset>
+       
+        <p class="forgot-password"><a href="#">Forgot password?</a></p>
+        <button type="submit" class="button">SUBMIT</button>
+    </form>
+ 
+    <div class="para">
+        <p>Don't have an account? <a href="#">Register</a></p>
+    </div>
+</div>

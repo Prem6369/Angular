@@ -39,7 +39,7 @@ export class ResortDetailsComponent implements OnInit {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
     const id = 2; // or any other valid resort ID
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-  
+    
     this.httpclient.get<any>(`https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${id}`, { headers })
       .subscribe(
         (response) => {
@@ -47,30 +47,6 @@ export class ResortDetailsComponent implements OnInit {
           // Check if response contains data
           this.img=response.image_urls;
           this.location=response.location;
-          if (response && response.resort_id) {
-            // Create a new ResortDetails object from the response
-            const newResortDetails = new ResortDetails(
-              response.resort_id,
-              response.name,
-              response.description,
-              response.location,
-              response.amenities,
-              response.image_urls,
-              response.video_urls,
-              response.status,
-              response.created_date,
-              response.last_modified_date,
-              response.categories,
-              response.coordinates
-            );
-            // Update resortlist with the new ResortDetails object
-            this.resortlist.push(newResortDetails);
-          } else {
-            console.error('Empty response or response does not contain any resorts.');
-          }
-        },
-        (error) => {
-          console.error('Error fetching resort details:', error);
         }
       );
   }

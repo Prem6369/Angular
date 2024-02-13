@@ -1,0 +1,100 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ 
+.datePicker {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    width: 250px;
+}
+ 
+.datePicker mat-datepicker-toggle {
+    margin: 0 20px; /* Adjust as needed */
+}
+ 
+.datePicker input {
+    width: 120px; /* Adjust width as needed */
+}
+ 
+ 
+.container {
+    max-width: 1200px;
+    margin: 30px;
+    padding: 0 20px;
+    margin-bottom: 100px;
+}
+ 
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+}
+ 
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 350px;
+    height: 200px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+ 
+.image-container {
+    position: relative;
+}
+ 
+.resort-image {
+    width: 100%;
+    display: block;
+    border-radius: 8px 8px 0 0;
+}
+ 
+.resort-name {
+    position: absolute;
+    top: 130px;
+    left: 20px;
+    margin: 0;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+}
+ 
+.resort-location {
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    margin-left: 10px;
+    font-size: 0.7rem;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+}
+ 
+.location {
+    margin-right: 5px;
+}
+ 
+.arrow-icon {
+    position: absolute;
+    top: 40%;
+    left:280px; /* Adjust as needed */
+    transform: translateY(-50%);
+}
+ 
+.arrow-icon i {
+    color:white; /* Adjust arrow color as needed */
+    font-size: 1.5rem; /* Adjust arrow size as needed */
+    background-color:lightsteelblue;
+    padding: 5px;
+    border-radius: 20px;
+}

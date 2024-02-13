@@ -55,36 +55,43 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log(response);
-          if (response && response.resort_id) {
-            const newResortDetails = new UserProfile(
-              response.user_id,
-              response.first_name,
-              response.last_name,
-              response.claySys_email,
-              response.phone_number,
-              response.address,
-              response.role,
-              response.lead,
-              response.emplyee_id,
-              response.age,
-              response.gender,
-              response.official_id_card_no,
-              response.official_id_image_url,
-              response.claysys_id_card_image_url,
-              response.allotted_stays,
-              response.used_stays,
-              response.remaining_days,
-              response.status,
-              response.username,
-              response.created_date,
-              response.last_modified_date
+          if (response && response.length > 0 && response[0].username) {
+            const userProfile = response[0]; // Accessing the first element of the array
+            const userprofiles = new UserProfile(
+              userProfile.user_id,
+              userProfile.first_name,
+              userProfile.last_name,
+              userProfile.claySys_email,
+              userProfile.phone_number,
+              userProfile.address,
+              userProfile.role,
+              userProfile.lead,
+              userProfile.employee_id,
+              userProfile.age,
+              userProfile.gender,
+              userProfile.official_id_card_no,
+              userProfile.official_id_image_url,
+              userProfile.claysys_id_card_image_url,
+              userProfile.allotted_stays,
+              userProfile.used_stays,
+              userProfile.remaining_days,
+              userProfile.status,
+              userProfile.username,
+              userProfile.created_date,
+              userProfile.last_modified_date
             );
-            this.userlist.push(newResortDetails);
+            this.userlist.push(userprofiles);
           } else {
-            console.error(
-              'Empty response or response does not contain any resorts.'
-            );
+            console.error('Empty response or response does not contain any user profile.');
           }
-        });
+        },
+        (error) => {
+          console.error('Error occurred while fetching user details:', error);
+        }
+      );
+}
 
-}}
+  homePage() {
+    this.router.navigate(['/ResortDetails']);
+  }
+}
