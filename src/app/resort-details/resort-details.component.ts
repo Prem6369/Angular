@@ -28,7 +28,7 @@ export class ResortDetailsComponent implements OnInit {
   resortlist: ResortDetails[] = [];
   img:string='';
   location:string=''
-
+  name:string=''
   constructor(private httpclient: HttpClient,private router:Router) {}
 
   ngOnInit(): void {
@@ -47,10 +47,22 @@ export class ResortDetailsComponent implements OnInit {
           // Check if response contains data
           this.img=response.image_urls;
           this.location=response.location;
+          this.name=response.name;
         }
       );
   }
   booknow(){
     this.router.navigate(['/Resortrooms']);
+  }
+
+  scrollPhotoContainer(event: MouseEvent): void {
+    // Get the clicked image element
+    const clickedImage = event.target as HTMLElement;
+    // Get the offset position of the clicked image
+    const offsetLeft = clickedImage.offsetLeft;
+    // Get the photo container element by ID
+    const photoContainer = document.getElementById('photoContainer') as HTMLElement;
+    // Scroll the photo container to the left to the position of the clicked image
+    photoContainer.scrollLeft = offsetLeft;
   }
 }
