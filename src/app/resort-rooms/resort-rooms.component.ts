@@ -37,6 +37,12 @@ export class ResortRoomsComponent implements OnInit {
     { name: 'Suite Room', value: 0 ,icon:'fa-solid fa-hospital fa-2x check'}
   ];
 
+  total_members: { name: string;profile:string;contact: number,type:string;icon:string }[] = [
+    { name: 'Samual James', contact: 1234567890 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Employee'},
+    { name: 'Santhra Philip', contact: 78945612320 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Guest'},
+    { name: 'Henry Fuller', contact: 5874123690 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Guest'}
+  ];
+
   selectedRooms: { name: string; count: number }[] = [];
 
   constructor(private httpclient: HttpClient, private router: Router) {}
@@ -114,6 +120,11 @@ export class ResortRoomsComponent implements OnInit {
 
   BackToResort(){
     this.router.navigate(['/ResortDetails']);
+  }
+
+  next()
+  {
+    
   }
 
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -67,4 +67,107 @@
   
 
 </body>
-</html>
+</html> -->
+
+
+<!----Elangovan Work-->
+<div class="resot-details-page">
+  <div class="top p-5">
+    <div class="cancelicon" (click)="BackToResort()">
+      <i class="fa-solid fa-xmark cancel"></i>
+    </div>
+    <h4 class="text-center" (click)="nextpage()">Booking details</h4>
+    <div class="row justify-content-center my-5" id="resort-info-box">
+
+      <div class="col-md-2 col-xs-2">
+        <img src="assets/Image/Resort_image.jpg" class="img-fluid" alt="Resort Image">
+      </div>
+
+      <div class="col-md-5 col-xs-5 my-1">
+        <p class="resort-name fw-bold">{{resortname}}</p>
+        <p class="date-range fw-light">From: <span class="fw-bold">13/12/2023</span> | To: <span
+            class="fw-bold">18/12/2023</span></p>
+        <p class="total-days fw-bold">Total Days: 5, Total Nights: 5</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+
+    <mat-tab-group>
+      <mat-tab label="Room(s)" id="tab-label" class="mt-4">
+        <div *ngFor="let room of rooms; let i = index" class="row w-0 m-3 border-bottom pt-5">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="iconbackground">
+            <i class="{{room.icon}}"></i>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="fw-bold">{{ room.name }}</div>
+            <div>1 Balcony</div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="d-flex border" id="incrementBtn">
+              <button class="btn btn-sm btn-light me-2 fw-bold" (click)="decrement(i)"><i class="fa-solid fa-minus"></i>
+              </button>
+              <div>{{ room.value }}</div>
+              <button class="btn btn-sm btn-light ms-2 fw-bold" (click)="increment(i)"><i
+                  class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="Guest" id="tab-label">
+        
+        <div class="row " id="addButtons">
+          <button class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn-sm btn m-3" id="addEmployeeBtn">
+            ADD EMPLOYEE
+          </button>
+          <button class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn-sm btn m-3" id="addGuestBtn">
+            ADD GUEST
+          </button>
+        </div>
+
+        <div class=" my-3 p-5">
+          <div *ngFor="let member of total_members" class="row">
+            <div class="icon col-md-2">
+              <i class="{{member.profile}} fs-1"></i>
+            </div>
+            <div class="name col-md-8">
+              <div class="name">
+                <div class="fw-bold">{{member.name }}</div>
+              </div>
+              <div class="row">
+                <div class="number col-md-6">
+                  <div class="fw-light">{{member.contact }}</div>
+                </div>
+      
+                <div class="number col-md-6 border rounded-pill" id="person-type">
+                  <div class="fw-light">{{member.type }}</div>
+                </div>
+      
+              </div>
+      
+            </div>
+            <div class="edit col-md-2">
+              <i class="{{member.icon}} text-danger"></i>
+            </div>
+          </div>
+        </div>
+      
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div class="summary-box text-right">
+    <p>Total Rooms : &nbsp;</p>
+    <p>{{ totalSelectedRooms }}</p>
+  </div>
+
+  <div class="bg-success text-white" id="continue">
+    <div class="" (click)="next()" id="continuebtn">
+      continue <i class="fa-solid fa-arrow-right-long mx-3" style="font-size: 20px;"></i>
+    </div>
+  </div>
+
+</div>
