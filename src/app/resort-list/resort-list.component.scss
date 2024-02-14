@@ -7,10 +7,10 @@
 .datePicker {
     display: flex;
     align-items: center;
-    margin: 20px;
-    width: 250px;
+    justify-content: center;
+   
 }
- 
+
 .datePicker mat-datepicker-toggle {
     margin: 0 20px; /* Adjust as needed */
 }
@@ -19,7 +19,18 @@
     width: 120px; /* Adjust width as needed */
 }
  
- 
+.mat-datepicker-toggle
+{   
+    color:black;
+}
+.icon-calender
+{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: black;
+}
+
 .container {
     max-width: 1200px;
     margin: 30px;

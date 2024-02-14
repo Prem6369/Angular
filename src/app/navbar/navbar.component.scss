@@ -1,48 +1,70 @@
-nav {
-    background-color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between; /* Align items with space between */
-}
 
-nav a {
-    color: black;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 10px; /* Add padding to the links */
-}
 
 nav a:hover {
     color: #005011;
 }
 
 #logo img {
+    margin-left: 2px;
     height: 50px; 
     width: 100%; 
     vertical-align: middle; /* Align the logo vertically */
 }
 
-.navbar-nav {
-    list-style: none; /* Remove bullet points */
-    margin: 0;
-    padding: 0;
-    display: flex; /* Display list items as flex items */
-}
 
 .navbar-nav li {
-    margin-right: 10px; /* Add margin between list items */
+    margin-right: 30px; /* Add margin between list items */
 }
 
 .profilepicture{
-    border: 2px solid white;
+   
     border-radius: 100%;
     
     
 }
-.house{
+.house .bell{
     margin-top: 20px;
 
 }
-.bell{
-    margin-top: 20px;
+
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    text-align: left;
+
+}
+
+nav {
+   
+    cursor: pointer;
+}
+
+#navbarNav {
+    justify-content: end;
+  
+}
+.navbar-nav
+{
+    align-items: center;
+}
+
+nav ul li,
+nav a {
+    text-align: center;
+}
+
+
+nav ul li:last-child {
+    margin-right: 10px;
+}
+
+
+.nav-link {
+    font-size: 17px;
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
 }
