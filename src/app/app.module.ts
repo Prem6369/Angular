@@ -18,6 +18,8 @@ import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatDateRangeInput } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ResortAddGuestComponent } from './resort-add-guest/resort-add-guest.component';
+import { ResortAddEmployeeComponent } from './resort-add-employee/resort-add-employee.component';
 
 
 
@@ -32,6 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserProfileComponent,
     ResortLoginComponent,
     ResortListComponent,
+    ResortAddGuestComponent,
+    ResortAddEmployeeComponent,
     
   ],
   imports: [
