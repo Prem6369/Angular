@@ -18,44 +18,49 @@
         </div>
 
         <div class="bodycontainer">
-            <form action="" class="form">
+            <form [formGroup]="Addguest" class="form" (ngSubmit)="save()">
                 <fieldset>
                     <legend>FIRST NAME:</legend>
                     <div class="input-container">
-                      <span class="favorite-icon">&#10084;</span>
-                      <input type="text" id="fname" name="fname" class="fav-input" placeholder="Enter First Name">
+                      <i class="fa-solid fa-user"></i>
+                      <input type="text" id="fname" formControlName="Firstname">
                     </div>
                   </fieldset>
-                  
-                  
+
                   
                 <fieldset>
                     <legend>LAST NAME:</legend>
-                    <input type="text" id="fname" name="fname"><br><br>
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="lname" formControlName="Lastname">
                   </fieldset>
                   <fieldset>
                     <legend>AGE:</legend>
-                    <input type="text" id="fname" name="fname"><br><br>
+                    <i class="fa-regular fa-calendar"></i>
+                    <input type="text" id="age"formControlName="Age" >
                   </fieldset>
                   <fieldset>
                     <legend>SEX:</legend>
-                    <input type="text" id="fname" name="fname"><br><br>
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="sex" formControlName="Sex" >
                   </fieldset>
                   <fieldset>
                     <legend>PHONE NUMBER:</legend>
-                    <input type="text" id="fname" name="fname"><br><br>
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="text" id="Pnumber" formControlName="Phonenumber">
                   </fieldset>
                   <fieldset>
                     <legend>ADDRESS:</legend>
-                    <input type="text" id="fname" name="fname"><br><br>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <input type="text" id="address" formControlName="Address">
                   </fieldset>
                   <fieldset>
                     <legend>OFFCIAL ID CARD NO:</legend>
-                    <input type="text" id="fname" name="fname"><br><br>
+                    <i class="fa-solid fa-id-card"></i>
+                    <input type="text" id="idcard" formControlName="Idcardnumber" >
                   </fieldset>
                   <fieldset>
                     <legend>OFFCIAL ID IMAGE URL:</legend>
-                    <input type="text" id="fname" name="fname"><br><br>
+                    <input type="file" id="img" accept="image/*" formControlName="Imageurl">
                   </fieldset>
                   <BUtton class="btn btn-success">SAVE & NEW</BUtton>
                   <BUTTon class="btn btn-success">SAVE</BUTTon>
