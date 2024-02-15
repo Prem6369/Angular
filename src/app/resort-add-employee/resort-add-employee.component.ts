@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,6 +12,18 @@ export class ResortAddEmployeeComponent {
 
   constructor(private router:Router){}
 
+  searchEmployeeForm = new FormGroup(
+    {
+      employeeName : new FormControl(''),
+    })
+
+    
+
+
+    searchEmployee()
+    {
+
+    }
   BackToResort() {
     this.router.navigate(['']);
   }

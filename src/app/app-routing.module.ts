@@ -10,6 +10,7 @@ import { ResortLoginComponent } from './resort-login/resort-login.component';
 import { ResortListComponent } from './resort-list/resort-list.component';
 import { ResortAddGuestComponent } from './resort-add-guest/resort-add-guest.component';
 import { ResortAddEmployeeComponent } from './resort-add-employee/resort-add-employee.component';
+import { BookingPreviewComponent } from './booking-preview/booking-preview.component';
 
 const routes: Routes = [
   {path:'Home',component:HomeComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path:'',component:ResortLoginComponent},
   {path:'Resortlist',component:ResortListComponent},
   {path:'Addguest',component:ResortAddGuestComponent},
-  {path:'Addemployee',component:ResortAddEmployeeComponent}
+  {path:'Addemployee',component:ResortAddEmployeeComponent},
+  {path:'booking-preview',component:BookingPreviewComponent}
 ];
 
 @NgModule({

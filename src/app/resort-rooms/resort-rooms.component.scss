@@ -32,43 +32,37 @@
   
 // }
 
-// .container1 {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin: 80px;
-// }
+.container1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
 
-// .square-box {
-//   width: 400px;
-//   height: 100px;
-//   display: flex;
-//   border: 1px solid white;
-//   border-radius: 10px;
-//   overflow: hidden;
-//   background-color: white;
+.square-box {
+  width: 400px;
+  height: 100px;
+  display: flex;
+  color: black;
+  border: 1px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: white;
 
-// }
+}
 
-// img {
-//   width: 30%;
-//   height: auto;
-// }
+img {
+  width: 30%;
+  height: auto;
+}
 
 .top
 {
-  color: white;
+ color:white;
   background-color: black;
   height: fit-content;
 }
 
-#resort-info-box
-{
-  border:2px solid black;
-  border-radius: 10px;
-  color: black;
-  background-color: white;
-}
 
 #addEmployeeBtn,#addGuestBtn
 {
@@ -107,17 +101,31 @@
   align-items: center;
 }
 
-#tab-label:active{
-background-color: white;
-color: black;
+.mat-mdc-tab-group, .mat-mdc-tab-nav-bar {
+  --mdc-tab-indicator-active-indicator-color: #ffffff;
+  --mat-tab-header-disabled-ripple-color: rgb(213 14 14 / 50%);
+  --mat-tab-header-pagination-icon-color: #fff;
+  --mat-tab-header-inactive-label-text-color: rgb(255 255 255);
+  --mat-tab-header-active-label-text-color: #ffffff;
+  --mat-tab-header-active-ripple-color: #ffffff;
+  --mat-tab-header-inactive-ripple-color: #ffffff;
+  --mat-tab-header-inactive-focus-label-text-color: rgba(255, 255, 255, 0.952);
+  --mat-tab-header-inactive-hover-label-text-color: rgb(255, 255, 255);
+  --mat-tab-header-active-focus-label-text-color: #ffffff;
+  --mat-tab-header-active-hover-label-text-color: #ffffff;
+  --mat-tab-header-active-focus-indicator-color: #ffffff;
+  --mat-tab-header-active-hover-indicator-color: #ffffff;
 
 }
-#tab-label{
-  background-color: black;
-  color: white;
-  
-  }
 
+::ng-deep .mat-tab-label {
+  background-color: black !important;
+}
+
+::ng-deep .mat-tab-label.mat-tab-label-active {
+  background-color: white !important;
+} 
+  
 //  #iconbackground
 //  {
 // background-color: #f2fcfb;
@@ -285,5 +293,11 @@ margin-top: -50px;
 }
 .summary-box{
   display: flex;
-justify-content: center
+justify-content:end;
+}
+
+#edit-icon
+{
+  display:flex;
+  align-items: center;
 }

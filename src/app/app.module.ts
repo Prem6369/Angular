@@ -20,6 +20,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ResortAddGuestComponent } from './resort-add-guest/resort-add-guest.component';
 import { ResortAddEmployeeComponent } from './resort-add-employee/resort-add-employee.component';
+import { BookingPreviewComponent } from './booking-preview/booking-preview.component';
 
 
 
@@ -36,6 +37,7 @@ import { ResortAddEmployeeComponent } from './resort-add-employee/resort-add-emp
     ResortListComponent,
     ResortAddGuestComponent,
     ResortAddEmployeeComponent,
+    BookingPreviewComponent,
     
   ],
   imports: [

@@ -20,12 +20,13 @@ export class ResortDetails {
 
 }
 
+
 @Component({
-  selector: 'app-resort-rooms',
-  templateUrl: './resort-rooms.component.html',
-  styleUrls: ['./resort-rooms.component.scss']
+  selector: 'app-booking-preview',
+  templateUrl: './booking-preview.component.html',
+  styleUrl: './booking-preview.component.scss'
 })
-export class ResortRoomsComponent implements OnInit {
+export class BookingPreviewComponent implements OnInit {
   resortlist: ResortDetails[] = [];
   img: string = '';
   
@@ -33,14 +34,13 @@ export class ResortRoomsComponent implements OnInit {
   resortname: string = '';
   rooms: { name: string; value: number,icon:string }[] = [
     { name: 'Single Room', value: 0 ,icon:'fa-solid fa-bed fa-2x check'},
-    { name: 'Double Room', value: 0 ,icon:'fa-solid fa-user fa-2x check'},
     { name: 'Suite Room', value: 0 ,icon:'fa-solid fa-hospital fa-2x check'}
   ];
 
   total_members: { name: string;profile:string;contact: number,type:string;icon:string }[] = [
-    { name: 'Samual James', contact: 1234567890 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Employee'},
+    { name: 'Samual James', contact: 78945612320 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Employee'},
     { name: 'Santhra Philip', contact: 78945612320 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Guest'},
-    { name: 'Henry Fuller', contact: 5874123690 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Guest'}
+    { name: 'Henry Fuller', contact: 78945612320 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Guest'}
   ];
 
   selectedRooms: { name: string; count: number }[] = [];
@@ -122,9 +122,8 @@ export class ResortRoomsComponent implements OnInit {
     this.router.navigate(['/ResortDetails']);
   }
 
-  next()
-  {
-    this.router.navigate(['/booking-preview']);
+  submit() {
+    this.router.navigate(['/Thankyou']);
   }
 
 }
