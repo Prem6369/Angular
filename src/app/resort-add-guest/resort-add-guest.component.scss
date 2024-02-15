@@ -7,7 +7,7 @@
     display: inline-block;
   }
   .container1{
-    background-color: rgb(216, 231, 255);
+    background-color:white;
     font-family: Roboto;
 
   }
@@ -46,8 +46,46 @@ fieldset {
 
 .input-container {
   margin-bottom: 10px;
+  border: 2px dashed;
+  padding: 5px;
+  width: 250px;
+
 }
 
 button {
   margin-right: 10px; /* Add margin between buttons */
+}
+
+input[type="text"],
+input[type="password"] {
+    border: none;
+
+outline: none;
+    color: black;
+}
+ 
+section {
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 1em;
+  width:300px;
+  margin-left: 30px;
+ 
+}
+
+section h2 {
+  float: left;
+ margin: -1.7em 0 0;
+  padding: 0 .5em;
+  background: #fff;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.bodycontainer
+{
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

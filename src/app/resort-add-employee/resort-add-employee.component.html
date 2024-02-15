@@ -10,22 +10,19 @@
     </div>
 </div>
 
-<div class="bodycontainer">
-    <div class="row1">
-        <form action="" class="search-form"> 
-            <fieldset>
-                <legend>Search Employee</legend>
-                <input type="text" id="searchEmployee" name="searchEmployee">
-            </fieldset>
-            <div class="plusebox">
-                <div class="item">+</div>
-            </div>
-        </form>
-    </div>
+<div class="">
+        
+    <form [formGroup]="searchEmployeeForm" (ngSubmit)="searchEmployee()">
+        <fieldset>
+            <span class="icon"><i class="far fa-envelope"></i></span>
+            <input type="text" placeholder="SEARCH EMPLOYEE" formControlName="employeeName">
+            <legend>SEARCH EMPLOYEE</legend>
+        </fieldset>
+    </form>
 </div>
 
-<div class="rectangle">
+<!-- <div class="rectangle">
     <div class="logo">
         
     </div>
-</div>
+</div> -->

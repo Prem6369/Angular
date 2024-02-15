@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="logo">
        <img src="assets/Image/claysys-logo.png" width="210px"/>
     </div>
@@ -10,17 +10,17 @@
  
     <form [formGroup]="signInForm" (ngSubmit)="returnToRespectivePage()">
         
-        <fieldset>
-            <span class="icon"><i class="far fa-envelope"></i></span>
-            <input type="text" placeholder="Enter user name" formControlName="userName">
-            <legend>User name</legend>
-        </fieldset>
-        
-        <fieldset>
-            <span class="icon"><i class="fas fa-lock"></i></span>
-            <input type="password" placeholder="Enter password" formControlName="password" >
-            <legend>Password</legend>
-        </fieldset>
+      <section id=Username class="m-5">
+    <h2>User name</h2>
+    <span class="icon"><i class="far fa-envelope"></i></span>
+    <input type="text" placeholder="Enter username"  class="form-control" formControlName="userName" >
+</section>
+
+<section id=Password class="m-5">
+    <h2>Password</h2>
+    <span class="icon"><i class="fas fa-lock mx-2"></i></span>
+    <input type="password" placeholder="Enter password"  formControlName="password" >
+</section>
        
         <p class="forgot-password"><a href="#">Forgot password?</a></p>
         <button type="submit" class="button">SUBMIT</button>
@@ -29,4 +29,46 @@
     <div class="para">
         <p>Don't have an account? <a href="#">Register</a></p>
     </div>
+</div> -->
+
+<div class="loginPage text-center">
+    <div class="border container text-center">
+        <div class="mt-2">
+            <img src="assets/Image/claysys-logo.png" width="210px"/>
+        </div>
+        <h2 class=" pt-2" >
+            Let's sign in
+        </h2>
+        <div class="paragraph pt-3">
+            Lorem ipsum dolor sit amet consectetur adipisicing
+            elit. Quis sunt sed modi
+        </div>
+        <div class="form mt-3">
+            <form [formGroup]="signInForm" (ngSubmit)="returnToRespectivePage()">
+        
+                <section id="Username" class="mt-3">
+                    <h2>User name</h2>
+                        <span class="icon mx-1"><i class="far fa-envelope"></i></span>
+                        <input type="text" placeholder="Enter username" formControlName="userName">
+                    
+                </section>
+                
+        
+                <section id=Password class="mt-3">
+                    <h2>Password</h2>
+                    <span class="icon mx-1"><i class="fas fa-lock "></i></span>
+                    <input type="password" placeholder="Enter password" formControlName="password">
+                </section>
+        
+                <p class="forgot-password mt-3"><a routerLink="#">Forgot password?</a></p>
+                <div class="text-center">
+                    <button type="submit" class="button btn-lg text-center">SUBMIT</button>
+                </div>
+               
+            </form>
+        </div>
+    </div>
+    
+
 </div>
+
