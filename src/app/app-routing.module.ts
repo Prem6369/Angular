@@ -14,7 +14,7 @@ import { ResortAddEmployeeComponent } from './resort-add-employee/resort-add-emp
 const routes: Routes = [
   {path:'Home',component:HomeComponent},
   {path:'Navbar',component:NavbarComponent},
-  {path:'ResortDetails',component:ResortDetailsComponent},
+  {path:'Resortdetails',component:ResortDetailsComponent},
   { path:'Resortrooms',component:ResortRoomsComponent},
   {path : 'Thankyou',component:ResortThankyouComponent},
   {path:'Profile',component:UserProfileComponent},

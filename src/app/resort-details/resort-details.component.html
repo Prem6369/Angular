@@ -10,7 +10,7 @@
 <body>
   <div class="containerr">
     <img src="{{img}}" alt="" class="img-fluid" style="height: 500px;" width="100%">
-    <a class="link" href=""><i class="fa-solid fa-arrow-left-long backtopage"></i></a>
+    <a class="link"><i class="fa-solid fa-arrow-left-long backtopage" (click)="backToResortList()"></i></a>
     <div class="container">
       <div class="square-box">
         <p>View <br>Gallery</p>
@@ -26,34 +26,41 @@
 
   <div class="background">
     <div class="container2">
+      
       <h3 class="resortname">{{name}}</h3>
+
+      <div class="col-md-4 col-sm-12" id="map">
+        <div class="mapouter">
+        <div class="gmap_canvas">
+        <iframe class="gmap_iframe" width="100" frameborder="0" scrolling="no" src="https://maps.google.com/maps?width=644&amp;height=480&amp;hl=en&amp;q=Housten&amp;t=k&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+        </div>
+         
+                    </div>
+        </div>
 
       <div class="starcontainer"><i class="fa-solid fa-star star"></i>
         <p class="reviewtext">4.8(1,230reviews)</p>
-        <!-- <iframe
-        width="600"
-        height="450"
-        frameborder="0" style="border:0;"
-        src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJYVgzV2WAhYgRyoS7Zkj9WX4&key=YOUR_API_KEY" allowfullscreen>
-    </iframe> -->
       </div>
       <div class="locationcontainer"><i class="fa-solid fa-location-dot location"></i>
         <p class="locationtext">{{location}},Kerala</p>
       </div>
+      
     </div>
 
-    <div class="row1">
-      <div class="bedcontainer">
-        <i class="fa-solid fa-bed fa-2xl bed"></i>
-        <p class="txtbed">bed</p>
-      </div>
-      <div class="bathcontainer">
-        <i class="fa-solid fa-bath fa-2xl bath"></i>
-        <p class="txtbath">bath</p>
-      </div>
-      <div class="wificontainer">
-        <i class="fa-solid fa-wifi fa-2xl wifi"></i>
-        <p class="txtwifi">wifi</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 bedcontainer">
+          <i class="fa-solid fa-bed fa-2xl bed"></i>
+          <p class="txtbed">bed</p>
+        </div>
+        <div class="col-md-4 bathcontainer">
+          <i class="fa-solid fa-bath fa-2xl bath"></i>
+          <p class="txtbath">bath</p>
+        </div>
+        <div class="col-md-4 wificontainer">
+          <i class="fa-solid fa-wifi fa-2xl wifi"></i>
+          <p class="txtwifi">wifi</p>
+        </div>
       </div>
     </div>
 
@@ -73,47 +80,55 @@
       </p>
     </div>
 
-    <div class="highlights">
-      <h3>Highlights</h3>
-      <div class="images">
-        <div class="montainimg">
-          <i class="fa-solid fa-mountain-sun fa-2xl sun"></i>
-          <p class="txtgreateview">Great View</p>
-        </div>
-        <div class="shieldimg">
-          <i class="fa-solid fa-shield-halved fa-2xl shield"></i>
-          <p class="txtshield">Hygiene Plus</p>
-        </div>
-      </div>
-    </div>
 
-    <div class="facilities">
-      <h3>Facilities</h3>
-      <div class="facility">
-        <div class="checkimg">
-          <i class="fa-regular fa-circle-check fa-2xl check"></i>
-          <p class="txtblcycle">Blcycle rental</p>
+    <div class="highlights">
+      <h3 class="headinghigh">Highlights</h3>
+      <div class="row imagesforhighlights">
+        <div class="col-md-6 d-flex justify-content-center"> 
+          <div class="montainimg">
+            <i class="fa-solid fa-mountain-sun fa-2xl sun"></i>
+            <p class="txtgreateview">Great View</p>
+          </div>
         </div>
-        <div class="checkimg">
-          <i class="fa-regular fa-circle-check fa-2xl check"></i>
-          <p class="txtblcycle">Valet Parking</p>
-        </div>
-        <div class="checkimg">
-          <i class="fa-regular fa-circle-check fa-2xl check"></i>
-          <p class="txtblcycle">Front Desk [24-hours]</p>
-        </div>
-        <div class="checkimg">
-          <i class="fa-regular fa-circle-check fa-2xl check"></i>
-          <p class="txtblcycle">Airport Transfer</p>
+        <div class="col-md-6 d-flex justify-content-center"> 
+          <div class="shieldimg">
+            <i class="fa-solid fa-shield-halved fa-2xl shield"></i>
+            <p class="txtshield">Hygiene Plus</p>
+          </div>
         </div>
       </div>
     </div>
+    
+
+      <div class="facilities">
+        <h3 class="headingfacilities">Facilities</h3>
+        <div class="facility">
+          <div class="checkimg">
+            <i class="fa-regular fa-circle-check fa-2xl check"></i>
+            <p class="txtblcycle">Blcycle rental</p>
+          </div>
+          <div class="checkimg">
+            <i class="fa-regular fa-circle-check fa-2xl check"></i>
+            <p class="txtblcycle">Valet Parking</p>
+          </div>
+          <div class="checkimg">
+            <i class="fa-regular fa-circle-check fa-2xl check"></i>
+            <p class="txtblcycle">Front Desk [24-hours]</p>
+          </div>
+          <div class="checkimg">
+            <i class="fa-regular fa-circle-check fa-2xl check"></i>
+            <p class="txtblcycle">Airport Transfer</p>
+          </div>
+        </div>
+    </div>
+    
+    
   <div class="con">
     <div class="containerbook">
       <div>
-        <p class="txtdate">From:13/12/2023</p>
-        <p class="txtdate">To:18/12/2023</p>
-        <p class="txtchange">change</p>
+        <p class="txtdate">From:{{check_in_date}}</p>
+        <p class="txtdate">To:{{check_in_out}}</p>
+        <p class="txtchange" (click)="change()">change</p>
       </div>
   </div>
 

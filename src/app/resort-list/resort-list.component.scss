@@ -10,9 +10,20 @@
     justify-content: center;
    
 }
+.btn1{
+    margin: 0 10px;
+    background-color: rgb(4, 4, 82);
+    color: white;
+}
+.btn2{
+    margin: 0 10px;
+    background-color: rgb(4, 4, 82);
+    display: flex; align-items: center;
+    color: white;
+}
 
 .datePicker mat-datepicker-toggle {
-    margin: 0 20px; /* Adjust as needed */
+    margin: 0 10px; /* Adjust as needed */
 }
  
 .datePicker input {

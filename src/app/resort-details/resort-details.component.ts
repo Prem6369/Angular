@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export class ResortDetails {
   constructor(
@@ -29,10 +29,18 @@ export class ResortDetailsComponent implements OnInit {
   img:string='';
   location:string=''
   name:string=''
-  constructor(private httpclient: HttpClient,private router:Router) {}
+  check_in_date!:Date;
+  check_in_out!:Date;
+
+  constructor(private httpclient: HttpClient,private router:Router,private routing:ActivatedRoute) {}
 
   ngOnInit(): void {
     this.getResortDetails();
+    this.routing.queryParams.subscribe((parms) => {
+      this.check_in_date = parms['checkInDate'];
+      this.check_in_out = parms['checkOutDate'];
+
+    });
   }
 
   getResortDetails() {
@@ -54,15 +62,11 @@ export class ResortDetailsComponent implements OnInit {
   booknow(){
     this.router.navigate(['/Resortrooms']);
   }
-
-  scrollPhotoContainer(event: MouseEvent): void {
-    // Get the clicked image element
-    const clickedImage = event.target as HTMLElement;
-    // Get the offset position of the clicked image
-    const offsetLeft = clickedImage.offsetLeft;
-    // Get the photo container element by ID
-    const photoContainer = document.getElementById('photoContainer') as HTMLElement;
-    // Scroll the photo container to the left to the position of the clicked image
-    photoContainer.scrollLeft = offsetLeft;
+  backToResortList(){
+    this.router.navigate(['/Resortlist'])
   }
+  change(){
+    this.router.navigate(['Resortlist'])
+  }
+
 }
