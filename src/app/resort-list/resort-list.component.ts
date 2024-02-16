@@ -149,23 +149,24 @@ export class ResortListComponent implements OnInit {
   
   
   nextpage() {
-    // Get the check-in and check-out dates from the form group
     const checkInDate = this.rangevalue.get('check_in_date')?.value;
-    const checkOutDate = this.rangevalue.get('check_out_date')?.value;
+    let checkOutDate = this.rangevalue.get('check_out_date')?.value;
   
-    // Check if checkInDate is not null or undefined
     if (checkInDate != null && checkOutDate != null) {
-      // Navigate to the next page and pass the dates as query parameters
+      checkOutDate.setDate(checkOutDate.getDate() + 1);
+      checkInDate.setDate(checkInDate.getDate() + 1);
+
       this.router.navigate(['/Resortdetails'], {
         queryParams: {
-          checkInDate: checkInDate.toISOString().split('T')[0], // Convert to ISO string
-          checkOutDate: checkOutDate.toISOString().split('T')[0], // Convert to ISO string
+          checkInDate: checkInDate.toISOString().split('T')[0], 
+          checkOutDate: checkOutDate.toISOString().split('T')[0], 
         }
       });
     } else {
       console.error('Check-in date or check-out date is null or undefined.');
     }
   }
+  
   
 
   clearDates() {
