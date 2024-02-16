@@ -1,21 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export class ResortDetails {
   constructor(
     public resort_id: number,
     public name: string,
-    public description: string,
-    public location: string,
-    public amenities: string[],
+
     public image_urls: string,
-    public video_urls: string,
-    public status: string,
-    public created_date: string,
-    public last_modified_date: string,
-    public categories: any[],
-    public coordinates: { lat: string, long: string }
+    
   ) {}
 
 }
@@ -27,10 +20,11 @@ export class ResortDetails {
   styleUrl: './booking-preview.component.scss'
 })
 export class BookingPreviewComponent implements OnInit {
+  termsChecked: boolean = false;
   resortlist: ResortDetails[] = [];
   img: string = '';
-  
-  location: string = '';
+  totalSelectedRooms!:number;
+
   resortname: string = '';
   rooms: { name: string; value: number,icon:string }[] = [
     { name: 'Single Room', value: 0 ,icon:'fa-solid fa-bed fa-2x check'},
@@ -45,10 +39,17 @@ export class BookingPreviewComponent implements OnInit {
 
   selectedRooms: { name: string; count: number }[] = [];
 
-  constructor(private httpclient: HttpClient, private router: Router) {}
+  constructor(private httpclient: HttpClient, private router: Router,private route:ActivatedRoute) {}
 
   ngOnInit(): void {
     this.getResortDetails();
+    
+    this.route.queryParams.subscribe((params) => {
+      debugger;
+      this.totalSelectedRooms = params['totalSelectedRooms']
+    
+  });
+  
   }
 
   getResortDetails() {
@@ -57,42 +58,13 @@ export class BookingPreviewComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
     this.httpclient
-      .get<any>(
-        `https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${id}`,
-        { headers }
-      )
+      .get<any>(`https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${id}`,{ headers})
       .subscribe(
         (response) => {
           console.log(response);
-
           this.img = response.image_urls;
-          this.location = response.location;
           this.resortname = response.name;
-          if (response && response.resort_id) {
-            const newResortDetails = new ResortDetails(
-              response.resort_id,
-              response.name,
-              response.description,
-              response.location,
-              response.amenities,
-              response.image_urls,
-              response.video_urls,
-              response.status,
-              response.created_date,
-              response.last_modified_date,
-              response.categories,
-              response.coordinates
-            );
-            this.resortlist.push(newResortDetails);
-          } else {
-            console.error(
-              'Empty response or response does not contain any resorts.'
-            );
-          }
         },
-        (error) => {
-          console.error('Error fetching resort details:', error);
-        }
       );
   }
 
@@ -101,25 +73,15 @@ export class BookingPreviewComponent implements OnInit {
   }
 
 
-  increment(index: number) {
-    this.rooms[index].value++;
-    this.updateSelectedRooms();
-  }
-
-  decrement(index: number) {
-    if (this.rooms[index].value > 0) {
-      this.rooms[index].value--;
-      this.updateSelectedRooms();
-    }
-  }
-  totalSelectedRooms: number = 0;
-
-  updateSelectedRooms() {
-    this.totalSelectedRooms = this.rooms.reduce((total, room) => total + room.value, 0);
-  }
-
   BackToResort(){
     this.router.navigate(['/ResortDetails']);
+  }
+  
+  toggleSubmitButton(): void {}
+
+  edit()
+  {
+    this.router.navigate(['/Resortrooms']);
   }
 
   submit() {

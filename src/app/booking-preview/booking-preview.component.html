@@ -75,7 +75,7 @@
   <div class="row">
 
     <div class="col-md-2" id="terms-condition">
-      <input type="checkbox" />
+      <input type="checkbox" [(ngModel)]="termsChecked" (change)="toggleSubmitButton()" />
     </div>
 
     <div class="col-md-10" >
@@ -84,11 +84,11 @@
   </div>
 
   <div class="row p-4" id="final-button">
-    <button class="btn btn-light col-md-6">
+    <button class="btn btn-light col-md-6" (click)="edit()">
 EDIT
     </button>
 
-    <button class="btn btn-success col-md-6" (click)="submit()">
+    <button class="btn btn-success col-md-6" [disabled]="!termsChecked" (click)="submit()">
       SUBMIT
     </button>
   </div>

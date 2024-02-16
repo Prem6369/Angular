@@ -115,6 +115,7 @@ export class ResortRoomsComponent implements OnInit {
   totalSelectedRooms: number = 0;
 
   updateSelectedRooms() {
+    debugger;
     this.totalSelectedRooms = this.rooms.reduce((total, room) => total + room.value, 0);
   }
 
@@ -122,9 +123,13 @@ export class ResortRoomsComponent implements OnInit {
     this.router.navigate(['/ResortDetails']);
   }
 
-  next()
+  next(totalSelectedRooms: any)
   {
-    this.router.navigate(['/booking-preview']);
+    debugger;
+    this.router.navigate(['/booking-preview'],{
+      
+      queryParams:{totalSelectedRooms:totalSelectedRooms}
+    });
   }
-
+ 
 }
