@@ -1,28 +1,82 @@
-<div class="container1" >
-    <div class="headcontainer">
-      <div class="cancelicon" (click)="BackToResort()">
-        <i class="fa-solid fa-xmark fa-lg cancel"></i>
-    </div>
-    
-        <div class="heading">
-            <h3 class="text-center m-3">Add Employee</h3>
+<!-- <div class="container" >
+
+    <div class="my-3">
+     <div class="text-center m-3">
+            <h3>Add Employee</h3>
         </div>
     </div>
 </div>
-
 <div class="">
-        
-    <form [formGroup]="searchEmployeeForm" (ngSubmit)="searchEmployee()">
-        <fieldset>
-            <span class="icon"><i class="far fa-envelope"></i></span>
-            <input type="text" placeholder="SEARCH EMPLOYEE" formControlName="employeeName">
-            <legend>SEARCH EMPLOYEE</legend>
-        </fieldset>
+    <form [formGroup]="searchEmployeeForm" class="form" (ngSubmit)="searchEmployee()">
+
+        <section id="LastName" class="mt-3">
+            <h2>SEARCH EMPLOYEE</h2>
+
+            <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
+            <input type="text" id="Fname" formControlName="searchEmployee">
+
+        </section>
     </form>
-</div>
+</div> -->
 
 <!-- <div class="rectangle">
     <div class="logo">
         
     </div>
 </div> -->
+
+<div class="add-employee ">
+    <div class="head">
+        <h2 class="text-center ">Add Employee </h2>
+    </div>
+   
+        <div class="row">
+            <div class="col-md-7" id="searchBox">
+                <form [formGroup]="searchEmployeeForm" class="form" (ngSubmit)="searchEmployee()">
+                    <section id="LastName" class="mt-3">
+                        <h2>SEARCH EMPLOYEE</h2>
+                        <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="searchEmployee" formControlName="searchEmployee">
+                    </section>
+                </form>
+            </div>
+            <div class="col-md-4" id="icon">
+                <i class="fa-solid fa-square-plus" style="font-size:50px;"></i>
+            </div>
+        </div> 
+        <div class="my-3" id="search-box">
+            <div class="row" id="search-result">
+              <div class="icon col-md-5 text-center">
+                <i class="fa-regular fa-id-badge fs-1 "></i>
+              </div>
+    
+              <div class=" col-md-4">
+                <div class="name">
+                  <div class="fw-bold">Samual James</div>
+                </div>
+    
+                <div class="row">
+                    <div class=" col-md-6">
+                      <div class="fw-light">1234567890</div>
+                    </div>
+            
+                    <div class=" col-md-6 border rounded-pill" id="person-type">
+                      <div class="fw-light">Employee</div>
+                    </div>
+                </div>
+          
+              </div>
+              <div class="col-md-2 text-center" id="edit-icon">
+                <i class="fa-regular fa-trash-can text-danger"></i>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button class=" btn btn-success" (click)="save()">
+                SAVE 
+            </button>
+          </div>
+    
+
+  
+</div>
