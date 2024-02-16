@@ -107,6 +107,7 @@ export class ResortRoomsComponent implements OnInit {
   totalSelectedRooms: number = 0;
 
   updateSelectedRooms() {
+    debugger;
     this.totalSelectedRooms = this.rooms.reduce((total, room) => total + room.value, 0);
   }
 
@@ -114,10 +115,17 @@ export class ResortRoomsComponent implements OnInit {
     this.router.navigate(['/ResortDetails']);
   }
 
-  next()
+  next(totalSelectedRooms: any)
   {
-    this.router.navigate(['/booking-preview']);
+    debugger;
+    this.router.navigate(['/booking-preview'],{
+      
+      queryParams:{totalSelectedRooms:totalSelectedRooms}
+    });
   }
+<<<<<<< HEAD
+ 
+=======
 totalDays!:number;
 totalNights!:number;
 calculateDayAndNight() {
@@ -156,4 +164,5 @@ calculateDayAndNight() {
   this.totalNights = totalNights;
 }
 
+>>>>>>> 9d27f5bf9d78f376340878242d756d558266991a
 }

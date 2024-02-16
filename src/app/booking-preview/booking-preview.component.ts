@@ -1,8 +1,23 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { Router } from '@angular/router';
 import { ResortDetails } from '../Service/Model/models.service'; 
 
+=======
+import { ActivatedRoute, Router } from '@angular/router';
+
+export class ResortDetails {
+  constructor(
+    public resort_id: number,
+    public name: string,
+
+    public image_urls: string,
+    
+  ) {}
+
+}
+>>>>>>> 04b89ac88070c05bfccd526927de781baa359b70
 
 
 @Component({
@@ -11,10 +26,11 @@ import { ResortDetails } from '../Service/Model/models.service';
   styleUrl: './booking-preview.component.scss'
 })
 export class BookingPreviewComponent implements OnInit {
+  termsChecked: boolean = false;
   resortlist: ResortDetails[] = [];
   img: string = '';
-  
-  location: string = '';
+  totalSelectedRooms!:number;
+
   resortname: string = '';
   rooms: { name: string; value: number,icon:string }[] = [
     { name: 'Single Room', value: 0 ,icon:'fa-solid fa-bed fa-2x check'},
@@ -29,10 +45,17 @@ export class BookingPreviewComponent implements OnInit {
 
   selectedRooms: { name: string; count: number }[] = [];
 
-  constructor(private httpclient: HttpClient, private router: Router) {}
+  constructor(private httpclient: HttpClient, private router: Router,private route:ActivatedRoute) {}
 
   ngOnInit(): void {
     this.getResortDetails();
+    
+    this.route.queryParams.subscribe((params) => {
+      debugger;
+      this.totalSelectedRooms = params['totalSelectedRooms']
+    
+  });
+  
   }
 
   getResortDetails() {
@@ -41,17 +64,13 @@ export class BookingPreviewComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
     this.httpclient
-      .get<any>(
-        `https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${id}`,
-        { headers }
-      )
+      .get<any>(`https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${id}`,{ headers})
       .subscribe(
         (response) => {
           console.log(response);
-
           this.img = response.image_urls;
-          this.location = response.location;
           this.resortname = response.name;
+<<<<<<< HEAD
           if (response && response.resort_id) {
             const newResortDetails = new ResortDetails(
               response.resort_id,
@@ -77,6 +96,28 @@ export class BookingPreviewComponent implements OnInit {
       );
   }
 
+=======
+        },
+      );
+  }
+
+  nextpage() {
+    this.router.navigate(['/Thankyou']);
+  }
+
+
+  BackToResort(){
+    this.router.navigate(['/ResortDetails']);
+  }
+  
+  toggleSubmitButton(): void {}
+
+  edit()
+  {
+    this.router.navigate(['/Resortrooms']);
+  }
+
+>>>>>>> 04b89ac88070c05bfccd526927de781baa359b70
   submit() {
     this.router.navigate(['/Thankyou']);
   }
