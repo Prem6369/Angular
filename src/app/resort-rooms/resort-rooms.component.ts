@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export class ResortDetails {
   constructor(
@@ -45,10 +45,17 @@ export class ResortRoomsComponent implements OnInit {
 
   selectedRooms: { name: string; count: number }[] = [];
 
-  constructor(private httpclient: HttpClient, private router: Router) {}
-
+  constructor(private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
+  check_in_date!:Date;
+  check_out_date!:Date;
   ngOnInit(): void {
     this.getResortDetails();
+    this.routing.queryParams.subscribe((parms) => {
+      this.check_in_date = parms['checkInDate'];
+      this.check_out_date = parms['checkOutDate'];
+
+    });
+    this.calculateDayAndNight();
   }
 
   getResortDetails() {
@@ -64,6 +71,8 @@ export class ResortRoomsComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log(response);
+          console.log(this.totalDays);
+          console.log(this.totalNights);
 
           this.img = response.image_urls;
           this.location = response.location;
@@ -126,5 +135,42 @@ export class ResortRoomsComponent implements OnInit {
   {
     this.router.navigate(['/booking-preview']);
   }
+totalDays!:number;
+totalNights!:number;
+calculateDayAndNight() {
+  // Set default check-in time to 10 AM
+  const checkInDateTime = new Date(this.check_in_date);
+  checkInDateTime.setHours(10, 0, 0, 0);
+
+  // Set default check-out time to 6 PM
+  const checkOutDateTime = new Date(this.check_out_date);
+  checkOutDateTime.setHours(18, 0, 0, 0);
+
+  // Initialize total days and nights
+  let totalDays = 0;
+  let totalNights = 0;
+
+  // Check if check-out date is after check-in date
+  if (checkOutDateTime > checkInDateTime) {
+    // Calculate the difference in milliseconds between the two dates
+    const differenceInMs = checkOutDateTime.getTime() - checkInDateTime.getTime();
+
+    // Convert milliseconds to days and round it down
+    totalDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+
+    // Check if check-out time is after 6 PM
+    if (checkOutDateTime.getHours() >= 18) {
+      // Increment total nights by 1
+      totalNights++;
+    }
+
+    // Add the total days to total nights
+    totalNights += totalDays;
+  }
+
+  // Update class variables
+  this.totalDays = totalDays;
+  this.totalNights = totalNights;
+}
 
 }
