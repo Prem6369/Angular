@@ -1,42 +1,7 @@
-// .background{
-//   background-color: black;
-//   width: 100%;
- 
-  
-// }
-// .headcontainer {
-//   display: flex;
-//   align-items: center;
-
-// }
-
-// .cancelicon {
-//   margin-right: 5px; 
-//   margin-left: 40px; 
-//   cursor: pointer;
-// }
-
-// .txthead {
-//   color: white;
-//   text-align: center;
-//   font-weight: 400;
-//   margin-top: 20px;
-//   flex-grow: 1; 
-// }
-
-// .cancel {
-//   color: white;
-//   border: 2px solid rgb(99, 92, 92);
-//   border-radius: 70%;
-//   background-color: rgb(99, 92, 92);
-  
-// }
-
 .container1 {
   display: flex;
   justify-content: center;
   align-items: center;
- 
 }
 
 .square-box {
@@ -56,43 +21,38 @@ img {
   height: auto;
 }
 
-.top
-{
- color:white;
+.top {
+  color: white;
   background-color: black;
   height: fit-content;
 }
 
 
-#addEmployeeBtn,#addGuestBtn
-{
+#addEmployeeBtn,
+#addGuestBtn {
   background-color: #52225a;
-  color:white;
+  color: white;
 
 }
 
-#addButtons
-{
+#addButtons {
   display: flex;
   justify-content: center;
- 
+
 }
 
-#person-type
-{
+#person-type {
   width: auto;
-  color:aqua;
+  color: aqua;
   font-weight: bolder;
-  border:2px solid aqua;
+  border: 2px solid aqua;
 }
 
-#continue
-{
+#continue {
   height: 50px;
 }
 
-#continuebtn
-{
+#continuebtn {
   font-size: large;
   font-weight: bold;
   padding-top: 10px;
@@ -101,7 +61,8 @@ img {
   align-items: center;
 }
 
-.mat-mdc-tab-group, .mat-mdc-tab-nav-bar {
+.mat-mdc-tab-group,
+.mat-mdc-tab-nav-bar {
   --mdc-tab-indicator-active-indicator-color: #ffffff;
   --mat-tab-header-disabled-ripple-color: rgb(213 14 14 / 50%);
   --mat-tab-header-pagination-icon-color: #fff;
@@ -124,13 +85,8 @@ img {
 
 ::ng-deep .mat-tab-label.mat-tab-label-active {
   background-color: white !important;
-} 
-  
-//  #iconbackground
-//  {
-// background-color: #f2fcfb;
+}
 
-//  }
 .text-container {
   flex: 1;
   padding: 10px;
@@ -150,18 +106,20 @@ img {
   color: #666;
   font-weight: 600;
 }
+
 .container2 {
   display: flex;
-  justify-content: space-around; 
+  justify-content: space-around;
 }
 
-.txtguest{
+.txtguest {
   color: white;
   padding: 10px;
   font-weight: 500;
-  
+
 }
-.txtroom{
+
+.txtroom {
   color: black;
   border: 10px solid #f5fffe;
   border-radius: 2px;
@@ -169,13 +127,14 @@ img {
   padding: 4px;
   font-weight: 500;
 }
+
 .container {
-margin-top: -50px;
+  margin-top: -50px;
 }
 
 .rectangle-box {
   border: 2px solid black;
-  width: 800px; /* Adjust width as needed */
+  width: 800px;
   padding: 20px;
   border-radius: 5px;
   display: flex;
@@ -205,8 +164,8 @@ margin-top: -50px;
 }
 
 #incrementBtn {
-  width:80px;
-  font-weight: bolder ;
+  width: 80px;
+  font-weight: bolder;
   border: 3px solid black;
   border-radius: 10px;
   background-color: #f2fcfb;
@@ -215,14 +174,12 @@ margin-top: -50px;
 .value {
   margin: 0 10px;
 }
-// .background1{
-//   background-color: #f2fcfb;
-//}
+
 .containerret {
   border: 2px solid black;
   border-radius: 4px;
   width: 60%;
-  background-color:#f2fcfb ;
+  background-color: #f2fcfb;
   margin: 10px auto;
 }
 
@@ -231,14 +188,6 @@ margin-top: -50px;
 .incre {
   padding: 10px;
 }
-
-// .text, .sub-text {
-//   text-align: center;
-//   margin-bottom: 5px  0;
-//   font-weight: 700;
-// }
-
-
 .decrement {
   padding: 5px 10px;
   font-size: 18px;
@@ -248,11 +197,9 @@ margin-top: -50px;
   border-top-right-radius: 10px;
   background-color: #dff7f5;
   font-weight: bold;
-
-  
-
 }
-.increment{
+
+.increment {
   padding: 5px 10px;
   font-size: 18px;
   cursor: pointer;
@@ -261,47 +208,40 @@ margin-top: -50px;
   border-top-left-radius: 10px;
   background-color: #dff7f5;
   font-weight: bold;
-
-
 }
-.value{
-  border-top: 2px solid black; 
+
+.value {
+  border-top: 2px solid black;
   border-bottom: 2px solid black;
   padding: 6.5px 10px;
 
 }
 
-// .check {
-//   margin-right: 5px; 
-//   border: 2px solid gray;
-//   border-radius: 20px;
-//   padding: 15px ;
-//   background-color: #dff7f5;
-// }
-
 .incre {
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   margin: 10px;
 }
+
 .incre {
-  text-align: center; /* Aligns content to the right */
-} 
+  text-align: center;
+}
+
 .incre-row {
   display: flex;
   justify-content: flex-end;
 }
-.summary-box{
+
+.summary-box {
   display: flex;
-justify-content:end;
+  justify-content: end;
 }
 
-#edit-icon
-{
-  display:flex;
+#edit-icon {
+  display: flex;
   align-items: center;
 }
-#rules-list
-{
+
+#rules-list {
   list-style-type: none;
 }

@@ -3,39 +3,41 @@
     flex-direction: column;
     align-items: center;
 }
- 
+
 .datePicker {
     display: flex;
     align-items: center;
     justify-content: center;
-   
+
 }
-.btn1{
+
+.btn1 {
     margin: 0 10px;
     background-color: rgb(4, 4, 82);
     color: white;
 }
-.btn2{
+
+.btn2 {
     margin: 0 10px;
     background-color: rgb(4, 4, 82);
-    display: flex; align-items: center;
+    display: flex;
+    align-items: center;
     color: white;
 }
 
 .datePicker mat-datepicker-toggle {
-    margin: 0 10px; /* Adjust as needed */
+    margin: 0 10px;
 }
- 
+
 .datePicker input {
-    width: 120px; /* Adjust width as needed */
+    width: 120px;
 }
- 
-.mat-datepicker-toggle
-{   
-    color:black;
+
+.mat-datepicker-toggle {
+    color: black;
 }
-.icon-calender
-{
+
+.icon-calender {
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -48,14 +50,14 @@
     padding: 0 20px;
     margin-bottom: 100px;
 }
- 
+
 .card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 50px;
 }
- 
+
 .card {
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -66,17 +68,17 @@
     overflow: hidden;
     position: relative;
 }
- 
+
 .image-container {
     position: relative;
 }
- 
+
 .resort-image {
     width: 100%;
     display: block;
     border-radius: 8px 8px 0 0;
 }
- 
+
 .resort-name {
     position: absolute;
     top: 130px;
@@ -87,7 +89,7 @@
     font-weight: bold;
     text-align: left;
 }
- 
+
 .resort-location {
     position: absolute;
     bottom: 30px;
@@ -101,22 +103,22 @@
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 8px;
 }
- 
+
 .location {
     margin-right: 5px;
 }
- 
+
 .arrow-icon {
     position: absolute;
     top: 40%;
-    left:280px; /* Adjust as needed */
+    left: 280px;
     transform: translateY(-50%);
 }
- 
+
 .arrow-icon i {
-    color:white; /* Adjust arrow color as needed */
-    font-size: 1.5rem; /* Adjust arrow size as needed */
-    background-color:lightsteelblue;
+    color: white;
+    font-size: 1.5rem;
+    background-color: lightsteelblue;
     padding: 5px;
     border-radius: 20px;
 }

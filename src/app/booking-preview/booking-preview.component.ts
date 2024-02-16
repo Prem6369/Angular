@@ -1,24 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResortDetails } from '../Service/Model/models.service'; 
 
-export class ResortDetails {
-  constructor(
-    public resort_id: number,
-    public name: string,
-    public description: string,
-    public location: string,
-    public amenities: string[],
-    public image_urls: string,
-    public video_urls: string,
-    public status: string,
-    public created_date: string,
-    public last_modified_date: string,
-    public categories: any[],
-    public coordinates: { lat: string, long: string }
-  ) {}
-
-}
 
 
 @Component({
@@ -89,37 +73,8 @@ export class BookingPreviewComponent implements OnInit {
               'Empty response or response does not contain any resorts.'
             );
           }
-        },
-        (error) => {
-          console.error('Error fetching resort details:', error);
         }
       );
-  }
-
-  nextpage() {
-    this.router.navigate(['/Thankyou']);
-  }
-
-
-  increment(index: number) {
-    this.rooms[index].value++;
-    this.updateSelectedRooms();
-  }
-
-  decrement(index: number) {
-    if (this.rooms[index].value > 0) {
-      this.rooms[index].value--;
-      this.updateSelectedRooms();
-    }
-  }
-  totalSelectedRooms: number = 0;
-
-  updateSelectedRooms() {
-    this.totalSelectedRooms = this.rooms.reduce((total, room) => total + room.value, 0);
-  }
-
-  BackToResort(){
-    this.router.navigate(['/ResortDetails']);
   }
 
   submit() {

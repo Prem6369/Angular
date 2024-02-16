@@ -1,52 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { MatDateRangePicker } from '@angular/material/datepicker';
-import { MAT_DATE_FORMATS } from '@angular/material/core';
- 
-export const APP_DATE_FORMATS = {
-  parse: {
-    dateInput: 'DD.MM.YYYY',
-  },
-  display: {
-    dateInput: 'DD.MM.YYYY',
-    monthYearLabel: 'MM.YYYY',
-    dateA11yLabel: 'DD.MM.YYYY',
-    monthYearA11yLabel: 'MM.YYYY',
-  },
-};
- 
-export class ResortLists {
-  constructor(
-    public resort_id: number,
-    public name: string,
-    public description: string,
-    public location: string,
-    public amenities: string[],
-    public image_urls: string,
-    public video_urls: string,
-    public status: string,
-    public created_date: string,
-    public last_modified_date: string,
-    public categories: any[],
-    public coordinates: { lat: string, long: string }
-  ) {}
-}
- 
+import { ResortDetails } from '../Service/Model/models.service'; 
+  
 @Component({
   selector: 'app-resort-list',
   templateUrl: './resort-list.component.html',
   styleUrls: ['./resort-list.component.scss'],
-  providers: [
-    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
-  ],
+
 })
 
 export class ResortListComponent implements OnInit {
-  @ViewChild('picker') picker!: MatDateRangePicker<Date>;  
 
-  resortlist: ResortLists[] = [];
+  resortlist: ResortDetails[] = [];
   rangevalue = new FormGroup({
     check_in_date: new FormControl<Date | null>(new Date(new Date().toUTCString())),
     check_out_date: new FormControl<Date | null>(new Date(new Date().toUTCString())),
@@ -69,7 +36,7 @@ export class ResortListComponent implements OnInit {
           console.log(response);
           if (Array.isArray(response)) {
             response.forEach((resortObject) => {
-              const newResortDetails = new ResortLists(
+              const newResortDetails = new ResortDetails(
                 resortObject.resort_id,
                 resortObject.name,
                 resortObject.description,
@@ -96,7 +63,6 @@ export class ResortListComponent implements OnInit {
   } 
 
   getAvailableResortDetails() {
-
     const checkInDate = this.rangevalue.get('check_in_date')?.value;
     const checkOutDate = this.rangevalue.get('check_out_date')?.value;
     const today = new Date();
@@ -116,10 +82,10 @@ export class ResortListComponent implements OnInit {
         this.httpclient.get<any[]>('https://claysysresortapi.claysys.org/api/resorts/getroomavailability', { params, headers })
           .subscribe(
             (response) => {
-              console.log(params);
+              console.log(this.rangevalue);
               if (Array.isArray(response)) {
                 response.forEach((resortObject) => {
-                  const newResortDetails = new ResortLists(
+                  const newResortDetails = new ResortDetails(
                     resortObject.resort_id,
                     resortObject.name,
                     resortObject.description,
@@ -136,9 +102,6 @@ export class ResortListComponent implements OnInit {
                   this.resortlist.push(newResortDetails);
                 });
               }
-            },
-            (error) => {
-              console.error('Error fetching available resort details:', error);
             }
           );
       }

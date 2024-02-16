@@ -3,17 +3,16 @@
     max-width: 400px;
     margin: 40px auto;
     padding: 20px;
-   
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-
 .paragraph {
-  
+
     color: gray;
 }
+
 form {
     display: flex;
     flex-direction: column;
@@ -23,36 +22,22 @@ input[type="text"],
 input[type="password"] {
     border: none;
 
-outline: none;
+    outline: none;
     color: black;
 }
- 
+
 
 .button {
     padding: 10px;
     background-color: #52225a;
     color: #fff;
-    width:200px;
+    width: 200px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
-// .para {
-//     margin-top: 30px;
-//     color: gray;
-// }
-// p {
-//     text-align: center;
-// }
-// p a {
-//     color: #007bff;
-//     text-decoration: none;
-//     font-weight: bold;
-// }
-// p a:hover {
-//     text-decoration: underline;
-// }
+
 .forgot-password {
     text-align: right;
     margin-bottom: 20px;
@@ -62,17 +47,15 @@ section {
     border: 2px solid;
     border-radius: 10px;
     padding: 1em;
-    width:300px;
+    width: 300px;
     margin-left: 30px;
-   
-  }
-  
-  section h2 {
+}
+
+section h2 {
     float: left;
-   margin: -1.7em 0 0;
+    margin: -1.7em 0 0;
     padding: 0 .5em;
     background: #fff;
     font-size: 1em;
     font-weight: normal;
-  }
-
+}

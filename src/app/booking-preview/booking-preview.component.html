@@ -1,4 +1,3 @@
-
 <div class="" id="bookingPreviewPage">
 
   <h2 class="text-center">
@@ -6,24 +5,24 @@
   </h2>
 
   <div class="justify-content-center my-5">
-    <div class="container1">      
-        <div class="square-box">
-          <img src="assets/Image/Resort_image.jpg" alt="Resort Image">
-          <div class="text-container mx-1">
-            <div class="resort-name pb-1">{{resortname}}</div>
-            <div class="date-range">From: 13/12/2023 - To: 18/12/2023</div>
-            <div class="total-days">Total Days: 5, Total Nights: 5</div>
-          </div>
+    <div class="container1">
+      <div class="square-box">
+        <img src="assets/Image/Resort_image.jpg" alt="Resort Image">
+        <div class="text-container mx-1">
+          <div class="resort-name pb-1">{{resortname}}</div>
+          <div class="date-range">From: 13/12/2023 - To: 18/12/2023</div>
+          <div class="total-days">Total Days: 5, Total Nights: 5</div>
         </div>
+      </div>
     </div>
   </div>
 
   <div class="mx-5">
-    <h4 >
+    <h4>
       Room details (2)
     </h4>
   </div>
- 
+
 
   <div id="room-details" class="container rounded my-3">
     <div *ngFor="let room of rooms;" class="row w-0 m-3 border-bottom p-3">
@@ -39,13 +38,13 @@
       </div>
     </div>
   </div>
-<div class="mx-5">
-  <h4>
-    Person details (3)
-  </h4>
+  <div class="mx-5">
+    <h4>
+      Person details (3)
+    </h4>
 
-</div>
- 
+  </div>
+
 
   <div id="room-members" class="container rounded my-3">
     <div *ngFor="let member of total_members" class="row border-bottom p-3">
@@ -78,14 +77,14 @@
       <input type="checkbox" />
     </div>
 
-    <div class="col-md-10" >
+    <div class="col-md-10">
       I agree <span class="text-primary">Terms</span> and <span class="text-primary">Conditions</span>
     </div>
   </div>
 
   <div class="row p-4" id="final-button">
     <button class="btn btn-light col-md-6">
-EDIT
+      EDIT
     </button>
 
     <button class="btn btn-success col-md-6" (click)="submit()">

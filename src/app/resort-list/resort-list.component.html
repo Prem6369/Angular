@@ -1,30 +1,24 @@
 <app-navbar></app-navbar>
-<hr/>
+<hr />
 <div class="page">
 
     <div class="datePicker">
-        <mat-date-range-input [formGroup]="rangevalue" (ngSubmit)="getAvailableResortDetails()"   [rangePicker]="picker">
-            <input matStartDate formControlName="check_in_date" placeholder="Start date">  
+        <mat-date-range-input [formGroup]="rangevalue" (ngSubmit)="getAvailableResortDetails()" [rangePicker]="picker">
+            <input matStartDate formControlName="check_in_date" placeholder="Start date">
             <input matEndDate formControlName="check_out_date" placeholder="End date">
-        
-          </mat-date-range-input>   
-          <mat-datepicker-toggle matIconPreffix [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker #picker ></mat-date-range-picker>  
 
-          <div class="d-flex flex-column flex-md-row align-items-center justify-content-md-between">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconPreffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+        <div class="d-flex flex-column flex-md-row align-items-center justify-content-md-between">
             <button mat-button class="btn btn1 mb-2 mb-md-0 mr-md-2" (click)="clearDates()">CLEAR</button>
             <button mat-button class="btn btn2" (click)="applyFilter()">
-              <span>APPLYFILTERS</span>
+                <span>APPLYFILTERS</span>
             </button>
-          </div>
-          
-          
-          
-
-    </div>    
-
-  
- 
+        </div>
+    </div>
+    
     <div class="container">
         <div class="card-container" (click)="nextpage()">
             <div class="card" *ngFor="let resort of resortlist">
