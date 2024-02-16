@@ -24,7 +24,7 @@ export class ResortAddEmployeeComponent {
     {
 
     }
-  BackToResort() {
-    this.router.navigate(['']);
+    save() {
+    this.router.navigate(['/Resortrooms']);
   }
 }

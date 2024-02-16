@@ -26,9 +26,17 @@ export class ResortAddGuestComponent {
 });
 
 
+saveNew()
+{
+  var guestdetils=this.Addguest.value;
+  console.log(guestdetils)
+  this.Addguest.reset();
+}
 save(){
   var guestdetils=this.Addguest.value;
   console.log(guestdetils)
   this.Addguest.reset();
+   this.router.navigate(['/Resortrooms']);
+  
 }
 }

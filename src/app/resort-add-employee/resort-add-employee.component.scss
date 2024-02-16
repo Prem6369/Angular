@@ -25,10 +25,11 @@
 //     font-family: Roboto;
 //   }
 
-//   .heading {
-//     flex: 1; 
-//     text-align: center; /* Center the text */
-// }
+  .head {
+  background-color: black;
+  height: 100px;
+  color: white;
+}
 // .bodycontainer {
 //     display: flex;
 //     justify-content: center; /* Center the row horizontally */
@@ -75,3 +76,61 @@
 //     border: 3px solid black;
 //     border-radius: 5px;
 // }
+
+input[type="text"] {
+    border: none;
+outline: none;
+    color: black;
+}
+ 
+
+section {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 1em;
+    width:300px;
+    margin-left: 30px;
+   
+  }
+  
+  section h2 {
+    float: left;
+   margin: -1.7em 0 0;
+    padding: 0 .5em;
+    background: #fff;
+    font-size: 1em;
+    font-weight: normal;
+  }
+  #searchBox
+  {
+    display: flex;
+    justify-content: end;
+  }
+  #icon
+  {
+    display: flex;
+    align-items: center;
+  }
+  #person-type
+{
+  width: auto;
+  color:aqua;
+  font-weight: bolder;
+  border:2px solid aqua;
+}
+
+#search-box
+{
+    display: flex;
+    justify-content: center;
+}
+#search-result
+{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: aliceblue;
+    width: max-content;
+    border-radius: 10px;
+
+}

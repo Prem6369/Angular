@@ -73,9 +73,9 @@
 <!----Elangovan Work-->
 <div class="resot-details-page">
   <div class="top p-5">
-    <div class="cancelicon" (click)="BackToResort()">
+    <!-- <div class="cancelicon" (click)="BackToResort()">
       <i class="fa-solid fa-xmark cancel"></i>
-    </div>
+    </div> -->
     <h4 class="text-center" (click)="nextpage()">Booking details</h4>
 
     <div class="justify-content-center my-5">
@@ -130,7 +130,7 @@
         </div>
 
         <div class=" my-3">
-          <div *ngFor="let member of total_members" class="row border-bottom">
+          <div *ngFor="let member of total_members" class="row border">
 
             <div class="icon col-md-4 text-center">
               <i class="{{member.profile}} fs-1 "></i>

@@ -18,7 +18,7 @@
         </div>
 
         <div class="bodycontainer mt-5">
-            <form [formGroup]="Addguest" class="form" (ngSubmit)="save()">
+            <form [formGroup]="Addguest" class="form">
 
               <section id="LastName" class="mt-3">
                 <h2>FIRST NAME</h2>
@@ -83,8 +83,8 @@
                 </div>
             </section> 
             
-                  <BUtton class="btn btn-success">SAVE & NEW</BUtton>
-                  <BUTTon class="btn btn-success">SAVE</BUTTon>
+                  <BUtton class="btn btn-success" (click)="saveNew()">SAVE & NEW</BUtton>
+                  <BUTTon class="btn btn-success" (click)="save()">SAVE</BUTTon>
             </form>
 
         </div>
