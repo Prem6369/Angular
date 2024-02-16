@@ -96,6 +96,7 @@ export class ResortListComponent implements OnInit {
   } 
 
   getAvailableResortDetails() {
+
     const checkInDate = this.rangevalue.get('check_in_date')?.value;
     const checkOutDate = this.rangevalue.get('check_out_date')?.value;
     const today = new Date();
@@ -141,6 +142,8 @@ export class ResortListComponent implements OnInit {
             }
           );
       }
+    }else{
+      alert('please select date')
     }
   }
   

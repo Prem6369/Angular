@@ -16,11 +16,13 @@ import { ResortLoginComponent } from './resort-login/resort-login.component';
 import { ResortListComponent } from './resort-list/resort-list.component';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatDateRangeInput } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core'; 
+import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ResortAddGuestComponent } from './resort-add-guest/resort-add-guest.component';
 import { ResortAddEmployeeComponent } from './resort-add-employee/resort-add-employee.component';
 import { BookingPreviewComponent } from './booking-preview/booking-preview.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 
 
 
@@ -52,9 +54,9 @@ import { BookingPreviewComponent } from './booking-preview/booking-preview.compo
     MatTabsModule,
     FormsModule,
     MatDatepickerModule,
-    MatDateRangeInput,MatNativeDateModule
+    MatDateRangeInput,MatNativeDateModule,MatFormFieldModule,MatButtonModule
   ],
-  providers: [],
+  providers: [provideNativeDateAdapter()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

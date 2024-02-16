@@ -63,7 +63,7 @@ export class ResortDetailsComponent implements OnInit {
     this.router.navigate(['/Resortrooms']);
   }
   backToResortList(){
-    this.router.navigate(['/Resortlist'])
+    this.router.navigate(['Resortlist'])
   }
   change(){
     this.router.navigate(['Resortlist'])
