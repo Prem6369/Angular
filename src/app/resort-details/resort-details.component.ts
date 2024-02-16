@@ -30,7 +30,7 @@ export class ResortDetailsComponent implements OnInit {
   location:string=''
   name:string=''
   check_in_date!:Date;
-  check_in_out!:Date;
+  check_out_date!:Date;
 
   constructor(private httpclient: HttpClient,private router:Router,private routing:ActivatedRoute) {}
 
@@ -38,7 +38,7 @@ export class ResortDetailsComponent implements OnInit {
     this.getResortDetails();
     this.routing.queryParams.subscribe((parms) => {
       this.check_in_date = parms['checkInDate'];
-      this.check_in_out = parms['checkOutDate'];
+      this.check_out_date = parms['checkOutDate'];
 
     });
   }
@@ -59,9 +59,15 @@ export class ResortDetailsComponent implements OnInit {
         }
       );
   }
-  booknow(){
-    this.router.navigate(['/Resortrooms']);
+  booknow() {
+    this.router.navigate(['/Resortrooms'], {
+      queryParams: {
+        checkInDate: this.check_in_date,
+        checkOutDate: this.check_out_date
+      }
+    });
   }
+  
   backToResortList(){
     this.router.navigate(['Resortlist'])
   }

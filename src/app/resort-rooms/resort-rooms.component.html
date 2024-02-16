@@ -62,10 +62,6 @@
       <p>{{ totalSelectedRooms }}</p>
     </div>
   </div>
-  
-  
-  
-
 </body>
 </html> -->
 
@@ -73,9 +69,7 @@
 <!----Elangovan Work-->
 <div class="resot-details-page">
   <div class="top p-5">
-    <!-- <div class="cancelicon" (click)="BackToResort()">
-      <i class="fa-solid fa-xmark cancel"></i>
-    </div> -->
+
     <h4 class="text-center" (click)="nextpage()">Booking details</h4>
 
     <div class="justify-content-center my-5">
@@ -84,8 +78,8 @@
             <img src="assets/Image/Resort_image.jpg" alt="Resort Image">
             <div class="text-container">
               <p class="resort-name">{{resortname}}</p>
-              <p class="date-range">From: 13/12/2023 - To: 18/12/2023</p>
-              <p class="total-days">Total Days: 5, Total Nights: 5</p>
+              <p class="date-range">From: {{this.check_in_date}} - To: {{this.check_out_date}}</p>
+              <p class="total-days">Total Days: {{ totalDays }}, Total Nights: {{ totalNights }}</p>
             </div>
           </div>
       </div>
@@ -130,7 +124,7 @@
         </div>
 
         <div class=" my-3">
-          <div *ngFor="let member of total_members" class="row border">
+          <div *ngFor="let member of total_members" class="row border-bottom">
 
             <div class="icon col-md-4 text-center">
               <i class="{{member.profile}} fs-1 "></i>
