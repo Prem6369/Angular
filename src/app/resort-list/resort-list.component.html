@@ -3,6 +3,32 @@
 <div class="page">
 
     <div class="datePicker">
+<<<<<<< HEAD
+
+        <mat-form-field class="example-form-field" id="date-range-picker">
+            <mat-label id="label-checkin">Check-in &nbsp; &nbsp; &nbsp; -- &nbsp; &nbsp; &nbsp; Check-out</mat-label>
+            <mat-date-range-input [formGroup]="rangevalue" [rangePicker]="rangePicker">
+                <input matStartDate formControlName="check_in_date" placeholder="Start date">
+                <input matEndDate formControlName="check_out_date" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker panelClass="custom-datepicker datepickerOne" color="accent" #rangePicker>
+                <mat-date-range-picker-actions>
+                    <button mat-button matDateRangePickerCancel>CLEAR</button>
+                    <button mat-raised-button color="primary" (click)="applyFilter()" matDateRangePickerApply>
+                        <i class="fa-regular fa-circle-check mx-1"></i>APPLY FILTERS
+                    </button>
+                </mat-date-range-picker-actions>
+            </mat-date-range-picker>
+        </mat-form-field>
+
+
+
+    </div>
+
+
+
+=======
         <mat-date-range-input [formGroup]="rangevalue" (ngSubmit)="getAvailableResortDetails()" [rangePicker]="picker">
             <input matStartDate formControlName="check_in_date" placeholder="Start date">
             <input matEndDate formControlName="check_out_date" placeholder="End date">
@@ -19,6 +45,7 @@
         </div>
     </div>
     
+>>>>>>> 36c2bab127c08bd6e2679e1ab015f46e58011e76
     <div class="container">
         <div class="card-container" (click)="nextpage()">
             <div class="card" *ngFor="let resort of resortlist">

@@ -27,10 +27,18 @@
 
 .datePicker mat-datepicker-toggle {
     margin: 0 10px;
+<<<<<<< HEAD
+    /* Adjust as needed */
+=======
+>>>>>>> 36c2bab127c08bd6e2679e1ab015f46e58011e76
 }
 
 .datePicker input {
     width: 120px;
+<<<<<<< HEAD
+    /* Adjust width as needed */
+=======
+>>>>>>> 36c2bab127c08bd6e2679e1ab015f46e58011e76
 }
 
 .mat-datepicker-toggle {
@@ -112,13 +120,94 @@
     position: absolute;
     top: 40%;
     left: 280px;
+<<<<<<< HEAD
+    /* Adjust as needed */
+=======
+>>>>>>> 36c2bab127c08bd6e2679e1ab015f46e58011e76
     transform: translateY(-50%);
 }
 
 .arrow-icon i {
     color: white;
+<<<<<<< HEAD
+    /* Adjust arrow color as needed */
     font-size: 1.5rem;
+    /* Adjust arrow size as needed */
+=======
+    font-size: 1.5rem;
+>>>>>>> 36c2bab127c08bd6e2679e1ab015f46e58011e76
     background-color: lightsteelblue;
     padding: 5px;
     border-radius: 20px;
+}
+
+::ng-deep .datepickerOne {
+    background-color: white !important;
+}
+
+::ng-deep .datepickerOne .mat-calendar-body-cell-content {
+    color: black !important;
+}
+
+::ng-deep .mat-datepicker-actions {
+    background-color: white !important;
+}
+
+::ng-deep .datepickerOne .mat-mdc-button {
+    color: #0e0d0d;
+    border: 1px solid;
+}
+
+::ng-deep .datepickerOne .mat-calendar-table-header th {
+    text-align: center;
+    padding: 0 0 8px 0;
+    color: black;
+    font-weight: 600;
+    font-size: unset;
+}
+
+::ng-deep .mat-mdc-button .mdc-button__label,
+.mat-mdc-unelevated-button .mdc-button__label,
+.mat-mdc-raised-button .mdc-button__label,
+.mat-mdc-outlined-button .mdc-button__label {
+    color: black;
+}
+
+::ng-deep .datepickerOne .mat-datepicker-content .mat-calendar {
+    width: 290px;
+}
+
+::ng-deep .datepickerOne .mat-calendar-arrow {
+    fill: black;
+}
+
+::ng-deep .mat-date-range-input-container {
+    color: black;
+}
+
+::ng-deep .mat-mdc-form-field-flex {
+    background-color: white;
+
+}
+
+::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+    background-color: white;
+}
+
+::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+    background-color: white;
+}
+
+#label-checkin {
+    color: black;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: white !important;
+}
+
+::ng-deep .mat-mdc-form-field-type-mat-date-range-input .mat-mdc-form-field-infix {
+    width: 200px;
+    box-shadow: inset -2px -2px 4px 3px rgba(1, 1, 1, 0.1);
+    border-radius: 5px;
 }
