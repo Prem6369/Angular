@@ -47,23 +47,23 @@
 
 
   <div id="room-members" class="container rounded my-3">
-    <div *ngFor="let member of total_members" class="row border-bottom p-3">
+    <div *ngFor="let member of total_members" class="row border-bottom p-3 ">
 
-      <div class="icon col-md-4 text-center">
+      <div class="icon col-md-4 col-lg-4 col-sm-4 text-center">
         <i class="{{member.profile}} fs-1 "></i>
       </div>
 
-      <div class=" col-md-8">
+      <div class=" col-md-6 col-lg-6 col-sm-6">
         <div class="name">
           <div class="fw-bold">{{member.name }}</div>
         </div>
 
         <div class="row">
-          <div class=" col-md-6">
+          <div class=" col-md-6 ">
             <div class="fw-light">{{member.contact }}</div>
           </div>
 
-          <div class=" col-md-6 border rounded-pill m-1" id="person-type">
+          <div class=" col-md-6 col-lg-6 col-sm-6 border rounded-pill m-1" id="person-type">
             <div class="fw-light">{{member.type }}</div>
           </div>
         </div>
@@ -83,13 +83,8 @@
   </div>
 
   <div class="row p-4" id="final-button">
-<<<<<<< HEAD
-    <button class="btn btn-light col-md-6">
-      EDIT
-=======
     <button class="btn btn-light col-md-6" (click)="edit()">
-EDIT
->>>>>>> 04b89ac88070c05bfccd526927de781baa359b70
+      EDIT
     </button>
 
     <button class="btn btn-success col-md-6" [disabled]="!termsChecked" (click)="submit()">

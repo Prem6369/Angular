@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <div class="containerr">
+  <div class="container1">
     <img src="{{img}}" alt="" class="img-fluid" style="height: 500px;" width="100%">
     <div class="container">
       <div class="square-box">
@@ -24,7 +24,7 @@
 </div>
 
   <div class="background">
-    <div class="container2">
+    <!-- <div class="container2">
       
       <h3 class="resortname">{{name}}</h3>
 
@@ -34,18 +34,36 @@
         <iframe class="gmap_iframe" width="100" frameborder="0" scrolling="no" src="https://maps.google.com/maps?width=644&amp;height=480&amp;hl=en&amp;q=Housten&amp;t=k&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
         </div>
          
-                    </div>
         </div>
-
+        </div>
+ <div class="box2">
+     <h3 class="h3">Google Map</h3>
+     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.191429396037!2d77.00024787331404!3d11.024259654576955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8582f1435fa59%3A0x137d95bfd8909293!2sPSG%20College%20Of%20Technology!5e0!3m2!1sen!2sin!4v1697453739916!5m2!1sen!2sin"
+             width="550" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+ </div>
       <div class="starcontainer"><i class="fa-solid fa-star star"></i>
         <p class="reviewtext">4.8(1,230reviews)</p>
       </div>
       <div class="locationcontainer"><i class="fa-solid fa-location-dot location"></i>
         <p class="locationtext">{{location}},Kerala</p>
       </div>
-      
-    </div>
+    </div> -->
 
+      <div class="row container2">
+        <div class="textcontainer col-6 justify-content-start">
+          <h3 class="resortname">{{name}}</h3>
+          <div class="starcontainer"><i class="fa-solid fa-star star"></i>
+            <p class="reviewtext">4.8(1,230reviews)</p>
+          </div>
+          <div class="locationcontainer"><i class="fa-solid fa-location-dot location"></i>
+            <p class="locationtext">{{location}},Kerala</p>
+          </div>
+        </div>
+            
+        <div class="mapcontainer col-6 d-flex justify-content-end">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107040.58744604538!2d77.05631923956909!3d10.091305625359634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0799794d099a6d%3A0x63250e5553c7e0c!2sMunnar%2C%20Kerala%20685612!5e1!3m2!1sen!2sin!4v1708167955669!5m2!1sen!2sin" width="200" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
     <div class="container">
       <div class="row">
         <div class="col-md-4 bedcontainer">
@@ -85,13 +103,13 @@
       <div class="row imagesforhighlights">
         <div class="col-md-6 d-flex justify-content-center"> 
           <div class="montainimg">
-            <i class="fa-solid fa-mountain-sun fa-2xl sun"></i>
-            <p class="txtgreateview">Great View</p>
+            <img src="assets/Image/mountainimage-removebg-preview.png" height="50" width="50" alt="">
+            <p class="txtgreateview mx-3">Great View</p>
           </div>
         </div>
         <div class="col-md-6 d-flex justify-content-center"> 
           <div class="shieldimg">
-            <i class="fa-solid fa-shield-halved fa-2xl shield"></i>
+            <img src="assets/Image/hygiene.png" height="50" width="50" alt="">
             <p class="txtshield">Hygiene Plus</p>
           </div>
         </div>
@@ -101,22 +119,31 @@
 
       <div class="facilities">
         <h3 class="headingfacilities">Facilities</h3>
-        <div class="facility">
-          <div class="checkimg">
-            <i class="fa-regular fa-circle-check fa-2xl check"></i>
-            <p class="txtblcycle">Blcycle rental</p>
+        <div class="row justify-content-center my-5">
+          <div class="checkimg col-lg-3 col-md-4 col-sm-6 col-xm-12 mx-5" >
+            <div class="row">
+              <i class="fa-regular fa-circle-check fa-2xl check col-2 "></i>
+              <p class="txtblcycle col-10">Blcycle rental</p>
+            </div>
+           
           </div>
-          <div class="checkimg">
-            <i class="fa-regular fa-circle-check fa-2xl check"></i>
-            <p class="txtblcycle">Valet Parking</p>
+          <div class="checkimg col-lg-3 col-md-4 col-sm-6 col-xm-12 mx-5">
+            <div class="row">
+              <i class="fa-regular fa-circle-check fa-2xl check col-2 "></i>
+              <p class="txtblcycle col-10">valet parking</p>
+            </div>
           </div>
-          <div class="checkimg">
-            <i class="fa-regular fa-circle-check fa-2xl check"></i>
-            <p class="txtblcycle">Front Desk [24-hours]</p>
+          <div class="checkimg col-lg-3 col-md-4 col-sm-6 col-xm-12 mx-5">
+            <div class="row">
+              <i class="fa-regular fa-circle-check fa-2xl check col-2 "></i>
+              <p class="txtblcycle col-10">Front desk [24-hours]</p>
+            </div>
           </div>
-          <div class="checkimg">
-            <i class="fa-regular fa-circle-check fa-2xl check"></i>
-            <p class="txtblcycle">Airport Transfer</p>
+          <div class="checkimg col-lg-3 col-md-4 col-sm-6 col-xm-12 mx-5">
+            <div class="row">
+              <i class="fa-regular fa-circle-check fa-2xl check col-2 "></i>
+              <p class="txtblcycle col-10">Airport transfer </p>
+            </div>
           </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ResortDetails } from '../Service/Model/models.service'; 
+import { ResortDetails, getRoomTypes } from '../Service/Model/models.service'; 
 
 @Component({
   selector: 'app-resort-rooms',
@@ -10,6 +10,7 @@ import { ResortDetails } from '../Service/Model/models.service';
 })
 export class ResortRoomsComponent implements OnInit {
   resortlist: ResortDetails[] = [];
+  ResortRoom:getRoomTypes[]=[]
   img: string = '';
   
   location: string = '';
@@ -39,6 +40,7 @@ export class ResortRoomsComponent implements OnInit {
 
     });
     this.calculateDayAndNight();
+    this.getResortRoom();
   }
 
   getResortDetails() {
@@ -88,6 +90,41 @@ export class ResortRoomsComponent implements OnInit {
       );
   }
 
+
+  getResortRoom() {
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
+    const id = 2;
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    this.httpclient
+      .get<any>(
+        `https://claysysresortapi.claysys.org/api/resorts/getroomtypes`,
+        { headers }
+      )
+      .subscribe(
+        (response) => {
+          console.log(response);
+          if (response) {
+            const newResortRoom = new getRoomTypes(
+              response.room_type_id,
+              response.name,
+              response.capacity,
+              response.availability,
+              response.description,
+              response.room_type_count,
+              response.created_date,
+              response.last_modified_date,
+            );
+            this.ResortRoom.push(newResortRoom);
+          } else {
+            console.error(
+              'Empty response or response does not contain any resorts.'
+            );
+          }
+        }
+      );
+  }
+
   nextpage() {
     this.router.navigate(['/Thankyou']);
   }
@@ -123,46 +160,28 @@ export class ResortRoomsComponent implements OnInit {
       queryParams:{totalSelectedRooms:totalSelectedRooms}
     });
   }
-<<<<<<< HEAD
- 
-=======
 totalDays!:number;
 totalNights!:number;
 calculateDayAndNight() {
-  // Set default check-in time to 10 AM
   const checkInDateTime = new Date(this.check_in_date);
   checkInDateTime.setHours(10, 0, 0, 0);
 
-  // Set default check-out time to 6 PM
   const checkOutDateTime = new Date(this.check_out_date);
   checkOutDateTime.setHours(18, 0, 0, 0);
 
-  // Initialize total days and nights
   let totalDays = 0;
   let totalNights = 0;
 
-  // Check if check-out date is after check-in date
   if (checkOutDateTime > checkInDateTime) {
-    // Calculate the difference in milliseconds between the two dates
     const differenceInMs = checkOutDateTime.getTime() - checkInDateTime.getTime();
-
-    // Convert milliseconds to days and round it down
     totalDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
-
-    // Check if check-out time is after 6 PM
     if (checkOutDateTime.getHours() >= 18) {
-      // Increment total nights by 1
       totalNights++;
     }
-
-    // Add the total days to total nights
     totalNights += totalDays;
   }
-
-  // Update class variables
   this.totalDays = totalDays;
   this.totalNights = totalNights;
 }
 
->>>>>>> 9d27f5bf9d78f376340878242d756d558266991a
 }

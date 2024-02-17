@@ -3,7 +3,7 @@ body{
   background-color: #e6e6ff;
   font-family: Roboto;
 }
-.containerr {
+.container1 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,6 +49,13 @@ body{
   font-weight: bold;
   font-family: Roboto;
 
+}
+.container2{
+  margin: 30px;
+
+}
+iframe {
+   border: 2px solid black;
 }
 
 // .photo-container::-webkit-scrollbar {
@@ -173,45 +180,76 @@ body{
 }
 
 .txtgreateview, .txtshield {
-  font-size: 24px;
+  font-size: 20px;
   margin: 0;
   font-family: Roboto;
 }
 
 
 
-  .facility {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
+  // // .facility {
+  // //   display: flex;
+  // //   flex-wrap: wrap;
+  // //   justify-content: space-around;
+  // // }
   
-  .checkimg {
-    background-color: #d3d3f1;
-    display: flex;
-    align-items: center;
-    border: 2px solid #d1d1ff;
-    border-radius: 10px;
-    padding: 8px;
-    margin: 5px; /* Adjust as needed */
-    box-shadow: -4px 4px 4px 3px rgba(1, 1, 1, 0.1);
-  }
+  // .checkimg {
+  //   background-color: #d3d3f1;
+  //   width: fit-content;
+  //   // display: flex;
+  //   // align-items: center;
+  //   border: 2px solid #d1d1ff;
+  //   border-radius: 10px;
+  //   // padding: 8px;
+  //   margin: 5px; /* Adjust as needed */
+  //   box-shadow: -4px 4px 4px 3px rgba(1, 1, 1, 0.1);
+  // }
   
-  .txtblcycle {
-    font-size: 14px;
-    margin: 0;
-    font-family: Roboto;
-    padding: 5px;
-  }
+  // // .txtblcycle {
+  // //   font-size: 14px;
+  // //   // margin: 0;
+  // //   font-family: Roboto;
+  // //   // padding: 5px;
+  // // }
   
   .check {
     color: green;
-    margin-right: 10px;
   }
+
+
+  .checkimg {
+    background-color: #d3d3f1;
+    width: max-content;
+    border: 2px solid #d1d1ff;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px; /* Adjust as needed */
+    box-shadow: -4px 4px 4px 3px rgba(1, 1, 1, 0.1);
+    display: flex;
+    align-items: center; /* Center the content vertically */
+    justify-content: center; /* Center the content horizontally */
+}
+
+.txtblcycle {
+    margin: 0; 
+    text-align: center; 
+    font-weight: 500;
+}
+
+.fa-2xl {
+    font-size: 2em;
+    line-height: 1.03125em;
+}
+
 .headingfacilities{
   margin: 30px;
   font-family: Roboto;
 }  
+.fa-2xl {
+  font-size: 2em;
+  line-height: 1.03125em;
+}
+
   
   .containerbook {
     background-color: white;
@@ -309,16 +347,17 @@ body{
   //   margin-right: 10px;
   //   border-radius: 8px;
   // }
-  #map {
-    float: right;
-    display: block;
-}
+
  
 /* Styles for an element with the class 'mapouter' */
 .mapouter {
-    width: 80%;
-    height: 180px;
+    width: 50%;
+    height: 150px;
 }
+// #map {
+//   width: 60%; /* Adjust width as needed */
+//   height: 120px; /* Adjust height as needed */
+// }
  
 /* Styles for an element with the class 'gmap_canvas' */
 .gmap_canvas {
