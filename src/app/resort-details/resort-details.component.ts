@@ -1,23 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-export class ResortDetails {
-  constructor(
-    public resort_id: number,
-    public name: string,
-    public description: string,
-    public location: string,
-    public amenities: string[],
-    public image_urls: string,
-    public video_urls: string,
-    public status: string,
-    public created_date: string,
-    public last_modified_date: string,
-    public categories: any[],
-    public coordinates: { lat: string, long: string }
-  ) {}
-}
+import { ResortDetails } from '../Service/Model/models.service'; 
 
 @Component({
   selector: 'app-resort-details',
@@ -68,9 +52,6 @@ export class ResortDetailsComponent implements OnInit {
     });
   }
   
-  backToResortList(){
-    this.router.navigate(['Resortlist'])
-  }
   change(){
     this.router.navigate(['Resortlist'])
   }

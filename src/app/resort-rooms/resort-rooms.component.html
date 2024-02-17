@@ -1,93 +1,24 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div class="background">
-    <div class="headcontainer">
-      <div class="cancelicon" (click)="BackToResort()">
-        <i class="fa-solid fa-xmark cancel"></i>
-      </div>
-      <h4 class="txthead" (click)="nextpage()">Booking details</h4>
-    </div>
-
-    <div class="container1">
-      <div class="square-box">
-        <img src="assets/Image/Resort_image.jpg" alt="Resort Image">
-        <div class="text-container">
-          <p class="resort-name">{{resortname}}</p>
-          <p class="date-range">From: 13/12/2023 - To: 18/12/2023</p>
-          <p class="total-days">Total Days: 5, Total Nights: 5</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="container2">
-      <div class="txtroom">
-        Room(s)
-      </div>
-      <div class="txtguest">
-        Guest
-      </div>
-    </div>
-
-
-
-    
-  </div >
-  <div class="background1">
-    <table class="containerret">
-      <tr *ngFor="let room of rooms; let i = index">
-        <td class="icon">
-          <i class="{{room.icon}}"></i>
-        </td>
-        <td class="txtroo">
-          <div class="text">{{ room.name }}</div>
-          <div class="sub-text">1 Balcony</div>
-        </td>
-        <td class="incre-row">
-          <div class="incre">
-            <button class="increment" (click)="decrement(i)">-</button>
-            <div class="value">{{ room.value }}</div>
-            <button class="decrement" (click)="increment(i)">+</button>
-          </div>
-        </td>
-      </tr>
-    </table>
-    <div class="summary-box">
-      <p>Total Rooms:</p>
-      <p>{{ totalSelectedRooms }}</p>
-    </div>
-  </div>
-</body>
-</html> -->
-
-
-<!----Elangovan Work-->
 <div class="resot-details-page">
   <div class="top p-5">
 
     <h4 class="text-center" (click)="nextpage()">Booking details</h4>
 
     <div class="justify-content-center my-5">
-      <div class="container1">      
-          <div class="square-box">
-            <img src="assets/Image/Resort_image.jpg" alt="Resort Image">
-            <div class="text-container">
-              <p class="resort-name">{{resortname}}</p>
-              <p class="date-range">From: {{this.check_in_date}} - To: {{this.check_out_date}}</p>
-              <p class="total-days">Total Days: {{ totalDays }}, Total Nights: {{ totalNights }}</p>
-            </div>
+      <div class="container1">
+        <div class="square-box">
+          <img src="assets/Image/Resort_image.jpg" alt="Resort Image">
+          <div class="text-container">
+            <p class="resort-name">{{resortname}}</p>
+            <p class="date-range">From: {{this.check_in_date}} - To: {{this.check_out_date}}</p>
+            <p class="total-days">Total Days: {{ totalDays }}, Total Nights: {{ totalNights }}</p>
           </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <mat-tab-group  mat-align-tabs="center"  >
+    <mat-tab-group mat-align-tabs="center">
       <mat-tab label="Room(s)" id="tab-label" class="mt-4">
         <div *ngFor="let room of rooms; let i = index" class="row w-0 m-3 border-bottom pt-5">
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="iconbackground">
@@ -112,10 +43,11 @@
           <p>{{ totalSelectedRooms }}</p>
         </div>
       </mat-tab>
-      <mat-tab label="Guest"  id="tab-label">
-        
+      <mat-tab label="Guest" id="tab-label">
+
         <div class="row " id="addButtons">
-          <button class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn-sm btn m-3" routerLink="/Addemployee" id="addEmployeeBtn">
+          <button class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn-sm btn m-3" routerLink="/Addemployee"
+            id="addEmployeeBtn">
             ADD EMPLOYEE
           </button>
           <button class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn-sm btn m-3" routerLink="/Addguest" id="addGuestBtn">
@@ -136,46 +68,46 @@
               </div>
 
               <div class="row">
-                  <div class=" col-md-6">
-                    <div class="fw-light">{{member.contact }}</div>
-                  </div>
-          
-                  <div class=" col-md-6 border rounded-pill" id="person-type">
-                    <div class="fw-light">{{member.type }}</div>
-                  </div>
+                <div class=" col-md-6">
+                  <div class="fw-light">{{member.contact }}</div>
+                </div>
+
+                <div class=" col-md-6 border rounded-pill" id="person-type">
+                  <div class="fw-light">{{member.type }}</div>
+                </div>
               </div>
-        
+
             </div>
             <div class="col-md-4 text-center" id="edit-icon">
               <i class="{{member.icon}} text-danger"></i>
             </div>
           </div>
         </div>
-      <div class="row fw-bold m-4">
-        <div class="col-md-2 text-center">1 Employee</div>
-        <div class="col-md-2 text-center" >2 Guest</div>
-        <div class="col-md-8 text-center">Total 3</div>
-      </div>
-      <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+        <div class="row fw-bold m-4">
+          <div class="col-md-2 text-center">1 Employee</div>
+          <div class="col-md-2 text-center">2 Guest</div>
+          <div class="col-md-8 text-center">Total 3</div>
+        </div>
+        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
 
-        <strong>Rules</strong> 
-        <div>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse dolorum porro laborum omnis placeat eum consequatur est exercitationem repudiandae maxime laudantium, veritatis itaque libero enim repellat cum at eligendi natus?
+          <strong>Rules</strong>
+          <div>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse dolorum porro laborum omnis placeat eum
+            consequatur est exercitationem repudiandae maxime laudantium, veritatis itaque libero enim repellat cum at
+            eligendi natus?
+          </div>
+          <div>
+            <ul id="rules-list">
+              <li>--Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, laborum. </li>
+              <li>--Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, laborum. </li>
+              <li>--Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, laborum. </li>
+            </ul>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <div>
-          <ul id="rules-list">
-            <li>--Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, laborum. </li>
-            <li>--Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, laborum. </li>
-            <li>--Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, laborum. </li>
-          </ul>
-        </div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
       </mat-tab>
     </mat-tab-group>
   </div>
-
- 
 
   <div class="bg-success text-white" id="continue">
     <div class="" (click)="next(totalSelectedRooms)" id="continuebtn">

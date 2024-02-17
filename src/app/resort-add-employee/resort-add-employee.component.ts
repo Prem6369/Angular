@@ -15,11 +15,8 @@ export class ResortAddEmployeeComponent {
   searchEmployeeForm = new FormGroup(
     {
       employeeName : new FormControl(''),
-    })
-
+    });
     
-
-
     searchEmployee()
     {
 

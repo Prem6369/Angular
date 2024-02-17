@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title> 
+    <title>Document</title>
 </head>
+
 <body>
-    <div class="container1" >
+    <div class="container1">
         <div class="headcontainer">
-          <div class="cancelicon" (click)="BackToResort()">
-            <i class="fa-solid fa-xmark fa-lg cancel"></i>
-        </div>
-        
+            <div class="cancelicon" (click)="BackToResort()">
+                <i class="fa-solid fa-xmark fa-lg cancel"></i>
+            </div>
+
             <div class="heading">
                 <h3 class="text-center m-3">Add Guest</h3>
             </div>
@@ -20,74 +22,75 @@
         <div class="bodycontainer mt-5">
             <form [formGroup]="Addguest" class="form">
 
-              <section id="LastName" class="mt-3">
-                <h2>FIRST NAME</h2>
-             
+                <section id="LastName" class="mt-3">
+                    <h2>FIRST NAME</h2>
+
                     <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
                     <input type="text" id="Fname" formControlName="Firstname">
-              
-            </section>
 
-              <section id="LastName" class="mt-3">
-                <h2>LAST NAME</h2>
-             
+                </section>
+
+                <section id="LastName" class="mt-3">
+                    <h2>LAST NAME</h2>
+
                     <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
                     <input type="text" id="lname" formControlName="Lastname">
-              
-            </section>
-            
-            <section id="Age" class="mt-3">
-                <h2>AGE</h2>
-              
+
+                </section>
+
+                <section id="Age" class="mt-3">
+                    <h2>AGE</h2>
+
                     <span class="icon mx-1"><i class="fa-regular fa-calendar"></i></span>
                     <input type="text" id="age" formControlName="Age">
-              
-            </section>
-            
-            <section id="Sex" class="mt-3">
-                <h2>SEX</h2>
-               
+
+                </section>
+
+                <section id="Sex" class="mt-3">
+                    <h2>SEX</h2>
+
                     <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
                     <input type="text" id="sex" formControlName="Sex">
-               
-            </section>
-            
-            <section id="PhoneNumber" class="mt-3">
-                <h2>PHONE NUMBER</h2>
-               
+
+                </section>
+
+                <section id="PhoneNumber" class="mt-3">
+                    <h2>PHONE NUMBER</h2>
+
                     <span class="icon mx-1"><i class="fa-solid fa-phone"></i></span>
                     <input type="text" id="Pnumber" formControlName="Phonenumber">
-               
-            </section>
-            
-            <section id="Address" class="mt-3">
-                <h2>ADDRESS</h2>
-               
+
+                </section>
+
+                <section id="Address" class="mt-3">
+                    <h2>ADDRESS</h2>
+
                     <span class="icon mx-1"><i class="fa-solid fa-location-dot"></i></span>
                     <input type="text" id="address" formControlName="Address">
-               
-            </section>
-            
-            <section id="OfficialIdCardNo" class="mt-3">
-                <h2>OFFICIAL ID CARD NO</h2>
-                
+
+                </section>
+
+                <section id="OfficialIdCardNo" class="mt-3">
+                    <h2>OFFICIAL ID CARD NO</h2>
+
                     <span class="icon mx-1"><i class="fa-solid fa-id-card"></i></span>
                     <input type="text" id="idcard" formControlName="Idcardnumber">
-              
-            </section>
-            
-            <section id="OfficialIdImageUrl" class="mt-3">
-                <h2>OFFICIAL ID IMAGE URL</h2>
-                <div class="input-container">
-                    <input type="file" id="img" accept="image/*" formControlName="Imageurl">
-                </div>
-            </section> 
-            
-                  <BUtton class="btn btn-success" (click)="saveNew()">SAVE & NEW</BUtton>
-                  <BUTTon class="btn btn-success" (click)="save()">SAVE</BUTTon>
+
+                </section>
+
+                <section id="OfficialIdImageUrl" class="mt-3">
+                    <h2>OFFICIAL ID IMAGE URL</h2>
+                    <div class="input-container">
+                        <input type="file" id="img" accept="image/*" formControlName="Imageurl">
+                    </div>
+                </section>
+
+                <BUtton class="btn btn-success" (click)="saveNew()">SAVE & NEW</BUtton>
+                <BUTTon class="btn btn-success" (click)="save()">SAVE</BUTTon>
             </form>
 
         </div>
     </div>
 </body>
+
 </html>

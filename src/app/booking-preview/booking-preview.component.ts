@@ -1,5 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
+import { Router } from '@angular/router';
+import { ResortDetails } from '../Service/Model/models.service'; 
+
+=======
 import { ActivatedRoute, Router } from '@angular/router';
 
 export class ResortDetails {
@@ -12,6 +17,7 @@ export class ResortDetails {
   ) {}
 
 }
+>>>>>>> 04b89ac88070c05bfccd526927de781baa359b70
 
 
 @Component({
@@ -64,6 +70,33 @@ export class BookingPreviewComponent implements OnInit {
           console.log(response);
           this.img = response.image_urls;
           this.resortname = response.name;
+<<<<<<< HEAD
+          if (response && response.resort_id) {
+            const newResortDetails = new ResortDetails(
+              response.resort_id,
+              response.name,
+              response.description,
+              response.location,
+              response.amenities,
+              response.image_urls,
+              response.video_urls,
+              response.status,
+              response.created_date,
+              response.last_modified_date,
+              response.categories,
+              response.coordinates
+            );
+            this.resortlist.push(newResortDetails);
+          } else {
+            console.error(
+              'Empty response or response does not contain any resorts.'
+            );
+          }
+        }
+      );
+  }
+
+=======
         },
       );
   }
@@ -84,6 +117,7 @@ export class BookingPreviewComponent implements OnInit {
     this.router.navigate(['/Resortrooms']);
   }
 
+>>>>>>> 04b89ac88070c05bfccd526927de781baa359b70
   submit() {
     this.router.navigate(['/Thankyou']);
   }

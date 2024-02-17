@@ -5,7 +5,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ResortDetailsComponent } from './resort-details/resort-details.component';
 import { ResortRoomsComponent } from './resort-rooms/resort-rooms.component';
 import { ResortThankyouComponent } from './resort-thankyou/resort-thankyou.component';
-import { UserProfile, UserProfileComponent } from './user-profile/user-profile.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ResortLoginComponent } from './resort-login/resort-login.component';
 import { ResortListComponent } from './resort-list/resort-list.component';
 import { ResortAddGuestComponent } from './resort-add-guest/resort-add-guest.component';
