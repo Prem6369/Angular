@@ -3,39 +3,43 @@
     flex-direction: column;
     align-items: center;
 }
- 
+
 .datePicker {
     display: flex;
     align-items: center;
     justify-content: center;
-   
+
 }
-.btn1{
+
+.btn1 {
     margin: 0 10px;
     background-color: rgb(4, 4, 82);
     color: white;
 }
-.btn2{
+
+.btn2 {
     margin: 0 10px;
     background-color: rgb(4, 4, 82);
-    display: flex; align-items: center;
+    display: flex;
+    align-items: center;
     color: white;
 }
 
 .datePicker mat-datepicker-toggle {
-    margin: 0 10px; /* Adjust as needed */
+    margin: 0 10px;
+    /* Adjust as needed */
 }
- 
+
 .datePicker input {
-    width: 120px; /* Adjust width as needed */
+    width: 120px;
+    /* Adjust width as needed */
 }
- 
-.mat-datepicker-toggle
-{   
-    color:black;
+
+.mat-datepicker-toggle {
+    color: black;
 }
-.icon-calender
-{
+
+.icon-calender {
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -48,14 +52,14 @@
     padding: 0 20px;
     margin-bottom: 100px;
 }
- 
+
 .card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 50px;
 }
- 
+
 .card {
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -66,17 +70,17 @@
     overflow: hidden;
     position: relative;
 }
- 
+
 .image-container {
     position: relative;
 }
- 
+
 .resort-image {
     width: 100%;
     display: block;
     border-radius: 8px 8px 0 0;
 }
- 
+
 .resort-name {
     position: absolute;
     top: 130px;
@@ -87,7 +91,7 @@
     font-weight: bold;
     text-align: left;
 }
- 
+
 .resort-location {
     position: absolute;
     bottom: 30px;
@@ -101,22 +105,96 @@
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 8px;
 }
- 
+
 .location {
     margin-right: 5px;
 }
- 
+
 .arrow-icon {
     position: absolute;
     top: 40%;
-    left:280px; /* Adjust as needed */
+    left: 280px;
+    /* Adjust as needed */
     transform: translateY(-50%);
 }
- 
+
 .arrow-icon i {
-    color:white; /* Adjust arrow color as needed */
-    font-size: 1.5rem; /* Adjust arrow size as needed */
-    background-color:lightsteelblue;
+    color: white;
+    /* Adjust arrow color as needed */
+    font-size: 1.5rem;
+    /* Adjust arrow size as needed */
+    background-color: lightsteelblue;
     padding: 5px;
     border-radius: 20px;
+}
+
+::ng-deep .datepickerOne {
+    background-color: white !important;
+}
+
+::ng-deep .datepickerOne .mat-calendar-body-cell-content {
+    color: black !important;
+}
+
+::ng-deep .mat-datepicker-actions {
+    background-color: white !important;
+}
+
+::ng-deep .datepickerOne .mat-mdc-button {
+    color: #0e0d0d;
+    border: 1px solid;
+}
+
+::ng-deep .datepickerOne .mat-calendar-table-header th {
+    text-align: center;
+    padding: 0 0 8px 0;
+    color: black;
+    font-weight: 600;
+    font-size: unset;
+}
+
+::ng-deep .mat-mdc-button .mdc-button__label,
+.mat-mdc-unelevated-button .mdc-button__label,
+.mat-mdc-raised-button .mdc-button__label,
+.mat-mdc-outlined-button .mdc-button__label {
+    color: black;
+}
+
+::ng-deep .datepickerOne .mat-datepicker-content .mat-calendar {
+    width: 290px;
+}
+
+::ng-deep .datepickerOne .mat-calendar-arrow {
+    fill: black;
+}
+
+::ng-deep .mat-date-range-input-container {
+    color: black;
+}
+
+::ng-deep .mat-mdc-form-field-flex {
+    background-color: white;
+
+}
+
+::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+    background-color: white;
+}
+
+::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+    background-color: white;
+}
+
+#label-checkin {
+    color: black;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: white !important;
+}
+
+::ng-deep .mat-mdc-form-field-type-mat-date-range-input .mat-mdc-form-field-infix {
+    width: 200px;
+    box-shadow: inset -2px -2px 4px 3px rgba(1, 1, 1, 0.1);
+    border-radius: 5px;
 }
