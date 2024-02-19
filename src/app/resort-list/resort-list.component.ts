@@ -16,11 +16,17 @@ export class ResortListComponent implements OnInit {
   resortlist: ResortDetails[] = [];
   rangevalue = new FormGroup({
     check_in_date: new FormControl<Date | null>(new Date(new Date().toUTCString())),
-    check_out_date: new FormControl<Date | null>(new Date(new Date().toUTCString())),
+    check_out_date: new FormControl<Date | null>(new Date(new Date().toUTCString()+1)),
   });
-  
  
-  constructor(private httpclient: HttpClient, private router: Router) {}
+  constructor(private httpclient: HttpClient, private router: Router) {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.rangevalue.patchValue({
+      check_out_date: tomorrow
+    });
+  }
 
   ngOnInit(): void {
     this.getResortDetails();

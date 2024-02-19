@@ -56,9 +56,16 @@ export class ResortRoomsComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log(response);
-          console.log(this.totalDays);
-          console.log(this.totalNights);
+          const checkInDateTime = new Date(this.check_in_date);
 
+  checkInDateTime.setHours(10, 0, 0, 0);
+
+  const checkOutDateTime = new Date(this.check_out_date);
+  checkOutDateTime.setHours(18, 0, 0, 0);
+
+  const differenceInDays: number = Math.abs(checkInDateTime.getDate() - checkOutDateTime.getDate());
+
+  console.log(`The difference between the two dates is ${differenceInDays} days.`);
           this.img = response.image_urls;
           this.location = response.location;
           this.resortname = response.name;
@@ -163,25 +170,25 @@ export class ResortRoomsComponent implements OnInit {
 totalDays!:number;
 totalNights!:number;
 calculateDayAndNight() {
+
   const checkInDateTime = new Date(this.check_in_date);
-  checkInDateTime.setHours(10, 0, 0, 0);
 
   const checkOutDateTime = new Date(this.check_out_date);
-  checkOutDateTime.setHours(18, 0, 0, 0);
 
-  let totalDays = 0;
-  let totalNights = 0;
+  const differenceInDays: number = Math.abs(checkInDateTime.getDate() - checkOutDateTime.getDate());
+
+  console.log(`The difference between the two dates is ${differenceInDays} days.`);
+
 
   if (checkOutDateTime > checkInDateTime) {
     const differenceInMs = checkOutDateTime.getTime() - checkInDateTime.getTime();
-    totalDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
-    if (checkOutDateTime.getHours() >= 18) {
-      totalNights++;
-    }
-    totalNights += totalDays;
+    this.totalDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
+    this.totalDays++;
+    this.totalNights =this.totalDays-1;
+    console.log(this.totalDays,this.totalNights);
   }
-  this.totalDays = totalDays;
-  this.totalNights = totalNights;
+  this.totalDays = this.totalDays;
+  this.totalNights = this.totalNights;
 }
 
 }
