@@ -20,7 +20,7 @@
   <div class="container">
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="Room(s)" id="tab-label" class="mt-4">
-        <div *ngFor="let room of ResortRoom; let i = index" class="row w-0 m-3 border-bottom pt-5">
+        <div *ngFor="let room of ResortRoom" class="row w-0 m-3 border-bottom pt-5">
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="iconbackground">
             <i class="fa-solid fa-bed fa-2x check"></i>
           </div>
@@ -30,10 +30,11 @@
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="d-flex border" id="incrementBtn">
-              <button class="btn btn-sm btn-light me-2 fw-bold" (click)="decrement(i)"><i class="fa-solid fa-minus"></i>
-              </button>
-              <div>{{ room.room_type_count }}</div>
-              <button class="btn btn-sm btn-light ms-2 fw-bold" (click)="increment(i)"><i
+              <button class="btn btn-sm btn-light me-2 fw-bold" (click)="decrement(room.room_type_id )"><i
+                  class="fa-solid fa-minus"></i>
+              </button>          
+              <div>{{ roomCounts[room.room_type_id] || 0 }}</div>                                     
+              <button class="btn btn-sm btn-light ms-2 fw-bold" (click)="increment(room.room_type_id)"><i
                   class="fa-solid fa-plus"></i></button>
             </div>
           </div>
