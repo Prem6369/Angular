@@ -113,7 +113,7 @@ export class ResortRoomsComponent implements OnInit {
                 room.room_type_count,
                 room.created_date,
                 room.last_modified_date
-              );
+              ); 
               this.ResortRoom.push(newResortRoom);
             }
           } else {
