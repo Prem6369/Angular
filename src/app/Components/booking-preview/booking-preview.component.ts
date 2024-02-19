@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ResortDetails } from '../Service/Model/models.service'; 
-
+import { ResortDetails } from '../../Model/ResortDetails/resortDetails'; 
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -12,6 +11,10 @@ import { ResortDetails } from '../Service/Model/models.service';
 })
 export class BookingPreviewComponent implements OnInit {
   resortlist: ResortDetails[] = [];
+  totalDays!: number;
+  totalNights!: number;
+  check_in_date!: Date;
+  check_out_date!: Date;
   img: string = '';
     termsChecked: boolean = false;
 
@@ -31,7 +34,18 @@ export class BookingPreviewComponent implements OnInit {
 
   selectedRooms: { name: string; count: number }[] = [];
 
-  constructor(private httpclient: HttpClient, private router: Router) {}
+
+  constructor(private httpclient: HttpClient, private router: Router,private routing: ActivatedRoute) {
+
+    this.routing.queryParams.subscribe((params) => {
+      this.selectedRooms = params['totalSelectedRooms'];
+      this.totalDays = params['days'];
+      this.totalNights = params['nights'];
+      this.check_in_date = params['check_in_date'];
+      this.check_out_date = params['check_out_date'];
+
+    });
+  }
 
   ngOnInit(): void {
     this.getResortDetails();
@@ -50,7 +64,7 @@ export class BookingPreviewComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log(response);
-
+  
           this.img = response.image_urls;
           this.location = response.location;
           this.resortname = response.name;

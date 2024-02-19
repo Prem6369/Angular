@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserProfile } from '../Service/Model/models.service'; 
+import { UserProfile } from '../../Model/userProfile/userProfile' ; 
 
 @Component({
   selector: 'app-user-profile',
@@ -31,7 +31,7 @@ export class UserProfileComponent implements OnInit {
           console.log(response);
           if (response && response.length > 0 && response[0].username) {
             const userProfile = response[0]; // Accessing the first element of the array
-            const userprofiles = new UserProfile(
+            const userprofiles = new(
               userProfile.user_id,
               userProfile.first_name,
               userProfile.last_name,

@@ -39,6 +39,11 @@
     align-items: center;
     justify-content: center;
   }
+  
+.text-container {
+  flex: 1;
+  padding: 10px;
+}
 
   #person-type
 {
@@ -75,4 +80,9 @@ justify-content: center;
   width:200px;
   margin: 10px
 
+}
+
+#txtcolor
+{
+  color: #666;
 }

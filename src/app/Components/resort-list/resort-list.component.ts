@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ResortDetails } from '../Service/Model/models.service'; 
+import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
   
 @Component({
   selector: 'app-resort-list',
