@@ -3,23 +3,22 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResortDetails } from '../../Model/ResortDetails/resortDetails';  
 import { getRoomTypes } from '../../Model/RoomTypes/rooms';
+
+
 @Component({
   selector: 'app-resort-rooms',
   templateUrl: './resort-rooms.component.html',
   styleUrls: ['./resort-rooms.component.scss']
 })
+
 export class ResortRoomsComponent implements OnInit {
   resortlist: ResortDetails[] = [];
   ResortRoom:getRoomTypes[]=[]
   img: string = '';
+  totalSelectedRooms!: number;
   
   location: string = '';
   resortname: string = '';
-  rooms: { name: string; value: number,icon:string }[] = [
-    { name: 'Single Room', value: 0 ,icon:'fa-solid fa-bed fa-2x check'},
-    { name: 'Double Room', value: 0 ,icon:'fa-solid fa-user fa-2x check'},
-    { name: 'Suite Room', value: 0 ,icon:'fa-solid fa-hospital fa-2x check'}
-  ];
 
   total_members: { name: string;profile:string;contact: number,type:string;icon:string }[] = [
     { name: 'Samual James', contact: 1234567890 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Employee'},
@@ -129,23 +128,30 @@ export class ResortRoomsComponent implements OnInit {
   }
 
 
-  increment(index: number) {
-    this.ResortRoom[index].room_type_count++;
+
+  roomCounts: {[key: string]: number} = {};
+
+  increment(room_type_id: number) {
+    if (!this.roomCounts[room_type_id]) {
+      this.roomCounts[room_type_id] = 0;
+    }
+    this.roomCounts[room_type_id]++;
     this.updateSelectedRooms();
   }
-  
-  decrement(index: number) {
-    if (this.ResortRoom[index].room_type_count > 0) {
-      this.ResortRoom[index].room_type_count--;
+
+  decrement(room_type_id: number) {
+    if (this.roomCounts[room_type_id] && this.roomCounts[room_type_id] > 0) {
+      this.roomCounts[room_type_id]--;
       this.updateSelectedRooms();
     }
   }
-  
-  totalSelectedRooms: number = 0;
+
+
 
   updateSelectedRooms() {
-    this.totalSelectedRooms = this.ResortRoom.reduce((total, room) => total + room.room_type_count, 0);
+    this.totalSelectedRooms = Object.values(this.roomCounts).reduce((total, count) => total + count, 0);
   }
+  
 
   BackToResort(){
     this.router.navigate(['/ResortDetails']);
@@ -157,7 +163,8 @@ export class ResortRoomsComponent implements OnInit {
       check_in_date:this.check_in_date,
       check_out_date:this.check_out_date,
       days:this.totalDays,
-      nights:this.totalNights
+      nights:this.totalNights,
+      roomCounts:this.roomCounts
     }
     this.router.navigate(['/booking-preview'], {
       queryParams:booking_details
