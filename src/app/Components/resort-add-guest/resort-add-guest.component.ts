@@ -8,6 +8,9 @@ import { Route, Router } from '@angular/router';
   styleUrl: './resort-add-guest.component.scss',
 })
 export class ResortAddGuestComponent {
+  Firstname!:string;
+  Lastname!:string;
+  Phonenumber!:number;
   constructor(private router: Router) {}
   BackToResort() {
     this.router.navigate(['']);
@@ -31,8 +34,16 @@ export class ResortAddGuestComponent {
   }
   save() {
     var guestdetils = this.Addguest.value;
+    this.Firstname=this.Addguest.value.Firstname;
+    this.Lastname=this.Addguest.value.Lastname;
+    this.Phonenumber=this.Addguest.value.Phonenumber;
     console.log(guestdetils);
     this.Addguest.reset();
-    this.router.navigate(['/Resortrooms']);
+    var GuestDetails={
+      FirstName:this.Firstname,
+      LastName:this.Lastname,
+      PhoneNumber:this.Phonenumber
+    }
+    this.router.navigate(['/Resortrooms'],{queryParams:GuestDetails});
   }
 }
