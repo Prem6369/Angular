@@ -56,16 +56,6 @@ export class ResortRoomsComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log(response);
-          const checkInDateTime = new Date(this.check_in_date);
-
-  checkInDateTime.setHours(10, 0, 0, 0);
-
-  const checkOutDateTime = new Date(this.check_out_date);
-  checkOutDateTime.setHours(18, 0, 0, 0);
-
-  const differenceInDays: number = Math.abs(checkInDateTime.getDate() - checkOutDateTime.getDate());
-
-  console.log(`The difference between the two dates is ${differenceInDays} days.`);
           this.img = response.image_urls;
           this.location = response.location;
           this.resortname = response.name;
@@ -112,22 +102,24 @@ export class ResortRoomsComponent implements OnInit {
         (response) => {
           console.log(response);
           if (response) {
-            const newResortRoom = new getRoomTypes(
-              response.room_type_id,
-              response.name,
-              response.capacity,
-              response.availability,
-              response.description,
-              response.room_type_count,
-              response.created_date,
-              response.last_modified_date,
-            );
-            this.ResortRoom.push(newResortRoom);
+            // Assuming response is an array of room types
+            for (const room of response) {
+              const newResortRoom = new getRoomTypes(
+                room.room_type_id,
+                room.name,
+                room.capacity,
+                room.availability,
+                room.description,
+                room.room_type_count,
+                room.created_date,
+                room.last_modified_date
+              );
+              this.ResortRoom.push(newResortRoom);
+            }
           } else {
-            console.error(
-              'Empty response or response does not contain any resorts.'
-            );
+            console.error('Empty response or response does not contain any room types.');
           }
+          
         }
       );
   }
@@ -138,21 +130,21 @@ export class ResortRoomsComponent implements OnInit {
 
 
   increment(index: number) {
-    this.rooms[index].value++;
+    this.ResortRoom[index].room_type_count++;
     this.updateSelectedRooms();
   }
-
+  
   decrement(index: number) {
-    if (this.rooms[index].value > 0) {
-      this.rooms[index].value--;
+    if (this.ResortRoom[index].room_type_count > 0) {
+      this.ResortRoom[index].room_type_count--;
       this.updateSelectedRooms();
     }
   }
+  
   totalSelectedRooms: number = 0;
 
   updateSelectedRooms() {
-    debugger;
-    this.totalSelectedRooms = this.rooms.reduce((total, room) => total + room.value, 0);
+    this.totalSelectedRooms = this.ResortRoom.reduce((total, room) => total + room.room_type_count, 0);
   }
 
   BackToResort(){
@@ -161,7 +153,6 @@ export class ResortRoomsComponent implements OnInit {
 
   next(totalSelectedRooms: any)
   {
-    debugger;
     this.router.navigate(['/booking-preview'],{
       
       queryParams:{totalSelectedRooms:totalSelectedRooms}
