@@ -1,38 +1,37 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ResortDetails } from '../../Model/ResortDetails/resortDetails';  
 import { getRoomTypes } from '../../Model/RoomTypes/rooms';
-
 @Component({
   selector: 'app-resort-rooms',
   templateUrl: './resort-rooms.component.html',
   styleUrls: ['./resort-rooms.component.scss']
 })
 export class ResortRoomsComponent implements OnInit {
-  ResortRoom: getRoomTypes[] = []
+  resortlist: ResortDetails[] = [];
+  ResortRoom:getRoomTypes[]=[]
   img: string = '';
-  totalDays!: number;
-  totalNights!: number;
-
+  
   location: string = '';
   resortname: string = '';
-  rooms: { name: string; value: number, icon: string }[] = [
-    { name: 'Single Room', value: 0, icon: 'fa-solid fa-bed fa-2x check' },
-    { name: 'Double Room', value: 0, icon: 'fa-solid fa-user fa-2x check' },
-    { name: 'Suite Room', value: 0, icon: 'fa-solid fa-hospital fa-2x check' }
+  rooms: { name: string; value: number,icon:string }[] = [
+    { name: 'Single Room', value: 0 ,icon:'fa-solid fa-bed fa-2x check'},
+    { name: 'Double Room', value: 0 ,icon:'fa-solid fa-user fa-2x check'},
+    { name: 'Suite Room', value: 0 ,icon:'fa-solid fa-hospital fa-2x check'}
   ];
 
-  total_members: { name: string; profile: string; contact: number, type: string; icon: string }[] = [
-    { name: 'Samual James', contact: 1234567890, icon: 'fa-regular fa-trash-can', profile: 'fa-regular fa-id-badge', type: 'Employee' },
-    { name: 'Santhra Philip', contact: 78945612320, icon: 'fa-regular fa-trash-can', profile: 'fa-regular fa-id-badge', type: 'Guest' },
-    { name: 'Henry Fuller', contact: 5874123690, icon: 'fa-regular fa-trash-can', profile: 'fa-regular fa-id-badge', type: 'Guest' }
+  total_members: { name: string;profile:string;contact: number,type:string;icon:string }[] = [
+    { name: 'Samual James', contact: 1234567890 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Employee'},
+    { name: 'Santhra Philip', contact: 78945612320 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Guest'},
+    { name: 'Henry Fuller', contact: 5874123690 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Guest'}
   ];
 
   selectedRooms: { name: string; count: number }[] = [];
 
-  constructor(private httpclient: HttpClient, private router: Router, private routing: ActivatedRoute) { }
-  check_in_date!: Date;
-  check_out_date!: Date;
+  constructor(private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
+  check_in_date!:Date;
+  check_out_date!:Date;
   ngOnInit(): void {
     this.getResortDetails();
     this.routing.queryParams.subscribe((parms) => {
@@ -56,35 +55,35 @@ export class ResortRoomsComponent implements OnInit {
       )
       .subscribe(
         (response) => {
-          console.log(response);       
+          console.log(response);
           this.img = response.image_urls;
           this.location = response.location;
           this.resortname = response.name;
-          // if (response && response.resort_id) {
-          //   const newResortDetails = new ResortDetails(
-          //     response.resort_id,
-          //     response.name,
-          //     response.description,
-          //     response.location,
-          //     response.amenities,
-          //     response.image_urls,
-          //     response.video_urls,
-          //     response.status,
-          //     response.created_date,
-          //     response.last_modified_date,
-          //     response.categories,
-          //     response.coordinates
-          //   );
-          //   this.resortlist.push(newResortDetails);
-          // } else {
-          //   console.error(
-          //     'Empty response or response does not contain any resorts.'
-          //   );
-          // }
+          if (response && response.resort_id) {
+            const newResortDetails = new ResortDetails(
+              response.resort_id,
+              response.name,
+              response.description,
+              response.location,
+              response.amenities,
+              response.image_urls,
+              response.video_urls,
+              response.status,
+              response.created_date,
+              response.last_modified_date,
+              response.categories,
+              response.coordinates
+            );
+            this.resortlist.push(newResortDetails);
+          } else {
+            console.error(
+              'Empty response or response does not contain any resorts.'
+            );
+          }
         },
-        // (error) => {
-        //   console.error('Error fetching resort details:', error);
-        // }
+        (error) => {
+          console.error('Error fetching resort details:', error);
+        }
       );
   }
 
@@ -102,23 +101,25 @@ export class ResortRoomsComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log(response);
-          // if (response) {
-          //   const newResortRoom = new getRoomTypes(
-          //     response.room_type_id,
-          //     response.name,
-          //     response.capacity,
-          //     response.availability,
-          //     response.description,
-          //     response.room_type_count,
-          //     response.created_date,
-          //     response.last_modified_date,
-          //   );
-          //   this.ResortRoom.push(newResortRoom);
-          // } else {
-          //   console.error(
-          //     'Empty response or response does not contain any resorts.'
-          //   );
-          //}
+          if (response) {
+            // Assuming response is an array of room types
+            for (const room of response) {
+              const newResortRoom = new getRoomTypes(
+                room.room_type_id,
+                room.name,
+                room.capacity,
+                room.availability,
+                room.description,
+                room.room_type_count,
+                room.created_date,
+                room.last_modified_date
+              ); 
+              this.ResortRoom.push(newResortRoom);
+            }
+          } else {
+            console.error('Empty response or response does not contain any room types.');
+          }
+          
         }
       );
   }
@@ -129,26 +130,27 @@ export class ResortRoomsComponent implements OnInit {
 
 
   increment(index: number) {
-    this.rooms[index].value++;
+    this.ResortRoom[index].room_type_count++;
     this.updateSelectedRooms();
   }
-
+  
   decrement(index: number) {
-    if (this.rooms[index].value > 0) {
-      this.rooms[index].value--;
+    if (this.ResortRoom[index].room_type_count > 0) {
+      this.ResortRoom[index].room_type_count--;
       this.updateSelectedRooms();
     }
   }
+  
   totalSelectedRooms: number = 0;
 
   updateSelectedRooms() {
-    debugger;
-    this.totalSelectedRooms = this.rooms.reduce((total, room) => total + room.value, 0);
+    this.totalSelectedRooms = this.ResortRoom.reduce((total, room) => total + room.room_type_count, 0);
   }
 
-  BackToResort() {
+  BackToResort(){
     this.router.navigate(['/ResortDetails']);
   }
+
   next() {
     var booking_details={
       totalSelectedRooms: this.totalSelectedRooms,
@@ -161,27 +163,28 @@ export class ResortRoomsComponent implements OnInit {
       queryParams:booking_details
     });
   }
+totalDays!:number;
+totalNights!:number;
+calculateDayAndNight() {
+
+  const checkInDateTime = new Date(this.check_in_date);
+
+  const checkOutDateTime = new Date(this.check_out_date);
+
+  const differenceInDays: number = Math.abs(checkInDateTime.getDate() - checkOutDateTime.getDate());
+
+  console.log(`The difference between the two dates is ${differenceInDays} days.`);
 
 
-
-  calculateDayAndNight() {
-
-    const checkInDateTime = new Date(this.check_in_date);
-    const checkOutDateTime = new Date(this.check_out_date);
-    //const differenceInDays: number = Math.abs(checkInDateTime.getDate() - checkOutDateTime.getDate());
-
-    //console.log(`The difference between the two dates is ${differenceInDays} days.`);
-
-
-    if (checkOutDateTime > checkInDateTime) {
-      const differenceInMs = checkOutDateTime.getTime() - checkInDateTime.getTime();
-      this.totalDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
-      this.totalDays++;
-      this.totalNights = this.totalDays - 1;
-      console.log(this.totalDays, this.totalNights);
-    }
-    this.totalDays = this.totalDays;
-    this.totalNights = this.totalNights;
+  if (checkOutDateTime > checkInDateTime) {
+    const differenceInMs = checkOutDateTime.getTime() - checkInDateTime.getTime();
+    this.totalDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
+    this.totalDays++;
+    this.totalNights =this.totalDays-1;
+    console.log(this.totalDays,this.totalNights);
   }
+  this.totalDays = this.totalDays;
+  this.totalNights = this.totalNights;
+}
 
 }

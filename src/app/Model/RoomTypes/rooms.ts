@@ -1,11 +1,12 @@
-export interface getRoomTypes {
-
-    room_type_id: number,
-    name: string,
-    capacity: number,
-    availability: string,
-    description: string,
-    room_type_count: number,
-    created_date: Date,
-    last_modified_date: Date
+export class getRoomTypes {
+constructor(
+   public room_type_id: number,
+   public name: string,
+   public capacity: number,
+   public availability: string,
+   public description: string,
+   public room_type_count: number,
+   public created_date: Date,
+   public last_modified_date: Date
+){}
 }
