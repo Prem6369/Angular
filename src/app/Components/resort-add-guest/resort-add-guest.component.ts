@@ -36,12 +36,13 @@ export class ResortAddGuestComponent {
     var guestdetils = this.Addguest.value;
     this.Firstname=this.Addguest.value.Firstname;
     this.Lastname=this.Addguest.value.Lastname;
+    var guestname = this.Firstname+this.Lastname;
     this.Phonenumber=this.Addguest.value.Phonenumber;
     console.log(guestdetils);
     this.Addguest.reset();
     var GuestDetails={
-      FirstName:this.Firstname,
-      LastName:this.Lastname,
+      Guestname:guestname,
+
       PhoneNumber:this.Phonenumber
     }
     this.router.navigate(['/Resortrooms'],{queryParams:GuestDetails});
