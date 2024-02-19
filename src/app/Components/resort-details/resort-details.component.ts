@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ResortDetails } from '../Service/Model/models.service'; 
+import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
 
 @Component({
   selector: 'app-resort-details',

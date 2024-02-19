@@ -9,17 +9,18 @@
       <div class="square-box">
         <img src="assets/Image/Resort_image.jpg" alt="Resort Image">
         <div class="text-container mx-1">
-          <div class="resort-name pb-1">{{resortname}}</div>
-          <div class="date-range">From: 13/12/2023 - To: 18/12/2023</div>
-          <div class="total-days">Total Days: 5, Total Nights: 5</div>
+          <div class="resort-name fw-bold pb-1">{{ resortname }}</div>
+          <div class="date-range" id="txtcolor">From: {{ check_in_date }} - To: {{check_out_date}}</div>
+          <div class="total-days" id="txtcolor">Total Days: {{ totalDays }}, Total Nights: {{ totalNights }}</div>
         </div>
+        
       </div>
     </div>
   </div>
 
   <div class="mx-5">
     <h4>
-      Room details (2)
+      Room details ( {{selectedRooms}} )
     </h4>
   </div>
 
