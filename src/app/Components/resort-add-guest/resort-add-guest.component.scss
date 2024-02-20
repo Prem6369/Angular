@@ -1,5 +1,5 @@
 .cancelicon {
-    border: 1px solid rgba(126, 126, 126, 0.801);
+    border: 1px solid rgba(172, 172, 172, 0.801);
     border-radius: 50%;
     padding: 8px;
     background-color: rgba(126, 126, 126, 0.801);
@@ -47,7 +47,7 @@ fieldset {
 .input-container {
   margin-bottom: 10px;
   border: 2px dashed;
-  padding: 5px;
+  padding: 4px;
   width: 250px;
 
 }
@@ -57,10 +57,12 @@ button {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+select {
     border: none;
 outline: none;
     color: black;
+    width: 90%;
 }
  
 section {
@@ -87,4 +89,7 @@ section h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.icon{
+  color: rgb(64, 226, 231);
 }

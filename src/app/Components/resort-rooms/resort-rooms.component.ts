@@ -31,11 +31,18 @@ export class ResortRoomsComponent implements OnInit {
   constructor(private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
   check_in_date!:Date;
   check_out_date!:Date;
+  GuestContact!:number;
+  GuestFirstname!:string;
+  GuestLastname!:string;
   ngOnInit(): void {
     this.getResortDetails();
     this.routing.queryParams.subscribe((parms) => {
       this.check_in_date = parms['checkInDate'];
       this.check_out_date = parms['checkOutDate'];
+      this.GuestFirstname=parms['FirstName'];
+      this.GuestFirstname=parms['LastName'];
+      this.GuestFirstname=parms['PhoneNumber'];
+      
 
     });
     this.calculateDayAndNight();
@@ -89,7 +96,6 @@ export class ResortRoomsComponent implements OnInit {
 
   getResortRoom() {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-    const id = 2;
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
     this.httpclient
