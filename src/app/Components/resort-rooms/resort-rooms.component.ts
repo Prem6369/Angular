@@ -15,7 +15,7 @@ export class ResortRoomsComponent implements OnInit {
   resortlist: ResortDetails[] = [];
   ResortRoom:getRoomTypes[]=[]
   img: string = '';
-  totalSelectedRooms!: number;
+  totalSelectedRooms: number=0;
   
   location: string = '';
   resortname: string = '';
@@ -28,25 +28,24 @@ export class ResortRoomsComponent implements OnInit {
 
   selectedRooms: { name: string; count: number }[] = [];
 
+  GuestDetails:{Firstname:string,Lastname:string,Age:number,Sex:string,Phonenumber:number,Address:string,Idcardnumber:string,Imageurl:string}[]=[];
+
   constructor(private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
   check_in_date!:Date;
   check_out_date!:Date;
-  GuestContact!:number;
-  GuestFirstname!:string;
-  GuestLastname!:string;
+  guestdetails!:any;
   ngOnInit(): void {
     this.getResortDetails();
     this.routing.queryParams.subscribe((parms) => {
       this.check_in_date = parms['checkInDate'];
       this.check_out_date = parms['checkOutDate'];
-      this.GuestFirstname=parms['FirstName'];
-      this.GuestFirstname=parms['LastName'];
-      this.GuestFirstname=parms['PhoneNumber'];
-      
-
+      this.guestdetails =parms['guestdetils'];
     });
     this.calculateDayAndNight();
     this.getResortRoom();
+    this.GuestDetails.push(this.guestdetails);
+    console.log(this.GuestDetails.values);
+
   }
 
   getResortDetails() {
@@ -181,20 +180,13 @@ totalNights!:number;
 calculateDayAndNight() {
 
   const checkInDateTime = new Date(this.check_in_date);
-
   const checkOutDateTime = new Date(this.check_out_date);
-
-  const differenceInDays: number = Math.abs(checkInDateTime.getDate() - checkOutDateTime.getDate());
-
-  console.log(`The difference between the two dates is ${differenceInDays} days.`);
-
 
   if (checkOutDateTime > checkInDateTime) {
     const differenceInMs = checkOutDateTime.getTime() - checkInDateTime.getTime();
     this.totalDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
     this.totalDays++;
     this.totalNights =this.totalDays-1;
-    console.log(this.totalDays,this.totalNights);
   }
   this.totalDays = this.totalDays;
   this.totalNights = this.totalNights;

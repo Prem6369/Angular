@@ -27,24 +27,19 @@ export class ResortAddGuestComponent {
     Imageurl: new FormControl(),
   });
 
+
+  GuestDetails:{Firstname:string,Lastname:string,Age:number,Sex:string,Phonenumber:number,Address:string,Idcardnumber:string,Imageurl:string}[]=[];
+
+
   saveNew() {
-    var guestdetils = this.Addguest.value;
+    var guestdetils:any = this.Addguest.value;
     console.log(guestdetils);
     this.Addguest.reset();
+    this.GuestDetails.push(guestdetils);
   }
   save() {
     var guestdetils = this.Addguest.value;
-    this.Firstname=this.Addguest.value.Firstname;
-    this.Lastname=this.Addguest.value.Lastname;
-    var guestname = this.Firstname+this.Lastname;
-    this.Phonenumber=this.Addguest.value.Phonenumber;
     console.log(guestdetils);
-    this.Addguest.reset();
-    var GuestDetails={
-      Guestname:guestname,
-
-      PhoneNumber:this.Phonenumber
-    }
-    this.router.navigate(['/Resortrooms'],{queryParams:GuestDetails});
+    this.router.navigate(['/Resortrooms'],{queryParams:guestdetils});
   }
 }
