@@ -3,7 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResortDetails } from '../../Model/ResortDetails/resortDetails';  
 import { getRoomTypes } from '../../Model/RoomTypes/rooms';
+<<<<<<< HEAD
 import { DateService } from '../../Service/DateTime';
+=======
+import { GuestService } from '../../Service/GuestService';
+import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
+>>>>>>> a360b93aab5a58bb2eab3e380e9b29bd1a1ad574
 
 
 @Component({
@@ -14,31 +19,48 @@ import { DateService } from '../../Service/DateTime';
 
 export class ResortRoomsComponent implements OnInit {
   resortlist: ResortDetails[] = [];
-  ResortRoom:getRoomTypes[]=[]
+  ResortRoom:getRoomTypes[]=[];
+  guestDetails: GuestDetails[] = [];
   img: string = '';
   totalSelectedRooms!: number;
   
   location: string = '';
   resortname: string = '';
+  total_members:any;
+  total_guest!:number;
+  members_count!:number;
 
-  total_members: { name: string;profile:string;contact: number,type:string;icon:string }[] = [
-    { name: 'Samual James', contact: 1234567890 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Employee'},
-    { name: 'Santhra Philip', contact: 78945612320 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Guest'},
-    { name: 'Henry Fuller', contact: 5874123690 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Guest'}
-  ];
+  bookedRooms: { [key: string]: { count: number, name: string, description: string } } = {};
 
+<<<<<<< HEAD
   selectedRooms: { name: string; count: number }[] = [];
 
   constructor(private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute,private dateService:DateService) {}
+=======
+  constructor(private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
+>>>>>>> a360b93aab5a58bb2eab3e380e9b29bd1a1ad574
   check_in_date!:Date;
   check_out_date!:Date;
 
   ngOnInit(): void {
     this.getResortDetails();
+<<<<<<< HEAD
     this.check_in_date = this.dateService.checkInDate;
     this.check_out_date = this.dateService.checkOutDate;
     this.calculateDayAndNight();
     this.getResortRoom();
+=======
+    this.routing.queryParams.subscribe((parms) => {
+      this.check_in_date = parms['checkInDate'];
+      this.check_out_date = parms['checkOutDate'];
+    });
+    this.guestDetails = this.guestService.getGuests();
+    this.calculateDayAndNight();
+    this.getResortRoom();
+    this.total_members=this.guestDetails;
+    this.total_guest=this.guestDetails.length;
+    this.members_count=this.total_guest;
+>>>>>>> a360b93aab5a58bb2eab3e380e9b29bd1a1ad574
   }
 
   getResortDetails() {
@@ -127,19 +149,19 @@ export class ResortRoomsComponent implements OnInit {
 
 
 
-  roomCounts: {[key: string]: number} = {};
 
-  increment(room_type_id: number) {
-    if (!this.roomCounts[room_type_id]) {
-      this.roomCounts[room_type_id] = 0;
+  increment(room_type_id: number, name: string, description: string) {
+    if (!this.bookedRooms[room_type_id]) {
+      this.bookedRooms[room_type_id] = { count: 0, name: name, description: description }; 
     }
-    this.roomCounts[room_type_id]++;
+    this.bookedRooms[room_type_id].count++;
     this.updateSelectedRooms();
   }
+  
 
   decrement(room_type_id: number) {
-    if (this.roomCounts[room_type_id] && this.roomCounts[room_type_id] > 0) {
-      this.roomCounts[room_type_id]--;
+    if (this.bookedRooms[room_type_id] && this.bookedRooms[room_type_id].count > 0) {
+      this.bookedRooms[room_type_id].count--;
       this.updateSelectedRooms();
     }
   }
@@ -147,7 +169,7 @@ export class ResortRoomsComponent implements OnInit {
 
 
   updateSelectedRooms() {
-    this.totalSelectedRooms = Object.values(this.roomCounts).reduce((total, count) => total + count, 0);
+    this.totalSelectedRooms = Object.values(this.bookedRooms).reduce((total, room) => total + room.count, 0);
   }
   
 
@@ -156,18 +178,23 @@ export class ResortRoomsComponent implements OnInit {
   }
 
   next() {
-    var booking_details={
+    const booking_details = {
       totalSelectedRooms: this.totalSelectedRooms,
-      check_in_date:this.check_in_date,
-      check_out_date:this.check_out_date,
-      days:this.totalDays,
-      nights:this.totalNights,
-      roomCounts:this.roomCounts
-    }
+      check_in_date: this.check_in_date,
+      check_out_date: this.check_out_date,
+      days: this.totalDays,
+      nights: this.totalNights,
+      bookedRooms: this.bookedRooms, 
+      members_count: this.members_count,
+      total_members: this.total_members
+    };
+    console.log(booking_details);
+
     this.router.navigate(['/booking-preview'], {
-      queryParams:booking_details
+      queryParams: booking_details
     });
   }
+  
 totalDays!:number;
 totalNights!:number;
 calculateDayAndNight() {

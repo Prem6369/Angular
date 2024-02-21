@@ -21,21 +21,23 @@
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="Room(s)" id="tab-label" class="mt-4">
         <div *ngFor="let room of ResortRoom" class="row w-0 m-3 border-bottom pt-5">
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="iconbackground">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 d-flex justify-content-end" id="iconbackground">
             <i class="fa-solid fa-bed fa-2x check"></i>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <div class="fw-bold">{{room.name }}</div>
-            <div>{{room.capacity}} {{room.description}}</div>
+            <div class="fw-bold d-flex justify-content-center">{{room.name }}</div>
+            <div class="d-flex justify-content-center">{{room.capacity}} {{room.description}}</div>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex justify-content-center">
             <div class="d-flex border" id="incrementBtn">
               <button class="btn btn-sm btn-light me-2 fw-bold" (click)="decrement(room.room_type_id )"><i
                   class="fa-solid fa-minus"></i>
               </button>          
-              <div>{{ roomCounts[room.room_type_id] || 0 }}</div>                                     
-              <button class="btn btn-sm btn-light ms-2 fw-bold" (click)="increment(room.room_type_id)"><i
-                  class="fa-solid fa-plus"></i></button>
+              <div class="d-flex align-items-center">{{ bookedRooms[room.room_type_id]?.count || 0 }}</div>                                  
+              <button class="btn btn-sm btn-light ms-2 fw-bold" (click)="increment(room.room_type_id, room.name, room.description)">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+              
             </div>
           </div>
         </div>
@@ -55,22 +57,21 @@
             ADD GUEST
           </button>
         </div>
-
-        <div class=" my-3">
+                    <div class=" my-3">
           <div *ngFor="let member of total_members" class="row border-bottom">
 
             <div class="icon col-md-4 text-center">
-              <i class="{{member.profile}} fs-1 "></i>
+              <i class="fa-regular fa-address-card fs-1 d-flex justify-content-center"></i>
             </div>
 
             <div class=" col-md-4">
               <div class="name">
-                <div class="fw-bold">{{member.name }}</div>
+                <div class="fw-bold ">{{member.Firstname}} {{member.Lastname}}</div>
               </div>
 
               <div class="row">
                 <div class=" col-md-6">
-                  <div class="fw-light">{{member.contact }}</div>
+                  <div class="fw-light">{{member.Phonenumber }}</div>
                 </div>
 
                 <div class=" col-md-6 border rounded-pill" id="person-type">
@@ -80,15 +81,16 @@
 
             </div>
             <div class="col-md-4 text-center" id="edit-icon">
-              <i class="{{member.icon}} text-danger"></i>
+              <i class="fa-regular fa-pen-to-square text-success mx-3"></i>
+              <i class="fa-regular fa-trash-can text-danger"></i>
             </div>
           </div>
         </div>
         <div class="row fw-bold m-4">
-          <div class="col-md-2 text-center">1 Employee</div>
-          <div class="col-md-2 text-center">2 Guest</div>
-          <div class="col-md-8 text-center">Total 3</div>
-        </div>
+          <div class="col-md-2 text-center"> Employee</div>
+          <div class="col-md-2 text-center">{{ total_guest }} Guest</div>
+          <div class="col-md-8 text-center">Total {{ members_count }}</div>
+        </div> 
         <div class="alert alert-secondary alert-dismissible fade show" role="alert">
 
           <strong>Rules</strong>

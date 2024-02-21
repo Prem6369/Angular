@@ -1,19 +1,22 @@
+
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { GuestService } from '../../Service/GuestService';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-resort-add-guest',
   templateUrl: './resort-add-guest.component.html',
-  styleUrl: './resort-add-guest.component.scss',
+  styleUrls: ['./resort-add-guest.component.scss'],
 })
 export class ResortAddGuestComponent {
-  Firstname!:string;
-  Lastname!:string;
-  Phonenumber!:number;
-  constructor(private router: Router) {}
-  BackToResort() {
-    this.router.navigate(['']);
+  guests: any[] = [];
+  guestDetails:any;
+  constructor(private _location: Location,private router: Router,private guestService: GuestService) {
+    this.Addguest.patchValue({
+      type:"Guest"
+    })
   }
 
   Addguest = new FormGroup({
@@ -25,21 +28,24 @@ export class ResortAddGuestComponent {
     Address: new FormControl(),
     Idcardnumber: new FormControl(),
     Imageurl: new FormControl(),
+    type:new FormControl()
   });
 
-
-  GuestDetails:{Firstname:string,Lastname:string,Age:number,Sex:string,Phonenumber:number,Address:string,Idcardnumber:string,Imageurl:string}[]=[];
-
+ 
+  
 
   saveNew() {
-    var guestdetils:any = this.Addguest.value;
-    console.log(guestdetils);
+    debugger;
+    this.guestDetails = this.Addguest.value;
+    this.guestService.addGuest(this.guestDetails);
     this.Addguest.reset();
-    this.GuestDetails.push(guestdetils);
+    this.Addguest.controls['type'].setValue('Guest');
   }
+
   save() {
-    var guestdetils = this.Addguest.value;
-    console.log(guestdetils);
-    this.router.navigate(['/Resortrooms'],{queryParams:guestdetils});
+    debugger;
+    this.guestDetails = this.Addguest.value;
+    this.guestService.addGuest(this.guestDetails);
+    this._location.back();
   }
 }
