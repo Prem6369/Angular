@@ -5,7 +5,7 @@ import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
 import { getRoomTypes } from '../../Model/RoomTypes/rooms';
 import { GuestService } from '../../Service/GuestService';
 import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
-
+import { BookingService } from '../../Service/BookingService';
 
 @Component({
   selector: 'app-resort-rooms',
@@ -28,7 +28,9 @@ export class ResortRoomsComponent implements OnInit {
 
   bookedRooms: { [key: string]: { count: number, name: string, description: string } } = {};
 
-  constructor(private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
+
+
+  constructor(private bookingService:BookingService,private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
   check_in_date!:Date;
   check_out_date!:Date;
 
@@ -161,6 +163,7 @@ export class ResortRoomsComponent implements OnInit {
   }
 
   next() {
+    debugger;
     const booking_details = {
       totalSelectedRooms: this.totalSelectedRooms,
       check_in_date: this.check_in_date,
@@ -171,11 +174,9 @@ export class ResortRoomsComponent implements OnInit {
       members_count: this.members_count,
       total_members: this.total_members
     };
-    console.log(booking_details);
-
-    this.router.navigate(['/booking-preview'], {
-      queryParams: booking_details
-    });
+    debugger;
+    this.bookingService.addBooking(booking_details);
+    this.router.navigate(['/booking-preview']);
   }
   
 totalDays!:number;

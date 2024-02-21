@@ -2,53 +2,44 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ResortDetails } from '../../Model/ResortDetails/resortDetails'; 
 import { ActivatedRoute, Router } from '@angular/router';
-
-
+import { GuestService } from '../../Service/GuestService';
+import { BookingService } from '../../Service/BookingService';
+import { Booking_details } from '../../Model/bookingDetails';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-booking-preview',
   templateUrl: './booking-preview.component.html',
-  styleUrl: './booking-preview.component.scss'
+  styleUrl: './booking-preview.component.scss',
 })
 export class BookingPreviewComponent implements OnInit {
   resortlist: ResortDetails[] = [];
-  totalDays!: number;
-  totalNights!: number;
-  check_in_date!: Date;
-  check_out_date!: Date;
+  booking_details!:Booking_details;
   img: string = '';
-    termsChecked: boolean = false;
-
+  termsChecked: boolean = false;
+  bookedRoomsArray:any[]=[];
   
   location: string = '';
   resortname: string = '';
-  rooms: { name: string; value: number,icon:string }[] = [
-    { name: 'Single Room', value: 0 ,icon:'fa-solid fa-bed fa-2x check'},
-    { name: 'Suite Room', value: 0 ,icon:'fa-solid fa-hospital fa-2x check'}
-  ];
-
-  total_members: { name: string;profile:string;contact: number,type:string;icon:string }[] = [
-    { name: 'Samual James', contact: 78945612320 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Employee'},
-    { name: 'Santhra Philip', contact: 78945612320 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Guest'},
-    { name: 'Henry Fuller', contact: 78945612320 ,icon:'fa-regular fa-trash-can',profile:'fa-regular fa-id-badge',type:'Guest'}
-  ];
 
   selectedRooms: { name: string; count: number }[] = [];
+  guestDetails!: any[];
+  bookedRooms: { count: number, name: string, description: string }[] = [];
 
-
-  constructor(private httpclient: HttpClient, private router: Router,private routing: ActivatedRoute) {
-
-    this.routing.queryParams.subscribe((params) => {
-      this.selectedRooms = params['totalSelectedRooms'];
-      this.totalDays = params['days'];
-      this.totalNights = params['nights'];
-      this.check_in_date = params['check_in_date'];
-      this.check_out_date = params['check_out_date'];
-
-    });
+  constructor(private _location:Location,private bookingService:BookingService,private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.getResortDetails();
+    this.booking_details=this.bookingService.getBookings();
+    this.bookedRooms=this.booking_details.bookedRooms;
+    this.guestDetails=this.booking_details.total_members;
+     this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
+      id: key,
+      count: value.count,
+      name: value.name,
+      description: value.description
+  }));
+  
   }
 
   getResortDetails() {
@@ -96,7 +87,7 @@ export class BookingPreviewComponent implements OnInit {
 
   edit()
   {
-    this.router.navigate(['/Resortrooms']);
+    this._location.back()
   }
   submit() {
     this.router.navigate(['/Thankyou']);
