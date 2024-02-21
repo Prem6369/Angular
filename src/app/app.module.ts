@@ -23,6 +23,12 @@ import { ResortAddEmployeeComponent } from './Components/resort-add-employee/res
 import { BookingPreviewComponent } from './Components/booking-preview/booking-preview.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {AsyncPipe} from '@angular/common';
+import {MatInputModule} from '@angular/material/input';
+
+
+
 
 
 
@@ -54,7 +60,8 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
     MatTabsModule,
     FormsModule,
     MatDatepickerModule,
-    MatDateRangeInput,MatNativeDateModule,MatFormFieldModule,MatButtonModule
+    MatDateRangeInput,MatNativeDateModule,MatFormFieldModule,MatButtonModule,MatAutocompleteModule,
+    AsyncPipe,MatInputModule
   ],
   providers: [provideNativeDateAdapter()],
   bootstrap: [AppComponent]

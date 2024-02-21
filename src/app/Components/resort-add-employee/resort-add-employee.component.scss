@@ -32,6 +32,7 @@ section h2 {
 #searchBox {
   display: flex;
   justify-content: end;
+  margin-top: 20px;
 }
 
 #icon {
@@ -60,3 +61,22 @@ section h2 {
   border-radius: 10px;
 
 }
+.mat-form-field {
+  background-color: white;
+}
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #f3f3f3 !important ;
+}
+::ng-deep div.mat-mdc-autocomplete-panel{
+  background-color: #48ad16 ;
+
+}
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-floating-label, .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-floating-label--float-above {
+  color: rgb(0 0 0 / 87%) !important;;
+}
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: rgb(0 0 0 / 87%) !important;
+}
+// ::ng-deep div.mat-mdc-autocomplete-panel {
+//   background-color: white !important;
+// }

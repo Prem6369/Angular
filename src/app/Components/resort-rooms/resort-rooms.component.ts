@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResortDetails } from '../../Model/ResortDetails/resortDetails';  
 import { getRoomTypes } from '../../Model/RoomTypes/rooms';
-import { GuestService } from '../../Service/GuestService';
+import { DateService } from '../../Service/DateTime';
 import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
 import { BookingService } from '../../Service/BookingService';
 
@@ -18,7 +18,7 @@ export class ResortRoomsComponent implements OnInit {
   ResortRoom:getRoomTypes[]=[];
   guestDetails: GuestDetails[] = [];
   img: string = '';
-  totalSelectedRooms: number=0;
+  totalSelectedRooms!: number;
   
   location: string = '';
   resortname: string = '';
@@ -28,24 +28,24 @@ export class ResortRoomsComponent implements OnInit {
 
   bookedRooms: { [key: string]: { count: number, name: string, description: string } } = {};
 
+<<<<<<< HEAD
 
 
   constructor(private bookingService:BookingService,private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
+=======
+  selectedRooms: { name: string; count: number }[] = [];
+
+  constructor(private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute,private dateService:DateService) {}
+>>>>>>> 9fde1f840542eee364fdf1ba66fe9dc46dc5fba1
   check_in_date!:Date;
   check_out_date!:Date;
 
   ngOnInit(): void {
     this.getResortDetails();
-    this.routing.queryParams.subscribe((parms) => {
-      this.check_in_date = parms['checkInDate'];
-      this.check_out_date = parms['checkOutDate'];
-    });
-    this.guestDetails = this.guestService.getGuests();
+    this.check_in_date = this.dateService.checkInDate;
+    this.check_out_date = this.dateService.checkOutDate;
     this.calculateDayAndNight();
     this.getResortRoom();
-    this.total_members=this.guestDetails;
-    this.total_guest=this.guestDetails.length;
-    this.members_count=this.total_guest;
   }
 
   getResortDetails() {
@@ -191,6 +191,7 @@ calculateDayAndNight() {
     this.totalDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
     this.totalDays++;
     this.totalNights =this.totalDays-1;
+    console.log(this.totalDays,this.totalNights);
   }
   this.totalDays = this.totalDays;
   this.totalNights = this.totalNights;

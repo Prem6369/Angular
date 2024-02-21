@@ -21,8 +21,8 @@
         </div>
       </div>
     </div>
-  
-    
+
+
   </div>
 
   <div class="background">
@@ -126,27 +126,35 @@
           </div>
         </div>
       </div>
-    </div>
 
 
-    <div class="con">
-      <div class="containerbook">
-        <div>
-          <p class="txtdate">From:{{check_in_date}}</p>
-          <p class="txtdate">To:{{check_out_date}}</p>
-          <p class="txtchange" (click)="change()">change</p>
+      <div class="con">
+        <div class="containerbook">
+          <div>
+            <p class="txtdate">From:{{check_in_date| date:'dd/MM/yyyy'}}</p>
+            <p class="txtdate">To:{{check_out_date| date:'dd/MM/yyyy'}}</p>
+            <p class="txtchange" (click)="change()">change</p>
+          </div>
         </div>
-      </div>
 
-      <div class="book">
-        <p class="txtavailabel">12 Available Room </p>
-        <p class="txtbook btn-success btn " (click)="booknow()">Book Now </p>
+
+        <div class="con">
+          <div class="containerbook">
+            <div>
+              <p class="txtdate">From:{{check_in_date}}</p>
+              <p class="txtdate">To:{{check_out_date}}</p>
+              <p class="txtchange" (click)="change()">change</p>
+            </div>
+          </div>
+
+          <div class="book">
+            <p class="txtavailabel">12 Available Room </p>
+            <p class="txtbook btn-success btn " (click)="booknow()">Book Now </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  <script src="app/Components/resort-details/resort-details.js"></script>
 </body>
 
-</html> 
-
+</html>
