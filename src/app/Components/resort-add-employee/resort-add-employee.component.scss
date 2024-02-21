@@ -1,6 +1,6 @@
 .head {
   background-color: black;
-  height: 100px;
+  height:max-content;
   color: white;
 }
 
@@ -40,6 +40,12 @@ section h2 {
   align-items: center;
 }
 
+.example-full-widt
+{
+  width: auto;
+  background-color: #fff;
+  outline: none;
+}
 #person-type {
   width: auto;
   color: aqua;

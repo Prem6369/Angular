@@ -36,7 +36,7 @@
               <div class="d-flex align-items-center">{{ bookedRooms[room.room_type_id]?.count || 0 }}</div>                                  
               <button class="btn btn-sm btn-light ms-2 fw-bold" (click)="increment(room.room_type_id, room.name, room.description)">
                 <i class="fa-solid fa-plus"></i>
-              </button>
+              </button> 
               
             </div>
           </div>
@@ -58,7 +58,7 @@
           </button>
         </div>
                     <div class=" my-3">
-          <div *ngFor="let member of total_members" class="row border-bottom">
+          <div *ngFor="let member of total_list" class="row border-bottom">
 
             <div class="icon col-md-4 text-center">
               <i class="fa-regular fa-address-card fs-1 d-flex justify-content-center"></i>
@@ -66,7 +66,7 @@
 
             <div class=" col-md-4">
               <div class="name">
-                <div class="fw-bold ">{{member.Firstname}} {{member.Lastname}}</div>
+                <div class="fw-bold ">{{member.Firstname}} {{member.Lastname}} {{member.name}} </div>
               </div>
 
               <div class="row">
@@ -81,15 +81,15 @@
 
             </div>
             <div class="col-md-4 text-center" id="edit-icon">
-              <i class="fa-regular fa-pen-to-square text-success mx-3"></i>
+              <i *ngIf="member.type === 'Guest'" class="fa-regular fa-pen-to-square text-success mx-3"></i>
               <i class="fa-regular fa-trash-can text-danger"></i>
             </div>
           </div>
         </div>
         <div class="row fw-bold m-4">
-          <div class="col-md-2 text-center"> Employee</div>
-          <div class="col-md-2 text-center">{{ total_guest }} Guest</div>
-          <div class="col-md-8 text-center">Total {{ members_count }}</div>
+          <div class="col-md-2 text-center"> {{employee_count}} Employee</div>
+          <div class="col-md-2 text-center">{{ guest_count }} Guest</div>
+          <div class="col-md-8 text-center">Total {{ total_count }}</div>
         </div> 
         <div class="alert alert-secondary alert-dismissible fade show" role="alert">
 

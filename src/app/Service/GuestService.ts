@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GuestService {
   private guests: any[] = [];
+  private employees: any[] = [];
 
   constructor() { }
 
@@ -15,4 +16,14 @@ export class GuestService {
   addGuest(guest: any) {
     this.guests.push(guest);
   }
+
+  addEmployee(employeeList: any) {
+    this.employees.push(employeeList);
+  }
+
+  getEmployee(): any[]{
+    return this.employees;
+  }
+
+
 }

@@ -1,72 +1,60 @@
 <div class="add-employee ">
   <div class="head">
-    <h2 class="text-center ">Add Employee </h2>
+    <h2 class="text-center py-4">Add Employee </h2>
   </div>
 
   <div class="row">
-    <div class="col-6" id="searchBox">
-      <!-- <form [formGroup]="searchEmployeeForm" class="form" (ngSubmit)="searchEmployee()">
-        <section id="LastName" class="mt-3">
-          <h2>SEARCH EMPLOYEE</h2>
-          <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
-          <input type="text" id="searchEmployee" formControlName="searchEmployee">
-        </section>
-      </form> -->
+    <div class="col-md-6" id="searchBox">
       <form class="example-form" [formGroup]="employees">
-        <mat-form-field class="example-full-width">
-
-          <mat-label>Search Employee</mat-label>
-          <input type="text"
-                 
-                 matInput
-                 formControlName="Empname"
-                 [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-              {{ option }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
+        <section>
+          <h2>Search employee</h2>
+          <mat-form-field class="example-full-width">
+            <input type="text" matInput formControlName="name" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </section>
       </form>
-      
+
     </div>
-    <div class="col-md-4" id="icon" (click)="addEmployee()">
-      <i class="fa-solid fa-square-plus" style="font-size:50px;"></i>
+    <div class="col-md-4" id="icon" >
+      <i class="fa-solid fa-square-plus" style="font-size:50px;" (click)="addEmployee()"></i>
     </div>
   </div>
   <div class="my-3" id="search-box">
-    <div class="row" id="search-result" *ngFor="let employee of employeed">
+    <div class="row mx-2" id="search-result" *ngFor="let employe of employee">
       <div class="icon col-md-5 text-center">
         <i class="fa-regular fa-id-badge fs-1 "></i>
       </div>
-  
+
       <div class=" col-md-4">
         <div class="name">
-          <div class="fw-bold">{{ employee.name }}</div>
+          <div class="fw-bold">{{ employe.name }}</div>
         </div>
-  
+
         <div class="row">
           <div class=" col-md-6">
-            <div class="fw-light">{{ employee.phoneNumber }}</div>
+            <div class="fw-light">{{ employe.Phonenumber }}</div>
           </div>
-  
+
           <div class=" col-md-6 border rounded-pill" id="person-type">
-            <div class="fw-light">{{ employee.type }}</div>
+            <div class="fw-light">{{ employe.type }}</div>
           </div>
         </div>
-  
+
       </div>
       <div class="col-md-2 text-center" id="edit-icon">
         <i class="fa-regular fa-trash-can text-danger"></i>
       </div>
     </div>
   </div>
-  
+
   <div class="text-center">
     <button class=" btn btn-success" (click)="save()">
       SAVE
     </button>
   </div>
 </div>
-
-

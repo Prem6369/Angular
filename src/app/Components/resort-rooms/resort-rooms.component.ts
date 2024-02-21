@@ -6,6 +6,7 @@ import { getRoomTypes } from '../../Model/RoomTypes/rooms';
 import { DateService } from '../../Service/DateTime';
 import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
 import { BookingService } from '../../Service/BookingService';
+import { GuestService } from '../../Service/GuestService';
 
 @Component({
   selector: 'app-resort-rooms',
@@ -17,26 +18,26 @@ export class ResortRoomsComponent implements OnInit {
   resortlist: ResortDetails[] = [];
   ResortRoom:getRoomTypes[]=[];
   guestDetails: GuestDetails[] = [];
+  isGuest:boolean=false;
+
   img: string = '';
   totalSelectedRooms!: number;
   
   location: string = '';
   resortname: string = '';
-  total_members:any;
+  total_members!:any[];
+  total_employees!:any[];
+  total_list!:any[];
   total_guest!:number;
-  members_count!:number;
+  employee_count!:number;
+  guest_count!:number;
+  total_count!:number;
 
   bookedRooms: { [key: string]: { count: number, name: string, description: string } } = {};
 
-<<<<<<< HEAD
 
 
-  constructor(private bookingService:BookingService,private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
-=======
-  selectedRooms: { name: string; count: number }[] = [];
-
-  constructor(private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute,private dateService:DateService) {}
->>>>>>> 9fde1f840542eee364fdf1ba66fe9dc46dc5fba1
+  constructor(private dateService:DateService,private bookingService:BookingService,private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
   check_in_date!:Date;
   check_out_date!:Date;
 
@@ -44,6 +45,12 @@ export class ResortRoomsComponent implements OnInit {
     this.getResortDetails();
     this.check_in_date = this.dateService.checkInDate;
     this.check_out_date = this.dateService.checkOutDate;
+    this.total_members=this.guestService.getGuests();
+    this.total_employees=this.guestService.getEmployee();
+    this.total_list=this.total_members.concat(this.total_employees)
+    this.employee_count=this.total_employees.length;
+    this.guest_count=this.total_members.length;
+    this.total_count=this.employee_count+this.guest_count;
     this.calculateDayAndNight();
     this.getResortRoom();
   }
@@ -171,7 +178,7 @@ export class ResortRoomsComponent implements OnInit {
       days: this.totalDays,
       nights: this.totalNights,
       bookedRooms: this.bookedRooms, 
-      members_count: this.members_count,
+      members_count: this.total_count,
       total_members: this.total_members
     };
     debugger;
