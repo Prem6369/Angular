@@ -127,8 +127,8 @@
   <div class="con">
     <div class="containerbook">
       <div>
-        <p class="txtdate">From:{{check_in_date}}</p>
-        <p class="txtdate">To:{{check_out_date}}</p>
+        <p class="txtdate">From:{{check_in_date| date:'dd/MM/yyyy'}}</p>
+        <p class="txtdate">To:{{check_out_date| date:'dd/MM/yyyy'}}</p>
         <p class="txtchange" (click)="change()">change</p>
       </div>
   </div>

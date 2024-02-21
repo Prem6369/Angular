@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResortDetails } from '../../Model/ResortDetails/resortDetails';  
 import { getRoomTypes } from '../../Model/RoomTypes/rooms';
+import { DateService } from '../../Service/DateTime';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class ResortRoomsComponent implements OnInit {
   resortlist: ResortDetails[] = [];
   ResortRoom:getRoomTypes[]=[]
   img: string = '';
-  totalSelectedRooms: number=0;
+  totalSelectedRooms!: number;
   
   location: string = '';
   resortname: string = '';
@@ -28,24 +29,16 @@ export class ResortRoomsComponent implements OnInit {
 
   selectedRooms: { name: string; count: number }[] = [];
 
-  GuestDetails:{Firstname:string,Lastname:string,Age:number,Sex:string,Phonenumber:number,Address:string,Idcardnumber:string,Imageurl:string}[]=[];
-
-  constructor(private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
+  constructor(private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute,private dateService:DateService) {}
   check_in_date!:Date;
   check_out_date!:Date;
-  guestdetails!:any;
+
   ngOnInit(): void {
     this.getResortDetails();
-    this.routing.queryParams.subscribe((parms) => {
-      this.check_in_date = parms['checkInDate'];
-      this.check_out_date = parms['checkOutDate'];
-      this.guestdetails =parms['guestdetils'];
-    });
+    this.check_in_date = this.dateService.checkInDate;
+    this.check_out_date = this.dateService.checkOutDate;
     this.calculateDayAndNight();
     this.getResortRoom();
-    this.GuestDetails.push(this.guestdetails);
-    console.log(this.GuestDetails.values);
-
   }
 
   getResortDetails() {
@@ -187,6 +180,7 @@ calculateDayAndNight() {
     this.totalDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
     this.totalDays++;
     this.totalNights =this.totalDays-1;
+    console.log(this.totalDays,this.totalNights);
   }
   this.totalDays = this.totalDays;
   this.totalNights = this.totalNights;

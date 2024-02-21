@@ -13,7 +13,7 @@ ngOnInit(): void {
   
 }
 GoToHome(){
-  this.router.navigate(['/ResortDetails']);
+  this.router.navigate(['']);
 }
 
 }

@@ -9,7 +9,7 @@
           <img src="assets/Image/Resort_image.jpg" alt="Resort Image">
           <div class="text-container">
             <p class="resort-name">{{resortname}}</p>
-            <p class="date-range">From: {{this.check_in_date}} - To: {{this.check_out_date}}</p>
+            <p class="date-range">From: {{this.check_in_date| date:'dd/MM/yyyy'}} - To: {{this.check_out_date| date:'dd/MM/yyyy'}}</p>
             <p class="total-days">Total Days: {{ totalDays }}, Total Nights: {{ totalNights }}</p>
           </div>
         </div>

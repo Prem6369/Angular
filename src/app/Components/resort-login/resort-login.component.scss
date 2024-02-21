@@ -32,21 +32,26 @@ input[type="password"] {
     background-color: #52225a;
     color: #fff;
     width: 300px;
-    box-shadow: 7px 6px 6px 1px lightblue;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    font-weight: 400;
+    letter-spacing: 2px;
     transition: background-color 0.3s;
 }
 
 .forgot-password {
     text-align: right;
     margin-bottom: 20px;
+   
+}
+.forgot-password a{
+    text-decoration: none;
 }
 
 section {
-    border: 2px solid;
-    border-radius: 10px;
+    border: 1px solid;
+    border-radius: 5px;    
     padding: 1em;
     width: 300px;
     margin-left: 30px;
@@ -59,4 +64,10 @@ section h2 {
     background: #fff;
     font-size: 1em;
     font-weight: normal;
+}
+.icon{
+    color: rgb(93, 230, 240);
+}
+.para a{
+    text-decoration: none;
 }
