@@ -3,12 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResortDetails } from '../../Model/ResortDetails/resortDetails';  
 import { getRoomTypes } from '../../Model/RoomTypes/rooms';
-<<<<<<< HEAD
 import { DateService } from '../../Service/DateTime';
-=======
-import { GuestService } from '../../Service/GuestService';
 import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
->>>>>>> a360b93aab5a58bb2eab3e380e9b29bd1a1ad574
 
 
 @Component({
@@ -32,35 +28,18 @@ export class ResortRoomsComponent implements OnInit {
 
   bookedRooms: { [key: string]: { count: number, name: string, description: string } } = {};
 
-<<<<<<< HEAD
   selectedRooms: { name: string; count: number }[] = [];
 
   constructor(private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute,private dateService:DateService) {}
-=======
-  constructor(private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
->>>>>>> a360b93aab5a58bb2eab3e380e9b29bd1a1ad574
   check_in_date!:Date;
   check_out_date!:Date;
 
   ngOnInit(): void {
     this.getResortDetails();
-<<<<<<< HEAD
     this.check_in_date = this.dateService.checkInDate;
     this.check_out_date = this.dateService.checkOutDate;
     this.calculateDayAndNight();
     this.getResortRoom();
-=======
-    this.routing.queryParams.subscribe((parms) => {
-      this.check_in_date = parms['checkInDate'];
-      this.check_out_date = parms['checkOutDate'];
-    });
-    this.guestDetails = this.guestService.getGuests();
-    this.calculateDayAndNight();
-    this.getResortRoom();
-    this.total_members=this.guestDetails;
-    this.total_guest=this.guestDetails.length;
-    this.members_count=this.total_guest;
->>>>>>> a360b93aab5a58bb2eab3e380e9b29bd1a1ad574
   }
 
   getResortDetails() {
