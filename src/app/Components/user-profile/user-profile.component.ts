@@ -65,4 +65,7 @@ export class UserProfileComponent implements OnInit {
   homePage() {
     this.router.navigate(['/ResortDetails']);
   }
+  Logout(){
+    this.router.navigate(['']);
+  }
 }
