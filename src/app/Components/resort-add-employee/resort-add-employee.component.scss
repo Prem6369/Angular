@@ -86,3 +86,29 @@ section h2 {
 // ::ng-deep div.mat-mdc-autocomplete-panel {
 //   background-color: white !important;
 // }
+
+#search-input
+{
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+
+::ng-deep .mat-mdc-option
+.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple)
+{
+  background-color: white;
+  color: black;
+}
+
+::ng-deep .mat-mdc-option.mdc-list-item
+{
+  align-items: center;
+    background-color: white;
+    color: black;
+}
+#mat-autocomplete
+{
+  background-color: white;
+}
