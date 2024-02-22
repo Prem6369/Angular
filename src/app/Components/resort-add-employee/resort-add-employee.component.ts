@@ -4,6 +4,7 @@ import { Observable, map, startWith } from 'rxjs';
 import { Location } from '@angular/common';
 import { GuestService } from '../../Service/GuestService';
 
+
 @Component({
   selector: 'app-resort-add-employee',
   templateUrl: './resort-add-employee.component.html',
@@ -24,12 +25,28 @@ export class ResortAddEmployeeComponent {
 
   employedetails=["Alice","Aravind", "Benjamin", "Clara", "Elango", "Felix", "Katherine",  "Peter","Prem", "Quinn", "Rachel","Senthil", "Samuel", "Taylor", "Uma", "Victor", "Willow", "Xavier", "Yara", "Zachary"]
 
+//    employedetails: {[key: string]: string}[] = [
+//     {name: "Alice", phone: "123-456-7890"},
+//     {name: "Aravind", phone: "234-567-8901"},
+//     {name: "Clara", phone: "456-789-0123"},
+//     {name: "Elango", phone: "567-890-1234"},
+//     {name: "Felix", phone: "678-901-2345"},
+//     {name: "Katherine", phone: "789-012-3456"},
+//     {name: "Peter", phone: "890-123-4567"},
+//     {name: "Prem", phone: "901-234-5678"},
+//     {name: "Quinn", phone: "012-345-6789"},
+//     {name: "Rachel", phone: "123-456-7890"},
+//     {name: "Senthil", phone: "234-567-8901"},
+
+// ];
+
+
   constructor(private _location: Location,private guestService:GuestService) {
     this.filteredOptions = (this.employees.get('name')?.valueChanges as Observable<string>).pipe(
       startWith(''),
       map(value => value ? this._filter(value) : [])
     );
-    
+      
   }
 
   private _filter(value: string): string[] {
@@ -41,7 +58,6 @@ export class ResortAddEmployeeComponent {
     this.setValues()
     this.employee.push(this.employees.value);
     this.employeeList.push(this.employees.value);
-   // console.log("From add button:",this.employeeList);
     this.employees.reset();
   }
   
@@ -50,10 +66,10 @@ export class ResortAddEmployeeComponent {
     return phoneNumber;
   }
 
-removeEmployee(name: string): void {
-  const indexToRemove: number = this.employeeList.findIndex((emp: any) => emp.name === name);
-  const Remove: number = this.employee.findIndex((emp: any) => emp.name === name);
+removeEmployee(Phonenumber: number) {
 
+  const indexToRemove: number = this.employeeList.findIndex((emp: any) => emp.Phonenumber === Phonenumber);
+  const Remove: number = this.employee.findIndex((emp: any) => emp.Phonenumber === Phonenumber);
   if (indexToRemove !== -1 && Remove!==-1) {
     this.employeeList.splice(indexToRemove, 1);
     this.employee.splice(indexToRemove, 1);
@@ -64,7 +80,6 @@ removeEmployee(name: string): void {
 
   save() {
     this.guestService.addEmployee(this.employeeList);
-    //console.log("From save button:",this.employeeList);
     this._location.back();
   }
 
