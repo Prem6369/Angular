@@ -162,9 +162,9 @@
             </div>
 
 
-            <button class="btn btn-success" (click)="saveNew()">SAVE & NEW</button>
-            <button class="btn btn-success" (click)="save()">SAVE</button>
-        </form>
+            <button class="btn btn-success" [disabled]="!Addguest.valid" (click)="saveNew()">SAVE & NEW</button>
+            <button class="btn btn-success" [disabled]="!Addguest.valid" (click)="save()">SAVE</button>
+              </form>
 
     </div>
 </div>

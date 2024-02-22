@@ -35,15 +35,21 @@ export class ResortRoomsComponent implements OnInit {
   guest_count!:number;
 
   bookedRooms: { [key: string]: { count: number, name: string, description: string } } = {};
+  Resort_id!: number;
 
 
 
-  constructor(private dateService:DateService,private bookingService:BookingService,private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
+  constructor(private route:ActivatedRoute,private dateService:DateService,private bookingService:BookingService,private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
   check_in_date!:Date;
   check_out_date!:Date;
 
   ngOnInit(): void {
-    this.getResortDetails();
+
+    this.route.queryParams.subscribe(params => {
+      this.Resort_id= params['ID'];
+      this.getResortDetails();
+
+    });
     this.check_in_date = this.dateService.checkInDate;
     this.check_out_date = this.dateService.checkOutDate;
 
@@ -62,12 +68,12 @@ export class ResortRoomsComponent implements OnInit {
 
   getResortDetails() {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-    const id = 2;
+    
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
     this.httpclient
       .get<any>(
-        `https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${id}`,
+        `https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${this.Resort_id}`,
         { headers }
       )
       .subscribe(
@@ -187,7 +193,7 @@ export class ResortRoomsComponent implements OnInit {
     };
     console.log(booking_details);
     this.bookingService.addBooking(booking_details);
-    this.router.navigate(['/booking-preview']);
+    this.router.navigate(['/booking-preview'],{queryParams:{ID:this.Resort_id}});
   }
   
 //   removeEmployee(name: string) {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GuestService } from '../../Service/GuestService';
 import { Location } from '@angular/common';
 
@@ -15,32 +15,48 @@ export class ResortAddGuestComponent  {
   }
 
   Addguest = new FormGroup({
-    Firstname: new FormControl(),
-    Lastname: new FormControl(),
-    Age: new FormControl(),
-    Sex: new FormControl(),
-    Phonenumber: new FormControl(),
-    Address: new FormControl(),
-    Idcardnumber: new FormControl(),
-    Imageurl: new FormControl(),
-    type:new FormControl()
+    Firstname: new FormControl(null, Validators.required),
+    Lastname: new FormControl(null, Validators.required),
+    Age: new FormControl(null, Validators.required),
+    Sex: new FormControl(null, Validators.required),
+    Phonenumber: new FormControl(null, Validators.required),
+    Address: new FormControl(null, Validators.required),
+    Idcardnumber: new FormControl(null, Validators.required),
+    Imageurl: new FormControl(null, Validators.required),
+    type: new FormControl(),
   });
 
  
   
 
   saveNew() {
-    this.setType()
-    this.guestDetails = this.Addguest.value;
-    this.guestService.addGuest(this.guestDetails);
-    this.Addguest.reset(); 
+    debugger;
+    console.log(this.Addguest.invalid)
+    if(this.Addguest.valid){
+      this.setType()
+      this.guestDetails = this.Addguest.value;
+      this.guestService.addGuest(this.guestDetails);
+      this.Addguest.reset();
+    }
+    else{
+      alert("please Fill All Fileds")
+    }
+ 
   }
 
   save() {
+    debugger;
+    console.log(this.Addguest.valid)
+    if(this.Addguest.valid){
     this.setType()
     this.guestDetails = this.Addguest.value;
     this.guestService.addGuest(this.guestDetails);
     this._location.back();
+    }
+    else{
+      alert("please Fill All Fileds")
+
+    }
   } 
 
   setType()

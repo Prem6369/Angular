@@ -83,6 +83,9 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
+          <!-- <span *ngIf="employees.get('name')?.invalid && employees.get('name')?.touched" class="text-danger">
+            please fill Guest values
+          </span> -->
         </section>
       </form>
       <div class="mx-3">
@@ -126,9 +129,12 @@
   </div>
   
 
-  <div class="text-center">
-    <button class=" btn btn-success" (click)="save()">
+  <div class="text-center ">
+    <button class=" btn btn-success mx-3" (click)="save()">
       SAVE
+    </button>
+    <button class=" btn btn-success mx-3" (click)="back()">
+      BACK
     </button>
   </div>
 </div>

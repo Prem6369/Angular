@@ -103,7 +103,7 @@
   <div class="justify-content-center my-5">
     <div class="container1">
       <div class="square-box">
-        <img src="assets/Image/Resort_image.jpg" alt="Resort Image">
+        <img src="{{this.img}}" alt="Resort Image">
         <div class="text-container mx-1">
           <div class="resort-name fw-bold pb-1">{{ resortname }}</div>
           <div class="date-range" id="txtcolor">From: {{ booking_details.check_in_date | date:'dd/MM/yyyy' }} - To:
@@ -111,7 +111,6 @@
           <div class="total-days" id="txtcolor">Total Days: {{ booking_details.days }}, Total Nights: {{
             booking_details.nights }}</div>
         </div>
-
       </div>
     </div>
   </div>

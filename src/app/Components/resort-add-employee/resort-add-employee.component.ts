@@ -38,11 +38,17 @@ export class ResortAddEmployeeComponent {
   }
  
   addEmployee() {
-    this.setValues()
-    this.employee.push(this.employees.value);
-    this.employeeList.push(this.employees.value);
-   // console.log("From add button:",this.employeeList);
-    this.employees.reset();
+     if(this.employees.value.name!==""){
+      this.setValues()
+      this.employee.push(this.employees.value);
+      this.employeeList.push(this.employees.value);
+     // console.log("From add button:",this.employeeList);
+      this.employees.reset();
+    }
+    else{
+      alert("Employee not Selected Please Select Employee");
+    }
+
   }
   
   getRandomNumber(): string {
@@ -63,9 +69,14 @@ removeEmployee(name: string): void {
 
 
   save() {
+    if(this.employees.value.name!==""){
+
     this.guestService.addEmployee(this.employeeList);
     //console.log("From save button:",this.employeeList);
     this._location.back();
+    }else{
+      alert("Employee not Selected Please Select Employee");
+    }
   }
 
   setValues()
@@ -73,6 +84,8 @@ removeEmployee(name: string): void {
     this.employees.controls['type'].setValue("Employee");
     this.employees.controls['Phonenumber'].setValue(this.getRandomNumber());
   }
-  
+  back(){
+    this._location.back();
+  }
 }
 

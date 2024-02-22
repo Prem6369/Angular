@@ -18,6 +18,7 @@ export class BookingPreviewComponent implements OnInit {
   termsChecked: boolean = false;
   bookedRoomsArray:any[]=[];
   GuestEmployeeList:any[]=[];
+  Resort_id!:number;
 
   location: string = '';
   resortname: string = '';
@@ -26,11 +27,16 @@ export class BookingPreviewComponent implements OnInit {
   guestDetails!: any[];
   bookedRooms: { count: number, name: string, description: string }[] = [];
 
-  constructor(private _location:Location,private bookingService:BookingService,private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing: ActivatedRoute) {
+  constructor(private route:ActivatedRoute,private _location:Location,private bookingService:BookingService,private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing: ActivatedRoute) {
   }
   
   ngOnInit(): void {
-    this.getResortDetails();
+
+    this.route.queryParams.subscribe(params => {
+      this.Resort_id= params['ID'];
+      this.getResortDetails();
+
+    });
     this.booking_details=this.bookingService.getBookings();
     this.bookedRooms=this.booking_details.bookedRooms;
     this.guestDetails=this.booking_details.Total_List;
@@ -47,12 +53,11 @@ export class BookingPreviewComponent implements OnInit {
 
   getResortDetails() {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-    const id = 2;
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
     this.httpclient
       .get<any>(
-        `https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${id}`,
+        `https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${this.Resort_id}`,
         { headers }
       )
       .subscribe(
