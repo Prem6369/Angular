@@ -18,10 +18,12 @@ export class GuestService {
   }
 
   addEmployee(employeeList: any) {
-    this.employees.push(employeeList);
+    debugger;
+    this.employees=employeeList;
+    console.log("From service:",this.employees)
   }
 
-  getEmployee(): any[]{
+  getEmployee(): any{
     return this.employees;
   }
 

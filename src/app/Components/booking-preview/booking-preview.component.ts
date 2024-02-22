@@ -33,7 +33,7 @@ export class BookingPreviewComponent implements OnInit {
     this.getResortDetails();
     this.booking_details=this.bookingService.getBookings();
     this.bookedRooms=this.booking_details.bookedRooms;
-    this.guestDetails=this.booking_details.total_members;
+    this.guestDetails=this.booking_details.Total_List;
     this.GuestEmployeeList=this.booking_details.Total_List;
     console.log(this.GuestEmployeeList)
      this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
