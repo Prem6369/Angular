@@ -1,102 +1,7 @@
-<!-- <div class="" id="bookingPreviewPage">
+<app-navbar></app-navbar>
+<div class="mx-1" id="bookingPreviewPage">
 
-  <h2 class="text-center">
-    Booking Preview
-  </h2>
-
-  <div class="justify-content-center my-5">
-    <div class="container1">
-      <div class="square-box">
-        <img src="assets/Image/Resort_image.jpg" alt="Resort Image">
-        <div class="text-container mx-1">
-          <div class="resort-name fw-bold pb-1">{{ resortname }}</div>
-          <div class="date-range" id="txtcolor">From: {{ booking_details.check_in_date | date:'dd/MM/yyyy' }} - To:
-            {{booking_details.check_out_date |date:'dd/MM/yyyy'}}</div>
-          <div class="total-days" id="txtcolor">Total Days: {{ booking_details.days }}, Total Nights: {{
-            booking_details.nights }}</div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="mx-5">
-    <h4>
-      Room details ({{booking_details.totalSelectedRooms}})
-    </h4>
-  </div>
-
-
-  <div id="room-details" class="container rounded my-3">
-    <div *ngFor="let room of bookedRoomsArray" class="row w-0 m-3 border-bottom p-3">
-      <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2" id="iconbackground">
-        <i class="fa-solid fa-bed fa-2x check"></i>
-      </div>
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
-        <div class="fw-bold">{{ room.name }}</div>
-        <div>{{ room.description }}</div>
-      </div>
-      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="iconbackground">
-        <div class="text-center fw-bold">{{ room.count }}</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="mx-5">
-    <h4>
-      Person details ({{ booking_details.members_count }})
-    </h4>
-
-  </div>
-
-
-  <div id="room-members" class="container rounded my-3">
-    <div *ngFor="let guest of GuestEmployeeList" class="row border-bottom p-3 ">
-
-      <div class="icon col-md-4 col-lg-4 col-sm-4 text-center">
-        <i class="fa-regular fa-address-card fs-1 fs-1 "></i>
-      </div>
-
-      <div class=" col-md-6 col-lg-6 col-sm-6">
-        <div class="name">
-          <div class="fw-bold">{{guest.Firstname}} {{guest.Lastname}} {{guest.name}}</div>
-        </div>
-
-        <div class="row">
-          <div class=" col-md-6 col-lg-6 col-sm-6 ">
-            <div class="fw-light">{{guest.Phonenumber }}</div>
-          </div>
-
-          <div class=" col-md-6 col-lg-6 col-sm-6 border rounded-pill m-1" id="person-type">
-            <div class="fw-light">{{guest.type }}</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-
-  <div class="col-md-12 mt-3" id="terms-condition">
-    <input type="checkbox" class="mx-3" [(ngModel)]="termsChecked" (change)="toggleSubmitButton()" />
-    I agree <span class="text-primary mx-2"> Terms </span> and <span class="text-primary mx-2"> Conditions </span>
-  </div>
-
-
-  <div class="row p-4" id="final-button">
-    <button class="btn btn-light col-md-6" (click)="edit()">
-      EDIT
-    </button>
-
-    <button class="btn btn-success col-md-6" [disabled]="!termsChecked" (click)="submit()">
-      SUBMIT
-    </button>
-  </div>
-</div> -->
-
-<div class="" id="bookingPreviewPage">
-
-  <h2 class="text-center">
+  <h2 class="text-center pt-4">
     Booking Preview
   </h2>
 
@@ -116,11 +21,11 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 p-5">
       <h4>
         Room details ({{booking_details.totalSelectedRooms}})
       </h4>
-    
+
       <div id="room-details" class="container rounded my-3">
         <div *ngFor="let room of bookedRoomsArray" class="row w-0 m-3 border-bottom p-3">
           <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2" id="iconbackground">
@@ -137,45 +42,46 @@
       </div>
     </div>
 
-    
-  <div class="col-md-6">
-    <h4>
-      Person details ({{ booking_details.members_count }})
-    </h4>
-  
-    <div id="room-members" class="container rounded my-3">
-      <div *ngFor="let guest of GuestEmployeeList" class="row border-bottom p-3 ">
-  
-        <div class="icon col-md-4 col-lg-4 col-sm-4 text-center">
-          <i class="fa-regular fa-address-card fs-1 fs-1 "></i>
-        </div>
-  
-        <div class=" col-md-6 col-lg-6 col-sm-6">
-          <div class="name">
-            <div class="fw-bold">{{guest.Firstname}} {{guest.Lastname}} {{guest.name}}</div>
+
+    <div class="col-md-6 p-5">
+      <h4>
+        Person details ({{ booking_details.members_count }})
+      </h4>
+
+      <div id="room-members" class="container rounded my-3">
+        <div *ngFor="let guest of GuestEmployeeList" class="row border-bottom p-3 ">
+
+          <div class="icon col-md-4 col-lg-4 col-sm-4 text-center">
+            <i class="fa-regular fa-address-card fs-1 fs-1 "></i>
           </div>
-  
-          <div class="row">
-            <div class=" col-md-6 col-lg-6 col-sm-6 ">
-              <div class="fw-light">{{guest.Phonenumber }}</div>
+
+          <div class=" col-md-6 col-lg-6 col-sm-6">
+            <div class="name">
+              <div class="fw-bold">{{guest.Firstname}} {{guest.Lastname}} {{guest.name}}</div>
             </div>
-  
-            <div class=" col-md-6 col-lg-6 col-sm-6 border rounded-pill m-1" id="person-type">
-              <div class="fw-bold" *ngIf="guest.type === 'Guest'" [ngClass]="{'border-primary': guest.type === 'Guest'}">{{ guest.type }}</div>
-                  <div class="fw-bold" *ngIf="guest.type !== 'Guest'">{{ guest.type }}</div>
+
+            <div class="row">
+              <div class=" col-md-6 col-lg-6 col-sm-6 ">
+                <div class="fw-light">{{guest.Phonenumber }}</div>
+              </div>
+
+              <div class=" col-md-6 col-lg-6 col-sm-6 border rounded-pill m-1" id="person-type">
+                <div class="fw-bold" *ngIf="guest.type === 'Guest'"
+                  [ngClass]="{'border-primary': guest.type === 'Guest'}">{{ guest.type }}</div>
+                <div class="fw-bold" *ngIf="guest.type !== 'Guest'">{{ guest.type }}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
-    
-  </div>
- 
 
 
 
-  <div class="col-md-12 mt-3" id="terms-condition">
+
+  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  mt-3" id="terms-condition">
     <input type="checkbox" class="mx-3" [(ngModel)]="termsChecked" (change)="toggleSubmitButton()" />
     I agree <span class="text-primary mx-2"> Terms </span> and <span class="text-primary mx-2"> Conditions </span>
   </div>

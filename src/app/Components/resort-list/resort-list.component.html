@@ -5,10 +5,10 @@
     <div class="datePicker">
 
         <mat-form-field class="example-form-field" id="date-range-picker">
-            <mat-label id="label-checkin">Check-in &nbsp; &nbsp; &nbsp; -- &nbsp; &nbsp; &nbsp; Check-out</mat-label>
+            <mat-label class="p-3" id="label-checkin">Check-in &nbsp;  -- &nbsp; Check-out</mat-label>
             <mat-date-range-input [formGroup]="rangevalue" [rangePicker]="rangePicker">
-                <input matStartDate formControlName="check_in_date" placeholder="Start date">
-                <input matEndDate formControlName="check_out_date" placeholder="End date">
+                <input class="p-1" matStartDate formControlName="check_in_date" placeholder="Start date" >
+                <input matEndDate formControlName="check_out_date" placeholder="End date" >
             </mat-date-range-input>
             <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
             <mat-date-range-picker panelClass="custom-datepicker datepickerOne" color="accent" #rangePicker>
@@ -20,6 +20,7 @@
                 </mat-date-range-picker-actions>
             </mat-date-range-picker>
         </mat-form-field>
+        
     </div>
 
 

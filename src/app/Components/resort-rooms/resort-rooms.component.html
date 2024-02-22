@@ -2,7 +2,7 @@
 <div class="resot-details-page">
   <div class="top p-5">
 
-    <h4 class="text-center" (click)="nextpage()">Booking details</h4>
+    <h4 class="text-center">Booking details</h4>
 
     <div class="justify-content-center my-5">
       <div class="container1">
@@ -84,8 +84,7 @@
             </div>
             <div class="col-md-4 text-center" id="edit-icon">
               <i *ngIf="member.type === 'Guest'" class="fa-regular fa-pen-to-square text-success mx-3"></i>
-              <i class="fa-regular fa-trash-can text-danger"  ></i> 
-              <!-- (click)="removeEmployee( member.name)" -->
+              <i class="fa-regular fa-trash-can text-danger" (click)="removeMember( member.Phonenumber,member.type )" ></i> 
             </div>
           </div>
         </div>

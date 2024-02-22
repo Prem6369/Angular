@@ -9,9 +9,7 @@
   align-items: center;
   position: relative;
 }
-.backtopage{
-  color: black;
-}
+
 .link {
   border: 1px solid rgba(170, 170, 170, 0.801);
   border-radius: 50%;
@@ -23,9 +21,9 @@
 }
 
 .img-fluid {
-  width: 100%; /* Ensure image takes full width */
-  height: auto; /* Maintain aspect ratio */
-  z-index: 0; /* Set image behind other elements */
+  width: 100%; 
+  height: auto; 
+  z-index: 0; 
 }
 
 .square-box {
@@ -48,7 +46,6 @@
   padding-top: 10px;
   font-weight: bold;
   font-family: Roboto;
-
 }
 .container2{
   margin: 30px;
@@ -58,9 +55,6 @@ iframe {
    border: 2px solid black;
 }
 
-// .photo-container::-webkit-scrollbar {
-//   display: none;
-// }
 .resortname{
   font-family: Roboto;
 
@@ -176,7 +170,7 @@ iframe {
   padding: 20px;
   background-color: white;
   box-shadow: -4px 4px 4px 3px rgba(1, 1, 1, 0.1);
-  text-align: center; /* Center text */
+  text-align: center; 
 }
 
 .txtgreateview, .txtshield {
@@ -185,11 +179,9 @@ iframe {
   font-family: Roboto;
 }
 
-
   .check {
     color: green;
   }
-
 
   .checkimg {
     background-color: #d3d3f1;
@@ -197,11 +189,11 @@ iframe {
     border: 2px solid #d1d1ff;
     border-radius: 10px;
     padding: 10px;
-    margin: 5px; /* Adjust as needed */
+    margin: 5px; 
     box-shadow: -4px 4px 4px 3px rgba(1, 1, 1, 0.1);
     display: flex;
-    align-items: center; /* Center the content vertically */
-    justify-content: center; /* Center the content horizontally */
+    align-items: center; 
+    justify-content: center; 
 }
 
 .txtblcycle {
@@ -224,15 +216,6 @@ iframe {
   line-height: 1.03125em;
 }
 
-  
-  // .containerbook {
-  //   background-color: white;
-  //   padding: 10px;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: space-around; 
-  // }
-  
   .txtdate, .txtchange {
     display: inline-flex;
     font-family: Roboto;
@@ -243,9 +226,6 @@ iframe {
     cursor: pointer;
 
   }
-  // .txtdate:not(:last-child) {
-  //   margin-right: 200px; 
-  // }
   
   .book{
     position: sticky;
@@ -280,29 +260,29 @@ iframe {
   }
     
   .square-box {
-    width: 300px;
+    width: -webkit-fill-available;
     height: 100px;
     overflow: hidden;
     border: 2px solid gray;
     border-radius: 10px;
-    display: flex; /* Add flex display */
+    display: flex; 
 
   }
   
   .square-box p {
     margin: 0;
-    padding-top: 35px; 
+   padding: 10px;
     font-weight: bold;
   
   }
   .photo-container::-webkit-scrollbar {
-    display: none; /* Hide the scrollbar */
+    display: none; 
   }
   .photo-container {
-    flex: 1; /* Allow the photo container to grow */
+    flex: 1; 
     overflow-x: auto;
     white-space: nowrap;
-    padding: 10px; /* Adjust padding as needed */
+    padding: 10px; 
   }
   
   .photo-container img {
@@ -312,19 +292,11 @@ iframe {
     margin-right: 10px;
     border-radius: 8px;
   }
-
- 
-/* Styles for an element with the class 'mapouter' */
 .mapouter {
     width: 50%;
     height: 150px;
 }
-// #map {
-//   width: 60%; /* Adjust width as needed */
-//   height: 120px; /* Adjust height as needed */
-// }
- 
-/* Styles for an element with the class 'gmap_canvas' */
+
 .gmap_canvas {
     overflow: hidden;
     background: none !important;
@@ -332,7 +304,6 @@ iframe {
     height: 100px;
 }
  
-/* Styles for an element with the class 'gmap_iframe' */
 .gmap_iframe {
     height: 400px !important;
     width: 100%;
