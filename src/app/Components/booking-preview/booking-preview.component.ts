@@ -17,7 +17,8 @@ export class BookingPreviewComponent implements OnInit {
   img: string = '';
   termsChecked: boolean = false;
   bookedRoomsArray:any[]=[];
-  
+  GuestEmployeeList:any[]=[];
+
   location: string = '';
   resortname: string = '';
 
@@ -27,12 +28,14 @@ export class BookingPreviewComponent implements OnInit {
 
   constructor(private _location:Location,private bookingService:BookingService,private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing: ActivatedRoute) {
   }
-
+  
   ngOnInit(): void {
     this.getResortDetails();
     this.booking_details=this.bookingService.getBookings();
     this.bookedRooms=this.booking_details.bookedRooms;
     this.guestDetails=this.booking_details.total_members;
+    this.GuestEmployeeList=this.booking_details.Total_List;
+    console.log(this.GuestEmployeeList)
      this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
       id: key,
       count: value.count,
