@@ -24,19 +24,18 @@
 
 
 
-    <div class="container">
-        <div class="card-container" (click)="nextpage()">
-            <div class="card" *ngFor="let resort of resortlist">
-                <div class="image-container">
-                    <img class="resort-image" [src]="resort.image_urls" alt="Resort Image">
-                    <h3 class="resort-name">{{resort.name}}</h3>
-                    <h5 class="resort-location">
-                        <i class="fa-solid fa-location-dot location"></i>
-                        {{resort.location}}
-                        <span class="arrow-icon" (click)="nextpage()"><i class="fa-solid fa-arrow-right"></i></span>
-                    </h5>
-                </div>
+    <div class="card-container">
+        <div class="card" *ngFor="let resort of resortlist" (click)="nextpage(resort.resort_id)">
+            <div class="image-container">
+                <img class="resort-image" [src]="resort.image_urls" alt="Resort Image">
+                <h3 class="resort-name">{{ resort.name }}</h3>
+                <h5 class="resort-location">
+                    <i class="fa-solid fa-location-dot location"></i>
+                    {{ resort.location }}
+                    <span class="arrow-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </h5>
             </div>
         </div>
     </div>
+    
 </div>
