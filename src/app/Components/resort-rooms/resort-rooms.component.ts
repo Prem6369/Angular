@@ -21,7 +21,7 @@ export class ResortRoomsComponent implements OnInit {
   isGuest:boolean=false;
 
   img: string = '';
-  totalSelectedRooms!: number;
+  totalSelectedRooms: number=0;
   
   location: string = '';
   resortname: string = '';
@@ -48,9 +48,11 @@ export class ResortRoomsComponent implements OnInit {
     this.total_members=this.guestService.getGuests();
     this.total_employees=this.guestService.getEmployee();
     this.total_list=this.total_members.concat(this.total_employees)
+    console.log(this.total_list)
     this.employee_count=this.total_employees.length;
     this.guest_count=this.total_members.length;
     this.total_count=this.employee_count+this.guest_count;
+    console.log(this.total_count);
     this.calculateDayAndNight();
     this.getResortRoom();
   }
@@ -67,7 +69,7 @@ export class ResortRoomsComponent implements OnInit {
       )
       .subscribe(
         (response) => {
-          console.log(response);
+          // console.log(response);
           this.img = response.image_urls;
           this.location = response.location;
           this.resortname = response.name;
@@ -111,7 +113,7 @@ export class ResortRoomsComponent implements OnInit {
       )
       .subscribe(
         (response) => {
-          console.log(response);
+          // console.log(response);
           if (response) {
             // Assuming response is an array of room types
             for (const room of response) {
@@ -170,7 +172,6 @@ export class ResortRoomsComponent implements OnInit {
   }
 
   next() {
-    debugger;
     const booking_details = {
       totalSelectedRooms: this.totalSelectedRooms,
       check_in_date: this.check_in_date,
@@ -179,9 +180,10 @@ export class ResortRoomsComponent implements OnInit {
       nights: this.totalNights,
       bookedRooms: this.bookedRooms, 
       members_count: this.total_count,
-      total_members: this.total_members
+      total_members: this.total_members,
+      Total_List:this.total_list,
     };
-    debugger;
+    console.log(booking_details);
     this.bookingService.addBooking(booking_details);
     this.router.navigate(['/booking-preview']);
   }

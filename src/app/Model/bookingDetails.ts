@@ -7,4 +7,6 @@ export interface Booking_details {
    totalSelectedRooms:number,
    members_count: number,
    total_members: any[],
+   Total_List: any[]
+
 }

@@ -10,8 +10,8 @@
         <img src="assets/Image/Resort_image.jpg" alt="Resort Image">
         <div class="text-container mx-1">
           <div class="resort-name fw-bold pb-1">{{ resortname }}</div>
-          <div class="date-range" id="txtcolor">From: {{ booking_details.check_in_date }} - To:
-            {{booking_details.check_out_date}}</div>
+          <div class="date-range" id="txtcolor">From: {{ booking_details.check_in_date | date:'dd/MM/yyyy' }} - To:
+            {{booking_details.check_out_date |date:'dd/MM/yyyy'}}</div>
           <div class="total-days" id="txtcolor">Total Days: {{ booking_details.days }}, Total Nights: {{
             booking_details.nights }}</div>
         </div>
@@ -51,7 +51,7 @@
 
 
   <div id="room-members" class="container rounded my-3">
-    <div *ngFor="let guest of guestDetails" class="row border-bottom p-3 ">
+    <div *ngFor="let guest of GuestEmployeeList" class="row border-bottom p-3 ">
 
       <div class="icon col-md-4 col-lg-4 col-sm-4 text-center">
         <i class="fa-regular fa-address-card fs-1 fs-1 "></i>
@@ -59,7 +59,7 @@
 
       <div class=" col-md-6 col-lg-6 col-sm-6">
         <div class="name">
-          <div class="fw-bold">{{guest.Firstname}} {{guest.Lastname}}</div>
+          <div class="fw-bold">{{guest.Firstname}} {{guest.Lastname}} {{guest.name}}</div>
         </div>
 
         <div class="row">
