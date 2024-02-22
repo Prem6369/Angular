@@ -12,6 +12,9 @@ import { DateService } from '../../Service/DateTime';
 })
 export class ResortListComponent implements OnInit {
   resortlist: ResortDetails[] = [];
+  Resort_id!: number;
+
+
   rangevalue = new FormGroup({
     check_in_date: new FormControl<Date | null>(
       new Date(new Date().toUTCString())
@@ -64,6 +67,8 @@ export class ResortListComponent implements OnInit {
                 resortObject.coordinates
               );
               this.resortlist.push(newResortDetails);
+              this.Resort_id=resortObject.resort_id
+
             });
           } else {
             console.error('Response is not an array.');
@@ -105,7 +110,7 @@ export class ResortListComponent implements OnInit {
             { params, headers }
           )
           .subscribe((response) => {
-            console.log(this.rangevalue);
+            
             if (Array.isArray(response)) {
               response.forEach((resortObject) => {
                 const newResortDetails = new ResortDetails(
@@ -122,6 +127,7 @@ export class ResortListComponent implements OnInit {
                   resortObject.categories,
                   resortObject.coordinates
                 );
+                this.Resort_id=resortObject.resort_id
                 this.resortlist.push(newResortDetails);
               });
             }
@@ -132,19 +138,20 @@ export class ResortListComponent implements OnInit {
     }
   }
 
-  nextpage() {
+  nextpage(resortId: number) {
     const checkInDate = this.rangevalue.get('check_in_date')?.value;
-    let checkOutDate = this.rangevalue.get('check_out_date')?.value;
+    const checkOutDate = this.rangevalue.get('check_out_date')?.value;
 
     if (checkInDate != null && checkOutDate != null) {
-      this.dateService.checkInDate=checkInDate;
-      this.dateService.checkOutDate=checkOutDate;
+        this.dateService.checkInDate = checkInDate;
+        this.dateService.checkOutDate = checkOutDate;
 
-     this.router.navigate(['/Resortdetails']);
+        this.router.navigate(['/Resortdetails'], { queryParams: { ID: resortId } });
     } else {
-      console.error('Check-in date or check-out date is null or undefined.');
+        console.error('Check-in date or check-out date is null or undefined.');
     }
-  }
+}
+
 
   clearDates() {
     this.rangevalue.reset();
