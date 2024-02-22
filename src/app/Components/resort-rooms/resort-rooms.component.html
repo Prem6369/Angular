@@ -65,10 +65,10 @@
               <i class="fa-regular fa-address-card fs-1 d-flex justify-content-center"></i>
             </div>
 
-            <div class=" col-md-4">
+            <div class="col-md-4">
               <div class="name">
                 <div class="fw-bold ">{{member.Firstname}} {{member.Lastname}} {{member.name}} </div>
-              </div>
+              </div>  
 
               <div class="row">
                 <div class=" col-md-6">
@@ -76,14 +76,16 @@
                 </div>
 
                 <div class=" col-md-6 border rounded-pill" id="person-type">
-                  <div class="fw-light">{{member.type }}</div>
+                  <div class="fw-bold" *ngIf="member.type === 'Guest'" [ngClass]="{'border-primary': member.type === 'Guest'}">{{ member.type }}</div>
+                  <div class="fw-bold" *ngIf="member.type !== 'Guest'">{{ member.type }}</div>
                 </div>
               </div>
 
             </div>
             <div class="col-md-4 text-center" id="edit-icon">
               <i *ngIf="member.type === 'Guest'" class="fa-regular fa-pen-to-square text-success mx-3"></i>
-              <i class="fa-regular fa-trash-can text-danger" (click)="removeEmployee( member.name)" ></i>
+              <i class="fa-regular fa-trash-can text-danger"  ></i> 
+              <!-- (click)="removeEmployee( member.name)" -->
             </div>
           </div>
         </div>

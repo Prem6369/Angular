@@ -11,7 +11,7 @@ import { GuestService } from '../../Service/GuestService';
 })
 
 export class ResortAddEmployeeComponent {
- employeeList:any;
+ employeeList:any[]=[];
  employee:any[]=[];
 
   employees=new FormGroup({
@@ -40,8 +40,8 @@ export class ResortAddEmployeeComponent {
   addEmployee() {
     this.setValues()
     this.employee.push(this.employees.value);
-    this.employeeList=this.employees.value;
-    this.guestService.addEmployee(this.employeeList);
+    this.employeeList.push(this.employees.value);
+   // console.log("From add button:",this.employeeList);
     this.employees.reset();
   }
   
@@ -49,11 +49,25 @@ export class ResortAddEmployeeComponent {
     const phoneNumber = '9' + Math.floor(100000000 + Math.random() * 900000000).toString(); 
     return phoneNumber;
   }
-  removeEmployee(name: string) {
-    this.employee = this.employee.filter(emp => emp.name !== name);
+//   removeEmployee(name: string) {
+//     this.employee = this.employee.filter(emp => emp.name !== name);
+// }
+removeEmployee(name: string): void {
+  const indexToRemove: number = this.employeeList.findIndex((emp: any) => emp.name === name);
+  const Remove: number = this.employee.findIndex((emp: any) => emp.name === name);
+
+  if (indexToRemove !== -1 && Remove!==-1) {
+    this.employeeList.splice(indexToRemove, 1);
+    this.employee.splice(indexToRemove, 1);
+    console.log("deleted")
+  }
 }
 
+
+
   save() {
+    this.guestService.addEmployee(this.employeeList);
+    //console.log("From save button:",this.employeeList);
     this._location.back();
   }
 

@@ -140,7 +140,7 @@ export class ResortListComponent implements OnInit {
       this.dateService.checkInDate=checkInDate;
       this.dateService.checkOutDate=checkOutDate;
 
-      this.router.navigate(['/Resortdetails']);
+     this.router.navigate(['/Resortdetails']);
     } else {
       console.error('Check-in date or check-out date is null or undefined.');
     }

@@ -25,13 +25,14 @@ export class ResortRoomsComponent implements OnInit {
   
   location: string = '';
   resortname: string = '';
-  total_members!:any[];
-  total_employees!:any[];
+
+  total_guest!:any;
+  total_employees!:any;
   total_list!:any[];
-  total_guest!:number;
+
+  total_count!:number;
   employee_count!:number;
   guest_count!:number;
-  total_count!:number;
 
   bookedRooms: { [key: string]: { count: number, name: string, description: string } } = {};
 
@@ -45,14 +46,16 @@ export class ResortRoomsComponent implements OnInit {
     this.getResortDetails();
     this.check_in_date = this.dateService.checkInDate;
     this.check_out_date = this.dateService.checkOutDate;
-    this.total_members=this.guestService.getGuests();
+
+    this.total_guest=this.guestService.getGuests();
     this.total_employees=this.guestService.getEmployee();
-    this.total_list=this.total_members.concat(this.total_employees)
-    console.log(this.total_list)
+
+    this.total_list=this.total_guest.concat(this.total_employees)
+
     this.employee_count=this.total_employees.length;
-    this.guest_count=this.total_members.length;
+    this.guest_count=this.total_guest.length;
     this.total_count=this.employee_count+this.guest_count;
-    console.log(this.total_count);
+   // 
     this.calculateDayAndNight();
     this.getResortRoom();
   }
@@ -180,7 +183,6 @@ export class ResortRoomsComponent implements OnInit {
       nights: this.totalNights,
       bookedRooms: this.bookedRooms, 
       members_count: this.total_count,
-      total_members: this.total_members,
       Total_List:this.total_list,
     };
     console.log(booking_details);
@@ -188,9 +190,9 @@ export class ResortRoomsComponent implements OnInit {
     this.router.navigate(['/booking-preview']);
   }
   
-  removeEmployee(name: string) {
-    this.total_employees = this.total_employees.filter(emp => emp.name !== name);
-}
+//   removeEmployee(name: string) {
+//     this.total_employees = this.total_employees.filter(emp => emp.name !== name);
+// }
 
 
 totalDays!:number;

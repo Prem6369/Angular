@@ -186,32 +186,6 @@ iframe {
 }
 
 
-
-  // // .facility {
-  // //   display: flex;
-  // //   flex-wrap: wrap;
-  // //   justify-content: space-around;
-  // // }
-  
-  // .checkimg {
-  //   background-color: #d3d3f1;
-  //   width: fit-content;
-  //   // display: flex;
-  //   // align-items: center;
-  //   border: 2px solid #d1d1ff;
-  //   border-radius: 10px;
-  //   // padding: 8px;
-  //   margin: 5px; /* Adjust as needed */
-  //   box-shadow: -4px 4px 4px 3px rgba(1, 1, 1, 0.1);
-  // }
-  
-  // // .txtblcycle {
-  // //   font-size: 14px;
-  // //   // margin: 0;
-  // //   font-family: Roboto;
-  // //   // padding: 5px;
-  // // }
-  
   .check {
     color: green;
   }
@@ -251,13 +225,13 @@ iframe {
 }
 
   
-  .containerbook {
-    background-color: white;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around; 
-  }
+  // .containerbook {
+  //   background-color: white;
+  //   padding: 10px;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: space-around; 
+  // }
   
   .txtdate, .txtchange {
     display: inline-flex;
@@ -287,20 +261,11 @@ iframe {
     font-family: Roboto;
 
   }
-  // .txtbook{
-  //   background-color: rgba(60, 179, 113, 1);
-  //   color: white;
-  //   font-weight: 700;
-  //   border: 2px solid rgba(60, 179, 113, 1);
-  //   border-radius: 4px;
-  //   padding: 10px;
 
-  // }
   .con {
     position: sticky;
-    bottom: 0;
+    bottom: 0px;
     width: 100%; 
-    z-index: 100; 
     background-color: white; 
   }
 

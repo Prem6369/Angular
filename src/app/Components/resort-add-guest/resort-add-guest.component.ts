@@ -9,7 +9,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./resort-add-guest.component.scss'],
 })
 export class ResortAddGuestComponent  {
-  guests: any[] = [];
 
   guestDetails:any;
   constructor(private _location: Location,private guestService: GuestService) {
@@ -42,7 +41,7 @@ export class ResortAddGuestComponent  {
     this.guestDetails = this.Addguest.value;
     this.guestService.addGuest(this.guestDetails);
     this._location.back();
-  }
+  } 
 
   setType()
   {
