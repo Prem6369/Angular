@@ -26,6 +26,8 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {AsyncPipe} from '@angular/common';
 import {MatInputModule} from '@angular/material/input';
+import { AdminLayoutComponent } from './Components/layouts/admin-layout/admin-layout.component';
+import { UserLayouttComponent } from './Components/layouts/user-layoutt/user-layoutt.component';
 
 
 
@@ -46,6 +48,8 @@ import {MatInputModule} from '@angular/material/input';
     ResortAddGuestComponent,
     ResortAddEmployeeComponent,
     BookingPreviewComponent,
+    AdminLayoutComponent,
+    UserLayouttComponent,
     
   ],
   imports: [
