@@ -186,6 +186,11 @@ export class ResortRoomsComponent implements OnInit {
     this.router.navigate(['/booking-preview']);
   }
   
+  removeEmployee(name: string) {
+    this.total_employees = this.total_employees.filter(emp => emp.name !== name);
+}
+
+
 totalDays!:number;
 totalNights!:number;
 calculateDayAndNight() {

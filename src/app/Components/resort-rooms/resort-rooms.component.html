@@ -83,7 +83,7 @@
             </div>
             <div class="col-md-4 text-center" id="edit-icon">
               <i *ngIf="member.type === 'Guest'" class="fa-regular fa-pen-to-square text-success mx-3"></i>
-              <i class="fa-regular fa-trash-can text-danger"></i>
+              <i class="fa-regular fa-trash-can text-danger" (click)="removeEmployee( member.name)" ></i>
             </div>
           </div>
         </div>

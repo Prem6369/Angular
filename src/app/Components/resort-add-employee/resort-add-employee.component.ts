@@ -49,6 +49,10 @@ export class ResortAddEmployeeComponent {
     const phoneNumber = '9' + Math.floor(100000000 + Math.random() * 900000000).toString(); 
     return phoneNumber;
   }
+  removeEmployee(name: string) {
+    this.employee = this.employee.filter(emp => emp.name !== name);
+}
+
   save() {
     this._location.back();
   }

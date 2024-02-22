@@ -1,20 +1,10 @@
-.cancelicon {
-    border: 1px solid rgba(172, 172, 172, 0.801);
-    border-radius: 50%;
-    padding: 8px;
-    background-color: rgba(126, 126, 126, 0.801);
-    cursor: pointer;
-    display: inline-block;
-  }
+
   .container1{
     background-color:white;
     font-family: Roboto;
 
   }
-  .cancel {
-    color: white;
-  
-  }
+
   .headcontainer{
     width: 100%;
     height: 100px;
@@ -60,7 +50,7 @@ input[type="text"],
 input[type="password"],
 select {
     border: none;
-outline: none;
+    outline: none;
     color: black;
     width: 90%;
 }
@@ -92,4 +82,16 @@ section h2 {
 }
 .icon{
   color: rgb(64, 226, 231);
+}
+
+#main-div,#side-div{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.row
+{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
