@@ -47,7 +47,16 @@ export class ResortRoomsComponent implements OnInit {
   check_out_date!:Date;
 
   ngOnInit(): void {
+
+    this.route.queryParams.subscribe(params => {
+      this.Resort_id= params['ID'];
+      this.getResortDetails();
+    });
     this.initializer()
+    this.calculateDayAndNight();
+    this.getResortRoom();
+   
+
   }
 
   getResortDetails() {
@@ -71,12 +80,7 @@ console.log(this.Resort_id)
   }
 
   initializer()
-  { 
-    this.route.queryParams.subscribe(params => {
-      this.Resort_id= params['ID'];
-      this.getResortDetails();
-
-    });
+  {
     this.check_in_date = this.dateService.checkInDate;
     this.check_out_date = this.dateService.checkOutDate;
     this.total_guest=this.guestService.getGuests();
@@ -85,9 +89,6 @@ console.log(this.Resort_id)
     this.employee_count=this.total_employees.length;
     this.guest_count=this.total_guest.length;
     this.total_count=this.employee_count+this.guest_count;
-    this.calculateDayAndNight();
-    this.getResortRoom();
-
   }
 
   getResortRoom() {
