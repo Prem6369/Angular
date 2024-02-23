@@ -50,6 +50,10 @@ img {
 
 #continue {
   height: 50px;
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+
 }
 
 #continuebtn {
@@ -163,8 +167,8 @@ img {
   margin-bottom: 15px;
 }
 
-#incrementBtn {
-  width: 80px;
+.d-flex.border.increment-btn {
+  width:max-content;
   font-weight: bolder;
   border: 3px solid black;
   border-radius: 10px;
@@ -248,4 +252,9 @@ img {
 .border-primary {
   border-color:purple;
   color: purple;
+}
+
+#count-section
+{
+  width: fit-content;
 }
