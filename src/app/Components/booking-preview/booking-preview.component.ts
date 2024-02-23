@@ -98,6 +98,7 @@ export class BookingPreviewComponent implements OnInit {
     this._location.back()
   }
   submit() {
+    this.guestService.resetService()
     this.router.navigate(['/Thankyou']);
   }
 

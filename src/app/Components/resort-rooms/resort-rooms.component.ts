@@ -7,6 +7,7 @@ import { DateService } from '../../Service/DateTime';
 import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
 import { BookingService } from '../../Service/BookingService';
 import { GuestService } from '../../Service/GuestService';
+import { count } from 'rxjs';
 
 
 
@@ -37,8 +38,11 @@ export class ResortRoomsComponent implements OnInit {
   employee_count!:number;
   guest_count!:number;
 
-  bookedRooms: { [key: string]: { count: number, name: string, description: string } } = {};
+  bookedRooms: { [key: string]: { count: number, name: string, description: string,number_of_rooms:number } } = {};
   Resort_id!: number;
+  Room_id!:number;
+
+  Room_details:any[]=[];
 
 
 
@@ -73,7 +77,18 @@ console.log(this.Resort_id)
         (response) => {
           this.img = response.image_urls;
           this.location = response.location;
-          this.resortname = response.name;    
+          this.resortname = response.name;  
+          response.categories.forEach((category: any) => {
+            this.Room_id = category.room_type_id;
+            this.Room_details.push({
+              room_type_id: category.room_type_id,
+              name: category.name,
+              number_of_rooms: category.number_of_rooms,
+              capacity: category.capacity,
+              description: category.description
+          });
+
+        });  
         },
 
       );
@@ -123,12 +138,16 @@ console.log(this.Resort_id)
   }
 
 
-  increment(room_type_id: number, name: string, description: string) {
+  increment(room_type_id: number, name: string, description: string,number_of_rooms:number) {
     if (!this.bookedRooms[room_type_id]) {
-      this.bookedRooms[room_type_id] = { count: 0, name: name, description: description }; 
+      this.bookedRooms[room_type_id] = { count: 0, name: name, description: description , number_of_rooms:number_of_rooms}; 
     }
-    this.bookedRooms[room_type_id].count++;
-    this.updateSelectedRooms();
+    if (number_of_rooms > this.bookedRooms[room_type_id].count) {
+      this.bookedRooms[room_type_id].count++;
+      this.updateSelectedRooms();
+    }else{
+      alert(`Only ${number_of_rooms} Rooms Available`)
+    }
   }
   
 
@@ -181,20 +200,24 @@ console.log(this.Resort_id)
 
   
 
-calculateDayAndNight() {
-
-  const checkInDateTime = new Date(this.check_in_date);
-  const checkOutDateTime = new Date(this.check_out_date);
-
-  if (checkOutDateTime > checkInDateTime) {
-    const differenceInMs = checkOutDateTime.getTime() - checkInDateTime.getTime();
-    this.totalDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
-    this.totalDays++;
-    this.totalNights =this.totalDays-1;
-    console.log(this.totalDays,this.totalNights);
+  calculateDayAndNight() {
+    const checkInDateTime = new Date(this.check_in_date);
+    checkInDateTime.setHours(10, 0, 0, 0); 
+  
+    const checkOutDateTime = new Date(this.check_out_date);
+    checkOutDateTime.setHours(20, 0, 0, 0); 
+  
+    if (checkOutDateTime > checkInDateTime) {
+      debugger;
+  
+      const differenceInMs = checkOutDateTime.getTime() - checkInDateTime.getTime();
+      this.totalDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24)); 
+      this.totalNights = this.totalDays - 1;
+      console.log(this.totalDays, this.totalNights);
+    } else {
+      console.error("Check-out date must be greater than check-in date");
+    }
   }
-  this.totalDays = this.totalDays;
-  this.totalNights = this.totalNights;
-}
+  
 
 }

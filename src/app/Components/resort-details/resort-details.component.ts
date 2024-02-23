@@ -17,13 +17,12 @@ export class ResortDetailsComponent implements OnInit {
   check_in_date!: Date;
   check_out_date!: Date;
   Resort_id!:number;
-  
+  totalCapacity: number = 0; 
   constructor(private httpclient: HttpClient,private router:Router,private routing:ActivatedRoute,private dateService:DateService,private route:ActivatedRoute) {}
   
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.Resort_id= params['ID'];
-      console.log("bg",this.Resort_id);
       this.getResortDetails();
 
     });
@@ -38,10 +37,33 @@ export class ResortDetailsComponent implements OnInit {
     this.httpclient.get<any>(`https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${this.Resort_id}`, { headers })
       .subscribe(
         (response) => {
+          response.categories.forEach((category: any) => {
+            const capacity = category.number_of_rooms; 
+            this.totalCapacity += capacity;
+          });
+  
+          console.log('Total Capacity:', this.totalCapacity);
           console.log(this.resortlist);
           this.img=response.image_urls;
           this.location=response.location;
           this.name=response.name;
+          const resortDetail = new ResortDetails(
+            response.resort_id,
+            response.name,
+            response.description,
+            response.location,
+            response.amenities,
+            response.image_urls,
+            response.video_urls,
+            response.status,
+            response.created_date,
+            response.last_modified_date,
+            response.categories,
+            response.coordinates
+          );
+          this.resortlist.push(resortDetail);
+          console.log(this.resortlist)
+        
         }
       );
   }

@@ -26,5 +26,10 @@ export class GuestService {
     return this.employees;
   }
 
+ resetService()
+  {
+    this.employees.splice(0);
+    this.guests.splice(0);
+  }
 
 }

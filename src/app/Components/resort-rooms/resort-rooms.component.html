@@ -24,7 +24,7 @@
         <div class="table-responsive">
           <table class="table">
             <tbody>
-              <tr *ngFor="let room of ResortRoom" class="m-3">
+              <tr *ngFor="let room of Room_details" class="m-3">
                 <td>
                   <div class="icon-background d-flex justify-content-center">
                     <i class="fa-solid fa-bed fa-2x check"></i>
@@ -40,7 +40,7 @@
                       <i class="fa-solid fa-minus"></i>
                     </button>
                     <div class="d-flex align-items-center">{{ bookedRooms[room.room_type_id]?.count || 0 }}</div>
-                    <button class="btn btn-sm btn-light ms-2 fw-bold" (click)="increment(room.room_type_id, room.name, room.description)">
+                    <button class="btn btn-sm btn-light ms-2 fw-bold" (click)="increment(room.room_type_id, room.name, room.description,room.number_of_rooms)">
                       <i class="fa-solid fa-plus"></i>
                     </button>
                   </div>
