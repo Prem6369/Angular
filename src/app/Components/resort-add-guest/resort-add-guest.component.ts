@@ -30,7 +30,6 @@ export class ResortAddGuestComponent  {
   
 
   saveNew() {
-    debugger;
     console.log(this.Addguest.invalid)
     if(this.Addguest.valid){
       this.setType()
@@ -45,7 +44,6 @@ export class ResortAddGuestComponent  {
   }
 
   save() {
-    debugger;
     console.log(this.Addguest.valid)
     if(this.Addguest.valid){
     this.setType()

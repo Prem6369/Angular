@@ -15,9 +15,9 @@ section {
   border: 2px solid;
   border-radius: 10px;
   padding: 1em;
-  width: 300px;
+  width: 249px;
   margin-left: 30px;
-
+  padding-bottom: 0;
 }
 
 section h2 {
@@ -71,7 +71,7 @@ section h2 {
   background-color: white;
 }
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: #f3f3f3 !important ;
+  background-color: white !important ;
 }
 ::ng-deep div.mat-mdc-autocomplete-panel{
   background-color: #48ad16 ;

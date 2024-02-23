@@ -18,7 +18,6 @@ export class GuestService {
   }
 
   addEmployee(employeeList: any) {
-    debugger;
     this.employees=employeeList;
     console.log("From service:",this.employees)
   }

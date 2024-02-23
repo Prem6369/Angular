@@ -31,11 +31,11 @@
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex justify-content-center">
             <div class="d-flex border" id="incrementBtn">
-              <button class="btn btn-sm btn-light me-2 fw-bold" (click)="decrement(room.room_type_id )"><i
+              <button class="btn btn-sm btn-light me-2 fw-bold" id="" (click)="decrement(room.room_type_id )"><i
                   class="fa-solid fa-minus"></i>
               </button>          
               <div class="d-flex align-items-center">{{ bookedRooms[room.room_type_id]?.count || 0 }}</div>                                  
-              <button class="btn btn-sm btn-light ms-2 fw-bold" (click)="increment(room.room_type_id, room.name, room.description)">
+              <button class="btn btn-sm btn-light ms-2 fw-bold rounded" (click)="increment(room.room_type_id, room.name, room.description)">
                 <i class="fa-solid fa-plus"></i>
               </button> 
               
