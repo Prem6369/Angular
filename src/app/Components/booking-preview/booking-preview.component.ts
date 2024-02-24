@@ -40,7 +40,7 @@ export class BookingPreviewComponent implements OnInit {
     this.booking_details=this.bookingService.getBookings();
     console.log("Final JSON booking value:",this.booking_details);
     this.bookedRooms=this.booking_details.bookedRooms;
-    this.guestDetails=this.booking_details.Total_List;s
+    this.guestDetails=this.booking_details.Total_List;
     this.GuestEmployeeList=this.booking_details.Total_List;
     console.log(this.GuestEmployeeList)
      this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
