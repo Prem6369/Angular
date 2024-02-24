@@ -175,14 +175,22 @@ console.log(this.Resort_id)
         bookedRooms: this.bookedRooms, 
         members_count: this.total_count,
         Total_List:this.total_list,
+        message:"please approve",
+        food_choice: "veg",
+        approver_id: 2,
+        resort_id:this.Resort_id,
+        food_required_status: "yes",
+        booking_status: "Pending",
       };
       this.bookingService.addBooking(booking_details);
+      
       this.router.navigate(['/booking-preview'],{queryParams:{ID:this.Resort_id}});
     }
    
   }
 
   removeMember(Phonenumber: number, type: string) {
+    debugger;
     const elementIndex: number = this.total_list.findIndex((member: any) => member.Phonenumber === Phonenumber);
     
     if (elementIndex !== -1) {

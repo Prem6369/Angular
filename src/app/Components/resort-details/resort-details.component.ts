@@ -41,9 +41,6 @@ export class ResortDetailsComponent implements OnInit {
             const capacity = category.number_of_rooms; 
             this.totalCapacity += capacity;
           });
-  
-          console.log('Total Capacity:', this.totalCapacity);
-          console.log(this.resortlist);
           this.img=response.image_urls;
           this.location=response.location;
           this.name=response.name;

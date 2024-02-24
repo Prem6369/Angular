@@ -21,7 +21,7 @@
   <div class="container">
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="Room(s)" id="tab-label" class="mt-4">
-        <div class="table-responsive">
+        <div class="table-responsive p-4">
           <table class="table">
             <tbody>
               <tr *ngFor="let room of Room_details" class="m-3">
@@ -76,7 +76,7 @@
 
             <div class="col-md-4">
               <div class="name">
-                <div class="fw-bold ">{{member.Firstname}} {{member.Lastname}} {{member.name}} </div>
+                <div class="fw-bold ">{{member.Firstname}} {{member.Lastname}} {{member.username}} </div>
               </div>  
 
               <div class="row">
@@ -128,5 +128,4 @@
       continue <i class="fa-solid fa-arrow-right-long mx-3" style="font-size: 20px;"></i>
     </div>
   </div>
-
 </div>
