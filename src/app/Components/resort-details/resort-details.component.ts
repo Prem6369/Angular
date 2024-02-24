@@ -14,6 +14,7 @@ export class ResortDetailsComponent implements OnInit {
   img:string='';
   location:string=''
   name:string=''
+  description:string='';
   check_in_date!: Date;
   check_out_date!: Date;
   Resort_id!:number;
@@ -44,6 +45,7 @@ export class ResortDetailsComponent implements OnInit {
           this.img=response.image_urls;
           this.location=response.location;
           this.name=response.name;
+          this.description=response.description;
           const resortDetail = new ResortDetails(
             response.resort_id,
             response.name,
