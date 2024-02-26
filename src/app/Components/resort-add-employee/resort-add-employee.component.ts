@@ -1,107 +1,123 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { GuestService } from '../../Service/GuestService';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserProfile } from '../../Model/userProfile/userProfile';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-resort-add-employee',
   templateUrl: './resort-add-employee.component.html',
-  styleUrl: './resort-add-employee.component.scss'
+  styleUrls: ['./resort-add-employee.component.scss']
 })
 
-export class ResortAddEmployeeComponent {
- employeeList:any[]=[];
- employee:any[]=[];
+export class ResortAddEmployeeComponent implements OnInit {
+  employeeList: any[] = [];
+  employee: any[] = [];
+  userProfile: UserProfile[] = [];
+  selectedUserId!: number;
 
-  employees=new FormGroup({
-    name:new FormControl(''),
-    Phonenumber:new FormControl(''),
-    type:new FormControl('')
-  })
+  employees = new FormGroup({
+    username: new FormControl(''),
+    user_id: new FormControl(),
+    Phonenumber: new FormControl(''),
+    type: new FormControl('')
+  });
 
-  filteredOptions: Observable<string[]>;
+  filteredOptions: Observable<UserProfile[]>;
 
-  employedetails=["Alice","Aravind", "Benjamin", "Clara", "Elango", "Felix", "Katherine",  "Peter","Prem", "Quinn", "Rachel","Senthil", "Samuel", "Taylor", "Uma", "Victor", "Willow", "Xavier", "Yara", "Zachary"]
-
-//    employedetails: {[key: string]: string}[] = [
-//     {name: "Alice", phone: "123-456-7890"},
-//     {name: "Aravind", phone: "234-567-8901"},
-//     {name: "Clara", phone: "456-789-0123"},
-//     {name: "Elango", phone: "567-890-1234"},
-//     {name: "Felix", phone: "678-901-2345"},
-//     {name: "Katherine", phone: "789-012-3456"},
-//     {name: "Peter", phone: "890-123-4567"},
-//     {name: "Prem", phone: "901-234-5678"},
-//     {name: "Quinn", phone: "012-345-6789"},
-//     {name: "Rachel", phone: "123-456-7890"},
-//     {name: "Senthil", phone: "234-567-8901"},
-
-// ];
-
-
-  constructor(private _location: Location,private guestService:GuestService) {
-    this.filteredOptions = (this.employees.get('name')?.valueChanges as Observable<string>).pipe(
+  constructor(
+    private httpClient: HttpClient,
+    private _location: Location,
+    private guestService: GuestService
+  ) {
+    this.filteredOptions = this.employees.get('username')!.valueChanges.pipe(
       startWith(''),
       map(value => value ? this._filter(value) : [])
     );
-      
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.employedetails.filter(option => option.toLowerCase().includes(filterValue));
+  ngOnInit(): void {
+    this.getUsers();
   }
- 
-  addEmployee() {
-     if(this.employees.value.name!==""){
-      this.setValues()
+
+  public _filter(value: any): UserProfile[] {
+    const filterValue = value;
+    return this.userProfile.filter(option =>
+      option.username.toLowerCase().includes(filterValue) ||
+      option.user_id == filterValue
+    );
+  }
+
+  optionSelected(event: MatAutocompleteSelectedEvent): void {
+    this.employees.patchValue({
+      username: event.option.value.username
+    })
+    this.selectedUserId = event.option.value.user_id;
+  }
+
+
+  addEmployee(user_id: number) {
+    if (this.employees.value.username !== "") {
+      this.setValues(user_id);
       this.employee.push(this.employees.value);
       this.employeeList.push(this.employees.value);
-     // console.log("From add button:",this.employeeList);
       this.employees.reset();
-    }
-    else{
+    } else {
       alert("Employee not Selected Please Select Employee");
     }
-
-  }
-  
-  getRandomNumber(): string {
-    const phoneNumber = '9' + Math.floor(100000000 + Math.random() * 900000000).toString(); 
-    return phoneNumber;
   }
 
-removeEmployee(Phonenumber: number) {
-
-  const indexToRemove: number = this.employeeList.findIndex((emp: any) => emp.Phonenumber === Phonenumber);
-  const Remove: number = this.employee.findIndex((emp: any) => emp.Phonenumber === Phonenumber);
-  if (indexToRemove !== -1 && Remove!==-1) {
-    this.employeeList.splice(indexToRemove, 1);
-    this.employee.splice(indexToRemove, 1);
+  removeEmployee(user_id: number) {
+    const indexToRemove: number = this.employeeList.findIndex((emp: UserProfile) => emp.user_id === user_id);
+    const removeIndex: number = this.employee.findIndex((emp: UserProfile) => emp.user_id === user_id);
+    if (indexToRemove !== -1 && removeIndex !== -1) {
+      this.employeeList.splice(indexToRemove, 1);
+      this.employee.splice(removeIndex, 1);
+    }
   }
-}
-
 
 
   save() {
-    if(this.employees.value.name!==""){
-
-    this.guestService.addEmployee(this.employeeList);
-    this._location.back();
-    }else{
+    if (this.employees.value.username !== "") {
+      this.guestService.addEmployee(this.employeeList);
+      this._location.back();
+    } else {
       alert("Employee not Selected Please Select Employee");
     }
   }
 
-  setValues()
-  {
-    this.employees.controls['type'].setValue("Employee");
-    this.employees.controls['Phonenumber'].setValue(this.getRandomNumber());
+  setValues(user_id: number) {
+    if (this.userProfile.length > 0) {
+      const firstUserProfile = this.userProfile.find(profile => profile.user_id === user_id);
+      if (firstUserProfile) {
+        this.employees.controls['user_id'].setValue(user_id);
+        this.employees.controls['Phonenumber'].setValue(firstUserProfile.phone_number);
+        this.employees.controls['type'].setValue("Employee");
+      }
+    }
   }
-  back(){
+
+
+  back() {
     this._location.back();
   }
-}
 
+  getUsers() {
+    const url = `https://localhost:7036/api/resorts/getusers`;
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiI3NTEwZDVjNy1mYTNhLTRiYzctYjEzNy1lZjc1ZmVhNWYzZjIiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiMjIxNTljNmItYjY1MC00ZWFlLTg4ODMtNzRhMzgwN2QyZTg4IiwibmJmIjoxNzA4NjcxMTg1LCJleHAiOjE3MDg3MzExODUsImlhdCI6MTcwODY3MTE4NSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.D7SccInUXQRcXjY1UpMIevwkFz3WFhpUVlSuKWFkGIY';
+
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    this.httpClient.get<UserProfile[]>(url, { headers }).subscribe(
+      (response: UserProfile[]) => {
+        this.userProfile = response;
+        console.log("Object", this.userProfile);
+      }
+    );
+  }
+
+}

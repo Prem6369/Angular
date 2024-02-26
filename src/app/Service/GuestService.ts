@@ -22,7 +22,7 @@ export class GuestService {
     console.log("From service:",this.employees)
   }
 
-  getEmployee(): any{
+  getEmployee(): any[]{
     return this.employees;
   }
 
