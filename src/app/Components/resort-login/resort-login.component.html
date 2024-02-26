@@ -10,13 +10,16 @@
             Lorem ipsum dolor sit amet consectetur adipisicing
             elit. Quis sunt sed modi
         </div>
+        <div class="text-center text-danger">
+            {{Errormessage}}
+        </div>
         <div class="form mt-3">
-            <form [formGroup]="signInForm" (ngSubmit)="returnToRespectivePage()">
+            <form [formGroup]="signInForm" (ngSubmit)="Login()">
 
                 <section id="Username" class="mt-3">
                     <h2>User name</h2>
                     <span class="icon mx-1"><i class="far fa-envelope"></i></span>
-                    <input type="text" placeholder="Enter username" formControlName="userName">
+                    <input type="text" placeholder="Enter username" formControlName="Username">
 
                 </section>
 

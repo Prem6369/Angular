@@ -18,4 +18,5 @@ export class BookingService {
   getBookings(): any{
     return this.bookings;
   }
+  
 }

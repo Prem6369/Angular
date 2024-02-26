@@ -19,6 +19,7 @@ export class ResortDetailsComponent implements OnInit {
   check_out_date!: Date;
   Resort_id!:number;
   totalCapacity: number = 0; 
+  amenities:string[]=[];
   constructor(private httpclient: HttpClient,private router:Router,private routing:ActivatedRoute,private dateService:DateService,private route:ActivatedRoute) {}
   
   ngOnInit(): void {
@@ -42,6 +43,9 @@ export class ResortDetailsComponent implements OnInit {
             const capacity = category.number_of_rooms; 
             this.totalCapacity += capacity;
           });
+
+          this.amenities=response.amenities;
+          console.log(this.amenities);
   
           console.log('Total Capacity:', this.totalCapacity);
           console.log(this.resortlist);
