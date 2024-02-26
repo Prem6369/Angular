@@ -8,6 +8,7 @@ import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
 import { BookingService } from '../../Service/BookingService';
 import { GuestService } from '../../Service/GuestService';
 import { count } from 'rxjs';
+import { SessionServiceService } from '../../Service/Session/session-service.service';
 
 
 
@@ -37,16 +38,18 @@ export class ResortRoomsComponent implements OnInit {
   total_count!:number;
   employee_count!:number;
   guest_count!:number;
+  user_id!:number;
 
   bookedRooms: { [key: string]: { count: number, name: string, description: string,number_of_rooms:number } } = {};
   Resort_id!: number;
   Room_id!:number;
 
   Room_details:any[]=[];
+  employee_user_ids: string='';
 
 
 
-  constructor(private route:ActivatedRoute,private dateService:DateService,private bookingService:BookingService,private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
+  constructor(private session:SessionServiceService,private route:ActivatedRoute,private dateService:DateService,private bookingService:BookingService,private guestService: GuestService,private httpclient: HttpClient, private router: Router,private routing:ActivatedRoute) {}
   check_in_date!:Date;
   check_out_date!:Date;
 
@@ -56,7 +59,9 @@ export class ResortRoomsComponent implements OnInit {
       this.Resort_id= params['ID'];
       this.getResortDetails();
     });
+    this.user_id=this.session.getUserId();
     this.initializer()
+    this.getEmployeeIds();
     this.calculateDayAndNight();
     this.getResortRoom();
    
@@ -67,7 +72,6 @@ export class ResortRoomsComponent implements OnInit {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
     
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-console.log(this.Resort_id)
     this.httpclient
       .get<any>(
         `https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${this.Resort_id}`,
@@ -105,6 +109,19 @@ console.log(this.Resort_id)
     this.guest_count=this.total_guest.length;
     this.total_count=this.employee_count+this.guest_count;
   }
+
+  getEmployeeIds()
+  {
+    this.total_employees.forEach((employee: { user_id: { toString: () => string; }; }, index: number) => {
+      debugger;
+      this.employee_user_ids += employee.user_id.toString();
+      if (index < this.total_employees.length - 1) {
+        this.employee_user_ids += ","; 
+      }
+  });
+  }
+
+
 
   getResortRoom() {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
@@ -167,31 +184,30 @@ console.log(this.Resort_id)
     if(this.employee_count!=0 && this.totalSelectedRooms!=0)
     {
       const booking_details = {
-        totalSelectedRooms: this.totalSelectedRooms,
+        user_id: this.user_id,
+        resort_id:this.Resort_id,
         check_in_date: this.check_in_date,
         check_out_date: this.check_out_date,
+        employee_user_ids:this.employee_user_ids,
+        totalSelectedRooms: this.totalSelectedRooms,
         days: this.totalDays,
         nights: this.totalNights,
         bookedRooms: this.bookedRooms, 
         members_count: this.total_count,
         Total_List:this.total_list,
-        message:"please approve",
-        food_choice: "veg",
-        approver_id: 2,
-        resort_id:this.Resort_id,
-        food_required_status: "yes",
-        booking_status: "Pending",
       };
       this.bookingService.addBooking(booking_details);
       
       this.router.navigate(['/booking-preview'],{queryParams:{ID:this.Resort_id}});
     }
+    
    
   }
 
-  removeMember(Phonenumber: number, type: string) {
-    debugger;
-    const elementIndex: number = this.total_list.findIndex((member: any) => member.Phonenumber === Phonenumber);
+
+  
+  removeMember(phone_number: number, type: string) {
+    const elementIndex: number = this.total_list.findIndex((member: any) => member.phone_number === phone_number);
     
     if (elementIndex !== -1) {
       if (type === "Guest") {  
@@ -216,14 +232,10 @@ console.log(this.Resort_id)
     checkOutDateTime.setHours(20, 0, 0, 0); 
   
     if (checkOutDateTime > checkInDateTime) {
-      debugger;
   
       const differenceInMs = checkOutDateTime.getTime() - checkInDateTime.getTime();
       this.totalDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24)); 
       this.totalNights = this.totalDays - 1;
-      console.log(this.totalDays, this.totalNights);
-    } else {
-      console.error("Check-out date must be greater than check-in date");
     }
   }
   

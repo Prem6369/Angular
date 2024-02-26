@@ -19,7 +19,6 @@ export class GuestService {
 
   addEmployee(employeeList: any) {
     this.employees=employeeList;
-    console.log("From service:",this.employees)
   }
 
   getEmployee(): any[]{

@@ -10,7 +10,8 @@
           <img src="{{this.img}}" alt="Resort Image">
           <div class="text-container">
             <p class="resort-name">{{resortname}}</p>
-            <p class="date-range">From: {{this.check_in_date| date:'dd/MM/yyyy'}} - To: {{this.check_out_date| date:'dd/MM/yyyy'}}</p>
+            <p class="date-range">From: {{this.check_in_date| date:'dd/MM/yyyy'}} - To: {{this.check_out_date|
+              date:'dd/MM/yyyy'}}</p>
             <p class="total-days">Total Days: {{ totalDays }}, Total Nights: {{ totalNights }}</p>
           </div>
         </div>
@@ -40,7 +41,8 @@
                       <i class="fa-solid fa-minus"></i>
                     </button>
                     <div class="d-flex align-items-center">{{ bookedRooms[room.room_type_id]?.count || 0 }}</div>
-                    <button class="btn btn-sm btn-light ms-2 fw-bold" (click)="increment(room.room_type_id, room.name, room.description,room.number_of_rooms)">
+                    <button class="btn btn-sm btn-light ms-2 fw-bold"
+                      (click)="increment(room.room_type_id, room.name, room.description,room.number_of_rooms)">
                       <i class="fa-solid fa-plus"></i>
                     </button>
                   </div>
@@ -49,8 +51,8 @@
             </tbody>
           </table>
         </div>
-        
-        
+
+
         <div class="summary-box">
           <p>Total Rooms : &nbsp;</p>
           <p>{{ totalSelectedRooms }}</p>
@@ -59,49 +61,53 @@
       <mat-tab label="Guest" id="tab-label">
 
         <div class="row " id="addButtons">
-          <button class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn-sm btn m-3" routerLink="/Addemployee"
+          <button class="col-lg-6 col-md-6 col-sm-6  btn-sm btn m-3" routerLink="/Addemployee"
             id="addEmployeeBtn">
             ADD EMPLOYEE
           </button>
-          <button class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn-sm btn m-3" routerLink="/Addguest" id="addGuestBtn">
+          <button class="col-lg-6 col-md-6 col-sm-6 btn-sm btn m-3" routerLink="/Addguest" id="addGuestBtn">
             ADD GUEST
           </button>
         </div>
-                    <div class=" my-3">
-          <div *ngFor="let member of total_list" class="row border-bottom">
-
-            <div class="icon col-md-4 text-center">
-              <i class="fa-regular fa-address-card fs-1 d-flex justify-content-center"></i>
-            </div>
-
-            <div class="col-md-4">
-              <div class="name">
-                <div class="fw-bold ">{{member.Firstname}} {{member.Lastname}} {{member.username}} </div>
-              </div>  
-
-              <div class="row">
-                <div class=" col-md-6">
-                  <div class="fw-light">{{member.Phonenumber }}</div>
+        <div class="table-responsive p-4">
+        <table class="table">
+          <tbody>
+            <tr *ngFor="let member of total_list" class="border-bottom">
+              <td>
+                <div class="icon text-center">
+                  <i class="fa-regular fa-address-card fs-1 d-flex justify-content-center"></i>
                 </div>
-
-                <div class=" col-md-6 border rounded-pill" id="person-type">
-                  <div class="fw-bold" *ngIf="member.type === 'Guest'" [ngClass]="{'border-primary': member.type === 'Guest'}">{{ member.type }}</div>
-                  <div class="fw-bold" *ngIf="member.type !== 'Guest'">{{ member.type }}</div>
+              </td>
+              <td>
+                <div class="name ">
+                  <div class="fw-bold">{{ member.first_name }} {{ member.last_name }} {{ member.username }}</div>
+                  <div class="row">
+                    <div class=" col-lg-6 col-md-6 col-sm-6">
+                      <div class="fw-light">{{ member.phone_number }}</div>
+                    </div>
+                    <div class=" col-lg-6 col-md-6 col-sm-6 border rounded-pill" id="person-type">
+                      <div class="fw-bold" *ngIf="member.type === 'Guest'" [ngClass]="{'border-primary': member.type === 'Guest'}">{{ member.type }}</div>
+                      <div class="fw-bold" *ngIf="member.type !== 'Guest'">{{ member.type }}</div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-            </div>
-            <div class="col-md-4 text-center" id="edit-icon">
-              <i *ngIf="member.type === 'Guest'" class="fa-regular fa-pen-to-square text-success mx-3"></i>
-              <i class="fa-regular fa-trash-can text-danger" (click)="removeMember( member.Phonenumber,member.type )" ></i> 
-            </div>
-          </div>
+              </td>
+              <td>
+                <div class="member text-center" id="edit-icon">
+                  <i [style.visibility]="member.type === 'Guest' ? 'visible' : 'hidden'" class="fa-regular fa-pen-to-square text-success mx-3"></i>
+                  <i class="fa-regular fa-trash-can text-danger" (click)="removeMember(member.phone_number, member.type)"></i>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
         </div>
-        <div class="row fw-bold m-4" >
-          <div class="col-md-4 col-lg-4  col-sm-4 col-xs-4 text-center" id="count-section"> {{employee_count}} Employee</div>
+        <div class="row fw-bold m-4">
+          <div class="col-md-4 col-lg-4  col-sm-4 col-xs-4 text-center" id="count-section"> {{employee_count}} Employee
+          </div>
           <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 text-center" id="count-section">{{ guest_count }} Guest</div>
           <div class="col-md-4 col-lg-4  col-sm-4 col-xs-4 text-center" id="count-section">Total {{ total_count }}</div>
-        </div> 
+        </div>
         <div class="alert alert-secondary alert-dismissible fade show" role="alert">
 
           <strong>Rules</strong>

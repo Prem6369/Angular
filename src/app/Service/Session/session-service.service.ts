@@ -25,9 +25,18 @@ export class SessionServiceService {
 
   AddSessionvalues(id:string,name:string){
     this.sessionvalues.push(id,name)
+    console.log("Session:",this.sessionvalues);
   }
 
   GetSessionvalues(): any[] {
     return this.sessionvalues;
+  }
+
+  getUserName(): string {
+    return this.Username;
+  }
+
+  getUserId(): number {
+    return this.User_id;
   }
 }

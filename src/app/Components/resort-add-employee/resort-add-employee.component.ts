@@ -23,7 +23,7 @@ export class ResortAddEmployeeComponent implements OnInit {
   employees = new FormGroup({
     username: new FormControl(''),
     user_id: new FormControl(),
-    Phonenumber: new FormControl(''),
+    phone_number: new FormControl(''),
     type: new FormControl('')
   });
 
@@ -42,6 +42,11 @@ export class ResortAddEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    const storedEmployees = this.guestService.getEmployee();
+    if (storedEmployees && storedEmployees.length > 0) {
+      this.employee = storedEmployees;
+    }
+    
   }
 
   public _filter(value: any): UserProfile[] {
@@ -64,18 +69,15 @@ export class ResortAddEmployeeComponent implements OnInit {
     if (this.employees.value.username !== "") {
       this.setValues(user_id);
       this.employee.push(this.employees.value);
-      this.employeeList.push(this.employees.value);
       this.employees.reset();
-    } else {
+    } else { 
       alert("Employee not Selected Please Select Employee");
     }
   }
 
   removeEmployee(user_id: number) {
-    const indexToRemove: number = this.employeeList.findIndex((emp: UserProfile) => emp.user_id === user_id);
     const removeIndex: number = this.employee.findIndex((emp: UserProfile) => emp.user_id === user_id);
-    if (indexToRemove !== -1 && removeIndex !== -1) {
-      this.employeeList.splice(indexToRemove, 1);
+    if ( removeIndex !== -1) {
       this.employee.splice(removeIndex, 1);
     }
   }
@@ -83,7 +85,7 @@ export class ResortAddEmployeeComponent implements OnInit {
 
   save() {
     if (this.employees.value.username !== "") {
-      this.guestService.addEmployee(this.employeeList);
+      this.guestService.addEmployee(this.employee);
       this._location.back();
     } else {
       alert("Employee not Selected Please Select Employee");
@@ -95,7 +97,7 @@ export class ResortAddEmployeeComponent implements OnInit {
       const firstUserProfile = this.userProfile.find(profile => profile.user_id === user_id);
       if (firstUserProfile) {
         this.employees.controls['user_id'].setValue(user_id);
-        this.employees.controls['Phonenumber'].setValue(firstUserProfile.phone_number);
+        this.employees.controls['phone_number'].setValue(firstUserProfile.phone_number);
         this.employees.controls['type'].setValue("Employee");
       }
     }
