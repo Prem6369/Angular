@@ -74,7 +74,7 @@ export class ResortRoomsComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     this.httpclient
       .get<any>(
-        `https://localhost:7036/api/resorts/getresortdetails?resort_id=${this.Resort_id}`,
+        `https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${this.Resort_id}`,
         { headers }
       )
       .subscribe(
@@ -113,7 +113,6 @@ export class ResortRoomsComponent implements OnInit {
   getEmployeeIds()
   {
     this.total_employees.forEach((employee: { user_id: { toString: () => string; }; }, index: number) => {
-      debugger;
       this.employee_user_ids += employee.user_id.toString();
       if (index < this.total_employees.length - 1) {
         this.employee_user_ids += ","; 

@@ -79,7 +79,12 @@ constructor(private httpclient:HttpClient,private session:SessionServiceService)
       );
       this.Bookings_list.push(BookingDetails);
       console.log(this.Bookings_list)
-    }));
+    }),
+    (error) => {
+      console.error('Error fetching resort details:', error);
+      // Show an alert or message to the user
+      alert('Failed to fetch User details. Please try again later.');
+    });
 
   }
 }

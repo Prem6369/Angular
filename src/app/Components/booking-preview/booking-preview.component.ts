@@ -96,14 +96,24 @@ export class BookingPreviewComponent implements OnInit {
         (response) => {
           this.img = response.image_urls;
           this.resortname = response.name;
+        },
+        (error) => {
+          console.error('Error fetching resort details:', error);
+          alert('Failed to fetch resort details. Please try again later.');
         }
       );
   }
 
 
   toCustomFormat(date: Date): string {
+    if (date.getHours() === 0 && date.getMinutes() === 0 && date.getSeconds() === 0) {
+      date.setHours(10);
+      date.setMinutes(0);
+      date.setSeconds(0);
+    }
     return date.toISOString().slice(0, 19);
   }
+  
 
 
   //For checkbox terms and condition
@@ -113,6 +123,7 @@ export class BookingPreviewComponent implements OnInit {
     this._location.back()
   }
   submit() {
+    
     const booking = {
       user_id: this.user_id,
       resort_id: this.Resort_id,
@@ -130,14 +141,15 @@ export class BookingPreviewComponent implements OnInit {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJiN2UyZjBmNC1iOGY0LTQwY2MtODRjMy1kYTZiYjIwMjFjYmMiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiZjliYWJjOTUtOTMyYy00YTc2LWJlMzMtMTMyZDllM2I0MTc0IiwibmJmIjoxNzA4OTI0MTc1LCJleHAiOjE3MDg5ODQxNzUsImlhdCI6MTcwODkyNDE3NSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.eBRH1uS5SSiMXOBVA2Z5o2TjJydJCNqVqeXQloIIoZQ';
 
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-
+    
     const url = `https://localhost:7036/api/resorts/bookresort`
 
     console.log("Final JSON:", booking);
     this.httpclient.post(url, booking, { headers })
       .subscribe((response) => {
+        
         console.log("Booking status:", response);
-        if(response!=0)
+        if(response!==0)
         {
           this.router.navigate(['/Thankyou']);
         }

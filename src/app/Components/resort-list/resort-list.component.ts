@@ -45,7 +45,7 @@ export class ResortListComponent implements OnInit {
 
     this.httpclient
       .get<any[]>(
-        'https://localhost:7036/api/resorts/getallresorts',
+        'https://claysysresortapi.claysys.org/api/resorts/getallresorts',
         { headers }
       )
       .subscribe(
@@ -107,7 +107,7 @@ export class ResortListComponent implements OnInit {
 
         this.httpclient
           .get<any[]>(
-            'https://localhost:7036/api/resorts/getroomavailability',
+            'https://claysysresortapi.claysys.org/api/resorts/getroomavailability',
             { params, headers }
           )
           .subscribe((response) => {
