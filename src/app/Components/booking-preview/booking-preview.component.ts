@@ -60,7 +60,10 @@ export class BookingPreviewComponent implements OnInit {
 
   initializer() {
     this.user_id = this.session.getUserId();
-    this.guest = this.guestService.getGuests();
+    this.guest = this.guestService.getGuests().map(guest => {
+      const { type, ...guestWithoutType } = guest;
+      return guestWithoutType;
+  });
     this.booking_details = this.bookingService.getBookings();
     this.bookedRooms = this.booking_details.bookedRooms;
     this.guestDetails = this.booking_details.Total_List;
@@ -76,7 +79,7 @@ export class BookingPreviewComponent implements OnInit {
       room_type_count: value.count,
     }));
     this.check_in_date = this.toCustomFormat(this.booking_details.check_in_date)
-    this.check_out_date = this.toCustomFormat(this.booking_details.check_in_date)
+    this.check_out_date = this.toCustomFormat(this.booking_details.check_out_date)
   }
 
 
@@ -86,7 +89,7 @@ export class BookingPreviewComponent implements OnInit {
 
     this.httpclient
       .get<any>(
-        `https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${this.Resort_id}`,
+        `https://localhost:7036/api/resorts/getresortdetails?resort_id=${this.Resort_id}`,
         { headers }
       )
       .subscribe(
@@ -134,7 +137,15 @@ export class BookingPreviewComponent implements OnInit {
     this.httpclient.post(url, booking, { headers })
       .subscribe((response) => {
         console.log("Booking status:", response);
-        this.router.navigate(['/Thankyou']);
+        if(response!=0)
+        {
+          this.router.navigate(['/Thankyou']);
+        }
+        else
+        {
+          alert("Something went wrong")
+        }
+      
       })
 
   }
