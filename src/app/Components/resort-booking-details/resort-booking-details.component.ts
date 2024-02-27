@@ -22,15 +22,14 @@ constructor(private httpclient:HttpClient,private session:SessionServiceService)
   }
   
   getBookingDetails(){
-    const sessionValues = this.session.GetSessionvalues();
-    this.user_id = sessionValues[0];
-    this.username = sessionValues[1];
+    this.user_id = this.session.getUserId();
+    this.username = this.session.getUserName();
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
+    const token = ' eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJjMmVhMDZiOC03YmRiLTQyYTktYTFmYi05YmJjMGYyYzVlNGIiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiMzEzMzhjZGEtMDliMC00NjU3LWI1MzMtNTA3NTRmNTMyMWYzIiwibmJmIjoxNzA5MDExMzc3LCJleHAiOjE3MDkwNzEzNzcsImlhdCI6MTcwOTAxMTM3NywiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.qTgZalSx-yA9hZklTloO3zMe_voSZCJ-1UvnF4OfSFs';
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     const params = new HttpParams().set('user_id',this.user_id);
     this.httpclient.get<any>
-    (`https://claysysresortapi.claysys.org/api/resorts/getbookeduserlist`,{headers,params}).subscribe
+    (`https://localhost:7036/api/resorts/getbookeduserlist`,{headers,params}).subscribe
     ((response=>{
       console.log(response);
       this.bookedresort=response.bookings;

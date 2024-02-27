@@ -74,7 +74,7 @@ export class ResortRoomsComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     this.httpclient
       .get<any>(
-        `https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${this.Resort_id}`,
+        `https://localhost:7036/api/resorts/getresortdetails?resort_id=${this.Resort_id}`,
         { headers }
       )
       .subscribe(
@@ -128,7 +128,7 @@ export class ResortRoomsComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     this.httpclient
       .get<any>(
-        `https://claysysresortapi.claysys.org/api/resorts/getroomtypes`,
+        `https://localhost:7036/api/resorts/getroomtypes`,
         { headers }
       )
       .subscribe(

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionServiceService {
 
-  constructor() { }
+  constructor(private router: Router) { }
   private authentication: boolean = false;
   private User_id!:number;
   private Username:string='';
@@ -38,5 +39,12 @@ export class SessionServiceService {
 
   getUserId(): number {
     return this.User_id;
+  }
+
+  logout() {
+    this.Username = '';
+    this.User_id;
+    this.router.navigate(['']);
+    sessionStorage.clear(); 
   }
 }

@@ -75,6 +75,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   Logout() {
-    this.router.navigate(['']);
+    this.session.logout();
+   
   }
 }

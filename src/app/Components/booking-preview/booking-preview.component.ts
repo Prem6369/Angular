@@ -72,7 +72,7 @@ export class BookingPreviewComponent implements OnInit {
       description: value.description
     }));
     this.roomTypes_Req = Object.entries(this.bookedRooms).map(([key, value]) => ({
-      room_type_id: key,
+      room_type_id: Number(key),
       room_type_count: value.count,
     }));
     this.check_in_date = this.toCustomFormat(this.booking_details.check_in_date)

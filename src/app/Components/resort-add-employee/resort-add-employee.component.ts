@@ -22,7 +22,7 @@ export class ResortAddEmployeeComponent implements OnInit {
   employees = new FormGroup({
     username: new FormControl(''),
     user_id: new FormControl(),
-    Phonenumber: new FormControl(''),
+    phone_number: new FormControl(''),
     type: new FormControl('')
   });
 
@@ -101,7 +101,7 @@ export class ResortAddEmployeeComponent implements OnInit {
       const firstUserProfile = this.userProfile.find(profile => profile.user_id === user_id);
       if (firstUserProfile) {
         this.employees.controls['user_id'].setValue(user_id);
-        this.employees.controls['Phonenumber'].setValue(firstUserProfile.phone_number);
+        this.employees.controls['phone_number'].setValue(firstUserProfile.phone_number);
         this.employees.controls['type'].setValue("Employee");
       }
     }
