@@ -1,29 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GuestService } from '../../Service/GuestService';
 import { Location } from '@angular/common';
+import { SessionServiceService } from '../../Service/Session/session-service.service';
 
 @Component({
   selector: 'app-resort-add-guest',
   templateUrl: './resort-add-guest.component.html',
   styleUrls: ['./resort-add-guest.component.scss'],
 })
-export class ResortAddGuestComponent  {
-
+export class ResortAddGuestComponent implements OnInit  {
+  referrer_user_id!:number;
   guestDetails:any;
-  constructor(private _location: Location,private guestService: GuestService) {
+  constructor(private session:SessionServiceService,private _location: Location,private guestService: GuestService) {
+  }
+  ngOnInit(): void {
+    this.referrer_user_id=this.session.getUserId();
   }
 
   Addguest = new FormGroup({
-    Firstname: new FormControl(null, Validators.required),
-    Lastname: new FormControl(null, Validators.required),
-    Age: new FormControl(null, Validators.required),
-    Sex: new FormControl(null, Validators.required),
-    Phonenumber: new FormControl(null, Validators.required),
-    Address: new FormControl(null, Validators.required),
-    Idcardnumber: new FormControl(null, Validators.required),
-    Imageurl: new FormControl(null, Validators.required),
+    first_name: new FormControl(null, Validators.required),
+    last_name: new FormControl(null, Validators.required),
+    email: new FormControl(null, Validators.required),
+    age: new FormControl(null, Validators.required),
+    gender: new FormControl(null, Validators.required),
+    phone_number: new FormControl(null, Validators.required),
+    address: new FormControl(null, Validators.required),
+    official_id_card_no: new FormControl(null, Validators.required),
+    official_id_image_url: new FormControl(null, Validators.required),
     type: new FormControl(),
+    referrer_user_id:new FormControl()
   });
 
  
@@ -60,5 +66,6 @@ export class ResortAddGuestComponent  {
   setType()
   {
     this.Addguest.controls['type'].setValue("Guest");
+    this.Addguest.controls['referrer_user_id'].setValue(this.referrer_user_id)
   }
 }

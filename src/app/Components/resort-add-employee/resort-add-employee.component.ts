@@ -15,7 +15,6 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 })
 
 export class ResortAddEmployeeComponent implements OnInit {
-  employeeList: any[] = [];
   employee: any[] = [];
   userProfile: UserProfile[] = [];
   selectedUserId!: number;
@@ -42,6 +41,10 @@ export class ResortAddEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    const storedEmployees = this.guestService.getEmployee();
+    if (storedEmployees && storedEmployees.length > 0) {
+      this.employee = storedEmployees;
+    }
   }
 
   public _filter(value: any): UserProfile[] {
@@ -62,11 +65,10 @@ export class ResortAddEmployeeComponent implements OnInit {
 
   addEmployee(user_id: number) {
     if (this.employees.value.username !== "") {
-      const employeeExists = this.employeeList.some(emp => emp.user_id === user_id);
+      const employeeExists = this.employee.some(emp => emp.user_id === user_id);
       if (!employeeExists) {
         this.setValues(user_id);
         this.employee.push(this.employees.value);
-        this.employeeList.push(this.employees.value);
         this.employees.reset();
       } else {
         alert("Employee already added.");
@@ -78,10 +80,8 @@ export class ResortAddEmployeeComponent implements OnInit {
   
 
   removeEmployee(user_id: number) {
-    const indexToRemove: number = this.employeeList.findIndex((emp: UserProfile) => emp.user_id === user_id);
     const removeIndex: number = this.employee.findIndex((emp: UserProfile) => emp.user_id === user_id);
-    if (indexToRemove !== -1 && removeIndex !== -1) {
-      this.employeeList.splice(indexToRemove, 1);
+    if (removeIndex !== -1) {
       this.employee.splice(removeIndex, 1);
     }
   }
@@ -89,7 +89,7 @@ export class ResortAddEmployeeComponent implements OnInit {
 
   save() {
     if (this.employees.value.username !== "") {
-      this.guestService.addEmployee(this.employeeList);
+      this.guestService.addEmployee(this.employee);
       this._location.back();
     } else {
       alert("Employee not Selected Please Select Employee");

@@ -1,94 +1,3 @@
-<!-- <app-navbar></app-navbar>
-<div class="container1">
-    <div class="headcontainer">
-        <div class="heading">
-            <h3 class="text-center m-3">Add Guest</h3>
-        </div>
-    </div>
-
-    <div class="bodycontainer mt-5">
-        <form [formGroup]="Addguest" class="form">
-            <div class="row ">
-                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                    <section id="LastName" class="mt-3">
-                        <h2>FIRST NAME</h2>
-    
-                        <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" id="Fname" formControlName="Firstname">
-    
-                    </section>
-    
-                    <section id="LastName" class="mt-3">
-                        <h2>LAST NAME</h2>
-    
-                        <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" id="lname" formControlName="Lastname">
-    
-                    </section>
-    
-                    <section id="Age" class="mt-3">
-                        <h2>AGE</h2>
-    
-                        <span class="icon mx-1"><i class="fa-regular fa-calendar"></i></span>
-                        <input type="text" id="age" formControlName="Age">
-    
-                    </section>
-    
-                    <section id="Sex" class="mt-3">
-                        <h2>SEX</h2>
-    
-                        <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
-    
-                        <select id="sex" formControlName="Sex">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </section>
-                </div>
-               
-<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-    <section id="PhoneNumber" class="mt-3">
-        <h2>PHONE NUMBER</h2>
-
-        <span class="icon mx-1"><i class="fa-solid fa-phone"></i></span>
-        <input type="text" id="Pnumber" formControlName="Phonenumber">
-
-    </section>
-
-    <section id="Address" class="mt-3">
-        <h2>ADDRESS</h2>
-
-        <span class="icon mx-1"><i class="fa-solid fa-location-dot"></i></span>
-        <input type="text" id="address" formControlName="Address">
-
-    </section>
-
-    <section id="OfficialIdCardNo" class="mt-3">
-        <h2>OFFICIAL ID CARD NO</h2>
-
-        <span class="icon mx-1"><i class="fa-solid fa-id-card"></i></span>
-        <input type="text" id="idcard" formControlName="Idcardnumber">
-
-    </section>
-
-    <section id="OfficialIdImageUrl" class="mt-3">
-        <h2>OFFICIAL ID IMAGE URL</h2>
-        <div class="input-container">
-            <input type="file" id="img" accept="image/*" formControlName="Imageurl">
-        </div>
-    </section>
-</div>
-               
-            </div>
-
-
-            <button class="btn btn-success" (click)="saveNew()">SAVE & NEW</button>
-            <button class="btn btn-success" (click)="save()">SAVE</button>
-        </form>
-
-    </div>
-</div> -->
 
 <app-navbar></app-navbar>
 <div class="container1">
@@ -107,55 +16,62 @@
                     <section id="LastName" class="my-3">
                         <h2>FIRST NAME</h2>
                         <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" id="Fname" formControlName="Firstname">
+                        <input type="text" id="Fname" formControlName="first_name">
                     </section>
 
                     <section id="LastName" class="my-3">
                         <h2>LAST NAME</h2>
                         <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" id="lname" formControlName="Lastname">
+                        <input type="text" id="lname" formControlName="last_name">
                     </section>
 
                     <section id="Age" class="my-3">
                         <h2>AGE</h2>
                         <span class="icon mx-1"><i class="fa-regular fa-calendar"></i></span>
-                        <input type="text" id="age" formControlName="Age">
+                        <input type="text" id="age" formControlName="age">
                     </section>
 
                     <section id="Sex" class="my-3">
                         <h2>SEX</h2>
                         <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
-                        <select id="sex" formControlName="Sex">
+                        <select id="sex" formControlName="gender">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                             <option value="other">Other</option>
                         </select>
                     </section>
+
+                    
+                    <section id="Email" class="my-3">
+                        <h2>Email</h2>
+                        <span class="icon mx-1"><i class="fa-regular fa-envelope"></i></span>
+                        <input type="text" id="email" formControlName="email">
+                    </section>
                 </div>
 
                 <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 p-2" id="side-div">
-                    <section id="PhoneNumber" class="my-3">
+                    <section id="PhoneNumber" class="my-4">
                         <h2>PHONE NUMBER</h2>
                         <span class="icon mx-1"><i class="fa-solid fa-phone"></i></span>
-                        <input type="text" id="Pnumber" formControlName="Phonenumber">
+                        <input type="text" id="Pnumber" formControlName="phone_number">
                     </section>
 
-                    <section id="Address" class="my-3">
+                    <section id="Address" class="my-4">
                         <h2>ADDRESS</h2>
                         <span class="icon mx-1"><i class="fa-solid fa-location-dot"></i></span>
-                        <input type="text" id="address" formControlName="Address">
+                        <input type="text" id="address" formControlName="address">
                     </section>
 
-                    <section id="OfficialIdCardNo" class="my-3">
+                    <section id="OfficialIdCardNo" class="my-4">
                         <h2>OFFICIAL ID CARD NO</h2>
                         <span class="icon mx-1"><i class="fa-solid fa-id-card"></i></span>
-                        <input type="text" id="idcard" formControlName="Idcardnumber">
+                        <input type="text" id="idcard" formControlName="official_id_card_no">
                     </section>
 
-                    <section id="OfficialIdImageUrl" class="my-3">
+                    <section id="OfficialIdImageUrl" class="my-4">
                         <h2>OFFICIAL ID IMAGE URL</h2>
                         <div class="input-container">
-                            <input type="file" id="img" accept="image/*" formControlName="Imageurl">
+                            <input type="file" id="img" accept="image/*" formControlName="official_id_image_url">
                         </div>
                     </section>
                 </div>

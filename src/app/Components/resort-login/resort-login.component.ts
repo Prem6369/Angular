@@ -1,21 +1,29 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SessionServiceService } from '../../Service/Session/session-service.service';
+import { GuestService } from '../../Service/GuestService';
 
 @Component({
   selector: 'app-resort-login',
   templateUrl: './resort-login.component.html',
   styleUrl: './resort-login.component.scss',
 })
-export class ResortLoginComponent {
+export class ResortLoginComponent implements OnInit {
   signInForm = new FormGroup({
     Username: new FormControl(''),
     password: new FormControl(''),
   });
   Errormessage:string='';
-  constructor(private router: Router, private httpClient: HttpClient,private session:SessionServiceService) {}
+  constructor(private guestService: GuestService,
+    private router: Router, 
+    private httpClient: HttpClient,
+    private session:SessionServiceService) {}
+    
+  ngOnInit(): void {
+    this.guestService.resetService()
+  }
 
   Login() {
     var Loginvalues = this.signInForm.value;

@@ -35,6 +35,7 @@ export class ResortListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getResortDetails();
+
   }
 
   getResortDetails() {
@@ -84,7 +85,7 @@ export class ResortListComponent implements OnInit {
     const checkInDate = this.rangevalue.get('check_in_date')?.value;
     const checkOutDate = this.rangevalue.get('check_out_date')?.value;
     const today = new Date();
-    console.log(checkInDate, checkOutDate);
+   
 
     if (checkInDate && checkOutDate) {
       if (checkInDate < today) {
