@@ -13,13 +13,14 @@ export class UserProfileComponent implements OnInit {
   userlist: UserProfile[] = [];
   username: string = '';
   user_id!:number;
+  img:string='';
   constructor(private httpclient: HttpClient, private router: Router, private session: SessionServiceService) {}
 
   ngOnInit(): void {
-    this.getResortDetails();
+    this.getUserProfile();
   }
 
-  getResortDetails() {
+  getUserProfile() {
     const sessionValues = this.session.GetSessionvalues();
     this.user_id = sessionValues[0];
     this.username = sessionValues[1];
@@ -35,6 +36,7 @@ export class UserProfileComponent implements OnInit {
       )
       .subscribe(
         (response) => {
+          this.img=response.official_id_image_url;
           console.log('profile',response);
           const userprofiles = new UserProfile(
             response.user_id, 
