@@ -219,7 +219,14 @@ iframe {
   .txtdate, .txtchange {
     display: inline-flex;
     font-family: Roboto;
+    width: auto;
 
+  }
+
+  #date-view
+  {
+    display: flex;
+    justify-content: center;
   }
   .txtchange{
     color: rgb(78, 78, 235);
@@ -234,12 +241,10 @@ iframe {
     align-items: center;
     justify-content: space-evenly;
   }
-  .txtavailabel,.txtbook{
-    border: 2px solid black;
+ .txtbook{
     border-radius: 4px;
     padding: 15px;
     font-family: Roboto;
-
   }
 
   .con {
