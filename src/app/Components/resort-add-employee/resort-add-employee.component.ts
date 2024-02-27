@@ -62,14 +62,20 @@ export class ResortAddEmployeeComponent implements OnInit {
 
   addEmployee(user_id: number) {
     if (this.employees.value.username !== "") {
-      this.setValues(user_id);
-      this.employee.push(this.employees.value);
-      this.employeeList.push(this.employees.value);
-      this.employees.reset();
+      const employeeExists = this.employeeList.some(emp => emp.user_id === user_id);
+      if (!employeeExists) {
+        this.setValues(user_id);
+        this.employee.push(this.employees.value);
+        this.employeeList.push(this.employees.value);
+        this.employees.reset();
+      } else {
+        alert("Employee already added.");
+      }
     } else {
-      alert("Employee not Selected Please Select Employee");
+      alert("Employee not selected. Please select an employee.");
     }
   }
+  
 
   removeEmployee(user_id: number) {
     const indexToRemove: number = this.employeeList.findIndex((emp: UserProfile) => emp.user_id === user_id);

@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<div class="text-center"><h3>Booking Details</h3></div>
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Confirmed Bookings</h5>
+            <div *ngFor="let booking of confirmedBookings" class="mb-3">
+              <div class="card confirmed-card">
+                <div class="card-body">
+                  <h6 class="card-subtitle mb-2 text-muted text-center">{{ booking.name }}</h6>
+                  <p><strong>Location:</strong> {{ booking.location }}</p>
+                  <p><strong>Check-in:</strong> {{ booking.check_in_date | date:'dd/MM/yyyy'}}</p>
+                  <p><strong>Check-out:</strong> {{ booking.check_out_date | date:'dd/MM/yyyy' }}</p>
+                  <p><strong>Status:</strong> {{ booking.booking_status }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Pending Bookings</h5>
+            <div *ngFor="let booking of pendingBookings" class="mb-3">
+              <div class="card pending-card">
+                <div class="card-body">
+                  <h6 class="card-subtitle mb-2 text-muted text-center">{{ booking.name }}</h6>
+                  <p><strong>Location:</strong> {{ booking.location }}</p>
+                  <p><strong>Check-in:</strong> {{ booking.check_in_date| date:'dd/MM/yyyy' }}</p>
+                  <p><strong>Check-out:</strong> {{ booking.check_out_date| date:'dd/MM/yyyy' }}</p>
+                  <p><strong>Status:</strong> {{ booking.booking_status }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
