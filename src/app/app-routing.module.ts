@@ -12,6 +12,7 @@ import { ResortAddGuestComponent } from './Components/resort-add-guest/resort-ad
 import { ResortAddEmployeeComponent } from './Components/resort-add-employee/resort-add-employee.component';
 import { BookingPreviewComponent } from './Components/booking-preview/booking-preview.component';
 import { ResortBookingDetailsComponent } from './Components/resort-booking-details/resort-booking-details.component';
+import { UpdateProfileComponent } from './Components/update-profile/update-profile.component';
 
 const routes: Routes = [
   {path:'Home',component:HomeComponent},
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path:'Addguest',component:ResortAddGuestComponent},
   {path:'Addemployee',component:ResortAddEmployeeComponent},
   {path:'booking-preview',component:BookingPreviewComponent},
-  {path:'booking-details',component:ResortBookingDetailsComponent}
+  {path:'booking-details',component:ResortBookingDetailsComponent},
+  {path:'UpdateProfile',component:UpdateProfileComponent}
 ];
 
 @NgModule({
