@@ -142,12 +142,13 @@ export class ResortListComponent implements OnInit {
   nextpage(resortId: number) {
     const checkInDate = this.rangevalue.get('check_in_date')?.value;
     const checkOutDate = this.rangevalue.get('check_out_date')?.value;
-
+    const encryptId=(btoa(resortId.toString()))
+    console.log(encryptId)
     if (checkInDate != null && checkOutDate != null) {
         this.dateService.checkInDate = checkInDate;
         this.dateService.checkOutDate = checkOutDate;
 
-        this.router.navigate(['/Resortdetails'], { queryParams: { ID: resortId } });
+        this.router.navigate(['/Resortdetails'], { queryParams: { ID: encryptId } });
     } else {
         console.error('Check-in date or check-out date is null or undefined.');
     }

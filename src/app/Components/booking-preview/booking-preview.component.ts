@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -86,11 +86,13 @@ export class BookingPreviewComponent implements OnInit {
   getResortDetails() {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    const decrptyId=(atob(this.Resort_id.toString()));
+    const params=new HttpParams().set('resort_id',decrptyId);
 
     this.httpclient
       .get<any>(
-        `https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${this.Resort_id}`,
-        { headers }
+        `https://claysysresortapi.claysys.org/api/resorts/getresortdetails`,
+        { headers,params }
       )
       .subscribe(
         (response) => {
@@ -123,10 +125,11 @@ export class BookingPreviewComponent implements OnInit {
     this._location.back()
   }
   submit() {
-    
+    const decrptyId=(atob(this.Resort_id.toString()));
+
     const booking = {
       user_id: this.user_id,
-      resort_id: this.Resort_id,
+      resort_id: decrptyId,
       check_in_date: this.check_in_date,
       check_out_date: this.check_out_date,
       message: "please approve",
