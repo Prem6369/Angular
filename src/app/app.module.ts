@@ -33,6 +33,7 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { AdminHeaderComponent } from './Components/layouts/admin-header/admin-header.component';
 import { UserHeaderComponent } from './Components/layouts/user-header/user-header.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
+import { ResortSignupComponent } from './Components/resort-signup/resort-signup.component';
 
 
 
@@ -56,10 +57,14 @@ import { NotFoundComponent } from './Components/not-found/not-found.component';
     UserLayouttComponent,
     ResortBookingDetailsComponent,
     UpdateProfileComponent,
+<<<<<<< HEAD
     FooterComponent,
     AdminHeaderComponent,
     UserHeaderComponent,
     NotFoundComponent,
+=======
+    ResortSignupComponent,
+>>>>>>> 8856bd42fb78d89a851ac903a64db113fdf1c703
     
   ],
   imports: [
