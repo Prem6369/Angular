@@ -89,7 +89,7 @@ export class BookingPreviewComponent implements OnInit {
 
     this.httpclient
       .get<any>(
-        `https://localhost:7036/api/resorts/getresortdetails?resort_id=${this.Resort_id}`,
+        `https://claysysresortapi.claysys.org/api/resorts/getresortdetails?resort_id=${this.Resort_id}`,
         { headers }
       )
       .subscribe(
