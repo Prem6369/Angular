@@ -29,6 +29,7 @@ import {MatInputModule} from '@angular/material/input';
 import { AdminLayoutComponent } from './Components/layouts/admin-layout/admin-layout.component';
 import { UserLayouttComponent } from './Components/layouts/user-layoutt/user-layoutt.component';
 import { ResortBookingDetailsComponent } from './Components/resort-booking-details/resort-booking-details.component';
+import { UpdateProfileComponent } from './Components/update-profile/update-profile.component';
 
 
 
@@ -52,6 +53,7 @@ import { ResortBookingDetailsComponent } from './Components/resort-booking-detai
     AdminLayoutComponent,
     UserLayouttComponent,
     ResortBookingDetailsComponent,
+    UpdateProfileComponent,
     
   ],
   imports: [
