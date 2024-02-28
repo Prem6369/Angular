@@ -12,7 +12,9 @@ import { SessionServiceService } from '../../Service/Session/session-service.ser
 export class ResortAddGuestComponent implements OnInit  {
   referrer_user_id!:number;
   guestDetails:any;
-  constructor(private session:SessionServiceService,private _location: Location,private guestService: GuestService) {
+  constructor(private session:SessionServiceService,
+    private _location: Location,
+    private guestService: GuestService) {
   }
   ngOnInit(): void {
     this.referrer_user_id=this.session.getUserId();

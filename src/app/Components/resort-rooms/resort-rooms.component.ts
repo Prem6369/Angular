@@ -199,7 +199,7 @@ export class ResortRoomsComponent implements OnInit {
       };
       this.bookingService.addBooking(booking_details);
       
-      this.router.navigate(['/booking-preview'],{queryParams:{ID:this.Resort_id}});
+      this.router.navigate(['/user/booking-preview'],{queryParams:{ID:this.Resort_id}});
     }
     
    

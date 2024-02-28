@@ -1,1 +1,125 @@
-<p>update-profile works!</p>
+
+
+<div class="container1">
+    <div class="my-3">
+        <form [formGroup]="updateProfile" class="form">
+
+            <div class="row mx-3 border rounded">
+                <div class="headcontainer">
+                    <div class="heading">
+                        <h3 class="text-center m-3">Update profile</h3>
+                    </div>
+                </div>
+
+                <h3 *ngIf="successMessage" class="text-center  text-success">Profile updated successfully.</h3>
+<!-- 
+                <div  *ngIf="successMessage" class="alert alert-success alert-dismissible fade show mx-5 px-5" role="alert">
+                    <strong>Profile updated successfully...</strong> 
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div> -->
+
+                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 p-2" id="main-div">
+                    <section id="LastName" class="my-3">
+                        <h2>FIRST NAME</h2>
+                        <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="Fname" formControlName="first_name">
+                    </section>
+
+                    <section id="LastName" class="my-3">
+                        <h2>LAST NAME</h2>
+                        <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="lname" formControlName="last_name">
+                    </section>
+
+                    <section id="Age" class="my-3">
+                        <h2>AGE</h2>
+                        <span class="icon mx-1"><i class="fa-regular fa-calendar"></i></span>
+                        <input type="text" id="age" formControlName="age">
+                    </section>
+
+                    <section id="Sex" class="my-3">
+                        <h2>GENDER</h2>
+                        <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
+                        <select id="sex" formControlName="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </section>
+
+
+                    <section id="claySys_email" class="my-3">
+                        <h2>CLAYSYS EMAIL</h2>
+                        <span class="icon mx-1"><i class="fa-regular fa-envelope"></i></span>
+                        <input type="text" id="claySys_email" formControlName="claySys_email">
+                    </section>
+
+                    <section id="username" class="my-3">
+                        <h2>USERNAME</h2>
+                        <span class="icon mx-1"><i class="fa-regular fa-circle-user"></i></span>
+                        <input type="text" id="username" formControlName="username">
+                    </section>
+
+                    <section id="lead" class="my-3">
+                        <h2>LEAD</h2>
+                        <span class="icon"><i class="fa-solid fa-user-shield"></i></span>
+                        <input type="text" id="lead" formControlName="lead">
+                    </section>
+
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 p-2" id="side-div">
+
+                    <section id="PhoneNumber" class="my-3">
+                        <h2>ROLE</h2>
+                        <span class="icon"><i class="fa-solid fa-user-gear"></i></span>
+                        <input type="text" id="Pnumber" formControlName="role">
+                    </section>
+
+                    <section id="employee_id" class="my-3">
+                        <h2>EMPLOYEE CODE</h2>
+                        <span class="icon "><i class="fa-solid fa-users-line"></i></span>
+                        <input type="text" id="employee_id" formControlName="employee_id">
+                    </section>
+
+                    <section id="PhoneNumber" class="my-3">
+                        <h2>PHONE NUMBER</h2>
+                        <span class="icon mx-1"><i class="fa-solid fa-phone"></i></span>
+                        <input type="text" id="Pnumber" formControlName="phone_number">
+                    </section>
+
+                    <section id="Address" class="my-3">
+                        <h2>ADDRESS</h2>
+                        <span class="icon mx-1"><i class="fa-solid fa-location-dot"></i></span>
+                        <input type="text" id="address" formControlName="address">
+                    </section>
+
+                    <section id="OfficialIdCardNo" class="my-3">
+                        <h2>OFFICIAL ID CARD NO</h2>
+                        <span class="icon mx-1"><i class="fa-solid fa-id-card"></i></span>
+                        <input type="text" id="idcard" formControlName="official_id_card_no">
+                    </section>
+
+                    <section id="OfficialIdImageUrl" class="my-3">
+                        <h2>OFFICIAL ID IMAGE URL</h2>
+                        <div class="input-container">
+                            <input type="text" id="img"  formControlName="official_id_image_url">
+                        </div>
+                    </section>
+
+                    <section id="OfficialIdImageUrl" class="my-3">
+                        <h2>CLAYSYS ID CARD IMAGE URL</h2>
+                        <div class="input-container">
+                            <input type="text" id="img" formControlName="claysys_id_card_image_url">
+                        </div>
+                    </section>
+                </div>
+                <div class="text-center m-4">
+                    <button class="btn btn-success mx-3 px-5" [disabled]="!updateProfile.valid"
+                        (click)="update()">Update</button>
+                    <button class="btn btn-success mx-3 px-5" (click)="back()">Back</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

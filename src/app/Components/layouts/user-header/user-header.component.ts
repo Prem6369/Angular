@@ -1,26 +1,24 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserProfile } from '../../Model/userProfile/userProfile'; 
-import { SessionServiceService } from '../../Service/Session/session-service.service';
+import { UserProfile } from '../../../Model/userProfile/userProfile';
+import { SessionServiceService } from '../../../Service/Session/session-service.service';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss'] 
+  selector: 'app-user-header',
+  templateUrl: './user-header.component.html',
+  styleUrl: './user-header.component.scss'
 })
-export class UserProfileComponent implements OnInit {
+export class UserHeaderComponent implements OnInit {
   userlist!: UserProfile;
   username: string = '';
   user_id!:number;
   img:string='';
-  constructor(private httpclient: HttpClient, 
-    private router: Router, 
-    private session: SessionServiceService) {}
 
+  
   ngOnInit(): void {
     this.getUserProfile();
   }
+  constructor(private httpclient:HttpClient,private session:SessionServiceService){}
 
   getUserProfile() {
     const sessionValues = this.session.GetSessionvalues();
@@ -39,18 +37,10 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         (response) => {
           this.img=response.official_id_image_url;
-          console.log('profile',response);
           this.userlist=response;
+          console.log(this.userlist.claySys_email);
         },
       );
   }
 
-  homePage() {
-    this.router.navigate(['/ResortDetails']);
-  }
-
-  Logout() {
-    this.session.logout();
-   
-  }
 }

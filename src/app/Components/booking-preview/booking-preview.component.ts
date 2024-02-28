@@ -154,7 +154,7 @@ export class BookingPreviewComponent implements OnInit {
         console.log("Booking status:", response);
         if(response!==0)
         {
-          this.router.navigate(['/Thankyou']);
+          this.router.navigate(['/user/Thankyou']);
         }
         else
         {

@@ -10,7 +10,7 @@ export class HomeComponent {
  constructor(private router:Router){}
 
   navigateToResort(){
-    this.router.navigate(['/Resortlist']);
+    this.router.navigate(['/user/Resortlist']);
   }
 
   

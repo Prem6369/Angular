@@ -15,7 +15,7 @@ ngOnInit(): void {
 }
 GoToHome(){
   this.guestService.resetService();
-  this.router.navigate(['/Home']);
+  this.router.navigate(['/user/Home']);
 }
 
 }

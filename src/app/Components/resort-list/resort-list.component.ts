@@ -85,9 +85,10 @@ export class ResortListComponent implements OnInit {
     const checkInDate = this.rangevalue.get('check_in_date')?.value;
     const checkOutDate = this.rangevalue.get('check_out_date')?.value;
     const today = new Date();
-   
+    today.setDate(today.getDate() - 1);
 
     if (checkInDate && checkOutDate) {
+      debugger;
       if (checkInDate < today) {
         alert(
           'Check-in date cannot be in the past. Please select a valid date.'
@@ -148,7 +149,7 @@ export class ResortListComponent implements OnInit {
         this.dateService.checkInDate = checkInDate;
         this.dateService.checkOutDate = checkOutDate;
 
-        this.router.navigate(['/Resortdetails'], { queryParams: { ID: encryptId } });
+        this.router.navigate(['/user/Resortdetails'], { queryParams: { ID: encryptId } });
     } else {
         console.error('Check-in date or check-out date is null or undefined.');
     }

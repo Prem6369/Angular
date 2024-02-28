@@ -4,7 +4,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Components/home/home.component';
-import { NavbarComponent } from './Components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { ResortDetailsComponent } from './Components/resort-details/resort-details.component';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
@@ -30,6 +29,10 @@ import { AdminLayoutComponent } from './Components/layouts/admin-layout/admin-la
 import { UserLayouttComponent } from './Components/layouts/user-layoutt/user-layoutt.component';
 import { ResortBookingDetailsComponent } from './Components/resort-booking-details/resort-booking-details.component';
 import { UpdateProfileComponent } from './Components/update-profile/update-profile.component';
+import { FooterComponent } from './Components/footer/footer.component';
+import { AdminHeaderComponent } from './Components/layouts/admin-header/admin-header.component';
+import { UserHeaderComponent } from './Components/layouts/user-header/user-header.component';
+import { NotFoundComponent } from './Components/not-found/not-found.component';
 
 
 
@@ -40,7 +43,6 @@ import { UpdateProfileComponent } from './Components/update-profile/update-profi
   declarations: [
     AppComponent,
     HomeComponent,
-    NavbarComponent,
     ResortDetailsComponent,
     ResortRoomsComponent,
     ResortThankyouComponent,
@@ -54,6 +56,10 @@ import { UpdateProfileComponent } from './Components/update-profile/update-profi
     UserLayouttComponent,
     ResortBookingDetailsComponent,
     UpdateProfileComponent,
+    FooterComponent,
+    AdminHeaderComponent,
+    UserHeaderComponent,
+    NotFoundComponent,
     
   ],
   imports: [

@@ -51,7 +51,7 @@ export class ResortLoginComponent implements OnInit {
 
   SuccessfullLogin(id:number,name:string){
     this.session.SetUserAuthentication(id,name);
-    this.router.navigate(['/Home']);
+    this.router.navigate(['/user/Home']);
 
   }
 }

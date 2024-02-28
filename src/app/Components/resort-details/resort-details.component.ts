@@ -77,7 +77,7 @@ export class ResortDetailsComponent implements OnInit {
   }
   booknow() {
 
-    this.router.navigate(['/Resortrooms'],{queryParams:{ID:this.Resort_id}});
+    this.router.navigate(['/user/Resortrooms'],{queryParams:{ID:this.Resort_id}});
       
   }
   

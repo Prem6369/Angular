@@ -1,20 +1,22 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { UserProfile } from '../../Model/userProfile/userProfile';
-import { SessionServiceService } from '../../Service/Session/session-service.service';
+import { UserProfile } from '../../../Model/userProfile/userProfile';
+import { SessionServiceService } from '../../../Service/Session/session-service.service';
+
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  selector: 'app-admin-header',
+  templateUrl: './admin-header.component.html',
+  styleUrl: './admin-header.component.scss'
 })
-export class NavbarComponent implements OnInit {
-  userlist: UserProfile[] = [];
+
+export class AdminHeaderComponent implements OnInit {
+  userlist!: UserProfile;
   username: string = '';
   user_id!:number;
   img:string='';
 
-
+   
   ngOnInit(): void {
     this.getUserProfile();
   }
@@ -37,35 +39,11 @@ export class NavbarComponent implements OnInit {
       .subscribe(
         (response) => {
           this.img=response.official_id_image_url;
-          console.log('profile',response);
-          const userprofiles = new UserProfile(
-            response.user_id, 
-            response.first_name,
-            response.last_name,
-            response.claySys_email,
-            response.phone_number,
-            response.address,
-            response.role,
-            response.lead,
-            response.employee_id,
-            response.age,
-            response.gender,
-            response.official_id_card_no,
-            response.official_id_image_url,
-            response.claysys_id_card_image_url,
-            response.allotted_stays,
-            response.used_stays,
-            response.remaining_days,
-            response.status,
-            response.username,
-            response.created_date,
-            response.last_modified_date
-          );
-          this.userlist.push(userprofiles);
+          this.userlist=response;
+          console.log(this.userlist.claySys_email);
         },
-        (error) => {
-          console.error('Error fetching user details:', error);
-        }
       );
   }
+
+
 }
