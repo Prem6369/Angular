@@ -30,6 +30,7 @@ import { AdminLayoutComponent } from './Components/layouts/admin-layout/admin-la
 import { UserLayouttComponent } from './Components/layouts/user-layoutt/user-layoutt.component';
 import { ResortBookingDetailsComponent } from './Components/resort-booking-details/resort-booking-details.component';
 import { UpdateProfileComponent } from './Components/update-profile/update-profile.component';
+import { ResortSignupComponent } from './Components/resort-signup/resort-signup.component';
 
 
 
@@ -54,6 +55,7 @@ import { UpdateProfileComponent } from './Components/update-profile/update-profi
     UserLayouttComponent,
     ResortBookingDetailsComponent,
     UpdateProfileComponent,
+    ResortSignupComponent,
     
   ],
   imports: [
