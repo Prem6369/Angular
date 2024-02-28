@@ -57,14 +57,11 @@ import { ResortSignupComponent } from './Components/resort-signup/resort-signup.
     UserLayouttComponent,
     ResortBookingDetailsComponent,
     UpdateProfileComponent,
-<<<<<<< HEAD
     FooterComponent,
     AdminHeaderComponent,
     UserHeaderComponent,
     NotFoundComponent,
-=======
     ResortSignupComponent,
->>>>>>> 8856bd42fb78d89a851ac903a64db113fdf1c703
     
   ],
   imports: [
