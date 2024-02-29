@@ -14,11 +14,14 @@ import { ResortBookingDetailsComponent } from './Components/resort-booking-detai
 import { UpdateProfileComponent } from './Components/update-profile/update-profile.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { UserLayouttComponent } from './Components/layouts/user-layoutt/user-layoutt.component';
+import { ResortSignupComponent } from './Components/resort-signup/resort-signup.component';
 
 
 
 const routes: Routes = [
   { path: '', component: ResortLoginComponent },
+  { path: 'Signup',component:ResortSignupComponent},
+
   {
     path: 'user',
     component: UserLayouttComponent,
