@@ -17,11 +17,14 @@ import { UserLayouttComponent } from './Components/layouts/user-layoutt/user-lay
 import { AdminLayoutComponent } from './Components/layouts/admin-layout/admin-layout.component';
 import { InsertResortDetailsComponent } from './Components/insert-resort-details/insert-resort-details.component';
 import { AddRoomtypeComponent } from './Components/add-roomtype/add-roomtype.component';
+import { ResortSignupComponent } from './Components/resort-signup/resort-signup.component';
 
 
 
 const routes: Routes = [
   { path: '', component: ResortLoginComponent },
+  { path: 'Signup',component:ResortSignupComponent},
+
   {
     path: 'user',
     component: UserLayouttComponent,
