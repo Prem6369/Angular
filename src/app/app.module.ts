@@ -34,6 +34,8 @@ import { AdminHeaderComponent } from './Components/layouts/admin-header/admin-he
 import { UserHeaderComponent } from './Components/layouts/user-header/user-header.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { ResortSignupComponent } from './Components/resort-signup/resort-signup.component';
+import { InsertResortDetailsComponent } from './Components/insert-resort-details/insert-resort-details.component';
+import { AddRoomtypeComponent } from './Components/add-roomtype/add-roomtype.component';
 
 
 
@@ -62,6 +64,8 @@ import { ResortSignupComponent } from './Components/resort-signup/resort-signup.
     UserHeaderComponent,
     NotFoundComponent,
     ResortSignupComponent,
+    InsertResortDetailsComponent,
+    AddRoomtypeComponent,
     
   ],
   imports: [

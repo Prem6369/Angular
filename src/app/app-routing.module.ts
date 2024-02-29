@@ -14,6 +14,9 @@ import { ResortBookingDetailsComponent } from './Components/resort-booking-detai
 import { UpdateProfileComponent } from './Components/update-profile/update-profile.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { UserLayouttComponent } from './Components/layouts/user-layoutt/user-layoutt.component';
+import { AdminLayoutComponent } from './Components/layouts/admin-layout/admin-layout.component';
+import { InsertResortDetailsComponent } from './Components/insert-resort-details/insert-resort-details.component';
+import { AddRoomtypeComponent } from './Components/add-roomtype/add-roomtype.component';
 
 
 
@@ -34,6 +37,14 @@ const routes: Routes = [
       { path: 'UpdateProfile', component: UpdateProfileComponent },
       { path: 'Resortrooms', component: ResortRoomsComponent },
       { path: 'Thankyou', component: ResortThankyouComponent },
+    ]
+  },
+  {
+    path:'admin',
+    component:AdminLayoutComponent,
+    children:[ 
+        {path:'insertresortdetails',component:InsertResortDetailsComponent},
+        {path:'addroomtype',component:AddRoomtypeComponent}
     ]
   },
   { path: '**', component: NotFoundComponent }
