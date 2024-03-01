@@ -44,6 +44,12 @@ import { ApproverLayoutComponent } from './Components/layouts/approver-layout/ap
 
 
 
+import {MatStepperModule} from '@angular/material/stepper';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
+import { ResortDetailsPreviewComponent } from './Components/resort-details-preview/resort-details-preview.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +78,7 @@ import { ApproverLayoutComponent } from './Components/layouts/approver-layout/ap
     ManageBookingComponent,
     ApproverHeaderComponent,
     ApproverLayoutComponent,
+    ResortDetailsPreviewComponent,
     
   ],
   imports: [
@@ -85,11 +92,17 @@ import { ApproverLayoutComponent } from './Components/layouts/approver-layout/ap
     HttpClientModule,
     MatTabsModule,
     FormsModule,
+    MatStepperModule,
     MatDatepickerModule,
     MatDateRangeInput,MatNativeDateModule,MatFormFieldModule,MatButtonModule,MatAutocompleteModule,
-    AsyncPipe,MatInputModule
+    AsyncPipe,MatInputModule,
+    MatChipsModule,
+    MatIconModule,
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(),{
+    provide: STEPPER_GLOBAL_OPTIONS,
+    useValue: {displayDefaultIndicatorType: false},
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

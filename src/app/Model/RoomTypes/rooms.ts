@@ -10,3 +10,12 @@ constructor(
    public last_modified_date: Date
 ){}
 }
+
+export class addRoomTypes {
+   constructor(
+      public name: string,
+      public capacity: number,
+      public description: string,
+   ){}
+   }
+   

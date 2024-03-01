@@ -1,1 +1,36 @@
-<p>add-roomtype works!</p>
+<div class="bg-white border mx-5 rounded">
+
+    <form [formGroup]="AddRooms" class="text-center">
+        <h3 class="text-center my-3" >Add room types</h3>
+
+        <h3 *ngIf="successMessage" class="text-center  text-success">Room added successfully</h3>
+
+        <div id="form-body">
+            <section id="Name" class="my-3">
+                <h2>NAME</h2>
+                <span class="icon mx-1"><i class="fa-solid fa-house"></i></span>
+                <input type="text" id="name" formControlName="name">
+            </section>
+
+            <section id="capacity" class="my-3">
+                <h2>CAPACITY</h2>
+                <span class="icon mx-1"><i class="fa-solid fa-house-chimney-user"></i></span>
+                <input type="number" id="capacity" formControlName="capacity">
+            </section>
+
+            <section id="description" class="my-3">
+                <h2>DESCRIPTION</h2>
+                <span class="icon mx-1"><i class="fa-solid fa-circle-info"></i></span>
+                <input type="text" id="description" formControlName="description">
+            </section>
+        </div>
+    </form>
+
+    
+    <div class="text-center m-3">
+        <button class="btn btn-outline-success mx-2" (click)="saveRoom()">Save</button>
+        <button class="btn btn-outline-dark mx-2" (click)="back()">Back</button>
+    </div>
+
+
+</div>

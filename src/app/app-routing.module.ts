@@ -20,6 +20,7 @@ import { AddRoomtypeComponent } from './Components/add-roomtype/add-roomtype.com
 import { ResortSignupComponent } from './Components/resort-signup/resort-signup.component';
 import { ApproverLayoutComponent } from './Components/layouts/approver-layout/approver-layout.component';
 import { ManageBookingComponent } from './Components/manage-booking/manage-booking.component';
+import { ResortDetailsPreviewComponent } from './Components/resort-details-preview/resort-details-preview.component';
 
 
 
@@ -48,8 +49,9 @@ const routes: Routes = [
     path:'admin',
     component:AdminLayoutComponent,
     children:[ 
-        {path:'insertresortdetails',component:InsertResortDetailsComponent},
-        {path:'addroomtype',component:AddRoomtypeComponent}
+        {path:'insert_resortdetails',component:InsertResortDetailsComponent},
+        {path:'addroomtype',component:AddRoomtypeComponent},
+        {path:'resort-details-preview',component:ResortDetailsPreviewComponent}
     ]
   },
 
@@ -68,4 +70,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

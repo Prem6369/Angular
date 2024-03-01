@@ -1,0 +1,95 @@
+// .mat-stepper-horizontal {
+//     margin-top: 8px;
+//   }
+  
+//   .mat-mdc-form-field {
+//     margin-top: 16px;
+//   }
+
+//   #stepper
+//   {
+//     color: black;
+//   }
+//  ::ng-deep .mat-step-text-label
+// {
+//   color: black;
+// }
+
+// ::ng-deep .mat-horizontal-stepper-header .mat-step-icon
+// {
+//   background-color: black;
+// }
+
+section {
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 1em;
+  width:300px;
+  margin-left: 30px;
+ 
+}
+
+section h2 {
+  float: left;
+ margin: -1.7em 0 0;
+  padding: 0 .5em;
+  background: #fff;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+input[type="text"] ,
+input[type="number"],
+input[type="url"],
+select{
+    border: none;
+    outline: none;
+    color: black;
+    width: 90%;
+}
+
+.centered-label {
+  display: flex;
+  justify-content: center;
+}
+
+// ::ng-deep .mat-stepper-horizontal-line
+// {
+//   border-top-color: black;
+// }
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.input-container input[type="number"],
+.input-container button {
+    margin-right: 10px; /* Adjust as needed */
+}
+
+.example-form-field {
+  width: 100%;
+  background-color: white;
+  color: black;
+}
+
+.example-button-container > button {
+  margin: 0 12px;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white !important ;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-floating-label, .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-floating-label--float-above {
+  color: rgb(0 0 0 / 87%) !important;;
+}
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: rgb(0 0 0 / 87%) !important;
+}
+
+#chips
+{
+  color: black;
+}
