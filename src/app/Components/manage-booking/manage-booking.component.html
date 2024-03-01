@@ -1,0 +1,35 @@
+<h4 class="text-center">Resort Booking</h4>
+<div class="table-responsive p-5">      
+    <table class="table table-bordered table-striped col-md-6">
+        <thead class="text-center">
+            <tr>
+                <th>S.No</th>
+                <th>username</th>
+                <th>Resort Name</th>
+                <th>Check-in Date</th>
+                <th>Check-out Date</th>
+                <th>Member Count</th>
+                <th>Room count</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr *ngFor="let data of Bookings_list;let i = index">
+                <td><span>{{i+1}}</span></td>
+                <td><span>{{ data.username }}</span></td>
+                <td><span>{{ data.resort_name }}</span></td>
+                <td><span>{{ data.check_in_date| date:'dd/MM/yyyy' }}</span></td>
+                <td><span>{{ data.check_out_date| date:'dd/MM/yyyy' }}</span></td>
+                <td><span>{{ data.member_count }}</span></td>
+                <td><span>{{ data.room_count }}</span></td>
+                <td>
+                    <select (change)="onchange($event, data.booking_id,data.approver_id)" >
+                        <option>{{data.booking_status}}</option>
+                        <option>Confirmed</option>
+                        <option>Cancelled</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

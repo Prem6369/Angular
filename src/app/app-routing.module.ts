@@ -18,6 +18,8 @@ import { AdminLayoutComponent } from './Components/layouts/admin-layout/admin-la
 import { InsertResortDetailsComponent } from './Components/insert-resort-details/insert-resort-details.component';
 import { AddRoomtypeComponent } from './Components/add-roomtype/add-roomtype.component';
 import { ResortSignupComponent } from './Components/resort-signup/resort-signup.component';
+import { ApproverLayoutComponent } from './Components/layouts/approver-layout/approver-layout.component';
+import { ManageBookingComponent } from './Components/manage-booking/manage-booking.component';
 import { ResortDetailsPreviewComponent } from './Components/resort-details-preview/resort-details-preview.component';
 
 
@@ -50,6 +52,14 @@ const routes: Routes = [
         {path:'insert_resortdetails',component:InsertResortDetailsComponent},
         {path:'addroomtype',component:AddRoomtypeComponent},
         {path:'resort-details-preview',component:ResortDetailsPreviewComponent}
+    ]
+  },
+
+  {
+    path:'approver',
+    component:ApproverLayoutComponent,
+    children:[
+      { path :'managebooking',component:ManageBookingComponent},
     ]
   },
   { path: '**', component: NotFoundComponent }

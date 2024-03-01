@@ -36,8 +36,9 @@ import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { ResortSignupComponent } from './Components/resort-signup/resort-signup.component';
 import { InsertResortDetailsComponent } from './Components/insert-resort-details/insert-resort-details.component';
 import { AddRoomtypeComponent } from './Components/add-roomtype/add-roomtype.component';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { InputNumberModule } from 'primeng/inputnumber';
+import { ManageBookingComponent } from './Components/manage-booking/manage-booking.component';
+import { ApproverHeaderComponent } from './Components/layouts/approver-header/approver-header.component';
+import { ApproverLayoutComponent } from './Components/layouts/approver-layout/approver-layout.component';
 import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
@@ -67,6 +68,9 @@ import { ResortDetailsPreviewComponent } from './Components/resort-details-previ
     ResortSignupComponent,
     InsertResortDetailsComponent,
     AddRoomtypeComponent,
+    ManageBookingComponent,
+    ApproverHeaderComponent,
+    ApproverLayoutComponent,
     ResortDetailsPreviewComponent,
     
   ],
@@ -84,8 +88,6 @@ import { ResortDetailsPreviewComponent } from './Components/resort-details-previ
     MatDatepickerModule,
     MatDateRangeInput,MatNativeDateModule,MatFormFieldModule,MatButtonModule,MatAutocompleteModule,
     AsyncPipe,MatInputModule,
-    LeafletModule,
-    InputNumberModule,
     MatChipsModule,
     MatIconModule,
   ],

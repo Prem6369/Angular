@@ -41,7 +41,6 @@ export class ResortLoginComponent implements OnInit {
         if("Unknow User"==response.name){
           this.Errormessage='Incorrect Username and Password'
         }else{
-          debugger;
           this.SuccessfullLogin(response.id,response.name,response.role)
           this.session.AddSessionvalues(response.id,response.name);
         }
@@ -51,7 +50,6 @@ export class ResortLoginComponent implements OnInit {
 
 
   SuccessfullLogin(id:number,name:string,role:string){
-    debugger;
     if(role==="user")
     {
       this.router.navigate(['/user/Home']);
@@ -60,7 +58,7 @@ export class ResortLoginComponent implements OnInit {
     {
       this.router.navigate(['/admin/insertresortdetails']);
     }else{
-      this.router.navigate(['/admin/**'])
+      this.router.navigate(['/approver/managebooking'])
     }
     this.session.SetUserAuthentication(id,name);
 
