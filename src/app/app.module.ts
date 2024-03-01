@@ -36,6 +36,9 @@ import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { ResortSignupComponent } from './Components/resort-signup/resort-signup.component';
 import { InsertResortDetailsComponent } from './Components/insert-resort-details/insert-resort-details.component';
 import { AddRoomtypeComponent } from './Components/add-roomtype/add-roomtype.component';
+import { ManageBookingComponent } from './Components/manage-booking/manage-booking.component';
+import { ApproverHeaderComponent } from './Components/layouts/approver-header/approver-header.component';
+import { ApproverLayoutComponent } from './Components/layouts/approver-layout/approver-layout.component';
 
 
 
@@ -66,6 +69,9 @@ import { AddRoomtypeComponent } from './Components/add-roomtype/add-roomtype.com
     ResortSignupComponent,
     InsertResortDetailsComponent,
     AddRoomtypeComponent,
+    ManageBookingComponent,
+    ApproverHeaderComponent,
+    ApproverLayoutComponent,
     
   ],
   imports: [
