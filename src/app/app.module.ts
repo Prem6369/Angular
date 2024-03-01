@@ -36,11 +36,14 @@ import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { ResortSignupComponent } from './Components/resort-signup/resort-signup.component';
 import { InsertResortDetailsComponent } from './Components/insert-resort-details/insert-resort-details.component';
 import { AddRoomtypeComponent } from './Components/add-roomtype/add-roomtype.component';
-
-
-
-
-
+import {MatStepperModule} from '@angular/material/stepper';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { InputNumberModule } from 'primeng/inputnumber';
+import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
+import { ResortDetailsPreviewComponent } from './Components/resort-details-preview/resort-details-preview.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +69,7 @@ import { AddRoomtypeComponent } from './Components/add-roomtype/add-roomtype.com
     ResortSignupComponent,
     InsertResortDetailsComponent,
     AddRoomtypeComponent,
+    ResortDetailsPreviewComponent,
     
   ],
   imports: [
@@ -79,11 +83,19 @@ import { AddRoomtypeComponent } from './Components/add-roomtype/add-roomtype.com
     HttpClientModule,
     MatTabsModule,
     FormsModule,
+    MatStepperModule,
     MatDatepickerModule,
     MatDateRangeInput,MatNativeDateModule,MatFormFieldModule,MatButtonModule,MatAutocompleteModule,
-    AsyncPipe,MatInputModule
+    AsyncPipe,MatInputModule,
+    LeafletModule,
+    InputNumberModule,
+    MatChipsModule,
+    MatIconModule,
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(),{
+    provide: STEPPER_GLOBAL_OPTIONS,
+    useValue: {displayDefaultIndicatorType: false},
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

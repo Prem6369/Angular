@@ -1,0 +1,40 @@
+<div class="container">
+
+    <div class="text-center my-3">
+        <h3>
+            Resort details preview
+        </h3>
+      
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <img class="card-img-top" src="{{ resort.image_urls }}" style="height: 200px; object-fit: cover;" alt="Resort Image">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Resort name:</strong>{{ resort.name }}</h5>
+            <p class="card-text">{{ resort.description }}</p>
+            <p class="card-text"><strong>Location:</strong> {{ resort.location }}</p>
+            <p class="card-text"><strong>Amenities:</strong> {{ resort.amenities?.join(', ') }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ resort.status }}</p>
+            <p class="card-text"><strong>Coordinates:</strong> Latitude: {{ resort.coordinates.lat }}, Longitude: {{ resort.coordinates.long }}</p>
+            <video controls autoplay style="width: 100%; height: auto;">
+                <source src="{{ resort.video_urls }}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              
+            <div *ngFor="let room of resort?.categories">
+              <p class="card-text"><strong>Room Type:</strong> {{ room.room_type_id }}, <strong>Number of Rooms:</strong> {{ room.number_of_rooms }}, <strong>Availability:</strong> {{ room.availability }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row justify-content-center my-3">
+      <div class="col-md-6 text-center">
+        <button class="btn btn-outline-primary mx-2" (click)="back()">Edit</button>
+        <button class="btn btn-outline-success mx-2" (click)="save()">Submit</button>
+      </div>
+    </div>
+  </div>
+  
