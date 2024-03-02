@@ -21,6 +21,7 @@ import { ResortSignupComponent } from './Components/resort-signup/resort-signup.
 import { ApproverLayoutComponent } from './Components/layouts/approver-layout/approver-layout.component';
 import { ManageBookingComponent } from './Components/manage-booking/manage-booking.component';
 import { ResortDetailsPreviewComponent } from './Components/resort-details-preview/resort-details-preview.component';
+import { AdminHomeComponent } from './Components/admin-home/admin-home.component';
 
 
 
@@ -49,6 +50,7 @@ const routes: Routes = [
     path:'admin',
     component:AdminLayoutComponent,
     children:[ 
+        {path:'home',component:AdminHomeComponent},
         {path:'insert_resortdetails',component:InsertResortDetailsComponent},
         {path:'addroomtype',component:AddRoomtypeComponent},
         {path:'resort-details-preview',component:ResortDetailsPreviewComponent}

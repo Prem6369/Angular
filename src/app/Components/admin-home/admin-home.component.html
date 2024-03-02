@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let function of function_list">
+        <div class="card" routerLink="{{ function.fun_navigation }}">
+          <i class="{{function.fun_icon}} display-1 text-center m-3"></i>
+          <div class="card-body">
+            <h4 class="card-title text-center">{{ function.fun_name }}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

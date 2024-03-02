@@ -53,10 +53,12 @@ select{
   justify-content: center;
 }
 
-// ::ng-deep .mat-stepper-horizontal-line
-// {
-//   border-top-color: black;
-// }
+#main-div,#side-div{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 .input-container {
   display: flex;
@@ -65,7 +67,7 @@ select{
 
 .input-container input[type="number"],
 .input-container button {
-    margin-right: 10px; /* Adjust as needed */
+    margin-right: 10px;
 }
 
 .example-form-field {
@@ -93,3 +95,10 @@ select{
 {
   color: black;
 }
+
+#AddResortform{
+  border: 2px solid black;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(56, 11, 255, 0.2);
+  }

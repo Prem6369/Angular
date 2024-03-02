@@ -56,7 +56,7 @@ export class ResortLoginComponent implements OnInit {
     }
     else if (role==="admin")
     {
-      this.router.navigate(['/admin/insertresortdetails']);
+      this.router.navigate(['/admin/home']);
     }else{
       this.router.navigate(['/approver/managebooking'])
     }

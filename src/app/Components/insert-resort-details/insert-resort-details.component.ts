@@ -21,13 +21,14 @@ export class InsertResortDetailsComponent implements OnInit {
   amenities_list = ['Beach'];
 
 
-  constructor(private resortService:ResortService,private httpClient: HttpClient, private _location: Location,private router:Router) {
+  constructor(private resortService: ResortService, private httpClient: HttpClient, private _location: Location, private router: Router) {
   }
   ngOnInit(): void {
     this.getRoomTypes();
+    this.initializers();
+    
 
   }
-
   AddResort = new FormGroup({
     name: new FormControl(),
     description: new FormControl(),
@@ -42,11 +43,53 @@ export class InsertResortDetailsComponent implements OnInit {
 
 
   AddRooms = new FormGroup({
-    name:new FormControl(),
+    name: new FormControl(),
     room_type_id: new FormControl(),
     number_of_rooms: new FormControl(),
     availability: new FormControl("string")
   })
+
+
+  initializers() {
+
+    const value = this.resortService.getResort();
+    const coordinatesObject = value.coordinates;
+    const rooms = value.categories;
+
+
+    this.AddResort.patchValue({
+      name: value.name,
+      description: value.description,
+      location: value.location,
+      image_urls: value.image_urls,
+      video_urls: value.video_urls,
+      status: value.status,
+      coordinates: `${coordinatesObject.lat},${coordinatesObject.long}`,
+    });
+    value.amenities.forEach((element: string) => {
+      this.amenities_list.push(element);
+    });
+
+    for (const room of rooms) {
+      this.resort_rooms.push({
+        name: room.name,
+        room_type_id: room.room_type_id,
+        number_of_rooms: room.number_of_rooms,
+        availability: room.availability
+      });
+    }
+  }
+
+
+  selectRoomType(event: any) {
+    const roomTypeId = event.target.value;
+    const selectedRoom = this.roomsTypes.find((room: { room_type_id: number }) => room.room_type_id === +roomTypeId);
+    if (selectedRoom) {
+      this.AddRooms.patchValue({
+        name: selectedRoom.name,
+      });
+    }
+  }
 
 
 
@@ -88,24 +131,37 @@ export class InsertResortDetailsComponent implements OnInit {
 
 
   saveRooms() {
-    this.resort_rooms.push(this.AddRooms.value)
-    this.AddRooms.reset();
+    if (this.AddRooms.value.number_of_rooms !== null) {
+      const existingRoom = this.resort_rooms.find(room => room.room_type_id === this.AddRooms.value.room_type_id);
+
+      if (existingRoom) {
+        alert("Room already exists!");
+      } else {
+        this.AddRooms.controls['availability'].setValue('string');
+        this.resort_rooms.push(this.AddRooms.value);
+        this.AddRooms.reset();
+        console.log("Rooms:", this.resort_rooms);
+      }
+    } else {
+      alert("Provide room count");
+    }
   }
+
 
   save() {
     this.setValues();
     const resort_details = {
       name: this.AddResort.value.name,
-      description:this.AddResort.value.description, 
-      location:this.AddResort.value.location, 
-      amenities:this.AddResort.value.amenities, 
-      image_urls: this.AddResort.value.image_urls, 
-      video_urls: this.AddResort.value.video_urls, 
-      status: this.AddResort.value.status, 
-      categories: this.AddResort.value.categories, 
-      coordinates:this.AddResort.value.coordinates
-  };
-  console.log("From object:",resort_details)
+      description: this.AddResort.value.description,
+      location: this.AddResort.value.location,
+      amenities: this.AddResort.value.amenities,
+      image_urls: this.AddResort.value.image_urls,
+      video_urls: this.AddResort.value.video_urls,
+      status: this.AddResort.value.status,
+      categories: this.AddResort.value.categories,
+      coordinates: this.AddResort.value.coordinates
+    };
+    console.log("From object:", resort_details)
 
     this.resortService.addResort(resort_details);
     this.router.navigate(['/admin/resort-details-preview']);
@@ -126,4 +182,7 @@ export class InsertResortDetailsComponent implements OnInit {
     this.AddResort.controls['coordinates'].setValue(this.getCoordinates())
   }
 
+  back() {
+    this._location.back();
+  }
 }
