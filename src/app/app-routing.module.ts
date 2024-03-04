@@ -21,6 +21,9 @@ import { ResortSignupComponent } from './Components/resort-signup/resort-signup.
 import { ApproverLayoutComponent } from './Components/layouts/approver-layout/approver-layout.component';
 import { ManageBookingComponent } from './Components/manage-booking/manage-booking.component';
 import { ResortDetailsPreviewComponent } from './Components/resort-details-preview/resort-details-preview.component';
+import { ManageBookingStatusComponent } from './Components/manage-booking-status/manage-booking-status.component';
+import { ChangeApproverComponent } from './Components/change-approver/change-approver.component';
+import { ApproverHomeComponent } from './Components/approver-home/approver-home.component';
 
 
 
@@ -59,7 +62,10 @@ const routes: Routes = [
     path:'approver',
     component:ApproverLayoutComponent,
     children:[
+      { path :'approverhome',component:ApproverHomeComponent},
       { path :'managebooking',component:ManageBookingComponent},
+      { path : 'managestatus',component:ManageBookingStatusComponent},
+      { path : 'changeapprover',component:ChangeApproverComponent}
     ]
   },
   { path: '**', component: NotFoundComponent }

@@ -1,0 +1,41 @@
+<h4 class="text-center">Resort Booking</h4>
+<div class="table-responsive p-5">      
+    <table class="table table-bordered table-striped col-md-6">
+        <thead class="text-center">
+            <tr>
+                <th>S.No</th>
+                <th>Image</th>
+                <th>username</th>
+                <th>Resort Name</th>
+                <th>Check-in Date</th>
+                <th>Check-out Date</th>
+                <th>change approver</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr *ngFor="let data of Bookings_list;let i = index">
+                <td><span>{{i+1}}</span></td>
+                <td>
+                    <img [src]="resortimage[i]" alt="Resort Image" class="rounded-photo" width="80" height="80">
+                </td>                
+                <td><span>{{ data.username }}</span></td>
+                <td><span>{{ data.resort_name }}</span></td>    
+                <td><span>{{ data.check_in_date| date:'dd/MM/yyyy' }}</span></td>
+                <td><span>{{ data.check_out_date| date:'dd/MM/yyyy' }}</span></td>
+                <td>
+                    <form [formGroup]="value">
+                <select class="form-control" (change)="selectt($event)" >
+                    <option value="">Choose approver</option>
+                    <option *ngFor="let appr of approver" [value]="appr.user_id">{{ appr.username }}</option>
+                </select>
+            </form>
+                 </td>
+                            
+                  <td>
+                    <button class="btn btn-success" (click)="onchange(data.booking_id)">change</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
