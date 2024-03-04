@@ -39,13 +39,6 @@ import { AddRoomtypeComponent } from './Components/add-roomtype/add-roomtype.com
 import { ManageBookingComponent } from './Components/manage-booking/manage-booking.component';
 import { ApproverHeaderComponent } from './Components/layouts/approver-header/approver-header.component';
 import { ApproverLayoutComponent } from './Components/layouts/approver-layout/approver-layout.component';
-
-
-
-
-
-import {MatStepperModule} from '@angular/material/stepper';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
@@ -53,6 +46,7 @@ import { ResortDetailsPreviewComponent } from './Components/resort-details-previ
 import { ManageBookingStatusComponent } from './Components/manage-booking-status/manage-booking-status.component';
 import { ChangeApproverComponent } from './Components/change-approver/change-approver.component';
 import { ApproverHomeComponent } from './Components/approver-home/approver-home.component';
+import { AdminHomeComponent } from './Components/admin-home/admin-home.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +79,7 @@ import { ApproverHomeComponent } from './Components/approver-home/approver-home.
     ManageBookingStatusComponent,
     ChangeApproverComponent,
     ApproverHomeComponent,
+    AdminHomeComponent,
     
   ],
   imports: [
@@ -98,17 +93,13 @@ import { ApproverHomeComponent } from './Components/approver-home/approver-home.
     HttpClientModule,
     MatTabsModule,
     FormsModule,
-    MatStepperModule,
     MatDatepickerModule,
     MatDateRangeInput,MatNativeDateModule,MatFormFieldModule,MatButtonModule,MatAutocompleteModule,
     AsyncPipe,MatInputModule,
     MatChipsModule,
     MatIconModule,
   ],
-  providers: [provideNativeDateAdapter(),{
-    provide: STEPPER_GLOBAL_OPTIONS,
-    useValue: {displayDefaultIndicatorType: false},
-  },],
+  providers: [provideNativeDateAdapter()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

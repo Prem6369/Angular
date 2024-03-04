@@ -24,6 +24,7 @@ import { ResortDetailsPreviewComponent } from './Components/resort-details-previ
 import { ManageBookingStatusComponent } from './Components/manage-booking-status/manage-booking-status.component';
 import { ChangeApproverComponent } from './Components/change-approver/change-approver.component';
 import { ApproverHomeComponent } from './Components/approver-home/approver-home.component';
+import { AdminHomeComponent } from './Components/admin-home/admin-home.component';
 
 
 
@@ -52,6 +53,7 @@ const routes: Routes = [
     path:'admin',
     component:AdminLayoutComponent,
     children:[ 
+        {path:'home',component:AdminHomeComponent},
         {path:'insert_resortdetails',component:InsertResortDetailsComponent},
         {path:'addroomtype',component:AddRoomtypeComponent},
         {path:'resort-details-preview',component:ResortDetailsPreviewComponent}

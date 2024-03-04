@@ -1,5 +1,5 @@
 
-        <form [formGroup]="AddResort" class="text-center">
+        <form [formGroup]="AddResort" class="text-center m-5" id="AddResortform">
             <ng-template >Add resort details</ng-template>
             <div class="row mx-3">
                 <div>
@@ -73,12 +73,13 @@
                         <h2>ADD ROOMS</h2>
                         <form [formGroup]="AddRooms">
                             <span class="icon mx-1"><i class="fa-solid fa-layer-group"></i></span>
-                            <select formControlName="room_type_id">
-                              <option value="" disabled [selected]="true">Choose Room</option>
-                              <option *ngFor="let room of roomsTypes" [value]="room.room_type_id">{{ room.name }}</option>
-                            </select>
+                            <select formControlName="room_type_id" (change)="selectRoomType($event)">
+                                <option value="" disabled [selected]="true">Choose Room</option>
+                                <option *ngFor="let room of roomsTypes" [value]="room.room_type_id">{{ room.name }}   ({{ room.capacity}})</option>
+                              </select>
+                              
                             <div class="input-container">
-                              <input type="text" formControlName="number_of_rooms" placeholder="Enter number of rooms">
+                              <input type="number" formControlName="number_of_rooms" placeholder="Enter number of rooms">
                               <button class="btn btn-sm btn-outline-success" type="button" (click)="saveRooms()">Save</button>
                             </div>
                           </form>
@@ -87,7 +88,8 @@
             </div>
 
             <div>
-                <button class="btn btn-outline-success mx-2 px-5" (click)="save()">Next</button>
+                <button class="btn btn-outline-primary mb-2 px-5 mx-3" (click)="back()">Back</button>
+                <button class="btn btn-outline-success mb-2 px-5" (click)="save()">Next</button>
             </div>
         </form>
 
