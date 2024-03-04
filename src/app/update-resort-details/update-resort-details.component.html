@@ -1,0 +1,19 @@
+
+<div class="page">
+    <h2 class="text-center fw-bold">
+        All Resorts
+    </h2>
+    <div class="card-container my-5">
+        <div class="card" *ngFor="let resort of resortlist" (click)="nextpage(resort.resort_id)">
+            <div class="image-container">
+                <img class="resort-image" [src]="resort.image_urls" alt="Resort Image">
+                <h3 class="resort-name">{{ resort.name }}</h3>
+                <h5 class="resort-location">
+                    <i class="fa-solid fa-location-dot location"></i>
+                    {{ resort.location }}
+                    <span class="arrow-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>

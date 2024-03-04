@@ -17,6 +17,7 @@ export class ResortDetails {
 
 export class Resort {
   constructor(
+    public resort_id: number,
     public name: string,
     public description: string,
     public location: string,

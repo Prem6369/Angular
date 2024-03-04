@@ -44,6 +44,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { ResortDetailsPreviewComponent } from './Components/resort-details-preview/resort-details-preview.component';
 import { AdminHomeComponent } from './Components/admin-home/admin-home.component';
+import { UpdateResortDetailsComponent } from './update-resort-details/update-resort-details.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { AdminHomeComponent } from './Components/admin-home/admin-home.component
     ApproverLayoutComponent,
     ResortDetailsPreviewComponent,
     AdminHomeComponent,
+    UpdateResortDetailsComponent,
     
   ],
   imports: [

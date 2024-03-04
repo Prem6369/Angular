@@ -32,7 +32,7 @@ export class ResortLoginComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
     this.httpClient
-      .post<any>(`https://localhost:7036/api/login/singin`, Loginvalues, {
+      .post<any>(`https://localhost:7036/api/login/signin`, Loginvalues, {
         headers,
         responseType: 'json',
       })

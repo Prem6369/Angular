@@ -21,6 +21,7 @@ export class ResortService {
   
   resetService() {
     this.resorts = {
+      resort_id:-1,
       name: '',
       description: '',
       location: '',

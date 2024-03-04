@@ -21,7 +21,7 @@ export class ResortDetailsComponent implements OnInit {
   Resort_id!:number;
   totalCapacity: number = 0; 
   amenities:string[]=[];
-  constructor(private httpclient: HttpClient,private router:Router,private routing:ActivatedRoute,private dateService:DateService,private route:ActivatedRoute) {}
+  constructor(private httpclient: HttpClient,private router:Router,private dateService:DateService,private route:ActivatedRoute) {}
   
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
