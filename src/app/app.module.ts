@@ -43,6 +43,9 @@ import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { ResortDetailsPreviewComponent } from './Components/resort-details-preview/resort-details-preview.component';
+import { ManageBookingStatusComponent } from './Components/manage-booking-status/manage-booking-status.component';
+import { ChangeApproverComponent } from './Components/change-approver/change-approver.component';
+import { ApproverHomeComponent } from './Components/approver-home/approver-home.component';
 import { AdminHomeComponent } from './Components/admin-home/admin-home.component';
 import { UpdateResortDetailsComponent } from './update-resort-details/update-resort-details.component';
 
@@ -74,6 +77,9 @@ import { UpdateResortDetailsComponent } from './update-resort-details/update-res
     ApproverHeaderComponent,
     ApproverLayoutComponent,
     ResortDetailsPreviewComponent,
+    ManageBookingStatusComponent,
+    ChangeApproverComponent,
+    ApproverHomeComponent,
     AdminHomeComponent,
     UpdateResortDetailsComponent,
     

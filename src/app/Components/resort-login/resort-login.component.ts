@@ -58,7 +58,7 @@ export class ResortLoginComponent implements OnInit {
     {
       this.router.navigate(['/admin/home']);
     }else{
-      this.router.navigate(['/approver/managebooking'])
+      this.router.navigate(['/approver/approverhome'])
     }
     this.session.SetUserAuthentication(id,name);
 

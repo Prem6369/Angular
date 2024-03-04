@@ -14,7 +14,7 @@ export class ApproverHeaderComponent implements OnInit{
   user_id!:number;
   img:string='';
   ngOnInit(): void {
-    
+    this.getUserProfile()
   }
   constructor(private httpclient:HttpClient,private session:SessionServiceService){}
 
