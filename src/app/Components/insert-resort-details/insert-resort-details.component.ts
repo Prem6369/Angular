@@ -196,7 +196,7 @@ export class InsertResortDetailsComponent implements OnInit {
   save() {
     this.setValues();
     const resort_details = {
-      resort_id:Number(atob(this.Resort_id.toString()))||0, //need to check for the parsing
+      resort_id: this.Resort_id ? Number(atob(this.Resort_id.toString())) || 0 : 0,      
       name: this.AddResort.value.name,
       description: this.AddResort.value.description,
       location: this.AddResort.value.location,
