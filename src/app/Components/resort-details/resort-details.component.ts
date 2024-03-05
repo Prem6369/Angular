@@ -21,7 +21,7 @@ export class ResortDetailsComponent implements OnInit {
   Resort_id!:number;
   totalCapacity: number = 0; 
   amenities:string[]=[];
-  constructor(private httpclient: HttpClient,private router:Router,private routing:ActivatedRoute,private dateService:DateService,private route:ActivatedRoute) {}
+  constructor(private httpclient: HttpClient,private router:Router,private dateService:DateService,private route:ActivatedRoute) {}
   
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -38,7 +38,7 @@ export class ResortDetailsComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     const decrptyId=(atob(this.Resort_id.toString()))
     const params=new HttpParams().set('resort_id',decrptyId)
-    this.httpclient.get<any>(`https://claysysresortapi.claysys.org/api/resorts/getresortdetails`, { headers,params })
+    this.httpclient.get<any>(`https://localhost:7036/api/resorts/getresortdetails`, { headers,params })
       .subscribe(
         (response) => {
           response.categories.forEach((category: any) => {

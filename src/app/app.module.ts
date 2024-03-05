@@ -48,6 +48,7 @@ import { ChangeApproverComponent } from './Components/change-approver/change-app
 import { ApproverHomeComponent } from './Components/approver-home/approver-home.component';
 import { AdminHomeComponent } from './Components/admin-home/admin-home.component';
 import { RoomListComponent } from './Components/room-list/room-list.component';
+import { UpdateResortDetailsComponent } from './update-resort-details/update-resort-details.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { RoomListComponent } from './Components/room-list/room-list.component';
     ApproverHomeComponent,
     AdminHomeComponent,
     RoomListComponent,
+    UpdateResortDetailsComponent,
     
   ],
   imports: [

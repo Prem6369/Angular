@@ -126,4 +126,23 @@ export class ResortAddEmployeeComponent implements OnInit {
     );
   }
 
+  
+  getInitials(username: string): { initials: string, backgroundColor: string } {
+    let initials = '';
+    if (username) {
+      initials += username.charAt(0);
+      if (username.length > 1) {
+        initials += username.charAt(1);
+      }
+    }
+
+    const colors = ['orange', 'lightgreen', 'skyblue', 'red'];
+    const chosenColor = Math.floor(Math.random() * colors.length);
+    const backgroundColor = colors[chosenColor];
+
+    return { initials: initials.toUpperCase(), backgroundColor };
+  }
+
+
+
 }

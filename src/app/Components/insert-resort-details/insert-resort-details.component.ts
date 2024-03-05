@@ -6,6 +6,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResortService } from '../../Service/resort_details';
+import { Resort } from '../../Model/ResortDetails/resortDetails';
 
 @Component({
   selector: 'app-insert-resort-details',
@@ -17,18 +18,62 @@ export class InsertResortDetailsComponent implements OnInit {
   roomsTypes!: any;
   coordinates!: any;
   resort_rooms: any[] = [];
+  Resort_id!:number;
+
 
   amenities_list = ['Beach'];
 
 
-  constructor(private resortService: ResortService, private httpClient: HttpClient, private _location: Location, private router: Router) {
+  constructor(private resortService: ResortService, 
+    private httpClient: HttpClient,
+     private _location: Location,
+      private router: Router,
+      private route:ActivatedRoute) {
   }
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.Resort_id= params['ID'];
+      this.getResortDetails();
+    });
     this.getRoomTypes();
     this.initializers();
     
-
   }
+
+  
+  getResortDetails() {
+    debugger;
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    const decrptyId=(atob(this.Resort_id.toString()))
+    const params=new HttpParams().set('resort_id',decrptyId)
+
+    this.httpClient.get<Resort>(`https://localhost:7036/api/resorts/getresortdetails`, { headers,params })
+      .subscribe((response) => {
+        console.log("Responce by ID :",response);
+          this.amenities_list=response.amenities;
+          this.resort_rooms=response.categories;
+          this.resort_rooms.forEach(room => {
+            room.availability = 'string'; 
+        });
+        
+
+          const coordinatesObject = response.coordinates;
+
+          this.AddResort.patchValue({
+            name:response.name,
+            description:response.description,
+            location:response.location,
+            image_urls:response.image_urls,
+            video_urls:response.video_urls,
+            status:response.status,
+            coordinates: `${coordinatesObject.lat},${coordinatesObject.long}`,
+          })
+
+        });
+        console.log("Value for update:",this.AddResort.value)
+      }
+  
   AddResort = new FormGroup({
     name: new FormControl(),
     description: new FormControl(),
@@ -151,6 +196,7 @@ export class InsertResortDetailsComponent implements OnInit {
   save() {
     this.setValues();
     const resort_details = {
+      resort_id: this.Resort_id ? Number(atob(this.Resort_id.toString())) || 0 : 0,      
       name: this.AddResort.value.name,
       description: this.AddResort.value.description,
       location: this.AddResort.value.location,
@@ -178,7 +224,6 @@ export class InsertResortDetailsComponent implements OnInit {
     this.AddResort.controls['amenities'].setValue(this.amenities_list),
       this.AddResort.controls['categories'].setValue(this.resort_rooms),
       this.AddResort.controls['status'].setValue("Active"),
-      this.AddRooms.controls['availability'].setValue('string')
     this.AddResort.controls['coordinates'].setValue(this.getCoordinates())
   }
 
