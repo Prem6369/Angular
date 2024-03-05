@@ -1,0 +1,12 @@
+<div class="row text-center" >
+    <div class="col-3 mb-3" *ngFor="let roomItem of room">
+        <div class="card" (click)="navigate(roomItem.room_type_id)">
+            <div class="card-body">
+          <h5 class="card-title">{{ roomItem.name }}</h5>
+          <p class="card-text">{{ roomItem.description }}</p>
+          <h6 class="card-subtitle mb-2 text-muted">Capacity: {{ roomItem.capacity }}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+  

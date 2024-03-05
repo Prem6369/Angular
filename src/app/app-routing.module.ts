@@ -25,6 +25,7 @@ import { ManageBookingStatusComponent } from './Components/manage-booking-status
 import { ChangeApproverComponent } from './Components/change-approver/change-approver.component';
 import { ApproverHomeComponent } from './Components/approver-home/approver-home.component';
 import { AdminHomeComponent } from './Components/admin-home/admin-home.component';
+import { RoomListComponent } from './Components/room-list/room-list.component';
 
 
 
@@ -56,7 +57,8 @@ const routes: Routes = [
         {path:'home',component:AdminHomeComponent},
         {path:'insert_resortdetails',component:InsertResortDetailsComponent},
         {path:'addroomtype',component:AddRoomtypeComponent},
-        {path:'resort-details-preview',component:ResortDetailsPreviewComponent}
+        {path:'resort-details-preview',component:ResortDetailsPreviewComponent},
+        {path:'roomlist',component:RoomListComponent}
     ]
   },
 

@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
 export class ApproverHomeComponent {
 
 constructor(private router:Router){}
-  navigateToStatus(){
-    this.router.navigate(['/approver/managestatus']);
-  }
 
-  navigateToChangeApprover(){
-    this.router.navigate(['/approver/changeapprover']);
-  }
+
+  Approver_list=[
+    { Titel:'Resort Booking Status',fav_icon:'fa-solid fa-square-check',navigator:'/approver/managestatus'},
+    { Titel:'Change Approver',fav_icon:"fa-solid fa-retweet",navigator:'/approver/changeapprover'}
+
+  ]
 }
