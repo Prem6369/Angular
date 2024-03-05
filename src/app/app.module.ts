@@ -50,6 +50,8 @@ import { AdminHomeComponent } from './Components/admin-home/admin-home.component
 import { UpdateResortDetailsComponent } from './Components/update-resort-details/update-resort-details.component';
 import { AdminProfileComponent } from './Components/admin-profile/admin-profile.component';
 import { ApproverProfileComponent } from './Components/approver-profile/approver-profile.component';
+import { RoomListComponent } from './Components/room-list/room-list.component';
+
 
 @NgModule({
   declarations: [
@@ -83,6 +85,7 @@ import { ApproverProfileComponent } from './Components/approver-profile/approver
     ChangeApproverComponent,
     ApproverHomeComponent,
     AdminHomeComponent,
+    RoomListComponent,
     UpdateResortDetailsComponent,
     AdminProfileComponent,
     ApproverProfileComponent,

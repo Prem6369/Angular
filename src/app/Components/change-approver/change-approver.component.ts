@@ -118,6 +118,9 @@ export class ChangeApproverComponent implements OnInit {
       
         (response) => {
           console.log('Response:', response);
+          if(response){
+            this.getBookingstatus()
+          }
         }
       );
   }

@@ -28,6 +28,8 @@ import { AdminHomeComponent } from './Components/admin-home/admin-home.component
 import { UpdateResortDetailsComponent } from './Components/update-resort-details/update-resort-details.component';
 import { AdminProfileComponent } from './Components/admin-profile/admin-profile.component';
 import { ApproverProfileComponent } from './Components/approver-profile/approver-profile.component';
+import { RoomListComponent } from './Components/room-list/room-list.component';
+
 
 
 
@@ -63,6 +65,8 @@ const routes: Routes = [
         {path:'resort-details-update',component:UpdateResortDetailsComponent},
         {path:'admin-profile',component:AdminProfileComponent},
         { path: 'UpdateProfile', component: UpdateProfileComponent },
+        {path:'roomlist',component:RoomListComponent},
+        {path:'resort-details-update',component:UpdateResortDetailsComponent}
 
     ]
   },
