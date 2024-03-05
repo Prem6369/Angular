@@ -148,11 +148,11 @@ export class BookingPreviewComponent implements OnInit {
     const url = `https://localhost:7036/api/resorts/bookresort`
 
     console.log("Final JSON:", booking);
-    this.httpclient.post(url, booking, { headers })
+    this.httpclient.post<any>(url, booking, { headers })
       .subscribe((response) => {
         
         console.log("Booking status:", response);
-        if(response!==0)
+        if(response.booking_id!==0)
         {
           this.router.navigate(['/user/Thankyou']);
         }

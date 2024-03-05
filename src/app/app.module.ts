@@ -47,7 +47,9 @@ import { ManageBookingStatusComponent } from './Components/manage-booking-status
 import { ChangeApproverComponent } from './Components/change-approver/change-approver.component';
 import { ApproverHomeComponent } from './Components/approver-home/approver-home.component';
 import { AdminHomeComponent } from './Components/admin-home/admin-home.component';
-import { UpdateResortDetailsComponent } from './update-resort-details/update-resort-details.component';
+import { UpdateResortDetailsComponent } from './Components/update-resort-details/update-resort-details.component';
+import { AdminProfileComponent } from './Components/admin-profile/admin-profile.component';
+import { ApproverProfileComponent } from './Components/approver-profile/approver-profile.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,8 @@ import { UpdateResortDetailsComponent } from './update-resort-details/update-res
     ApproverHomeComponent,
     AdminHomeComponent,
     UpdateResortDetailsComponent,
+    AdminProfileComponent,
+    ApproverProfileComponent,
     
   ],
   imports: [

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ResortDetails } from '../Model/ResortDetails/resortDetails';
+import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 

@@ -25,7 +25,9 @@ import { ManageBookingStatusComponent } from './Components/manage-booking-status
 import { ChangeApproverComponent } from './Components/change-approver/change-approver.component';
 import { ApproverHomeComponent } from './Components/approver-home/approver-home.component';
 import { AdminHomeComponent } from './Components/admin-home/admin-home.component';
-import { UpdateResortDetailsComponent } from './update-resort-details/update-resort-details.component';
+import { UpdateResortDetailsComponent } from './Components/update-resort-details/update-resort-details.component';
+import { AdminProfileComponent } from './Components/admin-profile/admin-profile.component';
+import { ApproverProfileComponent } from './Components/approver-profile/approver-profile.component';
 
 
 
@@ -58,7 +60,9 @@ const routes: Routes = [
         {path:'insert_resortdetails',component:InsertResortDetailsComponent},
         {path:'addroomtype',component:AddRoomtypeComponent},
         {path:'resort-details-preview',component:ResortDetailsPreviewComponent},
-        {path:'resort-details-update',component:UpdateResortDetailsComponent}
+        {path:'resort-details-update',component:UpdateResortDetailsComponent},
+        {path:'admin-profile',component:AdminProfileComponent},
+        { path: 'UpdateProfile', component: UpdateProfileComponent },
 
     ]
   },
@@ -70,7 +74,9 @@ const routes: Routes = [
       { path :'approverhome',component:ApproverHomeComponent},
       { path :'managebooking',component:ManageBookingComponent},
       { path : 'managestatus',component:ManageBookingStatusComponent},
-      { path : 'changeapprover',component:ChangeApproverComponent}
+      { path : 'changeapprover',component:ChangeApproverComponent},
+      { path : 'approver-profile',component:ApproverProfileComponent},
+      { path: 'UpdateProfile', component: UpdateProfileComponent }
     ]
   },
   { path: '**', component: NotFoundComponent }
