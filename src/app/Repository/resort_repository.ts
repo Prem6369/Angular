@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiServiceInvoker } from '../Service/InvokeApiService';
+import { ApiService } from '../Service/InvokeApiService';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,10 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class ApiServiceRepo {
 
-    constructor(private api:ApiServiceInvoker){}
+    constructor(private api:ApiService){}
 
     getAllResort():Observable<any>{
-        return this.api.gets('getallresorts','resorts');
+        return this.api.get('getallresorts','resorts');
     }
 
     getAvailableResort(checkInDate: Date, checkOutDate: Date): Observable<any> {
@@ -18,7 +18,7 @@ export class ApiServiceRepo {
         check_in_date: checkInDate.toISOString().split('T')[0],
         check_out_date: checkOutDate.toISOString().split('T')[0]
       };
-      return this.api.gets('getroomavailability', 'resorts', params);
+      return this.api.get('getroomavailability', 'resorts', params);
     }
     
 
@@ -26,7 +26,7 @@ export class ApiServiceRepo {
       const params ={
         resort_id:decrptyId
       };
-      return this.api.gets('getresortdetails','resorts',params)
+      return this.api.get('getresortdetails','resorts',params)
     }
 
     bookResort(body:any){

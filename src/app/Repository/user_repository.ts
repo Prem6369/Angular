@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiServiceInvoker } from '../Service/InvokeApiService';
+import { ApiService } from '../Service/InvokeApiService';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
 })
 
 export class ApiUserServiceRepo{
-    constructor(private api:ApiServiceInvoker){}
+    constructor(private api:ApiService){}
 
     userProfileById(userid:any):Observable<any> {
         const params= {
             user_id:userid
         }
-        return this.api.gets("userprofile","resorts",params);
+        return this.api.get("userprofile","resorts",params);
     }
 
     updateProfile(body:any):Observable<any>{
@@ -25,6 +25,6 @@ export class ApiUserServiceRepo{
         const params={
             user_id:userId
         }
-        return this.api.gets('getbookeduserlist','resorts',params)
+        return this.api.get('getbookeduserlist','resorts',params)
     }
 }

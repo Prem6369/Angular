@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiServiceInvoker } from '../Service/InvokeApiService';
+import { ApiService } from '../Service/InvokeApiService';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 
 export class apiLoginService{
 
-    constructor(private api:ApiServiceInvoker){}
+    constructor(private api:ApiService){}
 
 
     signup(body: any): Observable<any> {
