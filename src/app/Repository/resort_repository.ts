@@ -28,4 +28,8 @@ export class ApiServiceRepo {
       };
       return this.api.get('getresortdetails','resorts',params)
     }
+
+    bookResort(body:any){
+      return this.api.post('bookresort','resorts',body)
+    }
 }

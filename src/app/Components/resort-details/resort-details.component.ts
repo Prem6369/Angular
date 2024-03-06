@@ -27,8 +27,7 @@ export class ResortDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.Resort_id= params['ID'];
-      debugger;
-      this.getResortDetails();
+      this.getf();
 
     });
     this.check_in_date = this.dateService.checkInDate;
@@ -41,56 +40,56 @@ export class ResortDetailsComponent implements OnInit {
     this.repository.getResortById(decrptyId).subscribe((response) => {
       console.log("newrepo", response);
       this.name=response.name;
-      
+      response.categories.forEach((category: any) => {
+        const capacity = category.number_of_rooms; 
+        this.totalCapacity += capacity;
+      });
+
+      this.amenities=response.amenities;
+      console.log(this.amenities);
+
+      console.log('Total Capacity:', this.totalCapacity);
+      console.log(this.resortlist);
+      this.img=response.image_urls;
+      this.location=response.location;
+      this.name=response.name;
+      this.description=response.description;
+      const resortDetail = new ResortDetails(
+        response.resort_id,
+        response.name,
+        response.description,
+        response.location,
+        response.amenities,
+        response.image_urls,
+        response.video_urls,
+        response.status,
+        response.created_date,
+        response.last_modified_date,
+        response.categories,
+        response.coordinates
+      );
+      this.resortlist.push(resortDetail);
+      console.log(this.resortlist)
+    
         
     });
   }
-  getResortDetails() {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    const decrptyId=(atob(this.Resort_id.toString()))
-    const params=new HttpParams().set('resort_id',decrptyId)
-     debugger;
+  // getResortDetails() {
+  //   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
+  //   const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+  //   const decrptyId=(atob(this.Resort_id.toString()))
+  //   const params=new HttpParams().set('resort_id',decrptyId)
+  //    debugger;
 
     
 
-    this.httpclient.get<any>(`https://localhost:7036/api/resorts/getresortdetails`, { headers,params })
-      .subscribe(
-        (response) => {
-          response.categories.forEach((category: any) => {
-            const capacity = category.number_of_rooms; 
-            this.totalCapacity += capacity;
-          });
+  //   this.httpclient.get<any>(`https://localhost:7036/api/resorts/getresortdetails`, { headers,params })
+  //     .subscribe(
+  //       (response) => {
 
-          this.amenities=response.amenities;
-          console.log(this.amenities);
-  
-          console.log('Total Capacity:', this.totalCapacity);
-          console.log(this.resortlist);
-          this.img=response.image_urls;
-          this.location=response.location;
-          this.name=response.name;
-          this.description=response.description;
-          const resortDetail = new ResortDetails(
-            response.resort_id,
-            response.name,
-            response.description,
-            response.location,
-            response.amenities,
-            response.image_urls,
-            response.video_urls,
-            response.status,
-            response.created_date,
-            response.last_modified_date,
-            response.categories,
-            response.coordinates
-          );
-          this.resortlist.push(resortDetail);
-          console.log(this.resortlist)
-        
-        }
-      );
-  }
+  //       }
+  //     );
+  // }
   booknow() {
 
     this.router.navigate(['/user/Resortrooms'],{queryParams:{ID:this.Resort_id}});

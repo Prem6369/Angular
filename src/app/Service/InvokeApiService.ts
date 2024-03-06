@@ -30,18 +30,13 @@ export class ApiService {
     return this.httpClient.put<any>(url, body, { headers: headers });
   }
 
-  getFullAPIUrl(path: string, app: string) {
-    return `${this.apiUrl}/${app}/${path}`;
+  getHeaders() {
+    return new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + this.getToken()
+    );
   }
 
-  private getHeaders(): HttpHeaders {
-    const token = this.getToken();
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
-    return headers;
-  }
 
   private getParams(params: any): HttpParams {
     let httpParams = new HttpParams();
@@ -55,8 +50,13 @@ export class ApiService {
     return httpParams;
   }
 
-  getToken(): string {
-    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJjMTQzMGZhZi1jODQ0LTQxYzctYWI0ZC0wMzc3NjVjYjlkMzMiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiY2I4ZjQwYzYtZDYwMy00OGQ3LWFiMjYtZTYyYzI1ZGI0NWU0IiwibmJmIjoxNzA5NTI0ODI1LCJleHAiOjE3MDk1ODQ4MjUsImlhdCI6MTcwOTUyNDgyNSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.7oNcd4c30picnukJAUKv6jbXzgCcrYPuCLD3JBS84co';
+  getFullAPIUrl(path: string, app: string) {
+    return `${this.apiUrl}/${app}/${path}`;
+  }
+
+
+  private getToken(): string {
+    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
   }
 
 }

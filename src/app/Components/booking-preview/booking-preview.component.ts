@@ -8,6 +8,7 @@ import { Booking_details } from '../../Model/bookingDetails';
 import { Location } from '@angular/common';
 import { SessionServiceService } from '../../Service/Session/session-service.service';
 import { GuestDetails, GuestPost } from '../../Model/GuestDetails/guestDetails';
+import { ApiServiceRepo } from '../../Repository/resort_repository';
 
 
 @Component({
@@ -47,7 +48,8 @@ export class BookingPreviewComponent implements OnInit {
     private bookingService: BookingService,
     private guestService: GuestService,
     private httpclient: HttpClient,
-    private router: Router) {
+    private router: Router,
+    private repository:ApiServiceRepo) {
   }
 
   ngOnInit(): void {
@@ -85,18 +87,10 @@ export class BookingPreviewComponent implements OnInit {
 
 
   getResortDetails() {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     const decrptyId=(atob(this.Resort_id.toString()));
-    const params=new HttpParams().set('resort_id',decrptyId);
 
-    this.httpclient
-      .get<any>(
-        `https://localhost:7036/api/resorts/getresortdetails`,
-        { headers,params }
-      )
-      .subscribe(
-        (response) => {
+    this.repository.getResortById(decrptyId).subscribe((response) => {
+      
           this.img = response.image_urls;
           this.resortname = response.name;
         },
@@ -142,28 +136,19 @@ export class BookingPreviewComponent implements OnInit {
       roomTypes_Req: this.roomTypes_Req,
       guests: this.guest
     }
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJiN2UyZjBmNC1iOGY0LTQwY2MtODRjMy1kYTZiYjIwMjFjYmMiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiZjliYWJjOTUtOTMyYy00YTc2LWJlMzMtMTMyZDllM2I0MTc0IiwibmJmIjoxNzA4OTI0MTc1LCJleHAiOjE3MDg5ODQxNzUsImlhdCI6MTcwODkyNDE3NSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.eBRH1uS5SSiMXOBVA2Z5o2TjJydJCNqVqeXQloIIoZQ';
-
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    
-    const url = `https://localhost:7036/api/resorts/bookresort`
-
     console.log("Final JSON:", booking);
-    this.httpclient.post<any>(url, booking, { headers })
-      .subscribe((response) => {
-        
-        console.log("Booking status:", response);
-        if(response.booking_id!==0)
-        {
-          this.router.navigate(['/user/Thankyou']);
-        }
-        else
-        {
-          alert("Something went wrong")
-        }
-      
-      })
 
+    this.repository.bookResort(booking).subscribe((response)=>{
+      console.log("Booking status",response)
+      if(response.booking_id!==0)
+      {
+        this.router.navigate(['/user/Thankyou']);
+      }
+      else
+      {
+        alert("Something went wrong")
+      }
+    })
   }
 
   getInitials(firstName: string, lastName: string, username: string): { initials: string, backgroundColor: string } {

@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { SessionServiceService } from '../../Service/Session/session-service.service';
 import { UserProfile } from '../../Model/userProfile/userProfile';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { ApiUserServiceRepo } from '../../Repository/user_repository';
 
 @Component({
   selector: 'app-update-profile',
@@ -16,7 +17,7 @@ export class UpdateProfileComponent implements OnInit {
   successMessage:boolean=false;
 
   constructor(private httpclient: HttpClient,private session: SessionServiceService,
-    private _location: Location) {
+    private _location: Location,private repository:ApiUserServiceRepo) {
   }
 
   ngOnInit(): void {
@@ -48,15 +49,9 @@ export class UpdateProfileComponent implements OnInit {
 
   getUserProfile() {
      this.user_id = this.session.getUserId();
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-    const params = new HttpParams().set('user_id',this.user_id);
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    const url=`https://localhost:7036/api/resorts/userprofile`;
 
-    this.httpclient
-      .get<UserProfile>(url,{ headers, params })
-      .subscribe(
-        (response) => {
+     this.repository.userProfileById(this.user_id).subscribe((response)=>{
+
           console.log('profile',response);
           this.userlist=response;
           this.patchFormValues();
@@ -90,18 +85,13 @@ export class UpdateProfileComponent implements OnInit {
   }
 
   update() {
-    console.log();
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    const url=`https://localhost:7036/api/resorts/updateuserprofile`;
-
-    this.httpclient
-      .put(url,this.updateProfile.value,{ headers}).subscribe(
-        (response) => {
-          this.successMessage=true;
+     this.repository.updateProfile(this.updateProfile.value).subscribe(
+      (response)=>{
+        this.successMessage=true;
           console.log('Update status:',response);
-        }
-      );
+      }
+    )
+
   }
 
   back() {
