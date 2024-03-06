@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiServiceInvoker } from '../Service/InvokeApiService';
+import { ApiService } from '../Service/InvokeApiService';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiServiceRepo {
 
-    constructor(private api:ApiServiceInvoker){}
+    constructor(private api:ApiService){}
 
     getAllResort():Observable<any>{
         return this.api.get('getallresorts','resorts');

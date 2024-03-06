@@ -14,6 +14,5 @@ constructor(private router:Router){}
   Approver_list=[
     { Titel:'Resort Booking Status',fav_icon:'fa-solid fa-square-check',navigator:'/approver/managestatus'},
     { Titel:'Change Approver',fav_icon:"fa-solid fa-retweet",navigator:'/approver/changeapprover'}
-
   ]
 }

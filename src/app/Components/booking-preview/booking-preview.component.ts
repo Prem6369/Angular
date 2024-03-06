@@ -61,9 +61,10 @@ export class BookingPreviewComponent implements OnInit {
   initializer() {
     this.user_id = this.session.getUserId();
     this.guest = this.guestService.getGuests().map(guest => {
-      const { type, ...guestWithoutType } = guest;
-      return guestWithoutType;
+      const { type, guest_id, ...guestWithoutTypeAndId } = guest;
+      return guestWithoutTypeAndId;
   });
+  
     this.booking_details = this.bookingService.getBookings();
     this.bookedRooms = this.booking_details.bookedRooms;
     this.guestDetails = this.booking_details.Total_List;

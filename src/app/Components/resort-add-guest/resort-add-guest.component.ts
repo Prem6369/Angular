@@ -4,7 +4,7 @@ import { GuestService } from '../../Service/GuestService';
 import { Location } from '@angular/common';
 import { SessionServiceService } from '../../Service/Session/session-service.service';
 import { ActivatedRoute } from '@angular/router';
-import { GuestDetails, GuestPost } from '../../Model/GuestDetails/guestDetails';
+import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
 
 @Component({
   selector: 'app-resort-add-guest',
@@ -46,11 +46,17 @@ export class ResortAddGuestComponent implements OnInit {
           type: this.guestDetails.type,
           referrer_user_id: this.guestDetails.referrer_user_id
         });
+        this.removeExistGuest(this.guest_id);
       }
     });
     
   }
 
+  removeExistGuest(id:number){
+    debugger;
+    const index=this.guest.findIndex((member:any)=>member.guest_id===id);
+    this.guest.splice(index,1);
+  }
   getValuesById(guest_id: number): GuestDetails[] {
     debugger;
     const elementIndex: number = this.guest.findIndex((member: any) => member.guest_id === guest_id);
@@ -66,7 +72,7 @@ export class ResortAddGuestComponent implements OnInit {
   }
 
   Addguest = new FormGroup({
-    guest_id: new FormControl(this.getRandomInt(1000, 9999)),
+    guest_id: new FormControl(),
     first_name: new FormControl(null, Validators.required),
     last_name: new FormControl(null, Validators.required),
     email: new FormControl(null, Validators.required),
@@ -112,7 +118,13 @@ export class ResortAddGuestComponent implements OnInit {
   }
 
   setType() {
+    debugger;
+    if(this.guest_id!==null && this.guest_id!==undefined)
+    {
+      debugger;
+      this.Addguest.controls['guest_id'].setValue(this.getRandomInt(1000, 9999))
       this.Addguest.controls['type'].setValue("Guest");
       this.Addguest.controls['referrer_user_id'].setValue(this.referrer_user_id)
+    }
   }
 }

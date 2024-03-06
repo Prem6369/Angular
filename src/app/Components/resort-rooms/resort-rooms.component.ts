@@ -7,8 +7,8 @@ import { DateService } from '../../Service/DateTime';
 import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
 import { BookingService } from '../../Service/BookingService';
 import { GuestService } from '../../Service/GuestService';
-import { count } from 'rxjs';
 import { SessionServiceService } from '../../Service/Session/session-service.service';
+import { UserProfile } from '../../Model/userProfile/userProfile';
 
 
 
@@ -204,32 +204,41 @@ export class ResortRoomsComponent implements OnInit {
 
 
 
-  removeMember(phone_number: number, type: string) {
+  removeMember(user_id: number, type: string) {
     debugger;
-    const elementIndex: number = this.total_list.findIndex((member: any) => member.phone_number === phone_number);
-    const Index: number = this.total_employees.findIndex((member: any) => member.phone_number === phone_number);
-    if (elementIndex !== -1 && Index !== -1) {
-      if (type === "Guest") {
-        this.guest_count--;
-      } else {
-        this.employee_count--;
-      }
-      this.total_count--;
-      this.total_list.splice(elementIndex, 1);
-      this.total_employees.splice(elementIndex, 1);
+    let indexToRemove: number = -1;
+
+    if (type === 'Employee') {
+        indexToRemove = this.total_employees.findIndex((member: UserProfile) => member.user_id === user_id);
+        if (indexToRemove !== -1) {
+            this.total_employees.splice(indexToRemove, 1);
+            this.employee_count--;
+        }
+    } else if (type === 'Guest') {
+        indexToRemove = this.total_guest.findIndex((member: any) => member.guest_id === user_id);
+        if (indexToRemove !== -1) {
+            this.total_guest.splice(indexToRemove, 1);
+            this.guest_count--;
+            this.initializer();
+        }
     }
 
+    if (type === 'Employee' || type === 'Guest') {
+        const listIndex = this.total_list.findIndex((member: UserProfile) => member.user_id === user_id);
+        if (listIndex !== -1) {
+            this.total_list.splice(listIndex, 1);
+            this.total_count--;
+        }
+    }
+}
 
-  }
 
   
 
   editGuest(guest_id: number) {
     debugger;
     const index=this.total_list.findIndex((member:any)=>member.guest_id===guest_id);
-    const cindex=this.total_guest.findIndex((member:any)=>member.guest_id===guest_id);
     this.total_list.splice(index,1);
-    this.total_guest.splice(cindex,1);
     this.router.navigate(['/user/Addguest'], { queryParams: { id:guest_id } });
     }
 

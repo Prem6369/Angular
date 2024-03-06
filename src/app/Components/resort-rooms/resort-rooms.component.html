@@ -98,7 +98,7 @@
               <td>
                 <div class="member text-center" id="edit-icon">
                   <i [style.visibility]="member.type === 'Guest' ? 'visible' : 'hidden'" class="fa-regular fa-pen-to-square text-success mx-3" (click)="editGuest(member.guest_id)"></i>
-                  <i class="fa-regular fa-trash-can text-danger" (click)="removeMember(member.phone_number, member.type)"></i>
+                  <i class="fa-regular fa-trash-can text-danger" (click)="removeMember(member.user_id || member.guest_id , member.type)"></i>
                 </div>
               </td>
             </tr>

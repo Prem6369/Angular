@@ -1,14 +1,15 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { SessionServiceService } from '../../Service/Session/session-service.service';
+import { approver_repository } from '../../Repository/approver_repository';
 
 @Component({
   selector: 'app-manage-booking-status',
   templateUrl: './manage-booking-status.component.html',
   styleUrl: './manage-booking-status.component.scss'
 })
-export class ManageBookingStatusComponent implements OnInit{
-  approverid!:number;
+
+export class ManageBookingStatusComponent implements OnInit {
+  approverid!: number;
   Bookings_list: any[] = [];
   resortId: any[] = [];
   resortname: any[] = [];
@@ -18,52 +19,40 @@ export class ManageBookingStatusComponent implements OnInit{
 
 
 
-  constructor(private http:HttpClient,private session:SessionServiceService){}
+  constructor(private repo: approver_repository,
+    private session: SessionServiceService) { }
+
   ngOnInit(): void {
-    this.approverid=this.session.getUserId();
+    this.approverid = this.session.getUserId();
     this.getBookingstatus()
   }
 
-  getBookingstatus(){
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiI3MDRiYzIwYy00ZTM1LTRjOTYtOTA3ZS1kY2RiYzMwN2UzOGMiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiMDdmOTUyNjAtMmE4Zi00OTgwLWE4ODUtZjllNGFiZmE1NGFkIiwibmJmIjoxNzA5MTg5NjQxLCJleHAiOjE3MDkyNDk2NDEsImlhdCI6MTcwOTE4OTY0MSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.Ffbt9fZPcZ3wGX7npqHKZ8ovp5cG86qyjoaA67XgUFQ';
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    const url = 'https://localhost:7036/api/resorts/getbookingrequest';
-    const params=new HttpParams().set("approver_id",this.approverid)
-    this.http.get<any>(url,{headers,params}).subscribe(
-      (response)=>{
+  getBookingstatus() {
+    this.repo.getBookingRequest(this.approverid).subscribe(
+      (response) => {
         this.Bookings_list = response;
         this.resortId = this.Bookings_list.map((booking) => booking.resort_id);
         this.userId = this.Bookings_list.map((booking) => booking.user_id);
-
         this.fetchResortNames(0);
         this.getUserName(0);
       }
     );
   }
 
-
   fetchResortNames(index: number) {
     if (index >= this.resortId.length) {
       this.mergeResortNames();
       return;
     }
-
     const resortId = this.resortId[index];
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiI3MDRiYzIwYy00ZTM1LTRjOTYtOTA3ZS1kY2RiYzMwN2UzOGMiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiMDdmOTUyNjAtMmE4Zi00OTgwLWE4ODUtZjllNGFiZmE1NGFkIiwibmJmIjoxNzA5MTg5NjQxLCJleHAiOjE3MDkyNDk2NDEsImlhdCI6MTcwOTE4OTY0MSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.Ffbt9fZPcZ3wGX7npqHKZ8ovp5cG86qyjoaA67XgUFQ';
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    const url = 'https://localhost:7036/api/resorts/getresortdetails';
-
-    const params = new HttpParams().set('resort_id', resortId.toString());
-
-    this.http.get<any>(url, { headers, params }).subscribe((response) => {
-      this.resortname.push(response.name);
-      // console.log(this.resortname);
-
-      this.fetchResortNames(index + 1);
-    });
+    const params = resortId;
+    this.repo.getResortDetails(params)
+      .subscribe((response) => {
+        this.resortname.push(response.name);
+        this.fetchResortNames(index + 1);
+      });
   }
+
 
 
   getUserName(userIndex: number) {
@@ -71,20 +60,14 @@ export class ManageBookingStatusComponent implements OnInit{
       this.mergeResortNames();
       return;
     }
-
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiI3MDRiYzIwYy00ZTM1LTRjOTYtOTA3ZS1kY2RiYzMwN2UzOGMiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiMDdmOTUyNjAtMmE4Zi00OTgwLWE4ODUtZjllNGFiZmE1NGFkIiwibmJmIjoxNzA5MTg5NjQxLCJleHAiOjE3MDkyNDk2NDEsImlhdCI6MTcwOTE4OTY0MSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.Ffbt9fZPcZ3wGX7npqHKZ8ovp5cG86qyjoaA67XgUFQ';
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     const userid = this.userId[userIndex];
-    const userurl = 'https://localhost:7036/api/resorts/userprofile';
-    const params = new HttpParams().set('user_id', userid.toString());
-
-    this.http.get<any>(userurl, { headers, params }).subscribe((response) => {
-      console.log(response);
+    const params = userid;
+    this.repo.getUserProfile(params).subscribe((response) => {
       this.username.push(response.username);
       this.getUserName(userIndex + 1);
     });
   }
+
 
   mergeResortNames() {
     this.Bookings_list.forEach((booking, index) => {
@@ -97,25 +80,18 @@ export class ManageBookingStatusComponent implements OnInit{
   }
 
 
-  onchange($event: any, id: number,approverid:number) {
+  onchange($event: any, id: number, approverid: number) {
     const changestatus = $event.target.value;
     const value = {
       booking_id: id,
-      approver_id: approverid, 
+      approver_id: approverid,
       status: changestatus,
-      message: 'thankyou' 
+      message: 'thankyou'
     };
-      const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiIyYjc1MDY0ZS1jNzJlLTQxNzUtYTU3My0zODE5OGNiNjljZTAiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiNzIzYjAyYjctOGI2Yi00ZjlmLWI3NmYtNDY3ZmFkZmI2MDc1IiwibmJmIjoxNzA5Mjg3MTk0LCJleHAiOjE3MDkzNDcxOTQsImlhdCI6MTcwOTI4NzE5NCwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.Fs0UuenrSnm9_GPXcjQp4RWW06vOMYjxSmFXpbyNvOs';
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    const url='https://localhost:7036/api/resorts/updatestatus';
-    console.log(value)
-    this.http
-      .put(url,value,{headers})
-      .subscribe(
-        (response) => {
-          console.log('Response:', response);
-        }
-      );
+    this.repo.changeStatus(value).subscribe(
+      (response) => {
+        console.log('Response:', response);
+      }
+    );
   }
 }

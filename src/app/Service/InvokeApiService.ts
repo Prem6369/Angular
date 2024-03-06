@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Resort } from '../Model/ResortDetails/resortDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -11,24 +10,24 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) {}
 
-  get(path: string, app: string, params?: any): Observable<Resort[]> {
-    const url = this.getFullAPIUrl(path, app);
-    const headers = this.getHeaders();
-    const httpParams = this.getParams(params);
-    return this.httpClient.get<Resort[]>(url, { headers: headers, params: httpParams });
-  }
-
-  post(path: string, app: string, body: any) {
+  get(path: string, app: string, params?: any): Observable<any[]> {
     debugger;
     const url = this.getFullAPIUrl(path, app);
     const headers = this.getHeaders();
-    return this.httpClient.post<Resort>(url, body, { headers: headers });
+    const httpParams = this.getParams(params);
+    return this.httpClient.get<any>(url, { headers: headers, params: httpParams });
+  }
+
+  post(path: string, app: string, body: any) {
+    const url = this.getFullAPIUrl(path, app);
+    const headers = this.getHeaders();
+    return this.httpClient.post<any>(url, body, { headers: headers });
   }
 
   put(path: string, app: string, body: any) {
     const url = this.getFullAPIUrl(path, app);
     const headers = this.getHeaders();
-    return this.httpClient.put<Resort>(url, body, { headers: headers });
+    return this.httpClient.put<any>(url, body, { headers: headers });
   }
 
   getFullAPIUrl(path: string, app: string) {

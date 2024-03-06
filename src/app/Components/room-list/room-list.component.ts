@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getRoomTypes } from '../../Model/RoomTypes/rooms';
-import { admin_room_repository } from '../../Repository/admin_room_repository';
+import { admin_resort_repository } from '../../Repository/admin_resort_repository';
 
 @Component({
   selector: 'app-room-list',
@@ -12,7 +12,7 @@ import { admin_room_repository } from '../../Repository/admin_room_repository';
 
 export class RoomListComponent implements OnInit {
 
-  constructor(private repo: admin_room_repository,
+  constructor(private repo: admin_resort_repository,
     private router: Router) { }
 
   room: getRoomTypes[] = [];

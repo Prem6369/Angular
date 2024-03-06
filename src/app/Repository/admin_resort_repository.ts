@@ -24,5 +24,17 @@ export class admin_resort_repository {
         debugger;
         return this.apiInvoker.get('getallresorts','resorts');
     }
+    
+    insertRoom(room: any) {
+        return this.apiInvoker.post('addroomtype', 'resorts', room);
+    }
+
+    updateRoom(room: any) {
+        return this.apiInvoker.put('updateroomtype', 'resorts', room);
+    }
+
+    getAllRoom():Observable<any[]>{
+        return this.apiInvoker.get('getroomtypes','resorts');
+    }
 
 }

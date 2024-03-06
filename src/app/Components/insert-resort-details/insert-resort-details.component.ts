@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResortService } from '../../Service/resort_details';
-import { Resort } from '../../Model/ResortDetails/resortDetails';
+import { admin_resort_repository } from '../../Repository/admin_resort_repository';
+import { approver_repository } from '../../Repository/approver_repository';
 
 @Component({
   selector: 'app-insert-resort-details',
@@ -25,11 +25,13 @@ export class InsertResortDetailsComponent implements OnInit {
 
 
   constructor(private resortService: ResortService, 
-    private httpClient: HttpClient,
+    private repo: admin_resort_repository,
      private _location: Location,
       private router: Router,
-      private route:ActivatedRoute) {
+      private route:ActivatedRoute,
+      private approver_repo:approver_repository) {
   }
+
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.Resort_id= params['ID'];
@@ -42,13 +44,8 @@ export class InsertResortDetailsComponent implements OnInit {
 
   
   getResortDetails() {
-    debugger;
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    const decrptyId=(atob(this.Resort_id.toString()))
-    const params=new HttpParams().set('resort_id',decrptyId)
-
-    this.httpClient.get<Resort>(`https://localhost:7036/api/resorts/getresortdetails`, { headers,params })
+    const decrptyId=Number(atob(this.Resort_id.toString()))
+    this.approver_repo.getResortDetails(decrptyId)
       .subscribe((response) => {
         console.log("Responce by ID :",response);
           this.amenities_list=response.amenities;
@@ -164,12 +161,8 @@ export class InsertResortDetailsComponent implements OnInit {
 
 
   getRoomTypes() {
-    const url = `https://localhost:7036/api/resorts/getroomtypes`;
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiIyMzU1MGRmMS1hNDJmLTQ3YjUtYjcxYS1mYzJhMDg0NThmY2IiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiMDcyZTE1YjAtMWExYi00MjRiLWFlMGUtNDZkODRiY2QxZjg1IiwibmJmIjoxNzA5MTg0MjIzLCJleHAiOjE3MDkyNDQyMjMsImlhdCI6MTcwOTE4NDIyMywiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.OS0iCE1ZCB5LiovKEAcoqCv3bLBDDWtekDrTvWt-Eio';
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-
-    this.httpClient.get<any>(url, { headers }).
-      subscribe((response) => {
+    this.repo.getAllRoom().subscribe(
+      (response) => {
         this.roomsTypes = response;
       })
   }
@@ -185,7 +178,6 @@ export class InsertResortDetailsComponent implements OnInit {
         this.AddRooms.controls['availability'].setValue('string');
         this.resort_rooms.push(this.AddRooms.value);
         this.AddRooms.reset();
-        console.log("Rooms:", this.resort_rooms);
       }
     } else {
       alert("Provide room count");
@@ -207,8 +199,6 @@ export class InsertResortDetailsComponent implements OnInit {
       categories: this.AddResort.value.categories,
       coordinates: this.AddResort.value.coordinates
     };
-    console.log("From object:", resort_details)
-
     this.resortService.addResort(resort_details);
     this.router.navigate(['/admin/resort-details-preview']);
   }

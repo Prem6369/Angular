@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { admin_room_repository } from '../../Repository/admin_room_repository';
+import { admin_resort_repository } from '../../Repository/admin_resort_repository';
 
 @Component({
   selector: 'app-add-roomtype',
@@ -18,7 +17,7 @@ export class AddRoomtypeComponent implements OnInit {
   roomId!: number;
 
   constructor(
-    private repo: admin_room_repository,
+    private repo: admin_resort_repository,
     private _location: Location,
     private route: ActivatedRoute
   ) { }
@@ -58,7 +57,6 @@ export class AddRoomtypeComponent implements OnInit {
 
         });
     } else {
-      debugger;
       this.repo.insertRoom(this.AddRooms.value)
         .subscribe(response => {
           if (response !== null) {
