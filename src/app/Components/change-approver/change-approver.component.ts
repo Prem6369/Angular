@@ -153,7 +153,6 @@ export class ChangeApproverComponent implements OnInit {
   }
  
   value=new FormGroup({
-   
     approver_id:new FormControl(0)
   }
   )

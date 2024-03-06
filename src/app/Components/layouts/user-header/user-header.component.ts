@@ -38,7 +38,7 @@ export class UserHeaderComponent implements OnInit {
         (response) => {
           this.img=response.official_id_image_url;
           this.userlist=response;
-          console.log(this.userlist.claySys_email);
+          // console.log(this.userlist.claySys_email);
         },
       );
   }

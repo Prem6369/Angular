@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
 import { DateService } from '../../Service/DateTime';
+import { ApiServiceRepo } from '../../Repository/resort_repository';
 
 @Component({
   selector: 'app-resort-list',
@@ -24,7 +25,7 @@ export class ResortListComponent implements OnInit {
     ),
   });
 
-  constructor(private httpclient: HttpClient, private router: Router,private dateService: DateService) {
+  constructor(private httpclient: HttpClient, private router: Router,private dateService: DateService,private repository:ApiServiceRepo) {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -34,52 +35,81 @@ export class ResortListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getResortDetails();
-
+    this.getResort()
   }
 
-  getResortDetails() {
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
-    this.httpclient
-      .get<any[]>(
-        'https://localhost:7036/api/resorts/getallresorts',
-        { headers }
-      )
-      .subscribe(
-        (response) => {
-          console.log(response);
-          if (Array.isArray(response)) {
-            response.forEach((resortObject) => {
-              const newResortDetails = new ResortDetails(
-                resortObject.resort_id,
-                resortObject.name,
-                resortObject.description,
-                resortObject.location,
-                resortObject.amenities,
-                resortObject.image_urls,
-                resortObject.video_urls,
-                resortObject.status,
-                resortObject.created_date,
-                resortObject.last_modified_date,
-                resortObject.categories,
-                resortObject.coordinates
-              );
-              this.resortlist.push(newResortDetails);
-              this.Resort_id=resortObject.resort_id
+  getResort(){
+    this.repository.getAllResort().subscribe(
+    (response:any[])=>{
+      console.log("new repo calling:",response);
+      if (Array.isArray(response)) {
+        response.forEach((resortObject) => {
+          const newResortDetails = new ResortDetails(
+            resortObject.resort_id,
+            resortObject.name,
+            resortObject.description,
+            resortObject.location,
+            resortObject.amenities,
+            resortObject.image_urls,
+            resortObject.video_urls,
+            resortObject.status,
+            resortObject.created_date,
+            resortObject.last_modified_date,
+            resortObject.categories,
+            resortObject.coordinates
+          );
+          this.resortlist.push(newResortDetails);
+          this.Resort_id=resortObject.resort_id
 
-            });
-          } else {
-            console.error('Response is not an array.');
-          }
-        },
-        (error) => {
-          console.error('Error fetching resort details:', error);
-        }
-      );
+        });}
+    });
   }
+
+
+
+  // getResortDetails() {
+  //   const token =
+  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
+  //   const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+  //   this.httpclient
+  //     .get<any[]>(
+  //       'https://localhost:7036/api/resorts/getallresorts',
+  //       { headers }
+  //     )
+  //     .subscribe(
+  //       (response) => {
+  //         console.log(response);
+  //         if (Array.isArray(response)) {
+  //           response.forEach((resortObject) => {
+  //             const newResortDetails = new ResortDetails(
+  //               resortObject.resort_id,
+  //               resortObject.name,
+  //               resortObject.description,
+  //               resortObject.location,
+  //               resortObject.amenities,
+  //               resortObject.image_urls,
+  //               resortObject.video_urls,
+  //               resortObject.status,
+  //               resortObject.created_date,
+  //               resortObject.last_modified_date,
+  //               resortObject.categories,
+  //               resortObject.coordinates
+  //             );
+  //             this.resortlist.push(newResortDetails);
+  //             this.Resort_id=resortObject.resort_id
+
+  //           });
+  //         } else {
+  //           console.error('Response is not an array.');
+  //         }
+  //       },
+  //       (error) => {
+  //         console.error('Error fetching resort details:', error);
+  //       }
+  //     );
+  // }
 
   getAvailableResortDetails() {
     const checkInDate = this.rangevalue.get('check_in_date')?.value;
@@ -88,12 +118,11 @@ export class ResortListComponent implements OnInit {
     today.setDate(today.getDate() - 1);
 
     if (checkInDate && checkOutDate) {
-      debugger;
       if (checkInDate < today) {
         alert(
           'Check-in date cannot be in the past. Please select a valid date.'
         );
-        this.getResortDetails();
+        this.getResort();
       } else {
         const params = new HttpParams()
           .set('check_in_date', checkInDate.toISOString().split('T')[0])
@@ -106,34 +135,57 @@ export class ResortListComponent implements OnInit {
           'Bearer ' + token
         );
 
-        this.httpclient
-          .get<any[]>(
-            'https://localhost:7036/api/resorts/getroomavailability',
-            { params, headers }
-          )
-          .subscribe((response) => {
-            
-            if (Array.isArray(response)) {
-              response.forEach((resortObject) => {
-                const newResortDetails = new ResortDetails(
-                  resortObject.resort_id,
-                  resortObject.name,
-                  resortObject.description,
-                  resortObject.location,
-                  resortObject.amenities,
-                  resortObject.image_urls,
-                  resortObject.video_urls,
-                  resortObject.status,
-                  resortObject.created_date,
-                  resortObject.last_modified_date,
-                  resortObject.categories,
-                  resortObject.coordinates
-                );
-                this.Resort_id=resortObject.resort_id
-                this.resortlist.push(newResortDetails);
-              });
-            }
+      this.repository.getAvailableResort(checkInDate, checkOutDate).subscribe((response) => {
+        console.log("looo",response);
+        if (Array.isArray(response)) {
+          response.forEach((resortObject) => {
+            const newResortDetails = new ResortDetails(
+              resortObject.resort_id,
+              resortObject.name,
+              resortObject.description,
+              resortObject.location,
+              resortObject.amenities,
+              resortObject.image_urls,
+              resortObject.video_urls,
+              resortObject.status,
+              resortObject.created_date,
+              resortObject.last_modified_date,
+              resortObject.categories,
+              resortObject.coordinates
+            );
+            this.Resort_id=resortObject.resort_id
+            this.resortlist.push(newResortDetails);
           });
+        }})
+
+        // this.httpclient
+        //   .get<any[]>(
+        //     'https://localhost:7036/api/resorts/getroomavailability',
+        //     { params, headers }
+        //   )
+        //   .subscribe((response) => {
+            
+        //     if (Array.isArray(response)) {
+        //       response.forEach((resortObject) => {
+        //         const newResortDetails = new ResortDetails(
+        //           resortObject.resort_id,
+        //           resortObject.name,
+        //           resortObject.description,
+        //           resortObject.location,
+        //           resortObject.amenities,
+        //           resortObject.image_urls,
+        //           resortObject.video_urls,
+        //           resortObject.status,
+        //           resortObject.created_date,
+        //           resortObject.last_modified_date,
+        //           resortObject.categories,
+        //           resortObject.coordinates
+        //         );
+        //         this.Resort_id=resortObject.resort_id
+        //         this.resortlist.push(newResortDetails);
+        //       });
+        //     }
+        //   });
       }
     } else {
       alert('please select date');
@@ -159,7 +211,7 @@ export class ResortListComponent implements OnInit {
   clearDates() {
     this.rangevalue.reset();
     this.resortlist = [];
-    this.getResortDetails();
+    this.getResort();
   }
 
   applyFilter() {
