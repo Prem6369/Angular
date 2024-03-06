@@ -199,9 +199,10 @@ export class ResortRoomsComponent implements OnInit {
 
 
   removeMember(phone_number: number, type: string) {
+    debugger;
     const elementIndex: number = this.total_list.findIndex((member: any) => member.phone_number === phone_number);
-
-    if (elementIndex !== -1) {
+    const Index: number = this.total_employees.findIndex((member: any) => member.phone_number === phone_number);
+    if (elementIndex !== -1 && Index !== -1) {
       if (type === "Guest") {
         this.guest_count--;
       } else {
@@ -209,12 +210,22 @@ export class ResortRoomsComponent implements OnInit {
       }
       this.total_count--;
       this.total_list.splice(elementIndex, 1);
+      this.total_employees.splice(elementIndex, 1);
     }
 
 
   }
 
+  
 
+  editGuest(guest_id: number) {
+    debugger;
+    const index=this.total_list.findIndex((member:any)=>member.guest_id===guest_id);
+    const cindex=this.total_guest.findIndex((member:any)=>member.guest_id===guest_id);
+    this.total_list.splice(index,1);
+    this.total_guest.splice(cindex,1);
+    this.router.navigate(['/user/Addguest'], { queryParams: { id:guest_id } });
+    }
 
 
 

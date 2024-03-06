@@ -4,32 +4,18 @@ import { Observable } from 'rxjs';
 import { Resort } from '../Model/ResortDetails/resortDetails';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class ApiServiceInvoker {
-  baseUrl = 'https://localhost:7036/api';
+export class ApiService {
+  private apiUrl: string = `https://localhost:7036/api`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
-  // get(path: string, app: string,params?: any) {
-  //   const url = this.getFullAPIUrl(path, app);
-  //   const headers = new HttpHeaders().set(
-  //     'Authorization',
-  //     'Bearer ' + this.getToken()
-  //   );
-  //   let requestOptions: any = { headers };
-
-  //   if (params) {
-  //     requestOptions.params = new HttpParams({ fromObject: params });
-  //   }
-  //   return this.http.get<any>(url, requestOptions);
-  // }
-
-  gets(path: string, app: string, params?: any): Observable<Resort[]> {
+  get(path: string, app: string, params?: any): Observable<Resort[]> {
     const url = this.getFullAPIUrl(path, app);
     const headers = this.getHeaders();
     const httpParams = this.getParams(params);
-    return this.http.get<any>(url, { headers: headers, params: httpParams });
+    return this.httpClient.get<any>(url, { headers: headers, params: httpParams });
   }
 
   getHeaders() {
@@ -42,7 +28,7 @@ export class ApiServiceInvoker {
   post(path: string, app: string,body:any){
     const url = this.getFullAPIUrl(path, app);
     const headers = this.getHeaders();
-    return this.http.post<any>(url,body, { headers: headers });
+    return this.httpClient.post<any>(url,body, { headers: headers });
 
   }
 
@@ -50,7 +36,7 @@ export class ApiServiceInvoker {
     const url= this.getFullAPIUrl(path,app);
     const headers =this.getHeaders();
 
-    return this.http.put<any>(url,body,{headers:headers})
+    return this.httpClient.put<any>(url,body,{headers:headers})
   }
   
   
@@ -68,7 +54,7 @@ export class ApiServiceInvoker {
   }
 
   getFullAPIUrl(path: string, app: string) {
-    return `${this.baseUrl}/${app}/${path}`;
+    return `${this.apiUrl}/${app}/${path}`;
   }
 
 
