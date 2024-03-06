@@ -1,23 +1,31 @@
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ApiServiceInvoker } from '../Service/InvokeApiService';
+import { Observable } from 'rxjs';
 
-// import { environment } from '../Components/environment/environment';
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiServiceRepo {
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class ApiService {
-//   private apiUrl: string = environment.apiUrl;
+    constructor(private api:ApiServiceInvoker){}
 
-//   constructor(private http: HttpClient) {}
+    getAllResort():Observable<any>{
+        return this.api.get('getallresorts','resorts');
+    }
 
-//   private buildUrl(endpoint: string): string {
-//     return `${this.apiUrl}/${endpoint}`;
-//   }
+    getAvailableResort(checkInDate: Date, checkOutDate: Date): Observable<any> {
+      const params = {
+        check_in_date: checkInDate.toISOString().split('T')[0],
+        check_out_date: checkOutDate.toISOString().split('T')[0]
+      };
+      return this.api.get('getroomavailability', 'resorts', params);
+    }
+    
 
-//   getUsers(): Observable<any> {
-//     const url = this.buildUrl('users');
-//     return this.http.get<any>(url);
-//   }
-// }
+    getResortById(decrptyId:string):Observable<any>{
+      const params ={
+        resort_id:decrptyId
+      };
+      return this.api.get('getresortdetails','resorts',params)
+    }
+}
