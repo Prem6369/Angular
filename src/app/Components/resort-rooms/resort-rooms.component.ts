@@ -9,6 +9,7 @@ import { BookingService } from '../../Service/BookingService';
 import { GuestService } from '../../Service/GuestService';
 import { count } from 'rxjs';
 import { SessionServiceService } from '../../Service/Session/session-service.service';
+import { ApiServiceRepo } from '../../Repository/resort_repository';
 
 
 
@@ -49,7 +50,7 @@ export class ResortRoomsComponent implements OnInit {
 
 
 
-  constructor(private session: SessionServiceService, private route: ActivatedRoute, private dateService: DateService, private bookingService: BookingService, private guestService: GuestService, private httpclient: HttpClient, private router: Router, private routing: ActivatedRoute) { }
+  constructor(private repository:ApiServiceRepo,private session: SessionServiceService, private route: ActivatedRoute, private dateService: DateService, private bookingService: BookingService, private guestService: GuestService, private httpclient: HttpClient, private router: Router, private routing: ActivatedRoute) { }
   check_in_date!: Date;
   check_out_date!: Date;
 
@@ -63,24 +64,17 @@ export class ResortRoomsComponent implements OnInit {
     this.initializer()
     this.getEmployeeIds();
     this.calculateDayAndNight();
-    this.getResortRoom();
+    // this.getResortRoom();
 
 
   }
 
   getResortDetails() {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
     const decrptyId = (atob(this.Resort_id.toString()))
 
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    const params = new HttpParams().set('resort_id', decrptyId);
-    this.httpclient
-      .get<any>(
-        `https://localhost:7036/api/resorts/getresortdetails`,
-        { headers, params }
-      )
-      .subscribe(
+    this.repository.getResortById(decrptyId).subscribe(
         (response) => {
+          console.log("newRepo",response)
           this.img = response.image_urls;
           this.location = response.location;
           this.resortname = response.name;
@@ -122,36 +116,36 @@ export class ResortRoomsComponent implements OnInit {
 
 
 
-  getResortRoom() {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    this.httpclient
-      .get<any>(
-        `https://localhost:7036/api/resorts/getroomtypes`,
-        { headers }
-      )
-      .subscribe(
-        (response) => {
-          if (response) {
-            for (const room of response) {
-              const newResortRoom = new getRoomTypes(
-                room.room_type_id,
-                room.name,
-                room.capacity,
-                room.availability,
-                room.description,
-                room.room_type_count,
-                room.created_date,
-                room.last_modified_date
-              );
-              this.ResortRoom.push(newResortRoom);
-            }
-          } else {
-            console.error('Empty response or response does not contain any room types.');
-          }
-        }
-      );
-  }
+  // getResortRoom() {
+  //   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
+  //   const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+  //   this.httpclient
+  //     .get<any>(
+  //       `https://localhost:7036/api/resorts/getroomtypes`,
+  //       { headers }
+  //     )
+  //     .subscribe(
+  //       (response) => {
+  //         if (response) {
+  //           for (const room of response) {
+  //             const newResortRoom = new getRoomTypes(
+  //               room.room_type_id,
+  //               room.name,
+  //               room.capacity,
+  //               room.availability,
+  //               room.description,
+  //               room.room_type_count,
+  //               room.created_date,
+  //               room.last_modified_date
+  //             );
+  //             this.ResortRoom.push(newResortRoom);
+  //           }
+  //         } else {
+  //           console.error('Empty response or response does not contain any room types.');
+  //         }
+  //       }
+  //     );
+  // }
 
 
   increment(room_type_id: number, name: string, description: string, number_of_rooms: number) {

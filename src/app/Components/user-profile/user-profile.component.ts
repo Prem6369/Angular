@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserProfile } from '../../Model/userProfile/userProfile'; 
 import { SessionServiceService } from '../../Service/Session/session-service.service';
+import { ApiUserServiceRepo } from '../../Repository/user_repository';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,9 +15,9 @@ export class UserProfileComponent implements OnInit {
   username: string = '';
   user_id!:number;
   img:string='';
-  constructor(private httpclient: HttpClient, 
+  constructor(
     private router: Router, 
-    private session: SessionServiceService) {}
+    private session: SessionServiceService,private repository:ApiUserServiceRepo) {}
 
   ngOnInit(): void {
     this.getUserProfile();
@@ -27,22 +28,12 @@ export class UserProfileComponent implements OnInit {
     this.user_id = sessionValues[0];
     this.username = sessionValues[1];
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-    const params = new HttpParams().set('user_id',this.user_id);
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-
-    this.httpclient
-      .get<any>(
-        `https://localhost:7036/api/resorts/userprofile`,
-        { headers, params }
-      )
-      .subscribe(
-        (response) => {
-          this.img=response.official_id_image_url;
-          console.log('profile',response);
-          this.userlist=response;
-        },
-      );
+    this.repository.userProfileById(this.user_id).subscribe((response)=>{
+      this.img=response.official_id_image_url;
+      console.log('profile',response);
+      this.userlist=response;
+    })
+    
   }
 
   homePage() {

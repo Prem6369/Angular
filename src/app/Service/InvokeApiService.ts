@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Resort } from '../Model/ResortDetails/resortDetails';
 
 @Injectable({
   providedIn: 'root',
@@ -10,24 +11,63 @@ export class ApiServiceInvoker {
 
   constructor(private http: HttpClient) {}
 
-  get(path: string, app: string,params?: any) {
+  // get(path: string, app: string,params?: any) {
+  //   const url = this.getFullAPIUrl(path, app);
+  //   const headers = new HttpHeaders().set(
+  //     'Authorization',
+  //     'Bearer ' + this.getToken()
+  //   );
+  //   let requestOptions: any = { headers };
+
+  //   if (params) {
+  //     requestOptions.params = new HttpParams({ fromObject: params });
+  //   }
+  //   return this.http.get<any>(url, requestOptions);
+  // }
+
+  gets(path: string, app: string, params?: any): Observable<Resort[]> {
     const url = this.getFullAPIUrl(path, app);
-    const headers = new HttpHeaders().set(
+    const headers = this.getHeaders();
+    const httpParams = this.getParams(params);
+    return this.http.get<any>(url, { headers: headers, params: httpParams });
+  }
+
+  getHeaders() {
+    return new HttpHeaders().set(
       'Authorization',
       'Bearer ' + this.getToken()
     );
-    let requestOptions: any = { headers };
-
-    if (params) {
-      requestOptions.params = new HttpParams({ fromObject: params });
-    }
-    return this.http.get<any>(url, requestOptions);
   }
 
+  post(path: string, app: string,body:any){
+    const url = this.getFullAPIUrl(path, app);
+    const headers = this.getHeaders();
+    return this.http.post<any>(url,body, { headers: headers });
 
+  }
 
+  put(path:string,app:string,body:any){
+    const url= this.getFullAPIUrl(path,app);
+    const headers =this.getHeaders();
 
-  getFullAPIUrl(path: string, app: string) {0
+    return this.http.put<any>(url,body,{headers:headers})
+  }
+  
+  
+
+  private getParams(params: any): HttpParams {
+    let httpParams = new HttpParams();
+    if (params) {
+      for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+          httpParams = httpParams.set(key, params[key]);
+        }
+      }
+    }
+    return httpParams;
+  }
+
+  getFullAPIUrl(path: string, app: string) {
     return `${this.baseUrl}/${app}/${path}`;
   }
 

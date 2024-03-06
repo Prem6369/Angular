@@ -10,7 +10,7 @@ export class ApiServiceRepo {
     constructor(private api:ApiServiceInvoker){}
 
     getAllResort():Observable<any>{
-        return this.api.get('getallresorts','resorts');
+        return this.api.gets('getallresorts','resorts');
     }
 
     getAvailableResort(checkInDate: Date, checkOutDate: Date): Observable<any> {
@@ -18,7 +18,7 @@ export class ApiServiceRepo {
         check_in_date: checkInDate.toISOString().split('T')[0],
         check_out_date: checkOutDate.toISOString().split('T')[0]
       };
-      return this.api.get('getroomavailability', 'resorts', params);
+      return this.api.gets('getroomavailability', 'resorts', params);
     }
     
 
@@ -26,6 +26,10 @@ export class ApiServiceRepo {
       const params ={
         resort_id:decrptyId
       };
-      return this.api.get('getresortdetails','resorts',params)
+      return this.api.gets('getresortdetails','resorts',params)
+    }
+
+    bookResort(body:any){
+      return this.api.post('bookresort','resorts',body)
     }
 }

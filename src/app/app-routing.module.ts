@@ -76,7 +76,6 @@ const routes: Routes = [
     component:ApproverLayoutComponent,
     children:[
       { path :'approverhome',component:ApproverHomeComponent},
-      { path :'managebooking',component:ManageBookingComponent},
       { path : 'managestatus',component:ManageBookingStatusComponent},
       { path : 'changeapprover',component:ChangeApproverComponent},
       { path : 'approver-profile',component:ApproverProfileComponent},

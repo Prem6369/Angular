@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ApiServiceRepo } from '../../Repository/resort_repository';
+import { apiLoginService } from '../../Repository/login_repository';
 
 @Component({
   selector: 'app-resort-signup',
@@ -29,25 +31,25 @@ export class ResortSignupComponent implements OnInit {
     username: new FormControl()
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private repository:apiLoginService) {}
 
   ngOnInit() {}
 
   register() {
-    const value = this.newuser.value;
-    console.log(value);
-
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiI3MDRiYzIwYy00ZTM1LTRjOTYtOTA3ZS1kY2RiYzMwN2UzOGMiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiMDdmOTUyNjAtMmE4Zi00OTgwLWE4ODUtZjllNGFiZmE1NGFkIiwibmJmIjoxNzA5MTg5NjQxLCJleHAiOjE3MDkyNDk2NDEsImlhdCI6MTcwOTE4OTY0MSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.Ffbt9fZPcZ3wGX7npqHKZ8ovp5cG86qyjoaA67XgUFQ';
-    
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    const url = 'https://localhost:7036/api/resorts/createuser';
-
-    this.http.post(url, value, { headers}).subscribe(
+    const formData = this.newuser.value; 
+    console.log(formData); 
+  
+    this.repository.signin(formData).subscribe(
       (response) => {
-        console.log('Signup', response);
+        console.log(response);
+      },
+      (error) => {
+        console.error('Error occurred during registration:', error);
       }
     );
-    this.newuser.reset();
+  
+    this.newuser.reset(); 
   }
+  
 
 }
