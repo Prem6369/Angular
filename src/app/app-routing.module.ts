@@ -28,6 +28,7 @@ import { UpdateResortDetailsComponent } from './Components/update-resort-details
 import { AdminProfileComponent } from './Components/admin-profile/admin-profile.component';
 import { ApproverProfileComponent } from './Components/approver-profile/approver-profile.component';
 import { RoomListComponent } from './Components/room-list/room-list.component';
+import { UpdateBookingDetailsComponent } from './Components/update-booking-details/update-booking-details.component';
 
 
 
@@ -51,6 +52,7 @@ const routes: Routes = [
       { path: 'UpdateProfile', component: UpdateProfileComponent },
       { path: 'Resortrooms', component: ResortRoomsComponent },
       { path: 'Thankyou', component: ResortThankyouComponent },
+      { path: 'update-booking', component: UpdateBookingDetailsComponent }
     ]
   },
   {

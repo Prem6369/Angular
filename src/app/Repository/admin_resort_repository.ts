@@ -21,7 +21,6 @@ export class admin_resort_repository {
     }
 
     getAllResort():Observable<any[]>{
-        debugger;
         return this.apiInvoker.get('getallresorts','resorts');
     }
     

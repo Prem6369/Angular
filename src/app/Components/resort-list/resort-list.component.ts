@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
 import { DateService } from '../../Service/DateTime';
 import { ApiServiceRepo } from '../../Repository/resort_repository';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-resort-list',
@@ -12,9 +12,10 @@ import { ApiServiceRepo } from '../../Repository/resort_repository';
   styleUrls: ['./resort-list.component.scss'],
 })
 export class ResortListComponent implements OnInit {
+
   resortlist: ResortDetails[] = [];
   Resort_id!: number;
-
+  booking_id!:number;
 
   rangevalue = new FormGroup({
     check_in_date: new FormControl<Date | null>(
@@ -25,7 +26,7 @@ export class ResortListComponent implements OnInit {
     ),
   });
 
-  constructor(private httpclient: HttpClient, private router: Router,private dateService: DateService,private repository:ApiServiceRepo) {
+  constructor(private _location: Location, private router: Router,private dateService: DateService,private repository:ApiServiceRepo) {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -35,7 +36,9 @@ export class ResortListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getResort()
+    this.getResort();
+
+
   }
 
 
@@ -67,50 +70,6 @@ export class ResortListComponent implements OnInit {
   }
 
 
-
-  // getResortDetails() {
-  //   const token =
-  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-  //   const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-
-  //   this.httpclient
-  //     .get<any[]>(
-  //       'https://localhost:7036/api/resorts/getallresorts',
-  //       { headers }
-  //     )
-  //     .subscribe(
-  //       (response) => {
-  //         console.log(response);
-  //         if (Array.isArray(response)) {
-  //           response.forEach((resortObject) => {
-  //             const newResortDetails = new ResortDetails(
-  //               resortObject.resort_id,
-  //               resortObject.name,
-  //               resortObject.description,
-  //               resortObject.location,
-  //               resortObject.amenities,
-  //               resortObject.image_urls,
-  //               resortObject.video_urls,
-  //               resortObject.status,
-  //               resortObject.created_date,
-  //               resortObject.last_modified_date,
-  //               resortObject.categories,
-  //               resortObject.coordinates
-  //             );
-  //             this.resortlist.push(newResortDetails);
-  //             this.Resort_id=resortObject.resort_id
-
-  //           });
-  //         } else {
-  //           console.error('Response is not an array.');
-  //         }
-  //       },
-  //       (error) => {
-  //         console.error('Error fetching resort details:', error);
-  //       }
-  //     );
-  // }
-
   getAvailableResortDetails() {
     const checkInDate = this.rangevalue.get('check_in_date')?.value;
     const checkOutDate = this.rangevalue.get('check_out_date')?.value;
@@ -124,17 +83,6 @@ export class ResortListComponent implements OnInit {
         );
         this.getResort();
       } else {
-        const params = new HttpParams()
-          .set('check_in_date', checkInDate.toISOString().split('T')[0])
-          .set('check_out_date', checkOutDate.toISOString().split('T')[0]);
-
-        const token =
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiJlODhiZTMyNS04NjU2LTQ3NzYtOGQ2MS1iMmY2OWRiYmE2ZTUiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiYTUzZDg3MDQtZjc1Ni00MzRmLWI0ZTYtOWNmNzE1MTJjMTM3IiwibmJmIjoxNzA3NTgwODk5LCJleHAiOjE3MDc2NDA4OTksImlhdCI6MTcwNzU4MDg5OSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.NIUOGTlkzAKUbverhL5hXB5l9MFysGlUJhvy50MT5Z4';
-        const headers = new HttpHeaders().set(
-          'Authorization',
-          'Bearer ' + token
-        );
-
       this.repository.getAvailableResort(checkInDate, checkOutDate).subscribe((response) => {
         console.log("looo",response);
         if (Array.isArray(response)) {
@@ -157,35 +105,6 @@ export class ResortListComponent implements OnInit {
             this.resortlist.push(newResortDetails);
           });
         }})
-
-        // this.httpclient
-        //   .get<any[]>(
-        //     'https://localhost:7036/api/resorts/getroomavailability',
-        //     { params, headers }
-        //   )
-        //   .subscribe((response) => {
-            
-        //     if (Array.isArray(response)) {
-        //       response.forEach((resortObject) => {
-        //         const newResortDetails = new ResortDetails(
-        //           resortObject.resort_id,
-        //           resortObject.name,
-        //           resortObject.description,
-        //           resortObject.location,
-        //           resortObject.amenities,
-        //           resortObject.image_urls,
-        //           resortObject.video_urls,
-        //           resortObject.status,
-        //           resortObject.created_date,
-        //           resortObject.last_modified_date,
-        //           resortObject.categories,
-        //           resortObject.coordinates
-        //         );
-        //         this.Resort_id=resortObject.resort_id
-        //         this.resortlist.push(newResortDetails);
-        //       });
-        //     }
-        //   });
       }
     } else {
       alert('please select date');
@@ -195,16 +114,28 @@ export class ResortListComponent implements OnInit {
   nextpage(resortId: number) {
     const checkInDate = this.rangevalue.get('check_in_date')?.value;
     const checkOutDate = this.rangevalue.get('check_out_date')?.value;
-    const encryptId=(btoa(resortId.toString()))
-    console.log(encryptId)
-    if (checkInDate != null && checkOutDate != null) {
+    const encryptId=(btoa(resortId.toString()));
+
+
+    if (this.booking_id) {
+      if (checkInDate != null && checkOutDate != null) {
         this.dateService.checkInDate = checkInDate;
         this.dateService.checkOutDate = checkOutDate;
-
-        this.router.navigate(['/user/Resortdetails'], { queryParams: { ID: encryptId } });
-    } else {
-        console.error('Check-in date or check-out date is null or undefined.');
+        this.router.navigate(['/user/Resortdetails'], { queryParams: { ID: encryptId,booking_id:this.booking_id } });
+      }
     }
+    else
+    {
+      debugger;
+    if (checkInDate != null && checkOutDate != null) {
+      this.dateService.checkInDate = checkInDate;
+      this.dateService.checkOutDate = checkOutDate;
+
+      this.router.navigate(['/user/Resortdetails'], { queryParams: { ID: encryptId } });
+    } else {
+      console.error('Check-in date or check-out date is null or undefined.');
+    }
+  }
 }
 
 

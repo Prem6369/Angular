@@ -50,6 +50,7 @@ import { UpdateResortDetailsComponent } from './Components/update-resort-details
 import { AdminProfileComponent } from './Components/admin-profile/admin-profile.component';
 import { ApproverProfileComponent } from './Components/approver-profile/approver-profile.component';
 import { RoomListComponent } from './Components/room-list/room-list.component';
+import { UpdateBookingDetailsComponent } from './Components/update-booking-details/update-booking-details.component';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { RoomListComponent } from './Components/room-list/room-list.component';
     UpdateResortDetailsComponent,
     AdminProfileComponent,
     ApproverProfileComponent,
+    UpdateBookingDetailsComponent,
     
   ],
   imports: [

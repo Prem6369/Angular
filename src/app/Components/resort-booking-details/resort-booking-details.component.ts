@@ -1,13 +1,13 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { SessionServiceService } from '../../Service/Session/session-service.service';
 import { Booking } from '../../Model/BookingDetaills/Booking';
 import { ApiUserServiceRepo } from '../../Repository/user_repository';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resort-booking-details',
   templateUrl: './resort-booking-details.component.html',
-  styleUrls: ['./resort-booking-details.component.scss'], // Fixing styleUrls
+  styleUrls: ['./resort-booking-details.component.scss'], 
 })
 export class ResortBookingDetailsComponent implements OnInit {
   Bookings_list: Booking[] = [];
@@ -18,9 +18,9 @@ export class ResortBookingDetailsComponent implements OnInit {
   pendingBookings: any[] = [];
 
   constructor(
-    private httpclient: HttpClient,
     private session: SessionServiceService,
-    private repository: ApiUserServiceRepo
+    private repository: ApiUserServiceRepo,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +32,6 @@ export class ResortBookingDetailsComponent implements OnInit {
     this.username = this.session.getUserName();
     this.repository.bookedResortById(this.user_id).subscribe(
       (response) => {
-        console.log(response);
         this.bookedresort = response.bookings;
         response.bookings.forEach((booking: any) => {
           if (booking.booking_status === 'confirmed') {
@@ -41,8 +40,7 @@ export class ResortBookingDetailsComponent implements OnInit {
             this.pendingBookings.push(booking);
           }
         });
-        // Removed extra closing parenthesis here
-        console.log(response);
+     
         response.bookings.forEach((booking: any) => {
           if (booking.booking_status === 'confirmed') {
             this.confirmedBookings.push(booking);
@@ -50,11 +48,6 @@ export class ResortBookingDetailsComponent implements OnInit {
             this.pendingBookings.push(booking);
           }
         });
-
-        console.log(this.confirmedBookings);
-        console.log(this.pendingBookings);
-
-        console.log(this.bookedresort);
         response.bookings.forEach((book: any) => {
           const booking_status = book.booking_status;
           console.log(booking_status);
@@ -84,13 +77,16 @@ export class ResortBookingDetailsComponent implements OnInit {
           response.username
         );
         this.Bookings_list.push(BookingDetails);
-        console.log(this.Bookings_list);
       },
       (error) => {
         console.error('Error fetching resort details:', error);
-        // Show an alert or message to the user
         alert('Failed to fetch User details. Please try again later.');
       }
     );
+  }
+
+  navigateToUpdateBooking(booking_id:number)
+  {
+    this.router.navigate(['/user/update-booking'],{ queryParams: { id:booking_id } })
   }
 }

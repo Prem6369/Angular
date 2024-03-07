@@ -138,7 +138,7 @@ export class ResortRoomsComponent implements OnInit {
   }
 
   next() {
-    if (this.employee_count != 0 && this.totalSelectedRooms != 0) {
+    if ((this.employee_count != 0 || this.guest_count != 0) && this.totalSelectedRooms != 0) {
       const booking_details = {
         user_id: this.user_id,
         resort_id: this.Resort_id,
