@@ -1,1 +1,147 @@
-<p>update-booking-details works!</p>
+<div id="update_booking_page">
+
+
+
+<div class="py-3 ">
+  <h2 class="text-center">{{resort_name}}</h2>
+</div>
+    
+
+
+  <div class="container">
+    <form [formGroup]="bookingUpdate">
+      <div class="row">
+
+        <div class="col-md-4">
+
+          <div class="row">
+            <div class="col-md-10">
+              <section id="LastName" class="my-3">
+                <h2>Checkin & Checkout</h2>
+                <div class="d-flex align-items-center">
+                  <span class="icon mx-1"><i class="fa-solid fa-calendar-day"></i></span>
+                  <input class="form-control mx-2" readonly formControlName="check_in_date" placeholder="Checkin">
+                  <input class="form-control" readonly formControlName="check_out_date" placeholder="Checkout">
+                </div>
+              </section>
+            </div>
+            <div class="col-md-2">
+              <div class="fs-4">
+                <i class="fa-solid fa-rotate" (click)="changeDate(booking_details.booking_id)"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 px-5 p-4">
+          Food Choice
+          <mat-button-toggle-group class="mx-3" formControlName="food_choice">
+            <mat-button-toggle value="veg">Veg</mat-button-toggle>
+            <mat-button-toggle value="non-veg">Non-veg</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+  
+      </div>
+    </form>
+  
+  </div>
+  
+    
+      
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 p-5">
+      <div class="row">
+        <h4 class="col-md-6 text-center">
+          Room details ({{booking_details.room_count}})
+        </h4>
+        <div class="col-md-6 fs-4">
+          <i class="fa-solid fa-house-chimney-medical" (click)="addRoom(booking_details.booking_id)"></i>
+        </div>
+
+      </div>
+      
+<div>
+
+</div>
+      <div id="room-details" class="container rounded my-3">
+        <div *ngFor="let room of bookedRoomsArray" class="row w-0 m-3 border-bottom p-3">
+
+          <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2" id="iconbackground">
+            <i class="fa-solid fa-bed fa-2x check"></i>
+          </div>
+
+          <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2">
+            <div class="fw-bold">{{ room.name }}</div>
+            <div>{{ room.description }}</div>
+          </div>
+
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="iconbackground">
+            <div class="text-center fw-bold">{{ room.room_type_count }}</div>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 fs-5 ">
+            <i  class="fa-solid fa-house-circle-xmark text-danger" (click)="removeRoom(room.room_type_id)"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-6 p-5">
+      <div class="row">
+        <h4 class="col-md-6 text-center">
+          Person details ({{ booking_details.member_count }})
+        </h4>
+        <div class="fs-4 col-md-6">
+          <i class="fa-solid fa-user-plus text-white" (click)="addMember(booking_details.booking_id)"></i>
+        </div>
+
+      </div>
+     
+
+      <div id="room-members" class="container rounded my-3">
+        <div *ngFor="let guest of totalList" class="row border-bottom p-3 ">
+
+          <div class="icon col-md-4 col-lg-4 col-sm-4 text-center">
+            <div class="initials" [style.background-color]="getInitials(guest.first_name, guest.last_name).backgroundColor"  >
+              {{ getInitials(guest.first_name, guest.last_name).initials }}
+            </div>
+          </div>
+
+          <div class=" col-md-6 col-lg-6 col-sm-6">
+            <div class="name">
+              <div class="fw-bold">{{guest.first_name}} {{guest.last_name}}</div>
+            </div>
+
+            <div class="row">
+              <div class=" col-md-6 col-lg-6 col-sm-6 ">
+                <div class="fw-light">{{guest.phone_number }}</div>
+              </div>
+
+              <div class=" col-md-6 col-lg-6 col-sm-6 border rounded-pill m-1" id="person-type">
+                <div class="fw-bold" *ngIf="guest.guest_user_id" [ngClass]="{'border-primary': guest.type === 'Guest'}">{{ guest.type }}</div>
+                <div class="fw-bold" *ngIf="guest.type !== 'Guest'">{{ guest.type }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2 col-lg-2 col-sm-2 fs-4">
+            <i class="fa-solid fa-user-xmark text-danger" (click)="removeMember(guest.guest_user_id)"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+ 
+<div class="text-center  pb-5">
+  
+  <button class="btn btn-outline-light" [disabled]="bookingUpdate.invalid">Update</button>
+  <button class="btn btn-outline-light mx-3" [disabled]="bookingUpdate.invalid">Back</button>
+
+</div>
+
+</div>
+
+  

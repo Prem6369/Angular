@@ -11,7 +11,6 @@ export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
   get(path: string, app: string, params?: any): Observable<any[]> {
-    debugger;
     const url = this.getFullAPIUrl(path, app);
     const headers = this.getHeaders();
     const httpParams = this.getParams(params);

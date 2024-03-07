@@ -1,0 +1,112 @@
+#Hide
+{
+    display: none;
+}
+
+.readonly-toggle {
+    pointer-events: none;
+  }
+
+  input[type="text"]{
+    border: none;
+    outline: none;
+    color: black;
+    width:50%;
+}
+ 
+section {
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 1em;
+  width:100%;
+  margin-left: 30px;
+
+}
+
+section h2 {
+  float: left;
+ margin: -1.7em 0 0;
+  padding: 0 .5em;
+  background: #fff;
+  font-size: 1em;
+  font-weight: normal;
+  color: black;
+}
+
+#update_booking_page
+{
+  color: white;
+    background-color: black;
+}
+  
+  #room-details, #room-members
+  {
+    background-color: white;
+    color: black;
+    justify-content: center;
+    align-items: center;
+  }
+.text-container {
+  flex: 1;
+  padding: 10px;
+}
+
+  #person-type
+{
+  width: auto;
+  color:aqua;
+  font-weight: bolder;
+  border:2px solid aqua;
+}
+ 
+  #terms-condition
+  {
+    display: flex;
+ justify-content: center;
+}
+
+#final-button 
+{
+display:flex ;
+justify-content: center;
+
+}
+
+#final-button button
+{
+  width:200px;
+  margin: 10px
+
+}
+
+#txtcolor
+{
+  color: #666;
+}
+
+.border-primary {
+  border-color:purple;
+  color: purple;
+}
+
+.initials {
+  font-size: 24px;
+  font-weight: bold;
+  width: 50px;
+  height: 37px;
+  background-color: #bb02db;
+  color: white;
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+
+// ::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content{
+//   color: white;
+// background-color: black;
+// }
+
+
+.mat-button-toggle-group .mat-button-toggle-checked {
+  background-color:white;
+  color: black;
+}
