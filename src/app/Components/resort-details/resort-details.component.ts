@@ -22,11 +22,13 @@ export class ResortDetailsComponent implements OnInit {
   Resort_id!:number;
   totalCapacity: number = 0; 
   amenities:string[]=[];
+  booking_id!:number;
   constructor(private repository:ApiServiceRepo,private httpclient: HttpClient,private router:Router,private dateService:DateService,private route:ActivatedRoute) {}
   
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.Resort_id= params['ID'];
+      this.booking_id=params['booking_id']
       this.getf();
 
     });
@@ -91,8 +93,12 @@ export class ResortDetailsComponent implements OnInit {
   //     );
   // }
   booknow() {
-
-    this.router.navigate(['/user/Resortrooms'],{queryParams:{ID:this.Resort_id}});
+    if(this.booking_id){
+      this.router.navigate(['/user/Resortrooms'],{queryParams:{ID:this.Resort_id,BookingId:this.booking_id}});
+    }else{
+      this.router.navigate(['/user/Resortrooms'],{queryParams:{ID:this.Resort_id}});
+    }
+    
       
   }
   

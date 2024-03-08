@@ -9,3 +9,11 @@ export interface Booking_details {
    members_count: number,
    Total_List: any[]
 }
+
+export interface UpdatedBooking_details {
+
+   check_in_date: Date,
+   check_out_date: Date,
+   resort_id:number,
+   roomTypes_Req:any
+}
