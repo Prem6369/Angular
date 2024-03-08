@@ -52,6 +52,7 @@ import { ApproverProfileComponent } from './Components/approver-profile/approver
 import { RoomListComponent } from './Components/room-list/room-list.component';
 import { UpdateBookingDetailsComponent } from './Components/update-booking-details/update-booking-details.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     AsyncPipe,MatInputModule,
     MatChipsModule,
     MatIconModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+     MatTooltipModule
   ],
   providers: [provideNativeDateAdapter()],
   bootstrap: [AppComponent]

@@ -12,7 +12,7 @@
     <form [formGroup]="bookingUpdate">
       <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-6">
 
           <div class="row">
             <div class="col-md-10">
@@ -26,7 +26,7 @@
               </section>
             </div>
             <div class="col-md-2">
-              <div class="fs-4">
+              <div class="fs-4"  #tooltip="matTooltip" matTooltipPosition="right" matTooltip="Adjusting your check-in does not ensure the retention of your current resort">
                 <i class="fa-solid fa-rotate" (click)="changeDate(booking_details.booking_id)"></i>
               </div>
             </div>
@@ -55,7 +55,7 @@
         <h4 class="col-md-6 text-center">
           Room details ({{booking_details.room_count}})
         </h4>
-        <div class="col-md-6 fs-4">
+        <div class="col-md-6 fs-4" >
           <i class="fa-solid fa-house-chimney-medical" (click)="addRoom(booking_details.booking_id)"></i>
         </div>
 
@@ -80,7 +80,7 @@
             <div class="text-center fw-bold">{{ room.room_type_count }}</div>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 fs-5 ">
-            <i  class="fa-solid fa-house-circle-xmark text-danger" (click)="removeRoom(room.room_type_id)"></i>
+            <i  class="fa-regular fa-trash-can text-danger" (click)="removeRoom(room.room_type_id)"></i>
           </div>
         </div>
       </div>
@@ -95,7 +95,6 @@
         <div class="fs-4 col-md-6">
           <i class="fa-solid fa-user-plus text-white" (click)="addMember(booking_details.booking_id)"></i>
         </div>
-
       </div>
      
 
@@ -125,8 +124,8 @@
             </div>
           </div>
 
-          <div class="col-md-2 col-lg-2 col-sm-2 fs-4">
-            <i class="fa-solid fa-user-xmark text-danger" (click)="removeMember(guest.guest_user_id)"></i>
+          <div class="col-md-2 col-lg-2 col-sm-2 fs-5">
+            <i class="fa-regular fa-trash-can text-danger" (click)="removeMember(guest.guest_user_id || guest.user_id )"></i>
           </div>
         </div>
       </div>
@@ -137,11 +136,10 @@
  
 <div class="text-center  pb-5">
   
-  <button class="btn btn-outline-light" [disabled]="bookingUpdate.invalid">Update</button>
-  <button class="btn btn-outline-light mx-3" [disabled]="bookingUpdate.invalid">Back</button>
+  <button class="btn btn-outline-light" (click)="update()" [disabled]="bookingUpdate.invalid">Update</button>
+  <button class="btn btn-outline-light mx-3" (click)="back()" [disabled]="bookingUpdate.invalid">Back</button>
 
 </div>
 
 </div>
 
-  
