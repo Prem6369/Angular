@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
 import { DateService } from '../../Service/DateTime';
 import { ApiServiceRepo } from '../../Repository/resort_repository';
@@ -26,7 +26,8 @@ export class ResortListComponent implements OnInit {
     ),
   });
 
-  constructor(private _location: Location, private router: Router,private dateService: DateService,private repository:ApiServiceRepo) {
+  constructor(private route:ActivatedRoute,
+    private _location: Location, private router: Router,private dateService: DateService,private repository:ApiServiceRepo) {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -37,7 +38,9 @@ export class ResortListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getResort();
-
+    this.route.queryParams.subscribe(param=>{
+      this.booking_id=param['booking_id']
+    })
 
   }
 

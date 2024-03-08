@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiUserServiceRepo } from '../../Repository/user_repository';
+import { Booking, BookingResponse } from '../../Model/BookingDetaills/Booking';
+import { BookingService } from '../../Service/BookingService';
+import { GuestService } from '../../Service/GuestService';
+import { DateService } from '../../Service/DateTime';
 import { FormControl, FormGroup } from '@angular/forms';
-import { BookingResponse } from '../../Model/BookingDetaills/Booking';
 import { RoomResponse } from '../../Model/RoomTypes/rooms';
 import { Location } from '@angular/common';
 
@@ -12,9 +15,21 @@ import { Location } from '@angular/common';
   styleUrls: ['./update-booking-details.component.scss']
 })
 export class UpdateBookingDetailsComponent implements OnInit {
-
   booking_id!: number;
   booking_details!: BookingResponse;
+  updatedvalues: any[] = [];
+  resortid!:any;
+
+  constructor(
+    private route: ActivatedRoute,
+    private repo: ApiUserServiceRepo,
+    private router: Router,
+    private booking: BookingService,
+    private guest: GuestService,
+    private dateService:DateService,
+    private _location:Location
+  ) {}
+
   resort_name!: string;
   bookedRoomsArray: RoomResponse[]=[];
   GuestList: any;
@@ -25,16 +40,14 @@ export class UpdateBookingDetailsComponent implements OnInit {
   food_choice: string = '';
   employee_user_ids:string='';
 
-  constructor(private route: ActivatedRoute,
-    private repo: ApiUserServiceRepo,
-    private _location:Location) { }
-
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.booking_id = +params['id'];
       this.resort_name = params['resort_name']
     });
     this.getBookingDetails();
+    this.updatedvalues = this.booking.getUpdatedBookings();
+    console.log(this.updatedvalues);
   }
 
   bookingUpdate = new FormGroup({
@@ -71,6 +84,13 @@ export class UpdateBookingDetailsComponent implements OnInit {
         this.totalList = this.EmployeeList.concat(this.GuestList);
         this.bookedRoomsArray = this.booking_details.bookingRoomRequests;
         this.food_choice = this.booking_details.food_choice;
+        
+        this.resortid = btoa(this.booking_details.resort_id.toString());
+    
+        this.guest.addEmployee(this.booking_details.employees);
+        this.guest.addGuest(this.booking_details.guests);
+        this.dateService.checkInDate = new Date(this.booking_details.check_in_date);
+        this.dateService.checkOutDate = new Date(this.booking_details.check_out_date);
 
       }
     );
@@ -149,8 +169,37 @@ export class UpdateBookingDetailsComponent implements OnInit {
 
   changeDate(id: number) {
 
+
+
+      
   }
 
+  changeCheckinout() {
+    this.router.navigate(['/user/Resortlist'], {
+      queryParams: { booking_id: this.booking_id },
+    });
+  }
+
+  room() {
+    if (this.booking_details && Array.isArray(this.booking_details.bookingRoomRequests)) {
+      this.booking_details.bookingRoomRequests.forEach((roomRequest: any) => {
+        const roomTypeId = roomRequest.room_type_id;
+        const roomTypeCount = roomRequest.room_type_count;
+
+        console.log(`Room Type ID: ${roomTypeId}, Room Type Count: ${roomTypeCount}`);
+
+        this.router.navigate(['/user/Resortrooms'], {
+          queryParams:
+            { ID: this.resortid, room_id: roomTypeId, room_count: roomTypeCount }
+        });
+
+      });
+
+    } else {
+      console.log("Booking details or bookingRoomRequests array not found");
+    }
+
+  }
 
   back()
   {

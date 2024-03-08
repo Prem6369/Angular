@@ -10,7 +10,7 @@ export class GuestService {
   constructor() { }
 
   getGuests(): any[] {
-    debugger;
+  
     return this.guests;
   }
 

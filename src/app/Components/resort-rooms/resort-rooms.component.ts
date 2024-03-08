@@ -48,16 +48,26 @@ export class ResortRoomsComponent implements OnInit {
   Room_details: any[] = [];
   employee_user_ids: string = '';
 
+  roomTypes_Req:any[]=[]
+  bookedRoomsArray:any[]=[]
+  booking_id!:number;
 
+  roomid!:number; 
+  roomcount!:number;
 
   constructor(private repository:ApiServiceRepo,private session: SessionServiceService, private route: ActivatedRoute, private dateService: DateService, private bookingService: BookingService, private guestService: GuestService, private httpclient: HttpClient, private router: Router, private routing: ActivatedRoute) { }
   check_in_date!: Date;
   check_out_date!: Date;
 
   ngOnInit(): void {
-
+debugger;
     this.route.queryParams.subscribe(params => {
       this.Resort_id = params['ID'];
+      this.booking_id =params['BookingId'];
+      this.roomid =params ['room_id'];
+      this.roomcount =params['room_count']
+      
+
       this.getResortDetails();
     });
     this.user_id = this.session.getUserId();
@@ -67,6 +77,7 @@ export class ResortRoomsComponent implements OnInit {
   }
 
   getResortDetails() {
+    debugger;
     const decrptyId = (atob(this.Resort_id.toString()))
 
     this.repository.getResortById(decrptyId).subscribe(
@@ -114,31 +125,54 @@ export class ResortRoomsComponent implements OnInit {
 
   increment(room_type_id: number, name: string, description: string, number_of_rooms: number) {
     if (!this.bookedRooms[room_type_id]) {
-      this.bookedRooms[room_type_id] = { count: 0, name: name, description: description, number_of_rooms: number_of_rooms };
+        this.bookedRooms[room_type_id] = { count: 0, name: name, description: description, number_of_rooms: number_of_rooms };
     }
-    if (number_of_rooms > this.bookedRooms[room_type_id].count) {
-      this.bookedRooms[room_type_id].count++;
-      this.updateSelectedRooms();
+    if (this.roomid === room_type_id && this.roomcount > this.bookedRooms[room_type_id].count) {
+        this.bookedRooms[room_type_id].count++;
+        this.updateSelectedRooms();
     } else {
-      alert(`Only ${number_of_rooms} Rooms Available`)
+        alert(`Only ${this.roomcount} Rooms Available`);
     }
-  }
+}
 
-
-  decrement(room_type_id: number) {
+decrement(room_type_id: number) {
     if (this.bookedRooms[room_type_id] && this.bookedRooms[room_type_id].count > 0) {
-      this.bookedRooms[room_type_id].count--;
-      this.updateSelectedRooms();
+        this.bookedRooms[room_type_id].count--;
+        this.updateSelectedRooms();
     }
-  }
+}
 
-
-  updateSelectedRooms() {
+updateSelectedRooms() {
     this.totalSelectedRooms = Object.values(this.bookedRooms).reduce((total, room) => total + room.count, 0);
-  }
+}
+
 
   next() {
-    if ((this.employee_count != 0 || this.guest_count != 0) && this.totalSelectedRooms != 0) {
+    debugger;
+    if(this.booking_id){
+      this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
+        room_type_id: key,
+        room_type_count: value.count,
+        name: value.name,
+        description: value.description
+      }));
+      this.roomTypes_Req = Object.entries(this.bookedRooms).map(([key, value]) => ({
+        room_type_id: Number(key),
+        room_type_count: value.count,
+      }));
+      const updatebooking={
+        resort_id: this.Resort_id,
+        check_in_date: this.check_in_date,
+        check_out_date: this.check_out_date,
+        roomTypes_Req: this.roomTypes_Req
+      }
+      this.bookingService.UpdatedBooking(updatebooking);
+      this.router.navigate(['/user/update-booking'], { queryParams: { updatedvalues: updatebooking,id:this.booking_id } });
+
+    }
+    else{ 
+      debugger;  
+      if ((this.employee_count != 0 || this.guest_count != 0) && this.totalSelectedRooms != 0) {
       const booking_details = {
         user_id: this.user_id,
         resort_id: this.Resort_id,
@@ -155,7 +189,8 @@ export class ResortRoomsComponent implements OnInit {
       this.bookingService.addBooking(booking_details);
 
       this.router.navigate(['/user/booking-preview'], { queryParams: { ID: this.Resort_id } });
-    }
+    }}
+ 
 
 
   }
@@ -165,7 +200,7 @@ export class ResortRoomsComponent implements OnInit {
   removeMember(user_id: number, type: string) {
     debugger;
     let indexToRemove: number = -1;
-
+    
     if (type === 'Employee') {
         indexToRemove = this.total_employees.findIndex((member: UserProfile) => member.user_id === user_id);
         if (indexToRemove !== -1) {

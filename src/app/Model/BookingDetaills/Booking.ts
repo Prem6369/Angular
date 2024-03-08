@@ -50,6 +50,7 @@ export class BookingResponse {
         public stay_request_id: number,
         public user_id: number
     ){}
+
 }
 
   
