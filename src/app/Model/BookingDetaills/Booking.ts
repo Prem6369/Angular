@@ -1,3 +1,6 @@
+import { GuestRespose } from "../GuestDetails/guestDetails";
+import { RoomResponse } from "../RoomTypes/rooms";
+
 export class Booking{
     constructor(
     public user_id: number,
@@ -28,7 +31,7 @@ export class Booking{
 export class BookingResponse {
     constructor(
         public  approver_id: number,
-        public  bookingRoomRequests: any[],
+        public  bookingRoomRequests: RoomResponse[],
         public  booking_id: number,
         public booking_status: string,
         public check_in_date: string,
@@ -39,7 +42,7 @@ export class BookingResponse {
         public food_choice: string,
         public food_required_status: string,
         public guest_count: number,
-        public guests: any[],
+        public guests: GuestRespose[],
         public member_count: number,
         public message: string,
         public resort_id: number,
@@ -47,4 +50,7 @@ export class BookingResponse {
         public stay_request_id: number,
         public user_id: number
     ){}
+
 }
+
+  

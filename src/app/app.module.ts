@@ -51,7 +51,7 @@ import { AdminProfileComponent } from './Components/admin-profile/admin-profile.
 import { ApproverProfileComponent } from './Components/approver-profile/approver-profile.component';
 import { RoomListComponent } from './Components/room-list/room-list.component';
 import { UpdateBookingDetailsComponent } from './Components/update-booking-details/update-booking-details.component';
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -107,6 +107,7 @@ import { UpdateBookingDetailsComponent } from './Components/update-booking-detai
     AsyncPipe,MatInputModule,
     MatChipsModule,
     MatIconModule,
+    MatButtonToggleModule
   ],
   providers: [provideNativeDateAdapter()],
   bootstrap: [AppComponent]

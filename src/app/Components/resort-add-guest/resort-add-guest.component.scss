@@ -46,32 +46,32 @@ button {
   margin-right: 10px; 
 }
 
-input[type="text"],
-input[type="password"],
-select {
-    border: none;
-    outline: none;
-    color: black;
-    width: 90%;
-}
- 
-section {
-  border: 2px solid;
-  border-radius: 10px;
-  padding: 1em;
-  width:300px;
-  margin-left: 30px;
- 
-}
+  input[type="text"],
+  input[type="password"],
+  select {
+      border: none;
+      outline: none;
+      color: black;
+      width: 90%;
+  }
+  
+  section {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 1em;
+    width:300px;
+    margin-left: 30px;
+  
+  }
 
-section h2 {
-  float: left;
- margin: -1.7em 0 0;
-  padding: 0 .5em;
-  background: #fff;
-  font-size: 1em;
-  font-weight: normal;
-}
+  section h2 {
+    float: left;
+  margin: -1.7em 0 0;
+    padding: 0 .5em;
+    background: #fff;
+    font-size: 1em;
+    font-weight: normal;
+  }
 
 .bodycontainer
 {

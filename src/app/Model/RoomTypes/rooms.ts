@@ -19,3 +19,14 @@ export class addRoomTypes {
    ){}
    }
    
+   export class RoomResponse {
+      constructor(
+         booking_id:number,
+         public room_type_id: number,
+         public name: string,
+         public description: string,
+         public resort_id: number,
+         public room_type_count: number,
+      ){}
+      }
+      
