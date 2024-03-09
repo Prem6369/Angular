@@ -32,4 +32,8 @@ export class ApiUserServiceRepo{
         const params={booking_id:booking_id}
         return this.api.get('getbookingbyid','resorts',params)
     }
+
+    getAllUsers():Observable<any>{
+        return this.api.get('getusers','resorts');
+    }
 }

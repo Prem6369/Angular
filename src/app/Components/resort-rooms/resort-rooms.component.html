@@ -75,8 +75,8 @@
             <tr *ngFor="let member of total_list" class="border-bottom">
               <td>
                 <div class="icon text-center" >
-                  <div class="initials" [style.background-color]="getInitials(member.first_name, member.last_name, member.username).backgroundColor"  >
-                    {{ getInitials(member.first_name, member.last_name, member.username).initials }}
+                  <div class="initials" [style.background-color]="getInitials(member.first_name, member.last_name, member.username, member).backgroundColor">
+                    {{ getInitials(member.first_name, member.last_name, member.username, member).initials }}
                   </div>
                 </div>
               </td>

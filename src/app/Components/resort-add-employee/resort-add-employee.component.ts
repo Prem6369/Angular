@@ -7,6 +7,7 @@ import { GuestService } from '../../Service/GuestService';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserProfile } from '../../Model/userProfile/userProfile';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { ApiUserServiceRepo } from '../../Repository/user_repository';
 
 @Component({
   selector: 'app-resort-add-employee',
@@ -31,7 +32,8 @@ export class ResortAddEmployeeComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private _location: Location,
-    private guestService: GuestService
+    private guestService: GuestService,
+    private repository:ApiUserServiceRepo
   ) {
     this.filteredOptions = this.employees.get('username')!.valueChanges.pipe(
       startWith(''),
@@ -117,17 +119,31 @@ export class ResortAddEmployeeComponent implements OnInit {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiI3NTEwZDVjNy1mYTNhLTRiYzctYjEzNy1lZjc1ZmVhNWYzZjIiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiMjIxNTljNmItYjY1MC00ZWFlLTg4ODMtNzRhMzgwN2QyZTg4IiwibmJmIjoxNzA4NjcxMTg1LCJleHAiOjE3MDg3MzExODUsImlhdCI6MTcwODY3MTE4NSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.D7SccInUXQRcXjY1UpMIevwkFz3WFhpUVlSuKWFkGIY';
 
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-
-    this.httpClient.get<UserProfile[]>(url, { headers }).subscribe(
-      (response: UserProfile[]) => {
+    this.repository.getAllUsers().subscribe(
+      (response:UserProfile[])=>{
         this.userProfile = response;
         console.log("Object", this.userProfile);
+
       }
-    );
+    )
+
   }
 
   
-  getInitials(username: string): { initials: string, backgroundColor: string } {
+  getInitials(username: string, user_id: number): { initials: string, backgroundColor: string } {
+    const storedEmployee = this.employee.find(emp => emp.user_id === user_id);
+    let backgroundColor = '';
+    if (storedEmployee && storedEmployee.backgroundColor) {
+      backgroundColor = storedEmployee.backgroundColor;
+    } else {
+      const colors = ['orange', 'green', 'blue', 'red'];
+      const chosenColor = Math.floor(Math.random() * colors.length);
+      backgroundColor = colors[chosenColor];
+      if (storedEmployee) {
+        storedEmployee.backgroundColor = backgroundColor;
+      }
+    }
+  
     let initials = '';
     if (username) {
       initials += username.charAt(0);
@@ -135,13 +151,10 @@ export class ResortAddEmployeeComponent implements OnInit {
         initials += username.charAt(1);
       }
     }
-
-    const colors = ['orange', 'lightgreen', 'skyblue', 'red'];
-    const chosenColor = Math.floor(Math.random() * colors.length);
-    const backgroundColor = colors[chosenColor];
-
+  
     return { initials: initials.toUpperCase(), backgroundColor };
   }
+  
 
 
 

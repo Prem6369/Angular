@@ -58,6 +58,8 @@ export class ResortRoomsComponent implements OnInit {
   constructor(private repository:ApiServiceRepo,private session: SessionServiceService, private route: ActivatedRoute, private dateService: DateService, private bookingService: BookingService, private guestService: GuestService, private httpclient: HttpClient, private router: Router, private routing: ActivatedRoute) { }
   check_in_date!: Date;
   check_out_date!: Date;
+  bookingIdFromRoom!:number;
+  
 
   ngOnInit(): void {
 debugger;
@@ -66,7 +68,8 @@ debugger;
       this.booking_id =params['BookingId'];
       this.roomid =params ['room_id'];
       this.roomcount =params['room_count']
-      
+      this.bookingIdFromRoom =params['bookingIdFromRoom']
+
 
       this.getResortDetails();
     });
@@ -123,31 +126,33 @@ debugger;
   }
 
 
-  increment(room_type_id: number, name: string, description: string, number_of_rooms: number) {
+increment(room_type_id: number, name: string, description: string, number_of_rooms: number) {
     if (!this.bookedRooms[room_type_id]) {
-        this.bookedRooms[room_type_id] = { count: 0, name: name, description: description, number_of_rooms: number_of_rooms };
+      this.bookedRooms[room_type_id] = { count: 0, name: name, description: description, number_of_rooms: number_of_rooms };
     }
-    if (this.roomid === room_type_id && this.roomcount > this.bookedRooms[room_type_id].count) {
-        this.bookedRooms[room_type_id].count++;
-        this.updateSelectedRooms();
+    if (number_of_rooms > this.bookedRooms[room_type_id].count) {
+      this.bookedRooms[room_type_id].count++;
+      this.updateSelectedRooms();
     } else {
-        alert(`Only ${this.roomcount} Rooms Available`);
+      alert(`Only ${number_of_rooms} Rooms Available`)
     }
-}
+  }
 
-decrement(room_type_id: number) {
+
+  decrement(room_type_id: number) {
     if (this.bookedRooms[room_type_id] && this.bookedRooms[room_type_id].count > 0) {
-        this.bookedRooms[room_type_id].count--;
-        this.updateSelectedRooms();
+      this.bookedRooms[room_type_id].count--;
+      this.updateSelectedRooms();
     }
-}
+  }
 
-updateSelectedRooms() {
+  
+  updateSelectedRooms() {
     this.totalSelectedRooms = Object.values(this.bookedRooms).reduce((total, room) => total + room.count, 0);
-}
-
+  }
 
   next() {
+    
     debugger;
     if(this.booking_id){
       this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
@@ -169,6 +174,23 @@ updateSelectedRooms() {
       this.bookingService.UpdatedBooking(updatebooking);
       this.router.navigate(['/user/update-booking'], { queryParams: { updatedvalues: updatebooking,id:this.booking_id } });
 
+    }
+    else if(this.roomid){
+      debugger;
+      this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
+        room_type_id: key,
+        room_type_count: value.count,
+        name: value.name,
+        description: value.description
+      }));
+      const updatedroom={
+        resort_id: this.Resort_id,
+        roomTypes_Req: this.bookedRoomsArray
+      }
+      debugger;
+      this.bookingService.Updatedrooms(updatedroom);
+      debugger;
+      this.router.navigate(['/user/update-booking'], { queryParams: { id: this.bookingIdFromRoom } });
     }
     else{ 
       debugger;  
@@ -252,7 +274,13 @@ updateSelectedRooms() {
     }
   }
 
-  getInitials(firstName: string, lastName: string, username: string): { initials: string, backgroundColor: string } {
+  getInitials(firstName: string, lastName: string, username: string, guest: any): { initials: string, backgroundColor: string } {
+    if (!guest.color) {
+      const colors = ['orange', 'green', 'blue', 'red'];
+      const chosenColor = Math.floor(Math.random() * colors.length);
+      guest.color = colors[chosenColor];
+    }
+  
     let initials = '';
     if (firstName) {
       initials += firstName.charAt(0);
@@ -266,13 +294,10 @@ updateSelectedRooms() {
         initials += username.charAt(1);
       }
     }
-
-    const colors = ['orange', 'lightgreen', 'skyblue', 'red'];
-    const chosenColor = Math.floor(Math.random() * colors.length);
-    const backgroundColor = colors[chosenColor];
-
-    return { initials: initials.toUpperCase(), backgroundColor };
+  
+    return { initials: initials.toUpperCase(), backgroundColor: guest.color };
   }
+  
 
 
 
