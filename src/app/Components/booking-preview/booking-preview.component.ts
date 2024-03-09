@@ -63,7 +63,7 @@ export class BookingPreviewComponent implements OnInit {
   initializer() {
     this.user_id = this.session.getUserId();
     this.guest = this.guestService.getGuests().map(guest => {
-      const { type, guest_id, ...guestWithoutTypeAndId } = guest;
+      const { type, guest_user_id, ...guestWithoutTypeAndId } = guest;
       return guestWithoutTypeAndId;
   });
   

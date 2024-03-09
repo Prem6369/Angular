@@ -38,11 +38,11 @@ export class BookingResponse {
         public check_out_date: string,
         public  created_date: string,
         public employee_count: number,
-        public employees: any[],
+        public employees: any,
         public food_choice: string,
         public food_required_status: string,
         public guest_count: number,
-        public guests: GuestRespose[],
+        public guests: any,
         public member_count: number,
         public message: string,
         public resort_id: number,
@@ -52,5 +52,10 @@ export class BookingResponse {
     ){}
 
 }
+
+export interface Updatedroom {
+
+    roomTypes_Req:any
+ }
 
   

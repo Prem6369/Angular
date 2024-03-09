@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Booking_details, UpdatedBooking_details } from "../Model/bookingDetails";
+import { Updatedroom } from "../Model/BookingDetaills/Booking";
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { Booking_details, UpdatedBooking_details } from "../Model/bookingDetails
 export class BookingService {
   bookings!:Booking_details;
   updatedBooking!:UpdatedBooking_details;
+  updatedrooms!:Updatedroom;
   constructor() { }
 
 
@@ -26,4 +28,14 @@ export class BookingService {
     return this.updatedBooking;
   }
   
+  Updatedrooms(updatedroos:Updatedroom):void{
+    this.updatedrooms=updatedroos;
+  }
+  getUpdatedRoom():any{
+
+    return this.updatedrooms;
+  }
+
+
+
 }

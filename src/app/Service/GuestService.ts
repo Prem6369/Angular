@@ -10,7 +10,6 @@ export class GuestService {
   constructor() { }
 
   getGuests(): any[] {
-  
     return this.guests;
   }
 
@@ -26,6 +25,10 @@ export class GuestService {
     return this.employees;
   }
 
+  addUpdateGuest(guest: any[]) {
+    debugger;
+    this.guests.push(...guest);
+  }
  resetService()
   {
     this.employees.splice(0);

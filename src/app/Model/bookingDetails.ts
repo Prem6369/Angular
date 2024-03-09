@@ -10,10 +10,12 @@ export interface Booking_details {
    Total_List: any[]
 }
 
-export interface UpdatedBooking_details {
-
-   check_in_date: Date,
-   check_out_date: Date,
-   resort_id:number,
-   roomTypes_Req:any
+export class UpdatedBooking_details {
+constructor(
+   public check_in_date: Date,
+   public check_out_date: Date,
+   public  resort_id:number,
+   public roomTypes_Req:any
+) {
+}
 }
