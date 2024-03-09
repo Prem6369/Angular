@@ -21,6 +21,8 @@ export class ResortAddEmployeeComponent implements OnInit {
 
   employees = new FormGroup({
     username: new FormControl(''),
+    first_name:new FormControl(''),
+    last_name:new FormControl(''),
     user_id: new FormControl(),
     phone_number: new FormControl(''),
     type: new FormControl('')
@@ -41,9 +43,12 @@ export class ResortAddEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    debugger;
     const storedEmployees = this.guestService.getEmployee();
     if (storedEmployees && storedEmployees.length > 0) {
+   //   console.log("from add employee:",storedEmployees);
       this.employee = storedEmployees;
+      console.log("from add employee:",this.employee);
     }
   }
 

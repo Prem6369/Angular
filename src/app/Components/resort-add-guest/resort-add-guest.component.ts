@@ -14,8 +14,11 @@ import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
 export class ResortAddGuestComponent implements OnInit {
   referrer_user_id!: number;
   guestDetails: any;
-  guest!: any[];
-  guest_id!: number;
+  guest!: any;
+  guest_user_id!: number;
+  booking_id!:number;
+
+  update_guest:any[]=[];
 
   constructor(private session: SessionServiceService,
     private _location: Location,
@@ -29,11 +32,15 @@ export class ResortAddGuestComponent implements OnInit {
     this.guest = this.guestService.getGuests();
 
     this.route.queryParams.subscribe((params) => {
-      this.guest_id = +params['id'];
-      if (this.guest_id) {
-        this.guestDetails = this.getValuesById(this.guest_id);
+      debugger;
+      this.guest_user_id = +params['id'];
+      this.booking_id = +params['booking_id'];
+      if (this.guest_user_id) {
+        this.guestDetails = this.getValuesById(this.guest_user_id);
+        console.log("From add guest", this.guestDetails);
+
         this.Addguest.patchValue({
-          guest_id: this.guest_id,
+          guest_user_id: this.guest_user_id,
           first_name: this.guestDetails.first_name,
           last_name: this.guestDetails.last_name,
           email: this.guestDetails.email,
@@ -43,28 +50,34 @@ export class ResortAddGuestComponent implements OnInit {
           address: this.guestDetails.address,
           official_id_card_no: this.guestDetails.official_id_card_no,
           official_id_image_url: this.guestDetails.official_id_image_url,
-          type: this.guestDetails.type,
           referrer_user_id: this.guestDetails.referrer_user_id
         });
-        this.removeExistGuest(this.guest_id);
+
+        if (!this.booking_id) {
+          this.Addguest.patchValue({
+            type: this.guestDetails.type
+          });
+        }
+         this.removeExistGuest(this.guest_user_id);
       }
     });
-    
   }
 
   removeExistGuest(id:number){
     debugger;
-    const index=this.guest.findIndex((member:any)=>member.guest_id===id);
-    this.guest.splice(index,1);
+      const index=this.guest.findIndex((member:any)=>member.guest_user_id===id);
+      this.guest.splice(index,1);
+
+
   }
-  getValuesById(guest_id: number): GuestDetails[] {
+  getValuesById(guest_user_id: number): GuestDetails[] {
     debugger;
-    const elementIndex: number = this.guest.findIndex((member: any) => member.guest_id === guest_id);
-    if (elementIndex !== -1) {
-      return this.guest[elementIndex];
-    } else {
-      return [];
-    }
+      const elementIndex: number = this.guest.findIndex((member: any) => member.guest_user_id === guest_user_id);
+      if (elementIndex !== -1) {
+        return this.guest[elementIndex];
+      } else {
+        return [];
+      }
   }
 
    getRandomInt(min: number, max: number): number {
@@ -72,7 +85,7 @@ export class ResortAddGuestComponent implements OnInit {
   }
 
   Addguest = new FormGroup({
-    guest_id: new FormControl(),
+    guest_user_id: new FormControl(),
     first_name: new FormControl(null, Validators.required),
     last_name: new FormControl(null, Validators.required),
     email: new FormControl(null, Validators.required),
@@ -88,41 +101,45 @@ export class ResortAddGuestComponent implements OnInit {
 
 
 
-
   saveNew() {
-    debugger
     if (this.Addguest.valid) {
-      this.setType()
-      this.guestDetails = this.Addguest.value;
-      this.guestService.addGuest(this.guestDetails);
-      this.Addguest.reset();
+      if (!this.booking_id) {
+        this.setType();
+        this.guestDetails = this.Addguest.value;
+        this.guestService.addGuest(this.guestDetails);
+      } else {
+        this.update_guest.push(this.Addguest.value); 
+        this.guestService.addUpdateGuest(this.update_guest); 
+      }
+      this._location.back();
+    } else {
+      alert("Please fill all fields");
     }
-    else {
-      alert("please Fill All Fileds")
-    }
-
   }
-
+  
   save() {
     debugger;
-    console.log(this.Addguest.valid)
     if (this.Addguest.valid) {
-      this.setType()
-      this.guestDetails = this.Addguest.value;
-      this.guestService.addGuest(this.guestDetails);
-      this._location.back();
+      if (!this.booking_id) {
+        this.setType();
+        this.guestDetails = this.Addguest.value;
+        this.guestService.addGuest(this.guestDetails);
+      } else {
+        this.update_guest.push(this.Addguest.value); 
+        this.guestService.addUpdateGuest(this.update_guest); 
+      }
+    } else {
+      alert("Please fill all fields");
     }
-    else {
-      alert("please Fill All Fileds")
-    }
+    this._location.back();
   }
 
   setType() {
     debugger;
-    if(this.guest_id!==null && this.guest_id!==undefined)
+    if(this.guest_user_id!==null && this.guest_user_id!==undefined)
     {
       debugger;
-      this.Addguest.controls['guest_id'].setValue(this.getRandomInt(1000, 9999))
+      this.Addguest.controls['guest_user_id'].setValue(this.getRandomInt(1000, 9999))
       this.Addguest.controls['type'].setValue("Guest");
       this.Addguest.controls['referrer_user_id'].setValue(this.referrer_user_id)
     }

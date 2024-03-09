@@ -21,7 +21,7 @@ export class addRoomTypes {
    
    export class RoomResponse {
       constructor(
-         booking_id:number,
+         public booking_id:number,
          public room_type_id: number,
          public name: string,
          public description: string,

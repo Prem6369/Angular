@@ -40,6 +40,7 @@ export class ResortRoomsComponent implements OnInit {
   employee_count!: number;
   guest_count!: number;
   user_id!: number;
+  bookingIdFromRoom!:number;
 
   bookedRooms: { [key: string]: { count: number, name: string, description: string, number_of_rooms: number } } = {};
   Resort_id!: number;
@@ -66,6 +67,7 @@ debugger;
       this.booking_id =params['BookingId'];
       this.roomid =params ['room_id'];
       this.roomcount =params['room_count']
+      this.bookingIdFromRoom=params['bookingIdFromRoom']
       
 
       this.getResortDetails();
@@ -105,11 +107,16 @@ debugger;
   initializer() {
     this.check_in_date = this.dateService.checkInDate;
     this.check_out_date = this.dateService.checkOutDate;
+    debugger;
     this.total_guest = this.guestService.getGuests();
     this.total_employees = this.guestService.getEmployee();
-    this.total_list = this.total_guest.concat(this.total_employees)
+    console.log("From total_employees:",this.total_employees);
+    console.log("From total_guest:",this.total_guest);
+      this.total_list = this.total_employees.concat(this.total_guest)
+ 
+    console.log("From total_list:",this.total_list);
     this.employee_count = this.total_employees.length;
-    this.guest_count = this.total_guest.length;
+      this.guest_count = this.total_guest.length;
     this.total_count = this.employee_count + this.guest_count;
   }
 
@@ -122,29 +129,30 @@ debugger;
     });
   }
 
-
   increment(room_type_id: number, name: string, description: string, number_of_rooms: number) {
     if (!this.bookedRooms[room_type_id]) {
-        this.bookedRooms[room_type_id] = { count: 0, name: name, description: description, number_of_rooms: number_of_rooms };
+      this.bookedRooms[room_type_id] = { count: 0, name: name, description: description, number_of_rooms: number_of_rooms };
     }
-    if (this.roomid === room_type_id && this.roomcount > this.bookedRooms[room_type_id].count) {
-        this.bookedRooms[room_type_id].count++;
-        this.updateSelectedRooms();
+    if (number_of_rooms > this.bookedRooms[room_type_id].count) {
+      this.bookedRooms[room_type_id].count++;
+      this.updateSelectedRooms();
     } else {
-        alert(`Only ${this.roomcount} Rooms Available`);
+      alert(`Only ${number_of_rooms} Rooms Available`)
     }
-}
-
-decrement(room_type_id: number) {
+  }
+ 
+ 
+  decrement(room_type_id: number) {
     if (this.bookedRooms[room_type_id] && this.bookedRooms[room_type_id].count > 0) {
-        this.bookedRooms[room_type_id].count--;
-        this.updateSelectedRooms();
+      this.bookedRooms[room_type_id].count--;
+      this.updateSelectedRooms();
     }
-}
-
-updateSelectedRooms() {
+  }
+ 
+ 
+  updateSelectedRooms() {
     this.totalSelectedRooms = Object.values(this.bookedRooms).reduce((total, room) => total + room.count, 0);
-}
+  }
 
 
   next() {
@@ -156,19 +164,29 @@ updateSelectedRooms() {
         name: value.name,
         description: value.description
       }));
-      this.roomTypes_Req = Object.entries(this.bookedRooms).map(([key, value]) => ({
-        room_type_id: Number(key),
-        room_type_count: value.count,
-      }));
       const updatebooking={
         resort_id: this.Resort_id,
         check_in_date: this.check_in_date,
         check_out_date: this.check_out_date,
-        roomTypes_Req: this.roomTypes_Req
+        roomTypes_Req: this.bookedRoomsArray
       }
       this.bookingService.UpdatedBooking(updatebooking);
-      this.router.navigate(['/user/update-booking'], { queryParams: { updatedvalues: updatebooking,id:this.booking_id } });
+      this.router.navigate(['/user/update-booking'], { queryParams: { ID: this.Resort_id,id:this.booking_id } });
 
+    }
+    else if(this.roomid){
+      this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
+        room_type_id: key,
+        room_type_count: value.count,
+        name: value.name,
+        description: value.description
+      }));
+      const updatedroom={
+        resort_id: this.Resort_id,
+        roomTypes_Req: this.bookedRoomsArray
+      }
+      this.bookingService.Updatedrooms(updatedroom);
+      this.router.navigate(['/user/update-booking'], { queryParams: { bookingIdFromRoom: this.bookingIdFromRoom,id:this.booking_id  } });
     }
     else{ 
       debugger;  
@@ -197,42 +215,91 @@ updateSelectedRooms() {
 
 
 
-  removeMember(user_id: number, type: string) {
+  removeMember(user_id: number, type?: string) {
     debugger;
-    let indexToRemove: number = -1;
-    
-    if (type === 'Employee') {
-        indexToRemove = this.total_employees.findIndex((member: UserProfile) => member.user_id === user_id);
-        if (indexToRemove !== -1) {
-            this.total_employees.splice(indexToRemove, 1);
-            this.employee_count--;
+    if (this.booking_id) {
+      debugger;
+      const indexToRemove = this.total_employees.findIndex((member: UserProfile) => member.user_id === user_id);
+      const index = this.total_guest.findIndex((member: any) => member.guest_user_id === user_id);
+      if (indexToRemove !== -1 || index !== -1) {
+        if (index!==-1) {
+          this.total_guest.splice(indexToRemove, 1);
+          this.guest_count--;
+          this.initializer();
         }
-    } else if (type === 'Guest') {
-        indexToRemove = this.total_guest.findIndex((member: any) => member.guest_id === user_id);
-        if (indexToRemove !== -1) {
+        else {
+          this.total_employees.splice(indexToRemove, 1);
+          this.employee_count--;
+          this.initializer();
+        }
+        if (index || indexToRemove) {
+          const listIndex = this.total_list.findIndex((member: UserProfile) => member.user_id === user_id);
+          if (listIndex !== -1) {
+            this.total_list.splice(listIndex, 1);
+            this.total_count--;
+          }
+        }
+        else if (this.total_guest) {
+          const indexToRemove = this.total_guest.findIndex((member: any) => member.guest_user_id === user_id);
+          if (indexToRemove !== -1) {
             this.total_guest.splice(indexToRemove, 1);
             this.guest_count--;
             this.initializer();
+          }
+          if (this.total_employees.user_id || this.total_guest.guest_user_id) {
+            const listIndex = this.total_list.findIndex((member: UserProfile) => member.user_id === user_id);
+            if (listIndex !== -1) {
+              this.total_list.splice(listIndex, 1);
+              this.total_count--;
+            }
+
+            else {
+              debugger;
+              if (type === 'Employee') {
+                const indexToRemove = this.total_employees.findIndex((member: UserProfile) => member.user_id === user_id);
+                if (indexToRemove !== -1) {
+                  this.total_employees.splice(indexToRemove, 1);
+                  this.employee_count--;
+                }
+              } else if (type === 'Guest') {
+                const indexToRemove = this.total_guest.findIndex((member: any) => member.guest_user_id === user_id);
+                if (indexToRemove !== -1) {
+                  this.total_guest.splice(indexToRemove, 1);
+                  this.guest_count--;
+                  this.initializer();
+                }
+              }
+              if (type === 'Employee' || type === 'Guest') {
+                const listIndex = this.total_list.findIndex((member: UserProfile) => member.user_id === user_id);
+                if (listIndex !== -1) {
+                  this.total_list.splice(listIndex, 1);
+                  this.total_count--;
+                }
+              }
+            }
+          }
         }
+
+
+      }
+
     }
-
-    if (type === 'Employee' || type === 'Guest') {
-        const listIndex = this.total_list.findIndex((member: UserProfile) => member.user_id === user_id);
-        if (listIndex !== -1) {
-            this.total_list.splice(listIndex, 1);
-            this.total_count--;
-        }
-    }
-}
+  }
 
 
-  
-
-  editGuest(guest_id: number) {
+  editGuest(guest_user_id: number) {
     debugger;
-    const index=this.total_list.findIndex((member:any)=>member.guest_id===guest_id);
-    this.total_list.splice(index,1);
-    this.router.navigate(['/user/Addguest'], { queryParams: { id:guest_id } });
+    if(this.booking_id)
+    {
+      const index=this.total_list.findIndex((member:any)=>member.guest_user_id===guest_user_id);
+      this.total_list.splice(index,1);
+      this.router.navigate(['/user/Addguest'], { queryParams: { id:guest_user_id,booking_id:this.booking_id }});
+    }
+    else{
+      const index=this.total_list.findIndex((member:any)=>member.guest_user_id===guest_user_id);
+      this.total_list.splice(index,1);
+      this.router.navigate(['/user/Addguest'], { queryParams: { id:guest_user_id } });
+    }
     }
 
 
