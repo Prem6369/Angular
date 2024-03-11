@@ -109,7 +109,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatChipsModule,
     MatIconModule,
     MatButtonToggleModule,
-     MatTooltipModule
+     MatTooltipModule,
+
   ],
   providers: [provideNativeDateAdapter()],
   bootstrap: [AppComponent]

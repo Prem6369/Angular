@@ -1,5 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
 import { getRoomTypes } from '../../Model/RoomTypes/rooms';
@@ -11,6 +10,7 @@ import { SessionServiceService } from '../../Service/Session/session-service.ser
 import { UserProfile } from '../../Model/userProfile/userProfile';
 import { ApiServiceRepo } from '../../Repository/resort_repository';
 import { Location } from '@angular/common';
+import { MatTabGroup } from '@angular/material/tabs';
 
 
 @Component({
@@ -19,7 +19,10 @@ import { Location } from '@angular/common';
   styleUrls: ['./resort-rooms.component.scss']
 })
 
-export class ResortRoomsComponent implements OnInit {
+export class ResortRoomsComponent implements OnInit  {
+
+  @ViewChild('matTabGroup') matTabGroup!: MatTabGroup;
+
   resortlist: ResortDetails[] = [];
   ResortRoom: getRoomTypes[] = [];
   guestDetails: GuestDetails[] = [];
@@ -42,7 +45,7 @@ export class ResortRoomsComponent implements OnInit {
   user_id!: number;
   bookingIdFromRoom!:number;
 
-  bookedRooms: { [key: string]: { count: number, name: string, description: string, number_of_rooms: number } } = {};
+  bookedRooms: { [key: string]: { count: number, name: string, description: string, number_of_rooms: number,resort_id:number } } = {};
   Resort_id!: number;
   Room_id!: number;
 
@@ -69,7 +72,12 @@ export class ResortRoomsComponent implements OnInit {
   
 
   ngOnInit(): void {
-debugger;
+
+    setTimeout(() => {
+      this.matTabGroup.selectedIndex = 1;
+    });
+
+    
     this.route.queryParams.subscribe(params => {
       this.Resort_id = params['ID'];
       this.booking_id =params['BookingId'];
@@ -86,6 +94,11 @@ debugger;
     this.calculateDayAndNight();
   }
 
+  
+  selectTab2() {
+    this.matTabGroup.selectedIndex = 1; 
+  }
+  
   getResortDetails() {
     debugger;
     const decrptyId = (atob(this.Resort_id.toString()))
@@ -103,7 +116,8 @@ debugger;
               name: category.name,
               number_of_rooms: category.number_of_rooms,
               capacity: category.capacity,
-              description: category.description
+              description: category.description,
+              resort_id:category.resort_id
             });
 
           });
@@ -137,9 +151,9 @@ debugger;
     });
   }
 
-  increment(room_type_id: number, name: string, description: string, number_of_rooms: number) {
+  increment(room_type_id: number, name: string, description: string, number_of_rooms: number,resort_id:number) {
     if (!this.bookedRooms[room_type_id]) {
-      this.bookedRooms[room_type_id] = { count: 0, name: name, description: description, number_of_rooms: number_of_rooms };
+      this.bookedRooms[room_type_id] = { count: 0, name: name, description: description, number_of_rooms: number_of_rooms,resort_id:resort_id};
     }
     if (number_of_rooms > this.bookedRooms[room_type_id].count) {
       this.bookedRooms[room_type_id].count++;
@@ -167,30 +181,34 @@ debugger;
     
     debugger;
     if(this.booking_id){
+      const decryptId=(atob(this.Resort_id.toString()));
       this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
         room_type_id: key,
         room_type_count: value.count,
         name: value.name,
-        description: value.description
+        description: value.description,
+        resort_id:decryptId
       }));
 
       const updatebooking={
-        resort_id: this.Resort_id,
+        resort_id:this.Resort_id,
         check_in_date: this.check_in_date,
         check_out_date: this.check_out_date,
         roomTypes_Req: this.bookedRoomsArray
       }
       this.bookingService.UpdatedBooking(updatebooking);
-      this.router.navigate(['/user/update-booking'], { queryParams: { ID: this.Resort_id,id:this.booking_id } });
+      this.router.navigate(['/user/update-booking'], { queryParams: { ID: this.Resort_id,id:this.booking_id,AddMember:true } });
 
     }
     else if(this.roomid){
       debugger;
+      const decryptId=(atob(this.Resort_id.toString()));
       this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
         room_type_id: key,
         room_type_count: value.count,
         name: value.name,
-        description: value.description
+        description: value.description,
+        resort_id:decryptId
       }));
       const updatedroom={
         resort_id: this.Resort_id,
@@ -238,16 +256,13 @@ debugger;
       if (indexToRemove !== -1 || index !== -1) {
         if (index!==-1) {
           this.total_guest.splice(indexToRemove, 1);
-          this.guest_count--;
-          this.initializer();
-        }
+          this.guest_count--;        }
         else {
           this.total_employees.splice(indexToRemove, 1);
           this.employee_count--;
-          this.initializer();
         }
-        if (index || indexToRemove) {
-          const listIndex = this.total_list.findIndex((member: UserProfile) => member.user_id === user_id);
+        if (user_id) {
+          const listIndex = this.total_list.findIndex((member: any) => (member.user_id === user_id) || (member.guest_user_id ===user_id));
           if (listIndex !== -1) {
             this.total_list.splice(listIndex, 1);
             this.total_count--;

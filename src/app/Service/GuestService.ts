@@ -22,6 +22,7 @@ export class GuestService {
   }
 
   getEmployee(): any[]{
+    debugger;
     return this.employees;
   }
 

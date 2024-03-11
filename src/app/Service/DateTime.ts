@@ -9,7 +9,6 @@ export class DateService{
 
     addCheckin(check_in_date:Date)
     {
-      debugger;
       this.checkInDate=check_in_date;
     }
 
@@ -24,5 +23,11 @@ export class DateService{
 
     getCheckout():Date{
       return this.checkOutDate;
+    }
+
+    resetDate()
+    {
+      this.checkInDate=new Date(0);
+      this.checkOutDate=new Date(0);
     }
 }

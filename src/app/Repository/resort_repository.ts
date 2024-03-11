@@ -32,4 +32,9 @@ export class ApiServiceRepo {
     bookResort(body:any){
       return this.api.post('bookresort','resorts',body)
     }
+
+    updateBookingDetails(body:any)
+    {
+        return this.api.put('updatebookingasync','resorts',body)
+    }
 }

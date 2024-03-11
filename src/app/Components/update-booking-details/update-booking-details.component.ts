@@ -9,6 +9,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { RoomResponse } from '../../Model/RoomTypes/rooms';
 import { Location } from '@angular/common';
 import { UpdatedBooking_details } from '../../Model/bookingDetails';
+import { ApiServiceRepo } from '../../Repository/resort_repository';
+import { SessionServiceService } from '../../Service/Session/session-service.service';
+
 
 @Component({
   selector: 'app-update-booking-details',
@@ -17,60 +20,90 @@ import { UpdatedBooking_details } from '../../Model/bookingDetails';
 })
 export class UpdateBookingDetailsComponent implements OnInit {
   booking_id!: number;
+  approver_id!:number;
+  booking_status:string='';
+  food_required_status:string='';
+  message:string='';
+
   booking_details!: BookingResponse;
   updatedvalues!: UpdatedBooking_details;
-  resortid!:any;
-  updatedroom!:Updatedroom;
-employee!:any[];
-bookingIdFromRoom!:number;
-total_member_count!:number;
-room_count!:number;
-
+  resortid!: any;
+  updatedroom!: Updatedroom;
+  employee!: any[];
+  bookingIdFromRoom!: number;
+  total_member_count!: number;
+  room_count!: number;
+  roomTypes_Req: any[] = [];
+  resort_id_Checkin!: number;
 
   constructor(
     private route: ActivatedRoute,
     private repo: ApiUserServiceRepo,
+    private apiRepo: ApiServiceRepo,
     private router: Router,
     private booking: BookingService,
     private guest: GuestService,
-    private dateService:DateService,
-    private _location:Location,
-  ) {}
+    private dateService: DateService,
+    private _location: Location,
+    private sessionService:SessionServiceService
+  ) { }
 
+  user_id!:number;
   resort_name!: string;
-  bookedRoomsArray: RoomResponse[]=[];
+  bookedRoomsArray: RoomResponse[] = [];
   GuestList: any;
   EmployeeList!: any[];
   totalList: any[] = [];
   members_count!: number;
   totalSelectedRooms!: number;
   food_choice: string = '';
-  employee_user_ids:string='';
+  employee_user_ids: string = '';
+  AddMember: boolean = false;
 
   ngOnInit(): void {
     debugger;
     this.route.queryParams.subscribe((params) => {
       this.booking_id = +params['id'];
       this.bookingIdFromRoom = +params['bookingIdFromRoom'];
-      this.resort_name = params['resort_name']
+      this.resort_name = params['resort_name'];
+      this.AddMember = params['AddMember'];
+      this.resort_id_Checkin = +params['ID']; 
     });
-  
+    this.user_id=this.sessionService.getUserId();
     this.updatedvalues = this.booking.getUpdatedBookings();
-    if (this.updatedvalues && this.updatedvalues.resort_id) {
+
+    if (this.updatedvalues && this.updatedvalues.roomTypes_Req.length !== 0) {
       this.populateFormFromUpdatedValues();
       this.getMemebers();
-    } else if(this.bookingIdFromRoom) {
-      this.booking_id=this.bookingIdFromRoom;
-      this.getBooking();
+    }
+    else if (this.AddMember) {
+      this.getDate();
+      this.getMemebers();
+      if (this.updatedvalues.roomTypes_Req.length !== 0) {
+        this.bookedRoomsArray = this.updatedvalues.roomTypes_Req;
+        this.updateSelectedRooms();
+      }
+      else if (this.booking.getUpdatedRoom()) {
+        this.updatedroom = this.booking.getUpdatedRoom();
+        this.bookedRoomsArray = this.updatedroom.roomTypes_Req;
+        this.updateSelectedRooms();
+        this.getDate();
+        this.getMemebers();
+      }
+      else {
+        this.getBooking();
+      }
+    }
+    else if (this.bookingIdFromRoom) {
+      this.booking_id = this.bookingIdFromRoom;
       this.getDate();
       this.updatedroom = this.booking.getUpdatedRoom();
       this.bookedRoomsArray = this.updatedroom.roomTypes_Req;
       this.updateSelectedRooms();
       this.getMemebers();
-
+      this.getBooking();
     }
-    else
-    {
+    else {
       this.getBookingDetails();
     }
   }
@@ -92,7 +125,7 @@ room_count!:number;
     this.getDate();
     if (this.updatedvalues.roomTypes_Req.length !== 0) {
       this.bookedRoomsArray = this.updatedvalues.roomTypes_Req;
-      this.room_count = this.bookedRoomsArray.length;
+      this.updateSelectedRooms();
     }
     else {
       this.getBooking();
@@ -101,23 +134,17 @@ room_count!:number;
 
   bookingUpdate = new FormGroup({
     approver_id: new FormControl(),
-    bookingRoomRequests: new FormControl(),
+    roomTypes_Req: new FormControl(),
     booking_id: new FormControl(),
     booking_status: new FormControl(),
     check_in_date: new FormControl(),
     check_out_date: new FormControl(),
-    created_date: new FormControl(),
-    employee_count: new FormControl(),
-    employee_user_ids:new FormControl(),
-    employees: new FormControl(),
+    employee_user_ids: new FormControl(),
     food_choice: new FormControl(),
     food_required_status: new FormControl(),
-    guest_count: new FormControl(),
     guests: new FormControl(),
-    member_count: new FormControl(),
     message: new FormControl(),
     resort_id: new FormControl(),
-    room_count: new FormControl(),
     user_id: new FormControl()
   })
 
@@ -131,31 +158,40 @@ room_count!:number;
         this.totalList = this.EmployeeList.concat(this.GuestList);
         this.bookedRoomsArray = this.booking_details.bookingRoomRequests;
         this.food_choice = this.booking_details.food_choice;
-        this.resortid = btoa(this.booking_details.resort_id.toString());
+        this.resortid = this.booking_details.resort_id.toString(); 
+        this.total_member_count = this.booking_details.member_count;
+        this.totalSelectedRooms = this.booking_details.room_count;
         this.guest.addEmployee(this.EmployeeList);
-        this.guest.addUpdateGuest( this.GuestList);
+        this.guest.addUpdateGuest(this.GuestList);
         this.dateService.checkInDate = new Date(this.booking_details.check_in_date);
         this.dateService.checkOutDate = new Date(this.booking_details.check_out_date);
+        this.approver_id=this.booking_details.approver_id;
+        this.booking_id=this.booking_details.booking_id;
+        this.booking_status=this.booking_details.booking_status;
+        this.food_required_status=this.booking_details.food_required_status;
+        this.message=this.booking_details.message;
+
       }
     );
   }
 
-  getMemebers()
-  {
+  getMemebers() {
     this.EmployeeList = this.guest.getEmployee();
     this.GuestList = this.guest.getGuests();
     this.totalList = this.EmployeeList.concat(this.GuestList);
-    this.total_member_count=this.totalList.length;
+    this.total_member_count = this.totalList.length;
   }
 
   getBooking() {
-    debugger;
     this.repo.getBookingDetailsById(this.booking_id).subscribe(
       (response: any[]) => {
         this.booking_details = response[0];
-        this.resortid = btoa(this.booking_details.resort_id.toString());
-        this.booking_id=this.booking_details.booking_id;
-        this.bookedRoomsArray = this.booking_details.bookingRoomRequests;
+        this.resortid = atob(this.booking_details.resort_id.toString());
+        this.booking_id = this.booking_details.booking_id;
+        if (!this.bookingIdFromRoom) {
+          this.bookedRoomsArray = this.booking_details.bookingRoomRequests;
+          this.updateSelectedRooms();
+        }
       }
     );
   }
@@ -167,13 +203,6 @@ room_count!:number;
     this.bookingUpdate.patchValue({
       check_in_date: formattedCheckInDate[0],
       check_out_date: formattedCheckOutDate[0],
-      food_choice: this.food_choice,
-      approver_id: this.booking_details.approver_id,
-      booking_status: this.booking_details.booking_status,
-      booking_id: this.booking_details.booking_id,
-      food_required_status: this.booking_details.food_required_status,
-      user_id: this.booking_details.user_id,
-      message: this.booking_details.message,
     });
   }
 
@@ -194,7 +223,7 @@ room_count!:number;
     return { initials: initials.toUpperCase(), backgroundColor };
   }
 
-  getEmployeeIds(){
+  getEmployeeIds() {
     this.booking_details.employees.forEach((employee: { user_id: { toString: () => string; }; }, index: number) => {
       this.employee_user_ids += employee.user_id.toString();
       if (index < this.booking_details.employees.length - 1) {
@@ -204,36 +233,40 @@ room_count!:number;
   }
 
   removeRoom(roomId: number) {
-    debugger;
     const indexToRemove = this.bookedRoomsArray.findIndex((room: any) => room.room_type_id === roomId);
-    
+
     if (indexToRemove !== -1) {
-        const roomToRemove = this.bookedRoomsArray[indexToRemove];
-        if (roomToRemove) {
-            const roomCount = roomToRemove.room_type_count;
-            this.bookedRoomsArray.splice(indexToRemove, 1);
-            if (roomCount) {
-                this.totalSelectedRooms = this.totalSelectedRooms - roomCount;
-            }
+      const roomToRemove = this.bookedRoomsArray[indexToRemove];
+      if (roomToRemove) {
+        const roomCount = roomToRemove.room_type_count;
+        this.bookedRoomsArray.splice(indexToRemove, 1);
+        if (roomCount) {
+          this.totalSelectedRooms = this.totalSelectedRooms - roomCount;
         }
+      }
+    }
+  }
+
+  removeMember(user_id: number) {
+    const indexToRemove = this.totalList.findIndex(member => member.user_id === user_id || member.guest_user_id === user_id);
+
+    if (indexToRemove !== -1) {
+        if (this.totalList[indexToRemove].hasOwnProperty('guest_user_id')) {
+            this.GuestList.splice(this.GuestList.findIndex((member: { guest_user_id: number; }) => member.guest_user_id === user_id), 1);
+        } else {
+            this.EmployeeList.splice(this.EmployeeList.findIndex(member => member.user_id === user_id), 1);
+        }
+        this.totalList.splice(indexToRemove, 1);
+        this.total_member_count--;
     }
 }
 
-  removeMember(user_id: number) {
-    const indexToRemove = this.totalList.findIndex((member: any) => member.user_id === user_id);
-    const index= this.totalList.findIndex((member: any) => member.guest_user_id === user_id);
-
-    if (indexToRemove !== -1 || index !== -1) {
-        this.totalList.splice(indexToRemove, 1);
-        this.booking_details.member_count--;
-    }
-  }
-
-  addMember() {
-    this.router.navigate(['/user/Resortrooms'], {
-      queryParams: { BookingId: this.booking_id,ID:this.resortid},
-    });
-  }
+addMember() {
+  this.router.navigate(['/user/Resortrooms'], { 
+    fragment: 'tab2',
+    queryParams: { BookingId: this.booking_id, ID: this.resortid || this.resort_id_Checkin },
+  });
+}
 
   changeCheckinout() {
     this.router.navigate(['/user/Resortlist'], {
@@ -242,46 +275,82 @@ room_count!:number;
   }
 
   addRoom() {
-    if(this.bookedRoomsArray.length > 0)
-    {
+    if (this.bookedRoomsArray.length > 0) {
+      debugger;
+      this.booking.resetBooking();
       this.bookedRoomsArray.forEach((roomRequest: any) => {
         const roomTypeId = roomRequest.room_type_id;
+        const resortID = btoa(roomRequest.resort_id); 
+
         this.router.navigate(['/user/Resortrooms'], {
           queryParams:
-            { ID: this.resortid, room_id: roomTypeId, bookingIdFromRoom: this.booking_id }
+            { ID: resortID, room_id: roomTypeId, bookingIdFromRoom: this.booking_id }
         });
       });
     }
   }
-  back()
-  {
+  back() {
     this.guest.resetService();
+    this.dateService.resetDate();
     this._location.back();
   }
-  
-update()
-{
-  this.getEmployeeIds();
-  this.bookingUpdate.patchValue({
-   employee_user_ids:this.employee_user_ids
-  })
-  console.log("from update button",this.bookingUpdate.value);
-  this.guest.resetService();
-}
 
-getDate()
-{
-  const formattedCheckInDate = this.toCustomFormat(this.dateService.getCheckin());
-  const formattedCheckOutDate =  this.toCustomFormat(this.dateService.getCheckout());
+  update() {
+    this.getEmployeeIds();
+    this.setValue();
+    this.apiRepo.bookResort(this.bookingUpdate.value).subscribe(
+      (response) => {
+        if (response) {
+          alert("Booking details updated successfully");
+          this.guest.resetService();
+          this.dateService.resetDate();
+          this._location.back();
+        }
+        else {
+          alert("something went wrong!!!");
+        }
+      }
+    )
 
-  const CheckInDate = formattedCheckInDate.split('T');
-  const CheckOutDate = formattedCheckOutDate.split('T');
+    console.log("from update button", this.bookingUpdate.value);
+    this.guest.resetService();
+    this.dateService.resetDate();
+  }
 
-  this.bookingUpdate.patchValue({
-    check_in_date: CheckInDate[0],
-    check_out_date: CheckOutDate[0],
-    food_choice: this.food_choice,
-  });
-}
+  getDate() {
+    const formattedCheckInDate = this.toCustomFormat(this.dateService.getCheckin());
+    const formattedCheckOutDate = this.toCustomFormat(this.dateService.getCheckout());
 
+    const CheckInDate = formattedCheckInDate.split('T');
+    const CheckOutDate = formattedCheckOutDate.split('T');
+
+    this.bookingUpdate.patchValue({
+      check_in_date: CheckInDate[0],
+      check_out_date: CheckOutDate[0],
+      food_choice: this.food_choice,
+    });
+  }
+
+
+  setValue()
+  {
+    this.roomTypes_Req = Object.entries(this.bookedRoomsArray).map(([key, value]) => ({
+      room_type_id: Number(key),
+      room_type_count: value.room_type_count,
+    }));
+
+    const resort_id = Number(this.resortid);
+    this.bookingUpdate.patchValue({
+      guests: this.GuestList,
+      roomTypes_Req: this.roomTypes_Req,
+      resort_id: resort_id,
+      employee_user_ids: this.employee_user_ids,
+      approver_id:this.approver_id,
+      booking_status: this.booking_status,
+      booking_id: this.booking_id,
+      food_required_status:   this.food_required_status,
+      user_id:this.user_id,
+      message:this.message,
+    });
+  }
 }

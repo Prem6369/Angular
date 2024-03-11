@@ -53,7 +53,7 @@
     <div class="col-md-6 p-5">
       <div class="row">
         <h4 class="col-md-6 text-center">
-          Room details ({{booking_details?.room_count || totalSelectedRooms}})
+          Room details ({{totalSelectedRooms}})
         </h4>
         <div class="col-md-6 fs-4">
           <i class="fa-solid fa-house-chimney-medical" (click)="addRoom()"></i>
@@ -90,7 +90,7 @@
     <div class="col-md-6 p-5">
       <div class="row">
         <h4 class="col-md-6 text-center">
-          Person details ({{ booking_details?.member_count || total_member_count }})
+          Person details ({{ total_member_count }})
         </h4>
         <div class="fs-4 col-md-6">
           <i class="fa-solid fa-user-plus text-white" (click)="addMember()"></i>
