@@ -59,7 +59,6 @@ export class ResortRoomsComponent implements OnInit {
   constructor(private repository:ApiServiceRepo,private session: SessionServiceService, private route: ActivatedRoute, private dateService: DateService, private bookingService: BookingService, private guestService: GuestService, private httpclient: HttpClient, private router: Router, private routing: ActivatedRoute) { }
   check_in_date!: Date;
   check_out_date!: Date;
-  bookingIdFromRoom!:number;
   
 
   ngOnInit(): void {
