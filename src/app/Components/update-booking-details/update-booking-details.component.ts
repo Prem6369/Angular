@@ -34,7 +34,7 @@ room_count!:number;
     private booking: BookingService,
     private guest: GuestService,
     private dateService:DateService,
-    private _location:Location
+    private _location:Location,
   ) {}
 
   resort_name!: string;
@@ -57,30 +57,26 @@ room_count!:number;
   
     this.updatedvalues = this.booking.getUpdatedBookings();
     if (this.updatedvalues && this.updatedvalues.resort_id) {
-      this.getBooking();
       this.populateFormFromUpdatedValues();
-      this.EmployeeList = this.guest.getEmployee();
-      this.GuestList = this.guest.getGuests();
-      this.totalList = this.EmployeeList.concat(this.GuestList);
-      this.total_member_count=this.totalList.length;
+      this.getMemebers();
     } else if(this.bookingIdFromRoom) {
+      this.booking_id=this.bookingIdFromRoom;
       this.getBooking();
       this.getDate();
       this.updatedroom = this.booking.getUpdatedRoom();
       this.bookedRoomsArray = this.updatedroom.roomTypes_Req;
-      this.room_count=this.bookedRoomsArray.length;
-       this.EmployeeList = this.guest.getEmployee();
-      this.GuestList = this.guest.getGuests();
-      this.totalList = this.EmployeeList.concat(this.GuestList);
-      this.total_member_count=this.totalList.length;
-      console.log("Updated rooms:", this.room_count);
-      this.getDate();
+      this.updateSelectedRooms();
+      this.getMemebers();
 
     }
     else
     {
       this.getBookingDetails();
     }
+  }
+
+  updateSelectedRooms() {
+    this.totalSelectedRooms = Object.values(this.bookedRoomsArray).reduce((total, room) => total + room.room_type_count, 0);
   }
 
   toCustomFormat(date: Date): string {
@@ -93,20 +89,13 @@ room_count!:number;
   }
 
   populateFormFromUpdatedValues() {
-    
     this.getDate();
     if (this.updatedvalues.roomTypes_Req.length !== 0) {
       this.bookedRoomsArray = this.updatedvalues.roomTypes_Req;
-      this.room_count=this.bookedRoomsArray.length;
-      console.log("Updated room:", this.room_count);
+      this.room_count = this.bookedRoomsArray.length;
     }
-    else  {
-      debugger;
+    else {
       this.getBooking();
-      this.EmployeeList = this.guest.getEmployee();
-    this.GuestList = this.guest.getGuests();
-    this.totalList = this.EmployeeList.concat(this.GuestList);
-    this.total_member_count=this.totalList.length;
     }
   }
 
@@ -151,13 +140,22 @@ room_count!:number;
     );
   }
 
+  getMemebers()
+  {
+    this.EmployeeList = this.guest.getEmployee();
+    this.GuestList = this.guest.getGuests();
+    this.totalList = this.EmployeeList.concat(this.GuestList);
+    this.total_member_count=this.totalList.length;
+  }
 
   getBooking() {
+    debugger;
     this.repo.getBookingDetailsById(this.booking_id).subscribe(
       (response: any[]) => {
         this.booking_details = response[0];
         this.resortid = btoa(this.booking_details.resort_id.toString());
         this.booking_id=this.booking_details.booking_id;
+        this.bookedRoomsArray = this.booking_details.bookingRoomRequests;
       }
     );
   }
@@ -206,14 +204,20 @@ room_count!:number;
   }
 
   removeRoom(roomId: number) {
+    debugger;
     const indexToRemove = this.bookedRoomsArray.findIndex((room: any) => room.room_type_id === roomId);
-
+    
     if (indexToRemove !== -1) {
-        this.bookedRoomsArray.splice(indexToRemove, 1);
-        this.booking_details.room_count--;
+        const roomToRemove = this.bookedRoomsArray[indexToRemove];
+        if (roomToRemove) {
+            const roomCount = roomToRemove.room_type_count;
+            this.bookedRoomsArray.splice(indexToRemove, 1);
+            if (roomCount) {
+                this.totalSelectedRooms = this.totalSelectedRooms - roomCount;
+            }
+        }
     }
 }
-
 
   removeMember(user_id: number) {
     const indexToRemove = this.totalList.findIndex((member: any) => member.user_id === user_id);
@@ -239,17 +243,7 @@ room_count!:number;
   }
 
   addRoom() {
-    if(!this.bookedRoomsArray)
-    {
-      this.booking_details.bookingRoomRequests.forEach((roomRequest: any) => {
-        const roomTypeId = roomRequest.room_type_id;
-        this.router.navigate(['/user/Resortrooms'], {
-          queryParams:
-            { ID: this.resortid, room_id: roomTypeId, bookingIdFromRoom: this.booking_id }
-        });
-      });
-    }
-    else
+    if(this.bookedRoomsArray.length > 0)
     {
       this.bookedRoomsArray.forEach((roomRequest: any) => {
         const roomTypeId = roomRequest.room_type_id;
@@ -278,8 +272,8 @@ update()
 
 getDate()
 {
-  const formattedCheckInDate = this.toCustomFormat(this.updatedvalues.check_in_date);
-  const formattedCheckOutDate =  this.toCustomFormat(this.updatedvalues.check_out_date);
+  const formattedCheckInDate = this.toCustomFormat(this.dateService.getCheckin());
+  const formattedCheckOutDate =  this.toCustomFormat(this.dateService.getCheckout());
 
   const CheckInDate = formattedCheckInDate.split('T');
   const CheckOutDate = formattedCheckOutDate.split('T');

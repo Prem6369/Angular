@@ -32,7 +32,6 @@ export class BookingService {
     this.updatedrooms=updatedroos;
   }
   getUpdatedRoom():any{
-
     return this.updatedrooms;
   }
 

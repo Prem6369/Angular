@@ -9,7 +9,6 @@ export class ResortService {
 
   constructor() { }
 
-
   addResort(resortDetails: Resort): void {
     this.resorts=resortDetails;
   }
