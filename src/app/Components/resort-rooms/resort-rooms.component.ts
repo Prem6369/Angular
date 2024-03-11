@@ -10,7 +10,7 @@ import { GuestService } from '../../Service/GuestService';
 import { SessionServiceService } from '../../Service/Session/session-service.service';
 import { UserProfile } from '../../Model/userProfile/userProfile';
 import { ApiServiceRepo } from '../../Repository/resort_repository';
-
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -56,7 +56,14 @@ export class ResortRoomsComponent implements OnInit {
   roomid!:number; 
   roomcount!:number;
 
-  constructor(private repository:ApiServiceRepo,private session: SessionServiceService, private route: ActivatedRoute, private dateService: DateService, private bookingService: BookingService, private guestService: GuestService, private httpclient: HttpClient, private router: Router, private routing: ActivatedRoute) { }
+  constructor(private repository:ApiServiceRepo,
+    private session: SessionServiceService, 
+    private route: ActivatedRoute, 
+    private dateService: DateService, 
+    private bookingService: BookingService,
+     private guestService: GuestService,
+      private router: Router, 
+      private _location: Location) { }
   check_in_date!: Date;
   check_out_date!: Date;
   
@@ -166,6 +173,7 @@ debugger;
         name: value.name,
         description: value.description
       }));
+
       const updatebooking={
         resort_id: this.Resort_id,
         check_in_date: this.check_in_date,
@@ -177,6 +185,7 @@ debugger;
 
     }
     else if(this.roomid){
+      debugger;
       this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
         room_type_id: key,
         room_type_count: value.count,
@@ -187,8 +196,11 @@ debugger;
         resort_id: this.Resort_id,
         roomTypes_Req: this.bookedRoomsArray
       }
+      this.dateService.addCheckin(this.check_in_date);
+      this.dateService.addCheckout(this.check_out_date);
       this.bookingService.Updatedrooms(updatedroom);
       this.router.navigate(['/user/update-booking'], { queryParams: { bookingIdFromRoom: this.bookingIdFromRoom,id:this.booking_id  } });
+
     }
     else{ 
       debugger;  
