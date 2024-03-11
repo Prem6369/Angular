@@ -66,6 +66,8 @@ export class ResortRoomsComponent implements OnInit {
       private _location: Location) { }
   check_in_date!: Date;
   check_out_date!: Date;
+  bookingIdFromRoom!:number;
+  
 
   ngOnInit(): void {
 debugger;
@@ -163,6 +165,7 @@ debugger;
 
 
   next() {
+    
     debugger;
     if(this.booking_id){
       this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
@@ -331,7 +334,7 @@ debugger;
     }
   }
 
-  getInitials(firstName: string, lastName: string, username: string): { initials: string, backgroundColor: string } {
+getInitials(firstName: string, lastName: string, username: string): { initials: string, backgroundColor: string } {
     let initials = '';
     if (firstName) {
       initials += firstName.charAt(0);
@@ -345,13 +348,14 @@ debugger;
         initials += username.charAt(1);
       }
     }
-
+ 
     const colors = ['orange', 'lightgreen', 'skyblue', 'red'];
     const chosenColor = Math.floor(Math.random() * colors.length);
     const backgroundColor = colors[chosenColor];
-
+ 
     return { initials: initials.toUpperCase(), backgroundColor };
   }
+  
 
 
 
