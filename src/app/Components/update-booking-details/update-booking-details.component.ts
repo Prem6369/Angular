@@ -230,7 +230,6 @@ room_count!:number;
   }
 
   addMember() {
-   
     this.router.navigate(['/user/Resortrooms'], {
       queryParams: { BookingId: this.booking_id,ID:this.resortid},
     });

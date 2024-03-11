@@ -66,7 +66,7 @@ export class ResortRoomsComponent implements OnInit {
       private _location: Location) { }
   check_in_date!: Date;
   check_out_date!: Date;
-  bookingIdFromRoom!:number;
+
   
 
   ngOnInit(): void {
