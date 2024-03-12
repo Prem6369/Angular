@@ -132,6 +132,7 @@ export class ResortRoomsComponent implements OnInit  {
   }
 
   increment(room_type_id: number, name: string, description: string, number_of_rooms: number,resort_id:number) {
+  debugger;
     if (!this.bookedRooms[room_type_id]) {
       this.bookedRooms[room_type_id] = { count: 0, name: name, description: description, number_of_rooms: number_of_rooms,resort_id:resort_id};
     }
@@ -197,7 +198,7 @@ export class ResortRoomsComponent implements OnInit  {
       this.dateService.addCheckin(this.check_in_date);
       this.dateService.addCheckout(this.check_out_date);
       this.bookingService.Updatedrooms(updatedroom);
-      this.router.navigate(['/user/update-booking'], { queryParams: { bookingIdFromRoom: this.bookingIdFromRoom,id:this.booking_id  } });
+      this.router.navigate(['/user/update-booking'], { queryParams: { bookingIdFromRoom: this.bookingIdFromRoom,id:this.booking_id ,ID: this.Resort_id } });
 
     }
     else{ 

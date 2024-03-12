@@ -87,6 +87,6 @@ export class ResortBookingDetailsComponent implements OnInit {
 
   navigateToUpdateBooking(booking_id:number,resort_name:string)
   {
-    this.router.navigate(['/user/update-booking'],{ queryParams: { id:booking_id,resort_name:resort_name } })
+    this.router.navigate(['/user/update-booking'],{ queryParams: { id:booking_id } })
   }
 }
