@@ -22,14 +22,13 @@ export class GuestService {
   }
 
   getEmployee(): any[]{
-    debugger;
     return this.employees;
   }
 
   addUpdateGuest(guest: any[]) {
-    debugger;
     this.guests.push(...guest);
   }
+  
  resetService()
   {
     this.employees.splice(0);

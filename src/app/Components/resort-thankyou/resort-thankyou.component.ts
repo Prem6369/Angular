@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { GuestService } from '../../Service/GuestService';
 
@@ -7,15 +7,12 @@ import { GuestService } from '../../Service/GuestService';
   templateUrl: './resort-thankyou.component.html',
   styleUrl: './resort-thankyou.component.scss'
 })
-export class ResortThankyouComponent implements OnInit {
+export class ResortThankyouComponent {
 
-constructor(private router:Router,private guestService: GuestService,){}
-ngOnInit(): void {
- // 
-}
-GoToHome(){
-  this.guestService.resetService();
-  this.router.navigate(['/user/Home']);
-}
+  constructor(private router: Router, private guestService: GuestService,) { }
 
+  GoToHome() {
+    this.guestService.resetService();
+    this.router.navigate(['/user/Home']);
+  }
 }

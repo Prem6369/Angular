@@ -1,4 +1,3 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getRoomTypes } from '../../Model/RoomTypes/rooms';
@@ -25,7 +24,6 @@ export class RoomListComponent implements OnInit {
   getAllRooms() {
     this.repo.getAllRoom().subscribe(
       (response) => {
-        console.log(response);
         this.room = response;
       }
     )

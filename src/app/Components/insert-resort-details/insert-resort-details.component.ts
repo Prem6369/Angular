@@ -39,7 +39,6 @@ export class InsertResortDetailsComponent implements OnInit {
     });
     this.getRoomTypes();
     this.initializers();
-    
   }
 
   
@@ -53,10 +52,7 @@ export class InsertResortDetailsComponent implements OnInit {
           this.resort_rooms.forEach(room => {
             room.availability = 'string'; 
         });
-        
-
           const coordinatesObject = response.coordinates;
-
           this.AddResort.patchValue({
             name:response.name,
             description:response.description,

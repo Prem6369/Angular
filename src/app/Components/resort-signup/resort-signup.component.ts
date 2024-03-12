@@ -1,7 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ApiServiceRepo } from '../../Repository/resort_repository';
 import { apiLoginService } from '../../Repository/login_repository';
 import { Router } from '@angular/router';
 
@@ -32,7 +30,8 @@ export class ResortSignupComponent implements OnInit {
     username: new FormControl(null,Validators.required)
   });
 
-  constructor(private http: HttpClient,private repository:apiLoginService,private router:Router) {}
+  constructor(private repository:apiLoginService,
+    private router:Router) {}
 
   ngOnInit() {}
 
@@ -41,11 +40,9 @@ export class ResortSignupComponent implements OnInit {
     if(this.newuser.valid){
     this.setValues();
     const formData = this.newuser.value; 
-    console.log(formData); 
   
     this.repository.signup(formData).subscribe(
       (response) => {
-        console.log(response);
         this.router.navigate([''])
         this.newuser.reset(); 
 

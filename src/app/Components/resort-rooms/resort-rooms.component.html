@@ -1,4 +1,3 @@
-
 <div class="resot-details-page">
   <div class="top p-5">
 
@@ -20,7 +19,7 @@
   </div>
 
   <div class="container">
-    <mat-tab-group  #matTabGroup [(selectedIndex)]="selectedTabIndex"  mat-align-tabs="center">
+    <mat-tab-group #matTabGroup [(selectedIndex)]="selectedTabIndex" mat-align-tabs="center">
       <mat-tab label="Room(s)" id="tab-label" [disabled]="isTabDisabled(0)" class="mt-4">
         <div class="table-responsive p-4">
           <table class="table">
@@ -61,8 +60,7 @@
       <mat-tab label="Guest" id="tab-label" [disabled]="isTabDisabled(1)">
 
         <div class="row " id="addButtons">
-          <button class="col-lg-6 col-md-6 col-sm-6  btn-sm btn m-3" routerLink="/user/Addemployee"
-            id="addEmployeeBtn">
+          <button class="col-lg-6 col-md-6 col-sm-6  btn-sm btn m-3" routerLink="/user/Addemployee" id="addEmployeeBtn">
             ADD EMPLOYEE
           </button>
           <button class="col-lg-6 col-md-6 col-sm-6 btn-sm btn m-3" routerLink="/user/Addguest" id="addGuestBtn">
@@ -71,7 +69,7 @@
         </div>
 
         <div>
-          <div class="table-responsive p-4" >
+          <div class="table-responsive p-4">
             <table class="table">
               <tbody>
                 <tr *ngFor="let member of total_list" class="border-bottom">
@@ -83,7 +81,7 @@
                       </div>
                     </div>
                   </td>
-          
+
                   <td>
                     <div class="name ">
                       <div class="fw-bold">{{ member.first_name }} {{ member.last_name }} {{ member.username }}</div>
@@ -91,52 +89,38 @@
                         <div class=" col-lg-6 col-md-6 col-sm-6">
                           <div class="fw-light">{{ member.phone_number }}</div>
                         </div>
-  
-                        <div *ngIf="!booking_id; else secondType" class=" col-lg-6 col-md-6 col-sm-6 border rounded-pill" id="person-type">
-  
-                          <div class="fw-bold" *ngIf="member.type === 'Guest'"
-                            [ngClass]="{'border-primary': member.type === 'Guest'}">{{ member.type }}</div>
-                          <div class="fw-bold" *ngIf="member.type !== 'Guest'">{{ member.type }} </div>
-                        </div>
-
-                        <ng-template #secondType>
-                          <div class="col-md-6 col-lg-6 col-sm-6 border rounded-pill m-1" id="person-type">
-                            <div class="fw-bold" style="{{ member.guest_user_id ? 'color: purple;' : '' }}">
-                              {{ member.guest_user_id ? 'Guest' : 'Employee' }}
-                            </div>
+                        <div class="col-md-6 col-lg-6 col-sm-6 border rounded-pill m-1" id="person-type">
+                          <div class="fw-bold" [style.color]="member.guest_user_id ? 'purple' : ''">
+                            {{ member.guest_user_id ? 'Guest' : 'Employee' }}
                           </div>
-                        </ng-template>
+                        </div>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <div *ngIf="!booking_id; else secondEdit" class="member text-center" id="edit-icon">
-                      <i [style.visibility]="member.type === 'Guest' ? 'visible' : 'hidden'" class="fa-regular fa-pen-to-square text-success mx-3" (click)="editGuest(member.guest_user_id)"></i>
-                      <i class="fa-regular fa-trash-can text-danger" (click)="removeMember(member.user_id || member.guest_user_id, member.type)"></i>
-                  </div>
-                  
-                    
-                    <ng-template #secondEdit>
-                      <div class="member text-center" id="edit-icon">
-                        <i [style.visibility]="member.guest_user_id !== undefined  ? 'visible' : 'hidden'"  class="fa-regular fa-pen-to-square text-success mx-3" (click)="editGuest(member.guest_user_id)"></i>
-                        <i class="fa-regular fa-trash-can text-danger" (click)="removeMember(member.guest_user_id || member.user_id)"></i>
-                      </div>
-                      
-                    </ng-template>
-                    
+                    <div class="member text-center" id="edit-icon">
+                      <i [style.visibility]="member.guest_user_id !== undefined  ? 'visible' : 'hidden'"
+                        class="fa-regular fa-pen-to-square text-success mx-3"
+                        (click)="editGuest(member.guest_user_id)"></i>
+                      <i class="fa-regular fa-trash-can text-danger"
+                        (click)="removeMember(member.guest_user_id || member.user_id)"></i>
+                    </div>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="row fw-bold m-4">
-            <div class="col-md-4 col-lg-4  col-sm-4 col-xs-4 text-center" id="count-section"> {{employee_count}} Employee
+            <div class="col-md-4 col-lg-4  col-sm-4 col-xs-4 text-center" id="count-section"> {{employee_count}}
+              Employee
             </div>
-            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 text-center" id="count-section">{{ guest_count }} Guest</div>
-            <div class="col-md-4 col-lg-4  col-sm-4 col-xs-4 text-center" id="count-section">Total {{ total_count }}</div>
+            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 text-center" id="count-section">{{ guest_count }} Guest
+            </div>
+            <div class="col-md-4 col-lg-4  col-sm-4 col-xs-4 text-center" id="count-section">Total {{ total_count }}
+            </div>
           </div>
         </div>
-        
+
         <div class="alert alert-secondary alert-dismissible fade show" role="alert">
 
           <strong>Rules</strong>

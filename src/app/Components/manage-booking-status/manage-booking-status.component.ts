@@ -9,6 +9,8 @@ import { approver_repository } from '../../Repository/approver_repository';
 })
 
 export class ManageBookingStatusComponent implements OnInit {
+
+
   approverid!: number;
   Bookings_list: any[] = [];
   resortId: any[] = [];
@@ -17,10 +19,8 @@ export class ManageBookingStatusComponent implements OnInit {
   username: any[] = [];
 
 
-
-
   constructor(private repo: approver_repository,
-    private session: SessionServiceService) { }
+              private session: SessionServiceService) { }
 
   ngOnInit(): void {
     this.approverid = this.session.getUserId();

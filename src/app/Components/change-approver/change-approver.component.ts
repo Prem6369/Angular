@@ -1,16 +1,18 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { SessionServiceService } from '../../Service/Session/session-service.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { approver_repository } from '../../Repository/approver_repository';
-import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-change-approver',
   templateUrl: './change-approver.component.html',
   styleUrl: './change-approver.component.scss'
 })
+
+
 export class ChangeApproverComponent implements OnInit {
+
+  roomTypeId!: number;
   approverid!: number;
   Bookings_list: any[] = [];
   resortId: any[] = [];
@@ -22,7 +24,8 @@ export class ChangeApproverComponent implements OnInit {
   user: any[] = []
 
   constructor(private repo: approver_repository,
-    private session: SessionServiceService,) { }
+              private session: SessionServiceService)
+               { }
 
   ngOnInit(): void {
     this.approverid = this.session.getUserId();
@@ -114,9 +117,9 @@ export class ChangeApproverComponent implements OnInit {
 
   value = new FormGroup({
     approver_id: new FormControl(0)
-  }
-  )
-  roomTypeId!: number;
+  })
+
+
   selectt(event: any) {
     this.roomTypeId = event.target.value;
     this.value.patchValue({

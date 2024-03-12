@@ -26,8 +26,11 @@ export class ResortListComponent implements OnInit {
     ),
   });
 
-  constructor(private route:ActivatedRoute,
-    private _location: Location, private router: Router,private dateService: DateService,private repository:ApiServiceRepo) {
+  constructor(private route: ActivatedRoute,
+    private _location: Location,
+    private router: Router,
+    private dateService: DateService,
+    private repository: ApiServiceRepo) {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -41,7 +44,6 @@ export class ResortListComponent implements OnInit {
     this.route.queryParams.subscribe(param=>{
       this.booking_id=param['booking_id']
     })
-
   }
 
 
@@ -87,7 +89,6 @@ export class ResortListComponent implements OnInit {
         this.getResort();
       } else {
       this.repository.getAvailableResort(checkInDate, checkOutDate).subscribe((response) => {
-        console.log("looo",response);
         if (Array.isArray(response)) {
           response.forEach((resortObject) => {
             const newResortDetails = new ResortDetails(

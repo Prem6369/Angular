@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { SessionServiceService } from '../../Service/Session/session-service.service';
 import { UserProfile } from '../../Model/userProfile/userProfile';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ApiUserServiceRepo } from '../../Repository/user_repository';
 
 @Component({
@@ -16,12 +15,13 @@ export class UpdateProfileComponent implements OnInit {
   user_id!: number;
   successMessage:boolean=false;
 
-  constructor(private httpclient: HttpClient,private session: SessionServiceService,
-    private _location: Location,private repository:ApiUserServiceRepo) {
+  constructor(
+    private session: SessionServiceService,
+    private _location: Location,
+    private repository:ApiUserServiceRepo) {
   }
 
   ngOnInit(): void {
-    debugger;
     this.getUserProfile();
   }
 
@@ -51,8 +51,6 @@ export class UpdateProfileComponent implements OnInit {
      this.user_id = this.session.getUserId();
 
      this.repository.userProfileById(this.user_id).subscribe((response)=>{
-
-          console.log('profile',response);
           this.userlist=response;
           this.patchFormValues();
         }
@@ -88,7 +86,6 @@ export class UpdateProfileComponent implements OnInit {
      this.repository.updateProfile(this.updateProfile.value).subscribe(
       (response)=>{
         this.successMessage=true;
-          console.log('Update status:',response);
       }
     )
 

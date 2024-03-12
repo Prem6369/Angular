@@ -12,12 +12,12 @@ import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
   styleUrls: ['./resort-add-guest.component.scss'],
 })
 export class ResortAddGuestComponent implements OnInit {
+
   referrer_user_id!: number;
   guestDetails: any;
   guest!: any;
   guest_user_id!: number;
   booking_id!:number;
-
   update_guest:any[]=[];
 
   constructor(private session: SessionServiceService,
@@ -27,7 +27,6 @@ export class ResortAddGuestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger;
     this.referrer_user_id = this.session.getUserId();
     this.guest = this.guestService.getGuests();
 
@@ -35,10 +34,9 @@ export class ResortAddGuestComponent implements OnInit {
       debugger;
       this.guest_user_id = +params['id'];
       this.booking_id = +params['booking_id'];
+
       if (this.guest_user_id) {
         this.guestDetails = this.getValuesById(this.guest_user_id);
-        console.log("From add guest", this.guestDetails);
-
         this.Addguest.patchValue({
           guest_user_id: this.guest_user_id,
           first_name: this.guestDetails.first_name,
@@ -64,14 +62,12 @@ export class ResortAddGuestComponent implements OnInit {
   }
 
   removeExistGuest(id:number){
-    debugger;
       const index=this.guest.findIndex((member:any)=>member.guest_user_id===id);
       this.guest.splice(index,1);
-
-
   }
+
+
   getValuesById(guest_user_id: number): GuestDetails[] {
-    debugger;
       const elementIndex: number = this.guest.findIndex((member: any) => member.guest_user_id === guest_user_id);
       if (elementIndex !== -1) {
         return this.guest[elementIndex];
@@ -107,18 +103,18 @@ export class ResortAddGuestComponent implements OnInit {
         this.setType();
         this.guestDetails = this.Addguest.value;
         this.guestService.addGuest(this.guestDetails);
+        this.Addguest.reset();
       } else {
         this.update_guest.push(this.Addguest.value); 
         this.guestService.addUpdateGuest(this.update_guest); 
+        this.Addguest.reset();
       }
-      this._location.back();
     } else {
       alert("Please fill all fields");
     }
   }
   
   save() {
-    debugger;
     if (this.Addguest.valid) {
       if (!this.booking_id) {
         this.setType();
@@ -135,10 +131,8 @@ export class ResortAddGuestComponent implements OnInit {
   }
 
   setType() {
-    debugger;
     if(this.guest_user_id!==null && this.guest_user_id!==undefined)
     {
-      debugger;
       this.Addguest.controls['guest_user_id'].setValue(this.getRandomInt(1000, 9999))
       this.Addguest.controls['type'].setValue("Guest");
       this.Addguest.controls['referrer_user_id'].setValue(this.referrer_user_id)

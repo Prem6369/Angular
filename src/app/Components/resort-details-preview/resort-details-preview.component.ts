@@ -21,8 +21,8 @@ export class ResortDetailsPreviewComponent implements OnInit {
   constructor(private resortService: ResortService,
     private _location: Location,
     private repo: admin_resort_repository) {
-
   }
+
   ngOnInit(): void {
     this.resort = this.resortService.getResort();
     this.categories = this.resort.categories;
@@ -52,19 +52,16 @@ export class ResortDetailsPreviewComponent implements OnInit {
     if (this.resort.resort_id !== 0) {
       this.repo.updateResort(this.resort).subscribe
         ((result) => {
-          console.log("Resort post method status:", result);
           if (result) {
             alert("Resort updated successfully");
             this.resortService.resetService();
             this._location.back();
           }
-
         })
     }
     else {
       this.repo.insertResort(this.resort).subscribe
       ((response) => {
-        console.log("Resort post method status:", response);
         if (response.resort_id !== 0) {
           alert("Resort added successfully");
           this.resortService.resetService();

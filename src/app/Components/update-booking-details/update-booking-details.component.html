@@ -58,33 +58,10 @@
         <div class="col-md-6 fs-4">
           <i class="fa-solid fa-house-chimney-medical" (click)="addRoom()"></i>
         </div>
-  
       </div>
-  
       <div>
-  
       </div>
 
-      <!-- <div id="room-details" class="container rounded my-3">
-        <div *ngFor="let room of bookedRoomsArray" class="row w-0 m-3 border-bottom p-3">
-  
-          <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2 text-center" id="iconbackground">
-            <i class="fa-solid fa-bed fa-2x check text-center"></i>
-          </div>
-  
-          <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2 text-center">
-            <div class=" text-center fw-bold">{{ room.name }}</div>
-            <div>{{ room.description }}</div>
-          </div>
-  
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="iconbackground">
-            <div class="text-center fw-bold">{{ room.room_type_count }}</div>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 fs-5 text-center">
-            <i class="fa-regular fa-trash-can text-danger" (click)="removeRoom(room.room_type_id)"></i>
-          </div>
-        </div>
-      </div> -->
 
       <div class="table-responsive rounded my-3" id="room-details">
         <table class="table">
@@ -130,10 +107,11 @@
         <div *ngFor="let guest of totalList" class="row border-bottom p-3 ">
 
           <div class="icon col-md-4 col-lg-4 col-sm-4 text-center">
-            <div class="initials" [style.background-color]="getInitials(guest.first_name, guest.last_name).backgroundColor"  >
-              {{ getInitials(guest.first_name, guest.last_name).initials }}
+            <div class="initials" [style.background-color]="getInitials(guest.first_name, guest.last_name, guest.username).backgroundColor">
+              {{ getInitials(guest.first_name, guest.last_name, guest.username).initials }}
             </div>
           </div>
+          
 
           <div class=" col-md-6 col-lg-6 col-sm-6">
             <div class="name">

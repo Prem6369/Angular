@@ -44,7 +44,7 @@ export class ResortRoomsComponent implements OnInit  {
   user_id!: number;
   bookingIdFromRoom!:number;
 
-  bookedRooms: { [key: string]: { count: number, name: string, description: string, number_of_rooms: number,resort_id:number } } = {};
+  bookedRooms: { [key: string]: {room_type_id: number, count: number, name: string, description: string, number_of_rooms: number,resort_id:number } } = {};
   Resort_id!: number;
   Room_id!: number;
 
@@ -150,7 +150,7 @@ isTabDisabled(index: number): boolean {
   increment(room_type_id: number, name: string, description: string, number_of_rooms: number,resort_id:number) {
   debugger;
     if (!this.bookedRooms[room_type_id]) {
-      this.bookedRooms[room_type_id] = { count: 0, name: name, description: description, number_of_rooms: number_of_rooms,resort_id:resort_id};
+      this.bookedRooms[room_type_id] = { room_type_id:room_type_id,count: 0, name: name, description: description, number_of_rooms: number_of_rooms,resort_id:resort_id};
     }
     if (number_of_rooms > this.bookedRooms[room_type_id].count) {
       this.bookedRooms[room_type_id].count++;
@@ -179,7 +179,7 @@ isTabDisabled(index: number): boolean {
     if(this.booking_id){
       const decryptId=(atob(this.Resort_id.toString()));
       this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
-        room_type_id: key,
+        room_type_id: value.room_type_id,
         room_type_count: value.count,
         name: value.name,
         description: value.description,
@@ -201,7 +201,7 @@ isTabDisabled(index: number): boolean {
       debugger;
       const decryptId=(atob(this.Resort_id.toString()));
       this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
-        room_type_id: key,
+        room_type_id: value.room_type_id,
         room_type_count: value.count,
         name: value.name,
         description: value.description,
@@ -242,73 +242,19 @@ isTabDisabled(index: number): boolean {
 
   }
 
+  removeMember(user_id: number) {
+      const indexToRemove = this.total_list.findIndex(member => member.user_id === user_id || member.guest_user_id === user_id);
 
-
-  removeMember(user_id: number, type?: string) {
-    debugger;
-    if (this.booking_id) {
-      debugger;
-      const indexToRemove = this.total_employees.findIndex((member: UserProfile) => member.user_id === user_id);
-      const index = this.total_guest.findIndex((member: any) => member.guest_user_id === user_id);
-      if (indexToRemove !== -1 || index !== -1) {
-        if (index!==-1) {
-          this.total_guest.splice(indexToRemove, 1);
-          this.guest_count--;        }
-        else {
-          this.total_employees.splice(indexToRemove, 1);
-          this.employee_count--;
-        }
-        if (user_id) {
-          const listIndex = this.total_list.findIndex((member: any) => (member.user_id === user_id) || (member.guest_user_id ===user_id));
-          if (listIndex !== -1) {
-            this.total_list.splice(listIndex, 1);
-            this.total_count--;
+      if (indexToRemove !== -1) {
+        if (this.total_list[indexToRemove].hasOwnProperty('guest_user_id')) {
+            this.total_guest.splice(this.total_guest.findIndex((member: { guest_user_id: number; }) => member.guest_user_id === user_id), 1);
+        this.guest_count--;
+          } else {
+            this.total_employees.splice(this.total_employees.findIndex((member: { user_id: number; }) => member.user_id === user_id), 1);
+        this.employee_count--;
           }
-        }
-        else if (this.total_guest) {
-          const indexToRemove = this.total_guest.findIndex((member: any) => member.guest_user_id === user_id);
-          if (indexToRemove !== -1) {
-            this.total_guest.splice(indexToRemove, 1);
-            this.guest_count--;
-            this.initializer();
-          }
-          if (this.total_employees.user_id || this.total_guest.guest_user_id) {
-            const listIndex = this.total_list.findIndex((member: UserProfile) => member.user_id === user_id);
-            if (listIndex !== -1) {
-              this.total_list.splice(listIndex, 1);
-              this.total_count--;
-            }
-
-            else {
-              debugger;
-              if (type === 'Employee') {
-                const indexToRemove = this.total_employees.findIndex((member: UserProfile) => member.user_id === user_id);
-                if (indexToRemove !== -1) {
-                  this.total_employees.splice(indexToRemove, 1);
-                  this.employee_count--;
-                }
-              } else if (type === 'Guest') {
-                const indexToRemove = this.total_guest.findIndex((member: any) => member.guest_user_id === user_id);
-                if (indexToRemove !== -1) {
-                  this.total_guest.splice(indexToRemove, 1);
-                  this.guest_count--;
-                  this.initializer();
-                }
-              }
-              if (type === 'Employee' || type === 'Guest') {
-                const listIndex = this.total_list.findIndex((member: UserProfile) => member.user_id === user_id);
-                if (listIndex !== -1) {
-                  this.total_list.splice(listIndex, 1);
-                  this.total_count--;
-                }
-              }
-            }
-          }
-        }
-
-
-      }
-
+        this.total_list.splice(indexToRemove, 1);
+        this.total_count--;
     }
   }
 

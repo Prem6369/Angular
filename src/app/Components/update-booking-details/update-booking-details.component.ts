@@ -172,7 +172,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
         this.bookedRoomsArray = this.booking_details.bookingRoomRequests;
         this.food_choice = this.booking_details.food_choice;
         this.resortid = btoa(this.booking_details.resort_id.toString()); 
-        this.total_member_count = this.booking_details.member_count;
+        this.total_member_count =  this.totalList.length;
         this.totalSelectedRooms = this.booking_details.room_count;
         this.guest.addEmployee(this.EmployeeList);
         this.guest.addUpdateGuest(this.GuestList);
@@ -244,7 +244,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
   }
 
 
-  getInitials(firstName: string, lastName: string): { initials: string, backgroundColor: string } {
+  getInitials(firstName: string, lastName: string, username: string): { initials: string, backgroundColor: string } {
     let initials = '';
     if (firstName) {
       initials += firstName.charAt(0);
@@ -252,13 +252,17 @@ export class UpdateBookingDetailsComponent implements OnInit {
     if (lastName) {
       initials += lastName.charAt(0);
     }
-
+    if (username) {
+      initials += username.charAt(0);
+    }
+  
     const colors = ['orange', 'lightgreen', 'skyblue', 'red'];
     const chosenColor = Math.floor(Math.random() * colors.length);
     const backgroundColor = colors[chosenColor];
-
+  
     return { initials: initials.toUpperCase(), backgroundColor };
   }
+  
 
   getEmployeeIds() {
     debugger;
@@ -331,16 +335,16 @@ addMember() {
   back() {
     this.guest.resetService();
     this.dateService.resetDate();
-    this._location.back();
+    this.router.navigate(['/user/booking-details'])
   }
 
   update() {
     this.getEmployeeIds();
     this.setValue();
-    this.apiRepo.bookResort(this.bookingUpdate.value).subscribe(
+    this.apiRepo.updateBookingDetails(this.bookingUpdate.value).subscribe(
       (response) => {
         if (response) {
-          console.log("updated response",response)
+          console.log("updated response:",response)
           alert("Booking details updated successfully");
           this.guest.resetService();
           this.dateService.resetDate();

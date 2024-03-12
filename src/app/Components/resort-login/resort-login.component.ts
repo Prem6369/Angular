@@ -1,4 +1,3 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,7 +18,6 @@ export class ResortLoginComponent implements OnInit {
   Errormessage:string='';
   constructor(private guestService: GuestService,
     private router: Router, 
-    private httpClient: HttpClient,
     private session:SessionServiceService,
     private repository:apiLoginService) {}
     
@@ -30,7 +28,6 @@ export class ResortLoginComponent implements OnInit {
   Login() {
     var Loginvalues = this.signInForm.value;
     this.repository.signin(Loginvalues).subscribe((response)=>{
-      console.log(response);
       if("Unknow User"==response.name){
         this.Errormessage='Incorrect Username and Password'
       }else{

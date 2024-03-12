@@ -32,7 +32,6 @@ export class ResortAddEmployeeComponent implements OnInit {
   filteredOptions: Observable<UserProfile[]>;
 
   constructor(
-    private httpClient: HttpClient,
     private _location: Location,
     private guestService: GuestService,
     private repository:ApiUserServiceRepo
@@ -48,9 +47,7 @@ export class ResortAddEmployeeComponent implements OnInit {
     debugger;
     const storedEmployees = this.guestService.getEmployee();
     if (storedEmployees && storedEmployees.length > 0) {
-   //   console.log("from add employee:",storedEmployees);
       this.employee = storedEmployees;
-      console.log("from add employee:",this.employee);
     }
   }
 
@@ -120,22 +117,16 @@ export class ResortAddEmployeeComponent implements OnInit {
   }
 
   getUsers() {
-    const url = `https://localhost:7036/api/resorts/getusers`;
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiI3NTEwZDVjNy1mYTNhLTRiYzctYjEzNy1lZjc1ZmVhNWYzZjIiLCJzdWIiOiJhcmF2aW5kIiwiZW1haWwiOiJhcmF2aW5kIiwianRpIjoiMjIxNTljNmItYjY1MC00ZWFlLTg4ODMtNzRhMzgwN2QyZTg4IiwibmJmIjoxNzA4NjcxMTg1LCJleHAiOjE3MDg3MzExODUsImlhdCI6MTcwODY3MTE4NSwiaXNzIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIiwiYXVkIjoiaHR0cHM6Ly9jbGF5c3lzcmVzb3J0YXBpLmNsYXlzeXMub3JnIn0.D7SccInUXQRcXjY1UpMIevwkFz3WFhpUVlSuKWFkGIY';
-
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     this.repository.getAllUsers().subscribe(
       (response:UserProfile[])=>{
         this.userProfile = response;
-        console.log("Object", this.userProfile);
-
       }
     )
 
   }
 
   
-  getInitials(username: string, user_id: number): { initials: string, backgroundColor: string } {
+  getInitials(first_name: string, last_name: string, username: string, user_id: number): { initials: string, backgroundColor: string } {
     const storedEmployee = this.employee.find(emp => emp.user_id === user_id);
     let backgroundColor = '';
     if (storedEmployee && storedEmployee.backgroundColor) {
@@ -150,7 +141,16 @@ export class ResortAddEmployeeComponent implements OnInit {
     }
   
     let initials = '';
-    if (username) {
+
+    if (first_name) {
+      initials += first_name.charAt(0);
+    }
+ 
+    if (last_name) {
+      initials += last_name.charAt(0);
+    }
+  
+    if (!initials && username) {
       initials += username.charAt(0);
       if (username.length > 1) {
         initials += username.charAt(1);
@@ -160,7 +160,6 @@ export class ResortAddEmployeeComponent implements OnInit {
     return { initials: initials.toUpperCase(), backgroundColor };
   }
   
-
 
 
 }

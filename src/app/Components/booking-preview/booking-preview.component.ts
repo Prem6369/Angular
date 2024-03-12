@@ -37,7 +37,7 @@ export class BookingPreviewComponent implements OnInit {
 
   selectedRooms: { name: string; count: number }[] = [];
   guestDetails!: any[];
-  bookedRooms: { count: number, name: string, description: string }[] = [];
+  bookedRooms: { room_type_id:number,count: number, name: string, description: string }[] = [];
   guest: GuestPost[] = [];
 
   user_id!: number;
@@ -47,7 +47,6 @@ export class BookingPreviewComponent implements OnInit {
     private _location: Location,
     private bookingService: BookingService,
     private guestService: GuestService,
-    private httpclient: HttpClient,
     private router: Router,
     private repository:ApiServiceRepo) {
   }
@@ -72,13 +71,13 @@ export class BookingPreviewComponent implements OnInit {
     this.guestDetails = this.booking_details.Total_List;
     this.GuestEmployeeList = this.booking_details.Total_List;
     this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
-      room_type_id: key,
+      room_type_id: value.room_type_id,
       room_type_count: value.count,
       name: value.name,
       description: value.description
     }));
     this.roomTypes_Req = Object.entries(this.bookedRooms).map(([key, value]) => ({
-      room_type_id: Number(key),
+      room_type_id: value.room_type_id,
       room_type_count: value.count,
     }));
     this.check_in_date = this.toCustomFormat(this.booking_details.check_in_date)
