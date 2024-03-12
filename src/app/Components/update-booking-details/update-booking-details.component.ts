@@ -302,7 +302,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
 addMember() {
   debugger;
   this.router.navigate(['/user/Resortrooms'],
-   {queryParams: { BookingId: this.booking_id, ID: this.resort_id_Checkin || this.resortid },
+   {queryParams: { BookingId: this.booking_id, ID: this.resort_id_Checkin || this.resortid,selectedTab: 'tab2' },
   });
 }
 

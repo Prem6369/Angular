@@ -20,8 +20,8 @@
   </div>
 
   <div class="container">
-    <mat-tab-group  #matTabGroup  mat-align-tabs="center">
-      <mat-tab label="Room(s)" id="tab-label" class="mt-4">
+    <mat-tab-group  #matTabGroup [(selectedIndex)]="selectedTabIndex"  mat-align-tabs="center">
+      <mat-tab label="Room(s)" id="tab-label" [disabled]="isTabDisabled(0)" class="mt-4">
         <div class="table-responsive p-4">
           <table class="table">
             <tbody>
@@ -58,7 +58,7 @@
           <p>{{ totalSelectedRooms }}</p>
         </div>
       </mat-tab>
-      <mat-tab label="Guest" id="tab-label">
+      <mat-tab label="Guest" id="tab-label" [disabled]="isTabDisabled(1)">
 
         <div class="row " id="addButtons">
           <button class="col-lg-6 col-md-6 col-sm-6  btn-sm btn m-3" routerLink="/user/Addemployee"

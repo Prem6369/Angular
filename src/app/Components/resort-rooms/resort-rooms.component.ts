@@ -20,6 +20,7 @@ import { MatTabGroup } from '@angular/material/tabs';
 })
 
 export class ResortRoomsComponent implements OnInit  {
+  selectedTabIndex: number = 0;
 
   resortlist: ResortDetails[] = [];
   ResortRoom: getRoomTypes[] = [];
@@ -78,12 +79,18 @@ export class ResortRoomsComponent implements OnInit  {
       this.roomcount =params['room_count']
       this.bookingIdFromRoom=params['bookingIdFromRoom']
       this.getResortDetails();
+      const selectedTab = params['selectedTab'];
+      if (selectedTab === 'tab2') {
+        this.selectedTabIndex = 1; 
+      }
     });
     this.user_id = this.session.getUserId();
     this.initializer()
     this.getEmployeeIds();
     this.calculateDayAndNight();
   }
+  
+ 
   getResortDetails() {
     debugger;
     const decrptyId = (atob(this.Resort_id.toString()))
@@ -121,6 +128,15 @@ export class ResortRoomsComponent implements OnInit  {
     this.guest_count = this.total_guest.length;
     this.total_count = this.employee_count + this.guest_count;
   }
+
+isTabDisabled(index: number): boolean {
+  if (this.booking_id || this.roomid) {
+    return index !== this.selectedTabIndex;
+  } else {
+    return false;
+  }
+}
+
 
   getEmployeeIds() {
     this.total_employees.forEach((employee: { user_id: { toString: () => string; }; }, index: number) => {

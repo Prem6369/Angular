@@ -64,7 +64,8 @@
       <div>
   
       </div>
-      <div id="room-details" class="container rounded my-3">
+
+      <!-- <div id="room-details" class="container rounded my-3">
         <div *ngFor="let room of bookedRoomsArray" class="row w-0 m-3 border-bottom p-3">
   
           <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2 text-center" id="iconbackground">
@@ -83,7 +84,34 @@
             <i class="fa-regular fa-trash-can text-danger" (click)="removeRoom(room.room_type_id)"></i>
           </div>
         </div>
+      </div> -->
+
+      <div class="table-responsive rounded my-3" id="room-details">
+        <table class="table">
+          <tbody>
+            <tr *ngFor="let room of bookedRoomsArray" class=" border-bottom p-3">
+              <td>
+                <div class="icon-background d-flex justify-content-center" id="iconbackground">
+                  <i class="fa-solid fa-bed fa-2x check"></i>
+                </div>
+              </td>
+              <td>
+                <div class="fw-bold text-center">{{ room.name }}</div>
+                <div class="text-center">{{ room.description }}</div>
+              </td>
+              <td>
+                <div class="text-center fw-bold">{{ room.room_type_count }}</div>
+              </td>
+              <td>
+                <i class="fa-regular fa-trash-can text-danger" (click)="removeRoom(room.room_type_id)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
+
+
     </div>
 
 
