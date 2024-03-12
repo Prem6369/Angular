@@ -21,8 +21,6 @@ import { MatTabGroup } from '@angular/material/tabs';
 
 export class ResortRoomsComponent implements OnInit  {
 
-  @ViewChild('matTabGroup') matTabGroup!: MatTabGroup;
-
   resortlist: ResortDetails[] = [];
   ResortRoom: getRoomTypes[] = [];
   guestDetails: GuestDetails[] = [];
@@ -73,19 +71,12 @@ export class ResortRoomsComponent implements OnInit  {
 
   ngOnInit(): void {
 
-    setTimeout(() => {
-      this.matTabGroup.selectedIndex = 1;
-    });
-
-    
     this.route.queryParams.subscribe(params => {
       this.Resort_id = params['ID'];
       this.booking_id =params['BookingId'];
       this.roomid =params ['room_id'];
       this.roomcount =params['room_count']
       this.bookingIdFromRoom=params['bookingIdFromRoom']
-      
-
       this.getResortDetails();
     });
     this.user_id = this.session.getUserId();
@@ -93,12 +84,6 @@ export class ResortRoomsComponent implements OnInit  {
     this.getEmployeeIds();
     this.calculateDayAndNight();
   }
-
-  
-  selectTab2() {
-    this.matTabGroup.selectedIndex = 1; 
-  }
-  
   getResortDetails() {
     debugger;
     const decrptyId = (atob(this.Resort_id.toString()))
@@ -129,16 +114,11 @@ export class ResortRoomsComponent implements OnInit  {
   initializer() {
     this.check_in_date = this.dateService.checkInDate;
     this.check_out_date = this.dateService.checkOutDate;
-    debugger;
     this.total_guest = this.guestService.getGuests();
     this.total_employees = this.guestService.getEmployee();
-    console.log("From total_employees:",this.total_employees);
-    console.log("From total_guest:",this.total_guest);
-      this.total_list = this.total_employees.concat(this.total_guest)
- 
-    console.log("From total_list:",this.total_list);
+    this.total_list = this.total_employees.concat(this.total_guest)
     this.employee_count = this.total_employees.length;
-      this.guest_count = this.total_guest.length;
+    this.guest_count = this.total_guest.length;
     this.total_count = this.employee_count + this.guest_count;
   }
 
@@ -178,7 +158,6 @@ export class ResortRoomsComponent implements OnInit  {
 
 
   next() {
-    
     debugger;
     if(this.booking_id){
       const decryptId=(atob(this.Resort_id.toString()));
@@ -196,8 +175,9 @@ export class ResortRoomsComponent implements OnInit  {
         check_out_date: this.check_out_date,
         roomTypes_Req: this.bookedRoomsArray
       }
-      this.bookingService.UpdatedBooking(updatebooking);
-      this.router.navigate(['/user/update-booking'], { queryParams: { ID: this.Resort_id,id:this.booking_id,AddMember:true } });
+
+        this.bookingService.UpdatedBooking(updatebooking);
+        this.router.navigate(['/user/update-booking'], { queryParams: { ID: this.Resort_id,id:this.booking_id,AddMember:true } }); 
 
     }
     else if(this.roomid){

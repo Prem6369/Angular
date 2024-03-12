@@ -67,7 +67,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
       this.bookingIdFromRoom = +params['bookingIdFromRoom'];
       this.resort_name = params['resort_name'];
       this.AddMember = params['AddMember'];
-      this.resort_id_Checkin = +params['ID']; 
+      this.resort_id_Checkin = params['ID']; 
     });
     this.user_id=this.sessionService.getUserId();
     this.updatedvalues = this.booking.getUpdatedBookings();
@@ -77,6 +77,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
       this.getMemebers();
     }
     else if (this.AddMember) {
+      debugger;
       this.getDate();
       this.getMemebers();
       if (this.updatedvalues.roomTypes_Req.length !== 0) {
@@ -84,6 +85,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
         this.updateSelectedRooms();
       }
       else if (this.booking.getUpdatedRoom()) {
+        debugger;
         this.updatedroom = this.booking.getUpdatedRoom();
         this.bookedRoomsArray = this.updatedroom.roomTypes_Req;
         this.updateSelectedRooms();
@@ -158,7 +160,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
         this.totalList = this.EmployeeList.concat(this.GuestList);
         this.bookedRoomsArray = this.booking_details.bookingRoomRequests;
         this.food_choice = this.booking_details.food_choice;
-        this.resortid = this.booking_details.resort_id.toString(); 
+        this.resortid = btoa(this.booking_details.resort_id.toString()); 
         this.total_member_count = this.booking_details.member_count;
         this.totalSelectedRooms = this.booking_details.room_count;
         this.guest.addEmployee(this.EmployeeList);
@@ -183,10 +185,12 @@ export class UpdateBookingDetailsComponent implements OnInit {
   }
 
   getBooking() {
+    debugger;
     this.repo.getBookingDetailsById(this.booking_id).subscribe(
       (response: any[]) => {
+        debugger;
         this.booking_details = response[0];
-        this.resortid = atob(this.booking_details.resort_id.toString());
+        this.resortid = btoa(this.booking_details.resort_id.toString()); 
         this.booking_id = this.booking_details.booking_id;
         if (!this.bookingIdFromRoom) {
           this.bookedRoomsArray = this.booking_details.bookingRoomRequests;
@@ -262,9 +266,9 @@ export class UpdateBookingDetailsComponent implements OnInit {
 }
 
 addMember() {
-  this.router.navigate(['/user/Resortrooms'], { 
-    fragment: 'tab2',
-    queryParams: { BookingId: this.booking_id, ID: this.resortid || this.resort_id_Checkin },
+  debugger;
+  this.router.navigate(['/user/Resortrooms'],
+   {queryParams: { BookingId: this.booking_id, ID: this.resortid || this.resort_id_Checkin },
   });
 }
 
@@ -288,6 +292,13 @@ addMember() {
         });
       });
     }
+    // else
+    // {
+    //   this.router.navigate(['/user/Resortrooms'], {
+    //     queryParams:
+    //       { ID: resortID, bookingIdFromRoom: this.booking_id }
+    //   });
+    // }
   }
   back() {
     this.guest.resetService();
