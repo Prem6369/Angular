@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { GuestService } from '../../Service/GuestService';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserProfile } from '../../Model/userProfile/userProfile';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ApiUserServiceRepo } from '../../Repository/user_repository';
@@ -22,8 +21,8 @@ export class ResortAddEmployeeComponent implements OnInit {
 
   employees = new FormGroup({
     username: new FormControl(''),
-    first_name:new FormControl(''),
-    last_name:new FormControl(''),
+    first_name: new FormControl(''),
+    last_name: new FormControl(''),
     user_id: new FormControl(),
     phone_number: new FormControl(''),
     type: new FormControl('')
@@ -34,7 +33,7 @@ export class ResortAddEmployeeComponent implements OnInit {
   constructor(
     private _location: Location,
     private guestService: GuestService,
-    private repository:ApiUserServiceRepo
+    private repository: ApiUserServiceRepo
   ) {
     this.filteredOptions = this.employees.get('username')!.valueChanges.pipe(
       startWith(''),
@@ -60,15 +59,23 @@ export class ResortAddEmployeeComponent implements OnInit {
   }
 
   optionSelected(event: MatAutocompleteSelectedEvent): void {
-    this.employees.patchValue({
-      username: event.option.value.username
-    })
-    this.selectedUserId = event.option.value.user_id;
+    const userInput = event.option.value;
+    const optionSelected = this.userProfile.includes(userInput);
+    if (!optionSelected) {
+      this.employees.controls['username'].setValue('');
+    }
+    else {
+      this.employees.patchValue({
+        username: event.option.value.username
+      })
+      this.selectedUserId = event.option.value.user_id;
+    }
   }
 
 
   addEmployee(user_id: number) {
-    if (this.employees.value.username !== "") {
+    debugger;
+    if (this.employees.value.username !== '' && user_id !== undefined) {
       const employeeExists = this.employee.some(emp => emp.user_id === user_id);
       if (!employeeExists) {
         this.setValues(user_id);
@@ -81,7 +88,7 @@ export class ResortAddEmployeeComponent implements OnInit {
       alert("Employee not selected. Please select an employee.");
     }
   }
-  
+
 
   removeEmployee(user_id: number) {
     const removeIndex: number = this.employee.findIndex((emp: UserProfile) => emp.user_id === user_id);
@@ -118,14 +125,14 @@ export class ResortAddEmployeeComponent implements OnInit {
 
   getUsers() {
     this.repository.getAllUsers().subscribe(
-      (response:UserProfile[])=>{
+      (response: UserProfile[]) => {
         this.userProfile = response;
       }
     )
 
   }
 
-  
+
   getInitials(first_name: string, last_name: string, username: string, user_id: number): { initials: string, backgroundColor: string } {
     const storedEmployee = this.employee.find(emp => emp.user_id === user_id);
     let backgroundColor = '';
@@ -139,27 +146,24 @@ export class ResortAddEmployeeComponent implements OnInit {
         storedEmployee.backgroundColor = backgroundColor;
       }
     }
-  
+
     let initials = '';
 
     if (first_name) {
       initials += first_name.charAt(0);
     }
- 
+
     if (last_name) {
       initials += last_name.charAt(0);
     }
-  
+
     if (!initials && username) {
       initials += username.charAt(0);
       if (username.length > 1) {
         initials += username.charAt(1);
       }
     }
-  
+
     return { initials: initials.toUpperCase(), backgroundColor };
   }
-  
-
-
 }

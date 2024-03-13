@@ -68,12 +68,12 @@ export class InsertResortDetailsComponent implements OnInit {
       }
   
   AddResort = new FormGroup({
-    name: new FormControl(),
-    description: new FormControl(),
-    location: new FormControl(),
+    name: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+( [a-zA-Z]+)*$')]),
+    description: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+( [a-zA-Z]+)*$')]),
+    location: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+( [a-zA-Z]+)*$')]),
     coordinates: new FormControl(),
-    image_urls: new FormControl(),
-    video_urls: new FormControl(),
+    image_urls: new FormControl(null,Validators.required),
+    video_urls: new FormControl(null,Validators.required),
     amenities: new FormControl(),
     categories: new FormControl(),
     status: new FormControl(),
@@ -185,12 +185,12 @@ export class InsertResortDetailsComponent implements OnInit {
     this.setValues();
     const resort_details = {
       resort_id: this.Resort_id ? Number(atob(this.Resort_id.toString())) || 0 : 0,      
-      name: this.AddResort.value.name,
-      description: this.AddResort.value.description,
-      location: this.AddResort.value.location,
+      name: this.AddResort.value.name || '',
+      description: this.AddResort.value.description || '',
+      location: this.AddResort.value.location || '',
       amenities: this.AddResort.value.amenities,
-      image_urls: this.AddResort.value.image_urls,
-      video_urls: this.AddResort.value.video_urls,
+      image_urls: this.AddResort.value.image_urls || '',
+      video_urls: this.AddResort.value.video_urls || '',
       status: this.AddResort.value.status,
       categories: this.AddResort.value.categories,
       coordinates: this.AddResort.value.coordinates
@@ -215,5 +215,25 @@ export class InsertResortDetailsComponent implements OnInit {
 
   back() {
     this._location.back();
+  }
+
+  get Name(){
+    return this.AddResort.get('name');
+  }
+
+  get Description(){
+    return this.AddResort.get('description');
+  }
+
+  get Location(){
+    return this.AddResort.get('location');
+  }
+
+  get Image(){
+    return this.AddResort.get('image_urls');
+  }
+
+  get Video(){
+    return this.AddResort.get('video_urls');
   }
 }

@@ -1,96 +1,140 @@
+<form [formGroup]="AddResort" class="text-center m-5" id="AddResortform">
+    <ng-template>Add resort details</ng-template>
+    <div class="row mx-3">
+        <div>
+            <h3 class="text-center my-2">Add/Update Resort</h3>
+        </div>
 
-        <form [formGroup]="AddResort" class="text-center m-5" id="AddResortform">
-            <ng-template >Add resort details</ng-template>
-            <div class="row mx-3">
-                <div>
-                    <h3 class="text-center my-2">Add/Update Resort</h3>
+        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 p-2" id="main-div">
+            <section id="Name" class="my-3" [ngClass]="{ 'is-invalid': Name?.invalid && Name?.touched }">
+                <h2>NAME</h2>
+                <div class="input">
+                    <span class="icon mx-1"><i class="fa-solid fa-hotel"
+                            [ngClass]="{ 'text-danger': Name?.invalid && Name?.touched }"></i></span>
+                    <input type="text" id="Name" formControlName="name">
+                    <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="Name?.invalid && Name?.touched"></i>
                 </div>
-
-                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 p-2" id="main-div">
-                    <section id="Name" class="my-3">
-                        <h2>NAME</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-hotel"></i></span>
-                        <input type="text" id="name" formControlName="name">
-                    </section>
-
-                    <section id="description" class="my-3">
-                        <h2>DESCRIPTION</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-circle-exclamation"></i></span>
-                        <input type="text" id="description" formControlName="description">
-                    </section>
-
-                    <section id="location" class="my-3">
-                        <h2>LOCATION</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-map-pin"></i> </span>
-                        <input type="text" id="location" formControlName="location">
-                    </section>
-
-                    <section id="coordinates" class="my-3">
-                        <h2>CO-ORDINATES</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-map-location-dot"></i></span>
-                        <input type="text" id="latitude" placeholder="Type coordinates as csv" formControlName="coordinates">
-                    </section>
-
-                    <section id="image" class="my-3">
-                        <h2>IMAGE URL</h2>
-                        <span class="icon mx-1"><i class="fa-regular fa-file-image"></i></span>
-                        <input type="url" id="img" formControlName="image_urls">
-                    </section>
-
+                <div *ngIf="Name && Name.invalid && Name.touched" class="text-danger">
+                    Enter a valid name
                 </div>
+            </section>
 
-                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 p-2" id="side-div">
-                   
-
-                    <section  class="my-3">
-                        <h2>VIDEO URL</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-file-video"></i></span>
-                        <input type="url" id="video" formControlName="video_urls">
-                    </section>
-
-                    <section class="my-3">
-                        <h2>AMENTITIES</h2>
-                        <div class="checkbox-container">
-                            <mat-form-field class="example-form-field">
-                                <mat-chip-grid #chipGrid aria-label="Enter amenitity" [formControl]="formControl">
-                                    @for (amenitity of amenities_list; track amenitity) {
-                                    <mat-chip-row (removed)="removeKeyword(amenitity)" id="chips">
-                                        {{amenitity}}
-                                        <button matChipRemove aria-label="'remove ' + amenitity">
-                                            <mat-icon>cancel</mat-icon>
-                                        </button>
-                                    </mat-chip-row>
-                                    }
-                                </mat-chip-grid>
-                                
-                                <input placeholder="Add amentites.." [matChipInputFor]="chipGrid"
-                                    (matChipInputTokenEnd)="add($event)" />
-                            </mat-form-field>
-                        </div>
-                    </section>
-
-                    <section  class="my-3">
-                        <h2>ADD ROOMS</h2>
-                        <form [formGroup]="AddRooms">
-                            <span class="icon mx-1"><i class="fa-solid fa-layer-group"></i></span>
-                            <select formControlName="room_type_id" (change)="selectRoomType($event)">
-                                <option value="" disabled [selected]="true">Choose Room</option>
-                                <option *ngFor="let room of roomsTypes" [value]="room.room_type_id">{{ room.name }}   ({{ room.capacity}})</option>
-                              </select>
-                              
-                            <div class="input-container">
-                              <input type="number" formControlName="number_of_rooms" placeholder="Enter number of rooms">
-                              <button class="btn btn-sm btn-outline-success" type="button" (click)="saveRooms()">Save</button>
-                            </div>
-                          </form>
-                    </section>
+            <section id="Description" class="my-3"
+                [ngClass]="{ 'is-invalid': Description?.invalid && Description?.touched }">
+                <h2>DESCRIPTION</h2>
+                <div class="input">
+                    <span class="icon mx-1"><i class="fa-solid fa-circle-exclamation"
+                            [ngClass]="{ 'text-danger': Description?.invalid && Description?.touched }"></i></span>
+                    <input type="text" id="Description" formControlName="description">
+                    <i class="fa-solid fa-triangle-exclamation text-danger"
+                        *ngIf="Description?.invalid && Description?.touched"></i>
                 </div>
-            </div>
+                <div *ngIf="Description && Description.invalid && Description.touched" class="text-danger">
+                    field can't be empty
+                </div>
+            </section>
 
-            <div>
-                <button class="btn btn-outline-primary mb-2 px-5 mx-3" (click)="back()">Back</button>
-                <button class="btn btn-outline-success mb-2 px-5" (click)="save()">Next</button>
-            </div>
-        </form>
+            <section id="Location" class="my-3" [ngClass]="{ 'is-invalid': Location?.invalid && Location?.touched }">
+                <h2>LOCATION</h2>
+                <div class="input">
+                    <span class="icon mx-1"><i class="fa-solid fa-map-pin"
+                            [ngClass]="{ 'text-danger': Location?.invalid && Location?.touched }"></i> </span>
+                    <input type="text" id="Location" formControlName="location">
+                    <i class="fa-solid fa-triangle-exclamation text-danger"
+                        *ngIf="Location?.invalid && Location?.touched"></i>
+                </div>
+                <div *ngIf="Location && Location.invalid && Location.touched" class="text-danger">
+                    field can't be empty
+                </div>
+            </section>
+
+            <section id="coordinates" class="my-3">
+                <h2>CO-ORDINATES</h2>
+                <div class="input">
+                    <span class="icon mx-1"><i class="fa-solid fa-map-location-dot"></i></span>
+                    <input type="text" id="latitude" placeholder="Type coordinates as csv"
+                        formControlName="coordinates">
+                </div>
+            </section>
+
+            <section id="Image" class="my-3" [ngClass]="{ 'is-invalid': Image?.invalid && Image?.touched }">
+                <h2>IMAGE URL</h2>
+                <div class="input">
+                    <span class="icon mx-1"><i class="fa-regular fa-file-image"
+                            [ngClass]="{ 'text-danger': Image?.invalid && Image?.touched }"></i></span>
+                    <input type="url" id="img" formControlName="image_urls">
+                    <i class="fa-solid fa-triangle-exclamation text-danger"
+                        *ngIf="Image?.invalid && Image?.touched"></i>
+                </div>
+                <div *ngIf="Image && Image.invalid && Image.touched" class="text-danger">
+                    field can't be empty
+                </div>
+            </section>
+
+        </div>
+
+        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 p-2" id="side-div">
 
 
+            <section class="my-3" [ngClass]="{ 'is-invalid': Video?.invalid && Video?.touched }">
+                <h2>VIDEO URL</h2>
+                <div class="input">
+                    <span class="icon mx-1"><i class="fa-solid fa-file-video"
+                            [ngClass]="{ 'text-danger': Video?.invalid && Video?.touched }"></i></span>
+                    <input type="url" id="Video" formControlName="video_urls">
+                    <i class="fa-solid fa-triangle-exclamation text-danger"
+                        *ngIf="Video?.invalid && Video?.touched"></i>
+                </div>
+                <div *ngIf="Video && Video.invalid && Video.touched" class="text-danger">
+                    field can't be empty
+                </div>
+            </section>
+
+            <section class="my-3">
+                <h2>AMENTITIES</h2>
+                <div class="checkbox-container">
+                    <mat-form-field class="example-form-field">
+                        <mat-chip-grid #chipGrid aria-label="Enter amenitity" [formControl]="formControl">
+                            @for (amenitity of amenities_list; track amenitity) {
+                            <mat-chip-row (removed)="removeKeyword(amenitity)" id="chips">
+                                {{amenitity}}
+                                <button matChipRemove aria-label="'remove ' + amenitity">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip-row>
+                            }
+                        </mat-chip-grid>
+                        <input placeholder="Add amentites.." [matChipInputFor]="chipGrid"
+                            (matChipInputTokenEnd)="add($event)" />
+                    </mat-form-field>
+                </div>
+                <div *ngIf="Video && Video.invalid && Video.touched" class="text-danger">
+                    field can't be empty
+                </div>
+            </section>
+
+            <section class="my-3">
+                <h2>ADD ROOMS</h2>
+                <form [formGroup]="AddRooms">
+                    <div class="input">
+                        <span class="icon mx-1"><i class="fa-solid fa-layer-group"></i></span>
+                        <select formControlName="room_type_id" (change)="selectRoomType($event)">
+                            <option value="" disabled [selected]="true">Choose Room</option>
+                            <option *ngFor="let room of roomsTypes" [value]="room.room_type_id">{{ room.name }} ({{
+                                room.capacity}})</option>
+                        </select>
+                    </div>
+                    <div class="input-container">
+                        <input type="number" formControlName="number_of_rooms" placeholder="Enter number of rooms">
+                        <button class="btn btn-sm btn-outline-success" type="button" (click)="saveRooms()">Save</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <div>
+        <button class="btn btn-outline-primary mb-2 px-5 mx-3" (click)="back()">Back</button>
+        <button class="btn btn-outline-success mb-2 px-5" (click)="save()">Next</button>
+    </div>
+</form>
