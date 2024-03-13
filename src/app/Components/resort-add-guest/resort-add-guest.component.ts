@@ -82,12 +82,12 @@ export class ResortAddGuestComponent implements OnInit {
 
   Addguest = new FormGroup({
     guest_user_id: new FormControl(),
-    first_name: new FormControl(null, Validators.required),
-    last_name: new FormControl(null, Validators.required),
-    email: new FormControl(null, Validators.required),
-    age: new FormControl(null, Validators.required),
+    first_name: new FormControl(null, [Validators.required,Validators.pattern('[a-zA-Z]+$')]),
+    last_name: new FormControl(null, [Validators.required,Validators.pattern('[a-zA-Z]+$')]),
+    email: new FormControl(null,[Validators.required,Validators.email]),
+    age: new FormControl(null, [Validators.required,Validators.pattern('[0-9]+$'),Validators.min(1)]),
     gender: new FormControl(null, Validators.required),
-    phone_number: new FormControl(null, Validators.required),
+    phone_number: new FormControl(null, [Validators.required,Validators.pattern('[0-9]+$'),Validators.minLength(10)]),
     address: new FormControl(null, Validators.required),
     official_id_card_no: new FormControl(null, Validators.required),
     official_id_image_url: new FormControl(null, Validators.required),
@@ -138,4 +138,35 @@ export class ResortAddGuestComponent implements OnInit {
       this.Addguest.controls['referrer_user_id'].setValue(this.referrer_user_id)
     }
   }
+
+  get firstName(){
+    return this.Addguest.get('first_name');
+  }
+  get lastName(){
+    return this.Addguest.get('last_name');
+  }
+  get Age(){
+    return this.Addguest.get('age');
+  }
+
+    get Sex(){
+    return this.Addguest.get('gender');
+  }
+  get Email(){
+    return this.Addguest.get('email');
+  }
+  
+  get PhoneNumber(){
+    return this.Addguest.get('phone_number');
+  }
+  
+  get Address(){
+    return this.Addguest.get('address');
+  }
+  
+  get OfficialIdCardNo(){
+    return this.Addguest.get('official_id_card_no');
+  }
+
+  
 }
