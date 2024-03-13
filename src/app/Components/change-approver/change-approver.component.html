@@ -4,8 +4,8 @@
         <div class="card border border-primary h-auto">
             <img [src]="resortimage[i]" class="card-img-top" height="100px" width="100px" alt="Resort Image">
             <div class="card-body">
-                <h5 class="card-title">{{ data.resort_name }}</h5>
-                <p class="card-text">Username: {{ data.username }}</p>
+                <h5 class="card-title text-center">{{ data.resort_name }}</h5>
+                <p class="card-text"><strong>Booked user:</strong> {{ data.username }}</p>
                 <p class="card-text">Check-in Date: {{ data.check_in_date | date:'dd/MM/yyyy' }}</p>
                 <p class="card-text">Check-out Date: {{ data.check_out_date | date:'dd/MM/yyyy' }}</p>
                 <form [formGroup]="value" class="row">
