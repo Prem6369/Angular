@@ -11,61 +11,110 @@
             <div class="row mx-3 border rounded">
 
                 <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 p-2" id="main-div">
-                    <section id="LastName" class="my-3">
+
+
+                    <section id="firstName" class="my-3" [ngClass]="{ 'is-invalid': firstName?.invalid && firstName?.touched }"> 
                         <h2>FIRST NAME</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" id="Fname" formControlName="first_name">
+                        <div class="input">
+                            <span class="icon mx-1"><i class="fa-solid fa-user" [ngClass]="{ 'text-danger': firstName?.invalid && firstName?.touched }"></i></span>
+                            <input type="text" id="firstName" formControlName="first_name">
+                            <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="firstName?.invalid && firstName?.touched"></i>
+                        </div>
+                        <div *ngIf="firstName && firstName.invalid && firstName.touched" class="text-danger">
+                            Enter a valid first name
+                        </div>
                     </section>
-
-                    <section id="LastName" class="my-3">
+                    
+                    <section id="LastName" class="my-3" [ngClass]="{ 'is-invalid': lastName?.invalid && lastName?.touched }">
                         <h2>LAST NAME</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" id="lname" formControlName="last_name">
+                        <div class="input">
+                            <span class="icon mx-1"><i class="fa-solid fa-user" [ngClass]="{ 'text-danger': lastName?.invalid && lastName?.touched }"></i></span>
+                            <input type="text" id="lastName" formControlName="last_name">
+                            <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="lastName?.invalid && lastName?.touched"></i>
+                        </div>
+                        <div *ngIf="lastName && lastName.invalid && lastName.touched" class="text-danger">
+                            Enter a valid last name
+                        </div>
                     </section>
-
-                    <section id="Age" class="my-3">
+        
+                    <section id="Age" class="my-3" [ngClass]="{ 'is-invalid': Age?.invalid && Age?.touched }">
                         <h2>AGE</h2>
-                        <span class="icon mx-1"><i class="fa-regular fa-calendar"></i></span>
-                        <input type="text" id="age" formControlName="age">
+                        <div class="input">
+                            <span class="icon mx-1"><i class="fa-regular fa-calendar" [ngClass]="{ 'text-danger': Age?.invalid && Age?.touched }"></i></span>
+                            <input type="text" id="Age" formControlName="age">
+                            <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="Age?.invalid && Age?.touched"></i>
+                        </div>
+                        <div *ngIf="Age && Age.invalid && Age.touched" class="text-danger">
+                            Enter valid age
+                        </div>
                     </section>
-
-                    <section id="Sex" class="my-3">
+        
+                    <section id="Sex" class="my-3" [ngClass]="{ 'is-invalid': Sex?.invalid && Sex?.touched }">
                         <h2>SEX</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
-                        <select id="sex" formControlName="gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
+                        <div class="input">
+                            <span class="icon mx-1"><i class="fa-solid fa-user" [ngClass]="{ 'text-danger': Sex?.invalid && Sex?.touched }"></i></span>
+                            <select id="sex" formControlName="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="Sex?.invalid && Sex?.touched"></i>
+                        </div>
+                        <div *ngIf="Sex && Sex.invalid && Sex.touched" class="text-danger">
+                            Enter a valid last name
+                        </div>
                     </section>
-
-
-                    <section id="Email" class="my-3">
+        
+                    <section id="Email" class="my-3" [ngClass]="{ 'is-invalid': Email?.invalid && Email?.touched }">
                         <h2>Email</h2>
-                        <span class="icon mx-1"><i class="fa-regular fa-envelope"></i></span>
-                        <input type="text" id="email" formControlName="email">
+                        <div class="input">
+                            <span class="icon mx-1"><i class="fa-regular fa-envelope" [ngClass]="{ 'text-danger': Email?.invalid && Email?.touched }"></i></span>
+                            <input type="text" id="Email" formControlName="email">
+                            <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="Email?.invalid && Email?.touched"></i>
+                        </div>
+                        <div *ngIf="Email && Email.invalid && Email.touched" class="text-danger">
+                            Enter a valid email address
+                        </div>
                     </section>
                 </div>
-
+        
                 <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 p-2" id="side-div">
-                    <section id="PhoneNumber" class="my-4">
+                    <section id="PhoneNumber" class="my-4" [ngClass]="{ 'is-invalid': PhoneNumber?.invalid && PhoneNumber?.touched }">
                         <h2>PHONE NUMBER</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-phone"></i></span>
-                        <input type="text" id="Pnumber" formControlName="phone_number">
+                        <div class="input">
+                            <span class="icon mx-1"><i class="fa-solid fa-phone" [ngClass]="{ 'text-danger': PhoneNumber?.invalid && PhoneNumber?.touched }"></i></span>
+                            <input type="text" id="PhoneNumber" formControlName="phone_number">
+                            <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="PhoneNumber?.invalid && PhoneNumber?.touched"></i>
+                        </div>
+                        <div *ngIf="PhoneNumber && PhoneNumber.invalid && PhoneNumber.touched" class="text-danger">
+                            Enter a valid phone number
+                        </div>
                     </section>
-
-                    <section id="Address" class="my-4">
+        
+                    <section id="Address" class="my-4" [ngClass]="{ 'is-invalid': Address?.invalid && Address?.touched }">
                         <h2>ADDRESS</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-location-dot"></i></span>
-                        <input type="text" id="address" formControlName="address">
+                        <div class="input">
+                            <span class="icon mx-1"><i class="fa-solid fa-location-dot" [ngClass]="{ 'text-danger': Address?.invalid && Address?.touched }"></i></span>
+                            <input type="text" id="Address" formControlName="address">
+                            <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="Address?.invalid && Address?.touched"></i>
+                        </div>
+                        <div *ngIf="Address && Address.invalid && Address.touched" class="text-danger">
+                            Field can't be empty
+                        </div>
                     </section>
-
-                    <section id="OfficialIdCardNo" class="my-4">
+        
+                    <section id="OfficialIdCardNo" class="my-4" [ngClass]="{ 'is-invalid': OfficialIdCardNo?.invalid && OfficialIdCardNo?.touched }">
                         <h2>OFFICIAL ID CARD NO</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-id-card"></i></span>
-                        <input type="text" id="idcard" formControlName="official_id_card_no">
+                        <div class="input">
+                            <span class="icon mx-1"><i class="fa-solid fa-id-card" [ngClass]="{ 'text-danger': OfficialIdCardNo?.invalid && OfficialIdCardNo?.touched }"></i></span>
+                            <input type="text" id="idcard" formControlName="official_id_card_no">
+                            <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="OfficialIdCardNo?.invalid && OfficialIdCardNo?.touched"></i>
+                        </div>
+                        <div *ngIf="OfficialIdCardNo && OfficialIdCardNo.invalid && OfficialIdCardNo.touched" class="text-danger">
+                            Enter a valid ID card number
+                        </div>
                     </section>
-
+        
                     <section id="OfficialIdImageUrl" class="my-4">
                         <h2>OFFICIAL ID IMAGE URL</h2>
                         <div class="input-container">
