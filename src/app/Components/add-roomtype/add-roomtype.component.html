@@ -7,29 +7,48 @@
         <h3 *ngIf="updateMessage" class="text-center  text-success">Update Room successfully</h3>
 
         <div id="form-body">
-            <section id="Name" class="my-3">
+            <section id="Name" class="my-3" [ngClass]="{'is-invalid':roomname?.invalid && roomname?.touched}">
                 <h2>NAME</h2>
-                <span class="icon mx-1"><i class="fa-solid fa-house"></i></span>
+                <div class="input">
+                <span class="icon mx-1"><i class="fa-solid fa-house" [ngClass]="{'text-danger':roomname?.invalid && roomname?.touched}"></i></span>
                 <input type="text" id="name" formControlName="name">
+                <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="roomname?.invalid && roomname?.touched"></i>
+                <div class="text-danger" *ngIf="roomname && roomname.invalid && roomname.touched">
+                    Enter valid Roomname
+                </div>
+            </div>
             </section>
 
-            <section id="capacity" class="my-3">
+            <section id="capacity" class="my-3" [ngClass]="{'is-invalid':capacity?.invalid && capacity?.touched}">
                 <h2>CAPACITY</h2>
-                <span class="icon mx-1"><i class="fa-solid fa-house-chimney-user"></i></span>
+                <div class="input">
+                <span class="icon mx-1"><i class="fa-solid fa-house-chimney-user"[ngClass]="{'text-danger':capacity?.invalid && capacity?.touched}"></i></span>
                 <input type="number" id="capacity" formControlName="capacity">
+                <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="capacity?.invalid && capacity?.touched"></i>
+                <div class="text-danger" *ngIf="capacity && capacity.invalid && capacity.touched">
+                    Enter valid capacity
+                </div>
+            </div>
             </section>
 
-            <section id="description" class="my-3">
+            <section id="description" class="my-3" [ngClass]="{ 'is-invalid': description?.invalid && description?.touched }">
                 <h2>DESCRIPTION</h2>
-                <span class="icon mx-1"><i class="fa-solid fa-circle-info"></i></span>
+                <div class="input">
+                <span class="icon mx-1"><i class="fa-solid fa-circle-info" [ngClass]="{ 'text-danger': description?.invalid && description?.touched }"></i></span>
                 <input type="text" id="description" formControlName="description">
+                <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="description?.invalid && description?.touched"></i>
+                <div class="text-danger" *ngIf="description && description.invalid && description.touched">
+                    Enter a valid description
+                </div>
+            </div>
             </section>
+            
         </div>
     </form>
 
     
     <div class="text-center m-3">
-        <button class="btn btn-outline-success mx-2" (click)="saveRoom()">Save</button>
+        <button class="btn btn-outline-success mx-2" (click)="saveRoom()"[disabled]="!AddRooms.valid">Save</button>
         <button class="btn btn-outline-dark mx-2" (click)="back()">Back</button>
     </div>
 
