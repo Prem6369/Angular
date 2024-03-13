@@ -15,6 +15,10 @@
                         <h2>FIRST NAME</h2>
                         <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
                         <input type="text" id="Fname" formControlName="first_name">
+                        <div *ngIf="firstname && firstname.invalid && firstname.touched ">
+                            <div class="text-danger">enter vaild firstname </div>
+                        </div>
+
                     </section>
 
                     <section id="LastName" class="my-3">
@@ -26,7 +30,7 @@
 
                     <section id="email" class="my-3">
                         <h2>Claysys Email</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
+                        <span class="icon mx-1"><i class="fa-regular fa-envelope"></i></span>
                         <input type="text" id="email" formControlName="claySys_email">
                     </section>
 
@@ -47,13 +51,13 @@
 
                     <section id="role" class="my-4">
                         <h2>ROLE</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-location-dot"></i></span>
+                        <span class="icon mx-1"><i class="fa-regular fa-circle-user"></i></span>
                         <input type="text" id="role" formControlName="role">
                     </section>
 
                     <section id="lead" class="my-4">
                         <h2>LEAD</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-location-dot"></i></span>
+                        <span class="icon mx-1"><i class="fa-solid fa-user-injured fa-md"></i></span>
                         <input type="text" id="lead" formControlName="lead">
                     </section>
 
@@ -63,7 +67,7 @@
 
                     <section id="empid" class="my-4">
                         <h2>EMPLOYEE ID</h2>
-                        <span class="icon mx-1"><i class="fa-solid fa-phone"></i></span>
+                        <span class="icon mx-1"><i class="fa-solid fa-id-card"></i></span>
                         <input type="text" id="empid" formControlName="employee_id">
                     </section>
 
@@ -92,15 +96,16 @@
                     <section id="OfficialIdImageUrl" class="my-4">
                         <h2>OFFICIAL ID IMAGE URL</h2>
                         <div class="input-container">
-                            <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
+                            <span class="icon mx-1"><i class="fa-solid fa-link-slash"></i></span>
                             <input type="text" id="img" formControlName="official_id_image_url">
                         </div>
+
                     </section>
 
                     <section id="idcard" class="my-4">
                         <h2>ID IMAGE URL</h2>
                         <div class="input-container">
-                            <span class="icon mx-1"><i class="fa-solid fa-user"></i></span>
+                            <span class="icon mx-1"><i class="fa-solid fa-link"></i></span>
                             <input type="text" id="idimg" formControlName="claysys_id_card_image_url">
                         </div>
                     </section>

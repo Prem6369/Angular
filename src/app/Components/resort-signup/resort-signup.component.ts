@@ -11,23 +11,23 @@ import { Router } from '@angular/router';
 export class ResortSignupComponent implements OnInit {
 
   newuser = new FormGroup({
-    first_name: new FormControl(null,Validators.required),
-    last_name: new FormControl(null,Validators.required),
-    claySys_email: new FormControl(null,Validators.required),
-    phone_number: new FormControl(null,Validators.required),
-    address: new FormControl(null,Validators.required),
-    role: new FormControl(null,Validators.required),
-    lead: new FormControl(null,Validators.required),
-    employee_id: new FormControl(null,Validators.required),
-    age: new FormControl(null,Validators.required),
+    first_name: new FormControl(null,[Validators.required,Validators.pattern('[a-zA-Z]+$')]),
+    last_name: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+$')]),
+    claySys_email: new FormControl(null,[Validators.required,Validators.email]),
+    phone_number: new FormControl(null,[Validators.required,Validators.pattern('^[\\d]{10}$')]),
+    address: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z\\d]+$')]),
+    role: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+$')]),
+    lead: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+$')]),
+    employee_id: new FormControl(null,[Validators.required,Validators.maxLength(3),Validators.pattern('^[a-zA-Z\\d]+$')]),
+    age: new FormControl(null,[Validators.required,Validators.maxLength(3)]),
     gender: new FormControl(null,Validators.required),
-    official_id_card_no: new FormControl(null,Validators.required),
+    official_id_card_no: new FormControl(null,[Validators.required,Validators.maxLength(4),Validators.pattern('^[a-zA-Z\\d]+$')]),
     official_id_image_url: new FormControl(null,Validators.required),
-    claysys_id_card_image_url: new FormControl(null,Validators.required),
+    claysys_id_card_image_url: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z\\d]+$')]),
     allotted_stays:new FormControl(),
     used_stays:new FormControl(),
     status:new FormControl(''),
-    username: new FormControl(null,Validators.required)
+    username: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+$')])
   });
 
   constructor(private repository:apiLoginService,
@@ -69,5 +69,9 @@ export class ResortSignupComponent implements OnInit {
 
   back(){
     this.router.navigate([''])
+  }
+
+  get firstname(){
+    return this.newuser.get('first_name')
   }
 }
