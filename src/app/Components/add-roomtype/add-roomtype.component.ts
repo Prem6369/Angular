@@ -41,9 +41,9 @@ export class AddRoomtypeComponent implements OnInit {
 
   AddRooms = new FormGroup({
     room_type_id: new FormControl(),
-    name: new FormControl('', Validators.required),
-    capacity: new FormControl(),
-    description: new FormControl('', Validators.required)
+    name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$')]),
+    capacity: new FormControl(Validators.required, [Validators.maxLength(4)]),
+    description: new FormControl('', [Validators.required])
   });
 
   saveRoom() {
@@ -70,5 +70,15 @@ export class AddRoomtypeComponent implements OnInit {
 
   back() {
     this._location.back();
+  }
+
+  get roomname(){
+    return this.AddRooms.get('name')
+  }
+  get capacity(){
+    return this.AddRooms.get('capacity')
+  }
+  get description(){
+    return this.AddRooms.get('description')
   }
 }

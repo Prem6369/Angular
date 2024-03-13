@@ -18,12 +18,12 @@ export class ResortSignupComponent implements OnInit {
     address: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z\\d]+$')]),
     role: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+$')]),
     lead: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+$')]),
-    employee_id: new FormControl(null,[Validators.required,Validators.maxLength(3),Validators.pattern('^[a-zA-Z\\d]+$')]),
-    age: new FormControl(null,[Validators.required,Validators.maxLength(3)]),
+    employee_id: new FormControl(null,[Validators.required,Validators.maxLength(6),Validators.pattern('^[a-zA-Z\\d]+$')]),
+    age: new FormControl(null, [Validators.required, Validators.maxLength(3), Validators.pattern('^[0-9]+$')]),
     gender: new FormControl(null,Validators.required),
-    official_id_card_no: new FormControl(null,[Validators.required,Validators.maxLength(4),Validators.pattern('^[a-zA-Z\\d]+$')]),
-    official_id_image_url: new FormControl(null,Validators.required),
-    claysys_id_card_image_url: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z\\d]+$')]),
+    official_id_card_no: new FormControl(null,[Validators.required,Validators.maxLength(6),Validators.pattern('^[a-zA-Z\\d]+$')]),
+    official_id_image_url:new FormControl(null, [Validators.required, Validators.pattern('^(https?://)?[a-zA-Z0-9\\-]+(\\.[a-zA-Z]{2,})+(\\S*)$')]),
+    claysys_id_card_image_url: new FormControl(null, [Validators.required, Validators.pattern('^(https?://)?[a-zA-Z0-9\\-]+(\\.[a-zA-Z]{2,})+(\\S*)$')]),
     allotted_stays:new FormControl(),
     used_stays:new FormControl(),
     status:new FormControl(''),
@@ -74,4 +74,53 @@ export class ResortSignupComponent implements OnInit {
   get firstname(){
     return this.newuser.get('first_name')
   }
+
+  get lastName(){
+    return this.newuser.get('last_name');
+  }
+  get claySys_email(){
+    return this.newuser.get('claySys_email');
+  }
+  get role(){
+    return this.newuser.get('role');
+  }
+  get lead(){
+    return this.newuser.get('lead');
+  }
+
+  get employee_id(){
+    return this.newuser.get('employee_id');
+  }
+  get gender(){
+    return this.newuser.get('gender');
+  }
+  get age(){
+    return this.newuser.get('age');
+  }
+  get PhoneNumber(){
+    return this.newuser.get('phone_number');
+  }
+  
+  get Address(){
+    return this.newuser.get('address');
+  }
+  
+  get OfficialIdCardNo(){
+    return this.newuser.get('official_id_card_no');
+  }
+
+  get official_id_image_url(){
+    return this.newuser.get('official_id_image_url');
+  }
+  
+  get claysys_id_card_image_url(){
+    return this.newuser.get('claysys_id_card_image_url');
+  }
+  
+  get username(){
+    return this.newuser.get('username');
+  }
+
+
+  
 }
