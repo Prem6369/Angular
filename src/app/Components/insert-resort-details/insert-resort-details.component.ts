@@ -182,21 +182,24 @@ export class InsertResortDetailsComponent implements OnInit {
 
 
   save() {
-    this.setValues();
-    const resort_details = {
-      resort_id: this.Resort_id ? Number(atob(this.Resort_id.toString())) || 0 : 0,      
-      name: this.AddResort.value.name || '',
-      description: this.AddResort.value.description || '',
-      location: this.AddResort.value.location || '',
-      amenities: this.AddResort.value.amenities,
-      image_urls: this.AddResort.value.image_urls || '',
-      video_urls: this.AddResort.value.video_urls || '',
-      status: this.AddResort.value.status,
-      categories: this.AddResort.value.categories,
-      coordinates: this.AddResort.value.coordinates
-    };
-    this.resortService.addResort(resort_details);
-    this.router.navigate(['/admin/resort-details-preview']);
+    if(this.AddResort.valid)
+    {
+      this.setValues();
+      const resort_details = {
+        resort_id: this.Resort_id ? Number(atob(this.Resort_id.toString())) || 0 : 0,      
+        name: this.AddResort.value.name || '',
+        description: this.AddResort.value.description || '',
+        location: this.AddResort.value.location || '',
+        amenities: this.AddResort.value.amenities,
+        image_urls: this.AddResort.value.image_urls || '',
+        video_urls: this.AddResort.value.video_urls || '',
+        status: this.AddResort.value.status,
+        categories: this.AddResort.value.categories,
+        coordinates: this.AddResort.value.coordinates
+      };
+      this.resortService.addResort(resort_details);
+      this.router.navigate(['/admin/resort-details-preview']);
+    }
   }
 
   getCoordinates(): { lat: string, long: string } {

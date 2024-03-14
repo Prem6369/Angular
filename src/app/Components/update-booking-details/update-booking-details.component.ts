@@ -244,7 +244,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
   }
 
 
-  getInitials(firstName: string, lastName: string, username: string): { initials: string, backgroundColor: string } {
+  getInitials(firstName: string, lastName: string): { initials: string, backgroundColor: string } {
     let initials = '';
     if (firstName) {
       initials += firstName.charAt(0);
@@ -252,10 +252,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
     if (lastName) {
       initials += lastName.charAt(0);
     }
-    if (username) {
-      initials += username.charAt(0);
-    }
-  
+
     const colors = ['orange', 'lightgreen', 'skyblue', 'red'];
     const chosenColor = Math.floor(Math.random() * colors.length);
     const backgroundColor = colors[chosenColor];

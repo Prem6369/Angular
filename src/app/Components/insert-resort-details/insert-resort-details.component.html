@@ -135,6 +135,6 @@
 
     <div>
         <button class="btn btn-outline-primary mb-2 px-5 mx-3" (click)="back()">Back</button>
-        <button class="btn btn-outline-success mb-2 px-5" (click)="save()">Next</button>
+        <button class="btn btn-outline-success mb-2 px-5"  [disabled]="!AddResort.valid" (click)="save()">Next</button>
     </div>
 </form>
