@@ -61,12 +61,9 @@ export class UpdateBookingDetailsComponent implements OnInit {
   AddMember: boolean = false;
 
   ngOnInit(): void {
-    debugger;
-    
     this.route.queryParams.subscribe((params) => {
       this.booking_id = +params['id'];
       this.bookingIdFromRoom = +params['bookingIdFromRoom'];
-      // this.resort_name = params['resort_name'];
       this.AddMember = params['AddMember'];
       this.resort_id_Checkin = params['ID']; 
     });
@@ -80,7 +77,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
       this.getResortName();
     }
     else if (this.AddMember) {
-      debugger;
       this.getDate();
       this.getMemebers();
       this.getDefaultValues();
@@ -92,7 +88,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
         
       }
       else if (this.booking.getUpdatedRoom()) {
-        debugger;
         this.updatedroom = this.booking.getUpdatedRoom();
         this.bookedRoomsArray = this.updatedroom.roomTypes_Req;
         this.updateSelectedRooms();
@@ -160,7 +155,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
   })
 
   getBookingDetails() {
-    debugger;
     this.repo.getBookingDetailsById(this.booking_id).subscribe(
       (response: any[]) => {
         this.booking_details = response[0];
@@ -190,7 +184,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
   }
 
   getMemebers() {
-    debugger;
     this.EmployeeList = this.guest.getEmployee();
     this.GuestList = this.guest.getGuests();
     this.totalList = this.EmployeeList.concat(this.GuestList);
@@ -198,10 +191,8 @@ export class UpdateBookingDetailsComponent implements OnInit {
   }
 
   getBooking() {
-    debugger;
     this.repo.getBookingDetailsById(this.booking_id).subscribe(
       (response: any[]) => {
-        debugger;
         this.booking_details = response[0];
         this.resortid = btoa(this.booking_details.resort_id.toString()); 
          this.approver_id=this.booking_details.approver_id;
@@ -218,10 +209,8 @@ export class UpdateBookingDetailsComponent implements OnInit {
   }
 
   getDefaultValues() {
-    debugger;
     this.repo.getBookingDetailsById(this.booking_id).subscribe(
       (response: any[]) => {
-        debugger;
         this.booking_details = response[0];
          this.approver_id=this.booking_details.approver_id;
         this.booking_id=this.booking_details.booking_id;
@@ -262,7 +251,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
   
 
   getEmployeeIds() {
-    debugger;
     this.EmployeeList.forEach((employee: { user_id: { toString: () => string; }; }, index: number) => {
       this.employee_user_ids += employee.user_id.toString();
       if (index < this.EmployeeList.length - 1) {

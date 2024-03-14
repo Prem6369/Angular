@@ -11,11 +11,17 @@ import { apiLoginService } from '../../Repository/login_repository';
   styleUrl: './resort-login.component.scss',
 })
 export class ResortLoginComponent implements OnInit {
+
+
   signInForm = new FormGroup({
     Username: new FormControl(''),
     password: new FormControl(''),
   });
+
+
   Errormessage:string='';
+
+
   constructor(private guestService: GuestService,
     private router: Router, 
     private session:SessionServiceService,
@@ -27,10 +33,6 @@ export class ResortLoginComponent implements OnInit {
 
   Login() {
     var Loginvalues = this.signInForm.value;
-
-
-
-    
     this.repository.signin(Loginvalues).subscribe((response)=>{
       if("Unknow User"==response.name){
         this.Errormessage='Incorrect Username and Password'
@@ -53,7 +55,7 @@ export class ResortLoginComponent implements OnInit {
     }else{
       this.router.navigate(['/approver/approverhome'])
     }
-    this.session.SetUserAuthentication(id,name);
+    this.session.SetUserAuthentication(id,name,role);
 
   }
 }

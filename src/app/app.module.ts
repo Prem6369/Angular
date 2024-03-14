@@ -53,6 +53,7 @@ import { RoomListComponent } from './Components/room-list/room-list.component';
 import { UpdateBookingDetailsComponent } from './Components/update-booking-details/update-booking-details.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ForbiddenComponent } from './Components/forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     AdminProfileComponent,
     ApproverProfileComponent,
     UpdateBookingDetailsComponent,
+    ForbiddenComponent,
     
   ],
   imports: [

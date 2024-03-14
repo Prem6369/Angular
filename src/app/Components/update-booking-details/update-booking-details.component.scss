@@ -13,7 +13,7 @@ section {
   border: 2px solid;
   border-radius: 10px;
   padding: 1em;
-  width: 100%;
+  width: 90%;
   margin-left: 30px;
 
 }
@@ -83,5 +83,14 @@ section h2 {
 #date-change{
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+#person-type {
+  border-radius: 10px;
+}
+
+#edit-icon {
+  display: flex;
   align-items: center;
 }
