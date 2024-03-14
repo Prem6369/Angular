@@ -17,7 +17,7 @@ export class ApiService {
     return this.httpClient.get<any>(url, { headers: headers, params: httpParams });
   }
 
-  post(path: string, app: string, body: any) {
+  post(path: string, app: string, body?: any) {
     const url = this.getFullAPIUrl(path, app);
     const headers = this.getHeaders();
     return this.httpClient.post<any>(url, body, { headers: headers });
