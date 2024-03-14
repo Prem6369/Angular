@@ -297,20 +297,11 @@ iframe {
     margin-right: 10px;
     border-radius: 8px;
   }
-.mapouter {
-    width: 50%;
-    height: 150px;
-}
 
-.gmap_canvas {
-    overflow: hidden;
-    background: none !important;
-    width: 50%;
-    height: 100px;
-}
- 
-.gmap_iframe {
-    height: 400px !important;
-    width: 100%;
+#google-map
+{
+  height: 200px;
+  width: 300px;
+  border: 0px;
 }
 

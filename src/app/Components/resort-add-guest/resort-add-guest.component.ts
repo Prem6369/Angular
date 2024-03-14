@@ -50,12 +50,6 @@ export class ResortAddGuestComponent implements OnInit {
           official_id_image_url: this.guestDetails.official_id_image_url,
           referrer_user_id: this.guestDetails.referrer_user_id
         });
-
-        if (!this.booking_id) {
-          this.Addguest.patchValue({
-            type: this.guestDetails.type
-          });
-        }
          this.removeExistGuest(this.guest_user_id);
       }
     });
@@ -91,7 +85,6 @@ export class ResortAddGuestComponent implements OnInit {
     address: new FormControl(null, Validators.required),
     official_id_card_no: new FormControl(null, Validators.required),
     official_id_image_url: new FormControl(null, Validators.required),
-    type: new FormControl(),
     referrer_user_id: new FormControl()
   });
 
@@ -134,7 +127,6 @@ export class ResortAddGuestComponent implements OnInit {
     if(this.guest_user_id!==null && this.guest_user_id!==undefined)
     {
       this.Addguest.controls['guest_user_id'].setValue(this.getRandomInt(1000, 9999))
-      this.Addguest.controls['type'].setValue("Guest");
       this.Addguest.controls['referrer_user_id'].setValue(this.referrer_user_id)
     }
   }

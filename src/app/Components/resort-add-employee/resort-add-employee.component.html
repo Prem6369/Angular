@@ -10,23 +10,12 @@
           <h2>Search employee</h2>
           <mat-form-field class="example-full-width">
             <input type="text" matInput formControlName="username" [matAutocomplete]="auto">
-
-            <!-- <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
-              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                <span class="username">{{ option.username }}</span>
-                <span class="user-id" style="display: none;">(ID: {{ option.user_id }})</span>
-              </mat-option>
-            </mat-autocomplete> -->
-
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 <span class="username"> {{ option.first_name }} {{ option.last_name }}</span>
                 <span class="user-id" style="display: none;">(ID: {{ option.user_id }})</span>
               </mat-option>
             </mat-autocomplete>
-            
-
-
           </mat-form-field>
         </section>
       </form>

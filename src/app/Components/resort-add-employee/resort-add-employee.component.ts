@@ -25,7 +25,6 @@ export class ResortAddEmployeeComponent implements OnInit {
     last_name: new FormControl(''),
     user_id: new FormControl(),
     phone_number: new FormControl(''),
-    type: new FormControl('')
   });
 
   filteredOptions: Observable<UserProfile[]>;
@@ -35,7 +34,6 @@ export class ResortAddEmployeeComponent implements OnInit {
     private guestService: GuestService,
     private repository: ApiUserServiceRepo
   ) {
-    debugger;
     this.filteredOptions = this.employees.get('username')!.valueChanges.pipe(
       startWith(''),
       map(value => value ? this._filter(value) : [])
@@ -46,47 +44,23 @@ export class ResortAddEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
-    debugger;
     const storedEmployees = this.guestService.getEmployee();
     if (storedEmployees && storedEmployees.length > 0) {
       this.employee = storedEmployees;
     }
   }
 
-  // public _filter(value: any): UserProfile[] {
-  //   const filterValue = value;
-  //   return this.userProfile.filter(option =>
-  //     option.username.toLowerCase().includes(filterValue) ||
-  //     option.user_id == filterValue
-  //   );
-  // }
 
-  public _filter(value: string): UserProfile[] {
-    const filterValue = value.toLowerCase();
+  public _filter(value: any): UserProfile[] {
+    const filterValue = value;
     return this.userProfile.filter(option =>
       option.first_name.toLowerCase().includes(filterValue) ||
       option.last_name.toLowerCase().includes(filterValue) ||
-      option.user_id.toString() === filterValue
+      option.user_id.toString() == filterValue
     );
   }
   
-
-  // optionSelected(event: MatAutocompleteSelectedEvent): void {
-  //   const userInput = event.option.value;
-  //   const optionSelected = this.userProfile.includes(userInput);
-  //   if (!optionSelected) {
-  //     this.employees.controls['username'].setValue('');
-  //   }
-  //   else {
-  //     this.employees.patchValue({
-  //       username: event.option.value.username
-  //     })
-  //     this.selectedUserId = event.option.value.user_id;
-  //   }
-  // }
-
   optionSelected(event: MatAutocompleteSelectedEvent): void {
-    debugger;
     const selectedUserProfile: UserProfile = event.option.value;
     
     if (selectedUserProfile) {
@@ -105,7 +79,6 @@ export class ResortAddEmployeeComponent implements OnInit {
 
 
   addEmployee(user_id: number) {
-    debugger;
     if (this.employees.value.username !== '' && user_id !== undefined) {
       const employeeExists = this.employee.some(emp => emp.user_id === user_id);
       if (!employeeExists) {
@@ -144,7 +117,6 @@ export class ResortAddEmployeeComponent implements OnInit {
       if (firstUserProfile) {
         this.employees.controls['user_id'].setValue(user_id);
         this.employees.controls['phone_number'].setValue(firstUserProfile.phone_number);
-        this.employees.controls['type'].setValue("Employee");
       }
     }
   }

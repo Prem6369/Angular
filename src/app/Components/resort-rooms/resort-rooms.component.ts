@@ -86,7 +86,6 @@ export class ResortRoomsComponent implements OnInit  {
     });
     this.user_id = this.session.getUserId();
     this.initializer()
-    this.getEmployeeIds();
     this.calculateDayAndNight();
   }
   
@@ -148,7 +147,6 @@ isTabDisabled(index: number): boolean {
   }
 
   increment(room_type_id: number, name: string, description: string, number_of_rooms: number,resort_id:number) {
-  debugger;
     if (!this.bookedRooms[room_type_id]) {
       this.bookedRooms[room_type_id] = { room_type_id:room_type_id,count: 0, name: name, description: description, number_of_rooms: number_of_rooms,resort_id:resort_id};
     }
@@ -175,7 +173,7 @@ isTabDisabled(index: number): boolean {
 
 
   next() {
-    debugger;
+    this.getEmployeeIds();
     if(this.booking_id){
       const decryptId=(atob(this.Resort_id.toString()));
       this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({

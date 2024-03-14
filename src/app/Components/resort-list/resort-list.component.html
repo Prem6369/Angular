@@ -27,7 +27,7 @@
 
     <div class="card-container">
         <div class="card" *ngFor="let resort of resortlist" (click)="nextpage(resort.resort_id)">
-            <div class="image-container">
+            <div class="image-container" #tooltip="matTooltip" matTooltipPosition="above" matTooltip="{{ resort.name }}">
                 <img class="resort-image" [src]="resort.image_urls" alt="Resort Image">
                 <h3 class="resort-name">{{ resort.name }}</h3>
                 <h5 class="resort-location">
@@ -38,5 +38,12 @@
             </div>
         </div>
     </div>
-    
+
+  
+
+    <div class="col-md-12 d-flex justify-content-end px-5">
+        <a id="back-to-top"  class="back-to-top  bg-black" (click)="scrollToTop()">
+            <i class="fa fa-angle-up" aria-hidden="true"></i>
+        </a>
+    </div>
 </div>

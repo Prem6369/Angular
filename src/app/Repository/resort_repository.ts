@@ -10,7 +10,7 @@ export class ApiServiceRepo {
     constructor(private api:ApiService){}
 
     getAllResort():Observable<any>{
-        return this.api.get('getallresorts','resorts');
+        return this.api.get('getactiveresorts','resorts');
     }
 
     getAvailableResort(checkInDate: Date, checkOutDate: Date): Observable<any> {

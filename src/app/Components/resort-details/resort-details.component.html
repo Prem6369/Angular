@@ -35,11 +35,10 @@
       </div>
 
       <div class="mapcontainer col-md-6 d-flex col-sm-12 justify-content-center">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107040.58744604538!2d77.05631923956909!3d10.091305625359634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0799794d099a6d%3A0x63250e5553c7e0c!2sMunnar%2C%20Kerala%20685612!5e1!3m2!1sen!2sin!4v1708167955669!5m2!1sen!2sin"
-          width="200" height="100" style="border:0;" allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
+        <iframe allowfullscreen="" referrerpolicy="no-referrer-when-downgrade" [src]="generateGoogleMapsUrl()" id="google-map"></iframe>
+    </div>
+    
+    
     </div>
     <div class="container">
       <div class="row">

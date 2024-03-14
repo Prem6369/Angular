@@ -153,4 +153,8 @@ export class ResortListComponent implements OnInit {
     this.resortlist = [];
     this.getAvailableResortDetails();
   }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 }
