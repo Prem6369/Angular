@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router  } from '@angular/router';
+import { encryptDecrypt } from '../EncryptDecrypt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionServiceService {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private cryptoHandler :encryptDecrypt) { }
 
 
   private authentication: boolean = false;
@@ -22,9 +24,11 @@ export class SessionServiceService {
     this.User_id=id;
     this.Username=name;
     this.role=role;
-    sessionStorage.setItem('user_id',this.User_id.toString());
-    sessionStorage.setItem('username',this.Username)
 
+    const _id=this.cryptoHandler.encrypt(this.User_id.toString());
+    const _name=this.cryptoHandler.encrypt(this.Username);
+    sessionStorage.setItem('user_id',_id);
+    sessionStorage.setItem('username',_name)
   }
 
   canActivate(): boolean {
