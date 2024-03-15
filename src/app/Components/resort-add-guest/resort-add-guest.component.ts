@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GuestService } from '../../Service/GuestService';
+import { GuestService } from '../../core/service/GuestService';
 import { Location } from '@angular/common';
-import { SessionServiceService } from '../../Service/Session/session-service.service';
+import { SessionServiceService } from '../../core/service/Session/session-service.service';
 import { ActivatedRoute } from '@angular/router';
-import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
+import { GuestDetails } from '../../core/model/GuestDetails/guestDetails';
 
 @Component({
   selector: 'app-resort-add-guest',

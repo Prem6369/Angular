@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserProfile } from '../../Model/userProfile/userProfile'; 
-import { SessionServiceService } from '../../Service/Session/session-service.service';
-import { ApiUserServiceRepo } from '../../Repository/user_repository';
+import { UserProfile } from '../../core/model/userProfile/userProfile'; 
+import { SessionServiceService } from '../../core/service/Session/session-service.service';
+import { ApiUserServiceRepo } from '../../core/repository/user_repository';
 
 @Component({
   selector: 'app-user-profile',

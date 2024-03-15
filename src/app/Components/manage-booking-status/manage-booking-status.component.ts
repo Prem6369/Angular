@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionServiceService } from '../../Service/Session/session-service.service';
-import { approver_repository } from '../../Repository/approver_repository';
+import { SessionServiceService } from '../../core/service/Session/session-service.service';
+import { approver_repository } from '../../core/repository/approver_repository';
 
 @Component({
   selector: 'app-manage-booking-status',

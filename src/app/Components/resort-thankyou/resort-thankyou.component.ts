@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { GuestService } from '../../Service/GuestService';
+import { GuestService } from '../../core/service/GuestService';
 
 @Component({
   selector: 'app-resort-thankyou',

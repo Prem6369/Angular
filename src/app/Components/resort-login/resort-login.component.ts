@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SessionServiceService } from '../../Service/Session/session-service.service';
-import { GuestService } from '../../Service/GuestService';
-import { apiLoginService } from '../../Repository/login_repository';
+import { SessionServiceService } from '../../core/service/Session/session-service.service';
+import { GuestService } from '../../core/service/GuestService';
+import { apiLoginService } from '../../core/repository/login_repository';
 
 @Component({
   selector: 'app-resort-login',

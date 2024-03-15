@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { SessionServiceService } from '../../../Service/Session/session-service.service';
-import { UserProfile } from '../../../Model/userProfile/userProfile';
+import { SessionServiceService } from '../../../core/service/Session/session-service.service';
+import { UserProfile } from '../../../core/model/userProfile/userProfile';
 
 @Component({
   selector: 'app-approver-header',

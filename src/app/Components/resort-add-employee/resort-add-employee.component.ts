@@ -3,10 +3,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Location } from '@angular/common';
-import { GuestService } from '../../Service/GuestService';
-import { UserProfile } from '../../Model/userProfile/userProfile';
+import { GuestService } from '../../core/service/GuestService';
+import { UserProfile } from '../../core/model/userProfile/userProfile';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { ApiUserServiceRepo } from '../../Repository/user_repository';
+import { ApiUserServiceRepo } from '../../core/repository/user_repository';
 
 @Component({
   selector: 'app-resort-add-employee',

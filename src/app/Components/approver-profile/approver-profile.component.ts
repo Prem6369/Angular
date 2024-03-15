@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserProfile } from '../../Model/userProfile/userProfile'; 
-import { SessionServiceService } from '../../Service/Session/session-service.service';
-import { approver_repository } from '../../Repository/approver_repository';
+import { UserProfile } from '../../core/model/userProfile/userProfile'; 
+import { SessionServiceService } from '../../core/service/Session/session-service.service';
+import { approver_repository } from '../../core/repository/approver_repository';
 
 @Component({
   selector: 'app-approver-profile',

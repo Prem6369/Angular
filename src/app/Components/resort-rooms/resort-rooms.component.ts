@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
-import { getRoomTypes } from '../../Model/RoomTypes/rooms';
-import { DateService } from '../../Service/DateTime';
-import { GuestDetails } from '../../Model/GuestDetails/guestDetails';
-import { BookingService } from '../../Service/BookingService';
-import { GuestService } from '../../Service/GuestService';
-import { SessionServiceService } from '../../Service/Session/session-service.service';
-import { UserProfile } from '../../Model/userProfile/userProfile';
-import { ApiServiceRepo } from '../../Repository/resort_repository';
+import { ResortDetails } from '../../core/model/ResortDetails/resortDetails';
+import { getRoomTypes } from '../../core/model/RoomTypes/rooms';
+import { DateService } from '../../core/service/DateTime';
+import { GuestDetails } from '../../core/model/GuestDetails/guestDetails';
+import { BookingService } from '../../core/service/BookingService';
+import { GuestService } from '../../core/service/GuestService';
+import { SessionServiceService } from '../../core/service/Session/session-service.service';
+import { UserProfile } from '../../core/model/userProfile/userProfile';
+import { ApiServiceRepo } from '../../core/repository/resort_repository';
 import { Location } from '@angular/common';
 import { MatTabGroup } from '@angular/material/tabs';
-import { encryptDecrypt } from '../../Service/EncryptDecrypt';
+import { encryptDecrypt } from '../../core/service/EncryptDecrypt';
 
 
 @Component({

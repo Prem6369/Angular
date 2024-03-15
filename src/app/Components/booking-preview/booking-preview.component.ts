@@ -1,14 +1,14 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
+import { ResortDetails } from '../../core/model/ResortDetails/resortDetails';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GuestService } from '../../Service/GuestService';
-import { BookingService } from '../../Service/BookingService';
-import { Booking_details } from '../../Model/bookingDetails';
+import { GuestService } from '../../core/service/GuestService';
+import { BookingService } from '../../core/service/BookingService';
+import { Booking_details } from '../../core/model/BookingDetaills/bookingDetails';
 import { Location } from '@angular/common';
-import { SessionServiceService } from '../../Service/Session/session-service.service';
-import { GuestDetails, GuestPost } from '../../Model/GuestDetails/guestDetails';
-import { ApiServiceRepo } from '../../Repository/resort_repository';
+import { SessionServiceService } from '../../core/service/Session/session-service.service';
+import { GuestDetails, GuestPost } from '../../core/model/GuestDetails/guestDetails';
+import { ApiServiceRepo } from '../../core/repository/resort_repository';
 
 
 @Component({

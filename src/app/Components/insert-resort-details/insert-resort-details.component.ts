@@ -4,9 +4,9 @@ import { Location } from '@angular/common';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ResortService } from '../../Service/resort_details';
-import { admin_resort_repository } from '../../Repository/admin_resort_repository';
-import { approver_repository } from '../../Repository/approver_repository';
+import { ResortService } from '../../core/service/resort_details';
+import { admin_resort_repository } from '../../core/repository/admin_resort_repository';
+import { approver_repository } from '../../core/repository/approver_repository';
 
 @Component({
   selector: 'app-insert-resort-details',

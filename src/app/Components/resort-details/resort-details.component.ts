@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
-import { DateService } from '../../Service/DateTime';
-import { ApiServiceRepo } from '../../Repository/resort_repository';
+import { ResortDetails } from '../../core/model/ResortDetails/resortDetails';
+import { DateService } from '../../core/service/DateTime';
+import { ApiServiceRepo } from '../../core/repository/resort_repository';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({

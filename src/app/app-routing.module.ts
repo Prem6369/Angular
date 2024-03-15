@@ -29,7 +29,7 @@ import { AdminProfileComponent } from './Components/admin-profile/admin-profile.
 import { ApproverProfileComponent } from './Components/approver-profile/approver-profile.component';
 import { RoomListComponent } from './Components/room-list/room-list.component';
 import { UpdateBookingDetailsComponent } from './Components/update-booking-details/update-booking-details.component';
-import { SessionServiceService } from './Service/Session/session-service.service';
+import { SessionServiceService } from './core/service/Session/session-service.service';
 import { ForbiddenComponent } from './Components/forbidden/forbidden.component';
 
 

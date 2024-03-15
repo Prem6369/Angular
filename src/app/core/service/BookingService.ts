@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Booking_details, UpdatedBooking_details } from "../Model/bookingDetails";
-import { Updatedroom } from "../Model/BookingDetaills/Booking";
+import { Booking_details, UpdatedBooking_details } from "../model/BookingDetaills/bookingDetails";
+import { Updatedroom } from "../model/BookingDetaills/Booking";
 
 @Injectable({
   providedIn: 'root'

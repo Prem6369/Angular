@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionServiceService } from '../../Service/Session/session-service.service';
+import { SessionServiceService } from '../../core/service/Session/session-service.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { approver_repository } from '../../Repository/approver_repository';
+import { approver_repository } from '../../core/repository/approver_repository';
 
 @Component({
   selector: 'app-change-approver',
@@ -107,7 +107,7 @@ export class ChangeApproverComponent implements OnInit {
       (response) => {
         this.user = response
         this.user.forEach((user) => {
-          if (user.role === 'approver') {
+          if (user.role === 'Approver') {
             this.approver.push(user);
           }
         });

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { SessionServiceService } from '../../Service/Session/session-service.service';
-import { UserProfile } from '../../Model/userProfile/userProfile';
-import { ApiUserServiceRepo } from '../../Repository/user_repository';
+import { SessionServiceService } from '../../core/service/Session/session-service.service';
+import { UserProfile } from '../../core/model/userProfile/userProfile';
+import { ApiUserServiceRepo } from '../../core/repository/user_repository';
 
 @Component({
   selector: 'app-update-profile',

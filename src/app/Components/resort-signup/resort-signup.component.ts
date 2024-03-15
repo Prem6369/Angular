@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { apiLoginService } from '../../Repository/login_repository';
+import { apiLoginService } from '../../core/repository/login_repository';
 import { Router } from '@angular/router';
 
 @Component({

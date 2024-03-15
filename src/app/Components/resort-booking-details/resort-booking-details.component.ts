@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionServiceService } from '../../Service/Session/session-service.service';
-import { Booking } from '../../Model/BookingDetaills/Booking';
-import { ApiUserServiceRepo } from '../../Repository/user_repository';
+import { SessionServiceService } from '../../core/service/Session/session-service.service';
+import { Booking } from '../../core/model/BookingDetaills/Booking';
+import { ApiUserServiceRepo } from '../../core/repository/user_repository';
 import { Router } from '@angular/router';
-import { encryptDecrypt } from '../../Service/EncryptDecrypt';
+import { encryptDecrypt } from '../../core/service/EncryptDecrypt';
 
 
 @Component({

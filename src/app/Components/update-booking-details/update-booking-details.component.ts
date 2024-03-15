@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiUserServiceRepo } from '../../Repository/user_repository';
-import { Booking, BookingResponse, Updatedroom } from '../../Model/BookingDetaills/Booking';
-import { BookingService } from '../../Service/BookingService';
-import { GuestService } from '../../Service/GuestService';
-import { DateService } from '../../Service/DateTime';
+import { ApiUserServiceRepo } from '../../core/repository/user_repository';
+import { Booking, BookingResponse, Updatedroom } from '../../core/model/BookingDetaills/Booking';
+import { BookingService } from '../../core/service/BookingService';
+import { GuestService } from '../../core/service/GuestService';
+import { DateService } from '../../core/service/DateTime';
 import { FormControl, FormGroup } from '@angular/forms';
-import { RoomResponse } from '../../Model/RoomTypes/rooms';
+import { RoomResponse } from '../../core/model/RoomTypes/rooms';
 import { Location } from '@angular/common';
-import { UpdatedBooking_details } from '../../Model/bookingDetails';
-import { ApiServiceRepo } from '../../Repository/resort_repository';
-import { SessionServiceService } from '../../Service/Session/session-service.service';
-import { encryptDecrypt } from '../../Service/EncryptDecrypt';
+import { UpdatedBooking_details } from '../../core/model/BookingDetaills/bookingDetails';
+import { ApiServiceRepo } from '../../core/repository/resort_repository';
+import { SessionServiceService } from '../../core/service/Session/session-service.service';
+import { encryptDecrypt } from '../../core/service/EncryptDecrypt';
 
 
 @Component({

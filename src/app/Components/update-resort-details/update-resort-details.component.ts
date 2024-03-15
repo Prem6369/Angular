@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
+import { ResortDetails } from '../../core/model/ResortDetails/resortDetails';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { admin_resort_repository } from '../../Repository/admin_resort_repository';
-import { Resort } from '../../Model/ResortDetails/resortDetails';
+import { admin_resort_repository } from '../../core/repository/admin_resort_repository';
+import { Resort } from '../../core/model/ResortDetails/resortDetails';
 @Component({
   selector: 'app-update-resort-details',
   templateUrl: './update-resort-details.component.html',

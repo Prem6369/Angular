@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { admin_resort_repository } from '../../Repository/admin_resort_repository';
-import { ResortService } from '../../Service/resort_details';
+import { admin_resort_repository } from '../../core/repository/admin_resort_repository';
+import { ResortService } from '../../core/service/resort_details';
 
 @Component({
   selector: 'app-add-roomtype',

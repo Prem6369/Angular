@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
-import { DateService } from '../../Service/DateTime';
-import { ApiServiceRepo } from '../../Repository/resort_repository';
+import { ResortDetails } from '../../core/model/ResortDetails/resortDetails';
+import { DateService } from '../../core/service/DateTime';
+import { ApiServiceRepo } from '../../core/repository/resort_repository';
 import { Location } from '@angular/common';
-import { encryptDecrypt } from '../../Service/EncryptDecrypt';
+import { encryptDecrypt } from '../../core/service/EncryptDecrypt';
 
 @Component({
   selector: 'app-resort-list',

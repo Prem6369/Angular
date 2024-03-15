@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { getRoomTypes } from '../../Model/RoomTypes/rooms';
-import { admin_resort_repository } from '../../Repository/admin_resort_repository';
-import { encryptDecrypt } from '../../Service/EncryptDecrypt';
-import { ResortService } from '../../Service/resort_details';
+import { getRoomTypes } from '../../core/model/RoomTypes/rooms';
+import { admin_resort_repository } from '../../core/repository/admin_resort_repository';
+import { encryptDecrypt } from '../../core/service/EncryptDecrypt';
+import { ResortService } from '../../core/service/resort_details';
 
 @Component({
   selector: 'app-room-list',

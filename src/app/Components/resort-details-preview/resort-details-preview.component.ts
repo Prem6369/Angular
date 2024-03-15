@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Resort } from '../../Model/ResortDetails/resortDetails';
-import { ResortService } from '../../Service/resort_details';
-import { admin_resort_repository } from '../../Repository/admin_resort_repository';
+import { Resort } from '../../core/model/ResortDetails/resortDetails';
+import { ResortService } from '../../core/service/resort_details';
+import { admin_resort_repository } from '../../core/repository/admin_resort_repository';
 
 
 @Component({
