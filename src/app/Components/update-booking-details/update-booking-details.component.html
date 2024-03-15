@@ -2,10 +2,10 @@
 
 
 
-<div class="py-3 ">
-  <h2 class="text-center">{{resort_name}}</h2>
-</div>
-    
+  <div class="py-3 ">
+    <h2 class="text-center">{{resort_name}}</h2>
+  </div>
+
 
 
   <div class="container">
@@ -14,23 +14,29 @@
 
         <div class="col-md-6">
 
-          <div class="row">
-            <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10">
-              <section id="LastName" class="my-3">
-                <h2>Checkin & Checkout</h2>
-                <div class="d-flex align-items-center">
-                  <span class="icon mx-1"><i class="fa-solid fa-calendar-day"></i></span>
-                  <input class="form-control mx-2" readonly formControlName="check_in_date" placeholder="Checkin">
-                  <input class="form-control" readonly formControlName="check_out_date" placeholder="Checkout">
+          <table>
+            <tr>
+              <td class="col-md-10 col-lg-10 col-sm-10 col-xs-10">
+                <section id="LastName" class="my-3">
+                  <h2>Checkin & Checkout</h2>
+                  <div class="d-flex align-items-center">
+                    <span class="icon mx-1"><i class="fa-solid fa-calendar-day"></i></span>
+                    <input class="form-control mx-2" readonly formControlName="check_in_date" placeholder="Checkin">
+                    <input class="form-control" readonly formControlName="check_out_date" placeholder="Checkout">
+                  </div>
+                </section>
+              </td>
+              <td >
+                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" id="date-change">
+                  <div class="fs-4" #tooltip="matTooltip" matTooltipPosition="right"
+                    matTooltip="Adjusting your check-in does not ensure the retention of your current resort">
+                    <i class="fa-solid fa-rotate" (click)="changeCheckinout()"></i>
+                  </div>
                 </div>
-              </section>
-            </div>
-            <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" id="date-change">
-              <div class="fs-4"  #tooltip="matTooltip" matTooltipPosition="right" matTooltip="Adjusting your check-in does not ensure the retention of your current resort">
-                <i class="fa-solid fa-rotate" (click)="changeCheckinout()"></i>
-              </div>
-            </div>
-          </div>
+              </td>
+            </tr>
+          </table>
+          
         </div>
 
         <div class="col-md-6 px-5 p-4">
@@ -40,114 +46,117 @@
             <mat-button-toggle value="non-veg">Non-veg</mat-button-toggle>
           </mat-button-toggle-group>
         </div>
-  
+
       </div>
     </form>
-  
+
   </div>
-  
-    
-      
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 p-5">
-      <div class="row">
-        <h4 class="col-md-6 text-center">
-          Room details ({{totalSelectedRooms}})
-        </h4>
-        <div class="col-md-6 fs-4">
-          <i class="fa-solid fa-house-chimney-medical" (click)="addRoom()"></i>
-        </div>
-      </div>
-      <div>
-      </div>
 
 
-      <div class="table-responsive rounded my-3" id="room-details">
-        <table class="table">
-          <tbody>
-            <tr *ngFor="let room of bookedRoomsArray" class=" border-bottom p-3">
-              <td>
-                <div class="icon-background d-flex justify-content-center" id="iconbackground">
-                  <i class="fa-solid fa-bed fa-2x check"></i>
-                </div>
-              </td>
-              <td>
-                <div class="fw-bold text-center">{{ room.name }}</div>
-                <div class="text-center">{{ room.description }}</div>
-              </td>
-              <td>
-                <div class="text-center fw-bold">{{ room.room_type_count }}</div>
-              </td>
-              <td>
-                <i class="fa-regular fa-trash-can text-danger" (click)="removeRoom(room.room_type_id)"></i>
-              </td>
-            </tr>
-          </tbody>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 p-5">
+        <table>
+          <tr>
+            <td class="px-4">
+              <h4>
+                Room details ({{totalSelectedRooms}})
+              </h4>
+            </td>
+            <td class="px-4">
+              <div class="fs-4">
+                <i class="fa-solid fa-house-chimney-medical" (click)="addRoom()"></i>
+              </div>
+            </td>
+          </tr>
         </table>
-      </div>
-
-
-
-    </div>
-
-
-    <div class="col-md-6 p-5">
-      <div class="row">
-        <h4 class="col-md-6 text-center">
-          Person details ({{ total_member_count }})
-        </h4>
-        <div class="fs-4 col-md-6">
-          <i class="fa-solid fa-user-plus text-white" (click)="addMember()"></i>
+        <div class="table-responsive rounded my-3" id="room-details">
+          <table class="table">
+            <tbody>
+              <tr *ngFor="let room of bookedRoomsArray" class=" border-bottom p-3">
+                <td>
+                  <div class="icon-background d-flex justify-content-center" id="iconbackground">
+                    <i class="fa-solid fa-bed fa-2x check"></i>
+                  </div>
+                </td>
+                <td>
+                  <div class="fw-bold text-center">{{ room.name }}</div>
+                  <div class="text-center">{{ room.description }}</div>
+                </td>
+                <td>
+                  <div class="text-center fw-bold">{{ room.room_type_count }}</div>
+                </td>
+                <td>
+                  <i class="fa-regular fa-trash-can text-danger" (click)="removeRoom(room.room_type_id)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-     
-
-      <div id="room-members" class="container rounded my-3">
-        <div *ngFor="let guest of totalList" class="row border-bottom p-3 ">
-
-          <div class="icon col-md-4 col-lg-4 col-sm-4 text-center">
-            <div class="initials" [style.background-color]="getInitials(guest.first_name, guest.last_name).backgroundColor">
-              {{ getInitials(guest.first_name, guest.last_name).initials }}
-            </div>
-          </div>
-          
-
-          <div class=" col-md-6 col-lg-6 col-sm-6">
-            <div class="name">
-              <div class="fw-bold">{{guest.first_name}} {{guest.last_name}}</div>
-            </div>
-
-            <div class="row">
-              <div class=" col-md-6 col-lg-6 col-sm-6 ">
-                <div class="fw-light">{{guest.phone_number }}</div>
+  
+  
+      <div class="col-md-6 p-5">
+        <table>
+          <tr>
+            <td class="px-4">
+              <h4>
+                Person details ({{ total_member_count }})
+              </h4>
+            </td>
+            <td class="px-4">
+              <div class="fs-4">
+                <i class="fa-solid fa-user-plus text-white" (click)="addMember()"></i>
               </div>
-
-              <div class="col-md-6 col-lg-6 col-sm-6 border rounded-pill m-1" id="person-type">
-                <div class="fw-bold" [style.color]="guest.guest_user_id ? 'purple' : ''">
-                  {{ guest.guest_user_id ? 'Guest' : 'Employee' }}
-                </div>
-              </div>
-              
-            </div>
-          </div>
-
-          <div class="col-md-2 col-lg-2 col-sm-2 fs-5">
-            <i class="fa-regular fa-trash-can text-danger" (click)="removeMember(guest.guest_user_id || guest.user_id )"></i>
-          </div>
+            </td>
+          </tr>
+        </table>
+        <div class="table-responsive rounded my-3" id="room-members">
+          <table class="table">
+            <tbody>
+              <tr *ngFor="let guest of totalList" class="border-bottom p-3">
+                <td>
+                  <div class="icon text-center">
+                    <div class="initials"
+                      [style.background-color]="getInitials(guest.first_name, guest.last_name).backgroundColor">
+                      {{ getInitials(guest.first_name, guest.last_name).initials }}
+                    </div>
+                  </div>
+                </td>
+  
+                <td>
+                  <div class="fw-bold">{{ guest.first_name }} {{ guest.last_name }}</div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="fw-light">{{ guest.phone_number }}</div>
+                    </div>
+                    <div class="col border" id="person-type">
+                      <div class="fw-bold text-center" [style.color]="guest.guest_user_id ? 'purple' : ''">
+                        {{ guest.guest_user_id ? 'Guest' : 'Employee' }}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td style="vertical-align: middle;">
+                  <i class="fa-regular fa-trash-can text-danger"
+                    (click)="removeMember(guest.guest_user_id || guest.user_id)"></i>
+                </td>
+  
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
+  
     </div>
+  </div>
+
+  <div class="text-center  pb-5">
+
+    <button class="btn btn-outline-light" (click)="update()" [disabled]="bookingUpdate.invalid">Update</button>
+    <button class="btn btn-outline-light mx-3" (click)="back()" [disabled]="bookingUpdate.invalid">Back</button>
 
   </div>
-</div>
- 
-<div class="text-center  pb-5">
-  
-  <button class="btn btn-outline-light" (click)="update()" [disabled]="bookingUpdate.invalid">Update</button>
-  <button class="btn btn-outline-light mx-3" (click)="back()" [disabled]="bookingUpdate.invalid">Back</button>
 
 </div>
-
-</div>
-

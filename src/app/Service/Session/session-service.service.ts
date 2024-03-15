@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router  } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,26 +7,47 @@ import { Router } from '@angular/router';
 export class SessionServiceService {
 
   constructor(private router: Router) { }
+
+
   private authentication: boolean = false;
   private User_id!:number;
   private Username:string='';
+  private role:string="";
 
   sessionvalues:any[]=[];
 
 
-  SetUserAuthentication(id:number,name:string){
+  SetUserAuthentication(id:number,name:string,role:string){
     this.authentication=true;
     this.User_id=id;
     this.Username=name;
-
+    this.role=role;
     sessionStorage.setItem('user_id',this.User_id.toString());
     sessionStorage.setItem('username',this.Username)
 
   }
 
+  canActivate(): boolean {
+    if (this.authentication) {   
+      if (this.role === 'admin' || this.role === 'approver' || this.role === 'user') {
+        return true;
+      } else {
+        this.router.navigate(['']);
+        return false;
+      }
+    } else {
+      this.router.navigate(['/forbidden']);
+      return false;
+    } 
+  }
+
+
   AddSessionvalues(id:string,name:string){
     this.sessionvalues.push(id,name)
-    console.log("Session:",this.sessionvalues);
+  }
+
+  isAuthenticatedUser(): boolean {
+    return this.authentication;
   }
 
   GetSessionvalues(): any[] {

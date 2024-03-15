@@ -29,8 +29,8 @@
     height: auto;
   }
 
-  #room-details, #room-members
-  {
+  #room-details,
+  #room-members {
     background-color: white;
     color: black;
     justify-content: center;
@@ -38,7 +38,7 @@
   }
 .text-container {
   flex: 1;
-  padding: 10px;
+  padding: 5px;
 }
 
   #person-type
@@ -89,3 +89,9 @@ justify-content: center;
   border-radius: 100px;
   text-transform: uppercase;
 }
+
+#person-type {
+  border-radius: 10px;
+  width: fit-content;
+}
+

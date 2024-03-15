@@ -29,7 +29,8 @@ import { AdminProfileComponent } from './Components/admin-profile/admin-profile.
 import { ApproverProfileComponent } from './Components/approver-profile/approver-profile.component';
 import { RoomListComponent } from './Components/room-list/room-list.component';
 import { UpdateBookingDetailsComponent } from './Components/update-booking-details/update-booking-details.component';
-
+import { SessionServiceService } from './Service/Session/session-service.service';
+import { ForbiddenComponent } from './Components/forbidden/forbidden.component';
 
 
 
@@ -40,6 +41,7 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserLayouttComponent,
+    canActivate:[SessionServiceService],
     children: [
       { path: 'Home', component: HomeComponent },
       { path: 'Resortlist', component: ResortListComponent },
@@ -58,6 +60,7 @@ const routes: Routes = [
   {
     path:'admin',
     component:AdminLayoutComponent,
+    canActivate:[SessionServiceService],
     children:[ 
         {path:'home',component:AdminHomeComponent},
         {path:'insert_resortdetails',component:InsertResortDetailsComponent},
@@ -75,6 +78,7 @@ const routes: Routes = [
   {
     path:'approver',
     component:ApproverLayoutComponent,
+    canActivate:[SessionServiceService],
     children:[
       { path :'approverhome',component:ApproverHomeComponent},
       { path : 'managestatus',component:ManageBookingStatusComponent},
@@ -83,6 +87,7 @@ const routes: Routes = [
       { path: 'UpdateProfile', component: UpdateProfileComponent }
     ]
   },
+  {path:'forbidden',component:ForbiddenComponent},
   { path: '**', component: NotFoundComponent }
 ];
 
