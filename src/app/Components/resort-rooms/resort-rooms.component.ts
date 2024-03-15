@@ -72,20 +72,37 @@ export class ResortRoomsComponent implements OnInit  {
   check_out_date!: Date;
 
   ngOnInit(): void {
+    debugger;
 
     this.route.queryParams.subscribe(params => {
+      debugger;
+
       this.Resort_id = params['ID'];
-      this.booking_id =params['BookingId'];
-      this.roomid =params ['room_id'];
-      
+      const bookinid=params['BookingId'];
+      if(bookinid){
+        this.booking_id=this.encryptdecrypt.decrypt(bookinid)
+      }
+      const roomid=params['room_id'];
+      if(roomid){
+        this.roomid=this.encryptdecrypt.decrypt(roomid)
+      }
+      debugger;
+
       this.roomcount =params['room_count']
-      this.bookingIdFromRoom=params['bookingIdFromRoom']
-      this.getResortDetails();
+      const bookingidfromroom=params['bookingIdFromRoom'];
+      if(bookingidfromroom){
+        this.bookingIdFromRoom=this.encryptdecrypt.decrypt(bookingidfromroom);
+      }
+      debugger;
+
       const selectedTab = params['selectedTab'];
       if (selectedTab === 'tab2') {
+        debugger;
         this.selectedTabIndex = 1; 
       }
     });
+    this.getResortDetails();
+
     this.user_id = this.session.getUserId();
     this.initializer()
     this.calculateDayAndNight();
@@ -102,8 +119,12 @@ export class ResortRoomsComponent implements OnInit  {
           this.img = response.image_urls;
           this.location = response.location;
           this.resortname = response.name;
+          debugger;
+
           response.categories.forEach((category: any) => {
             this.Room_id = category.room_type_id;
+            debugger;
+
             this.Room_details.push({
               room_type_id: category.room_type_id,
               name: category.name,
@@ -111,7 +132,8 @@ export class ResortRoomsComponent implements OnInit  {
               capacity: category.capacity,
               description: category.description,
               resort_id:category.resort_id
-            });
+            });  debugger;
+
 
           });
         },
@@ -120,6 +142,8 @@ export class ResortRoomsComponent implements OnInit  {
   }
 
   initializer() {
+    debugger;
+
     this.check_in_date = this.dateService.checkInDate;
     this.check_out_date = this.dateService.checkOutDate;
     this.total_guest = this.guestService.getGuests();
@@ -131,6 +155,7 @@ export class ResortRoomsComponent implements OnInit  {
   }
 
 isTabDisabled(index: number): boolean {
+
   if (this.booking_id || this.roomid) {
     return index !== this.selectedTabIndex;
   } else {
@@ -175,6 +200,7 @@ isTabDisabled(index: number): boolean {
 
 
   next() {
+    debugger;
     this.getEmployeeIds();
     if(this.booking_id){
       const decryptId=(atob(this.Resort_id.toString()));
@@ -185,19 +211,21 @@ isTabDisabled(index: number): boolean {
         description: value.description,
         resort_id:decryptId
       }));
-
+      debugger;
       const updatebooking={
         resort_id:this.Resort_id,
         check_in_date: this.check_in_date,
         check_out_date: this.check_out_date,
         roomTypes_Req: this.bookedRoomsArray
       }
-
+      debugger;
+        const bookingid=this.encryptdecrypt.encrypt(this.booking_id);
         this.bookingService.UpdatedBooking(updatebooking);
-        this.router.navigate(['/user/update-booking'], { queryParams: { ID: this.Resort_id,id:this.booking_id,AddMember:true } }); 
+        this.router.navigate(['/user/update-booking'], { queryParams: { ID: this.Resort_id,id:bookingid,AddMember:true } }); 
 
     }
     else if(this.roomid){
+
       debugger;
       const decryptId=(atob(this.Resort_id.toString()));
       this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
@@ -211,10 +239,20 @@ isTabDisabled(index: number): boolean {
         resort_id: this.Resort_id,
         roomTypes_Req: this.bookedRoomsArray
       }
+      debugger;
+
       this.dateService.addCheckin(this.check_in_date);
       this.dateService.addCheckout(this.check_out_date);
       this.bookingService.Updatedrooms(updatedroom);
-      this.router.navigate(['/user/update-booking'], { queryParams: { bookingIdFromRoom: this.bookingIdFromRoom,id:this.booking_id ,ID: this.Resort_id } });
+      const bookingIdFromRoom=this.encryptdecrypt.encrypt(this.bookingIdFromRoom);
+      const bookingid=this.encryptdecrypt.encrypt(this.booking_id);
+      if(this.bookedRoomsArray.length>0){
+        this.router.navigate(['/user/update-booking'], { queryParams: { id:bookingid ,bookingIdFromRoom: bookingIdFromRoom ,ID: this.Resort_id } });
+
+      }
+      else{
+        alert("please select the room")
+      }
 
     }
     else{ 

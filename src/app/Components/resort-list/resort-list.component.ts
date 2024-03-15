@@ -5,6 +5,7 @@ import { ResortDetails } from '../../Model/ResortDetails/resortDetails';
 import { DateService } from '../../Service/DateTime';
 import { ApiServiceRepo } from '../../Repository/resort_repository';
 import { Location } from '@angular/common';
+import { encryptDecrypt } from '../../Service/EncryptDecrypt';
 
 @Component({
   selector: 'app-resort-list',
@@ -30,6 +31,7 @@ export class ResortListComponent implements OnInit {
     private _location: Location,
     private router: Router,
     private dateService: DateService,
+    private encryptdecrypt:encryptDecrypt,
     private repository: ApiServiceRepo) {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -42,7 +44,8 @@ export class ResortListComponent implements OnInit {
   ngOnInit(): void {
     this.getResort();
     this.route.queryParams.subscribe(param=>{
-      this.booking_id=param['booking_id']
+      const booking_id=param['booking_id'];
+      this.booking_id=this.encryptdecrypt.decrypt(booking_id);
     })
   }
 
@@ -125,7 +128,9 @@ export class ResortListComponent implements OnInit {
       if (checkInDate != null && checkOutDate != null) {
         this.dateService.checkInDate = checkInDate;
         this.dateService.checkOutDate = checkOutDate;
-        this.router.navigate(['/user/Resortdetails'], { queryParams: { ID: encryptId,booking_id:this.booking_id } });
+        const bookingid =this.encryptdecrypt.encrypt(this.booking_id);
+
+        this.router.navigate(['/user/Resortdetails'], { queryParams: { ID: encryptId,booking_id:bookingid } });
       }
     }
     else
