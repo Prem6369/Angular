@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { admin_resort_repository } from '../../Repository/admin_resort_repository';
+import { ResortService } from '../../Service/resort_details';
 
 @Component({
   selector: 'app-add-roomtype',
@@ -15,39 +16,41 @@ export class AddRoomtypeComponent implements OnInit {
   updateMessage: boolean = false;
 
   roomId!: number;
+  rooms:any
 
   constructor(
     private repo: admin_resort_repository,
     private _location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private resortRoom:ResortService
   ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.roomId = params['room_type_id'];
-      if (params && Object.keys(params).length !== 0) {
-        this.AddRooms.patchValue({
-          ['name']: params['name'],
-          ['capacity']: params['capacity'],
-          ['description']: params['description']
-        });
-      }
-    });
-    this.AddRooms.patchValue({
-      room_type_id: this.roomId
-    })
+   this.roomsTypes= this.resortRoom.getRoom();
+   console.log("roomsTypes",this.roomsTypes)
+
+   this.AddRooms.patchValue(
+    {
+      room_type_id:this.roomsTypes.room_type_id,
+      name: this.roomsTypes.name,
+      capacity:this.roomsTypes.capacity,
+      description:this.roomsTypes.description
+    }
+   )
+   
 
   }
 
   AddRooms = new FormGroup({
     room_type_id: new FormControl(),
     name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$')]),
-    capacity: new FormControl(Validators.required, [Validators.maxLength(4)]),
+    capacity: new FormControl(Validators.required, [Validators.maxLength(4),Validators.pattern('^[0-9]+( [0-9]+)*$')]),
     description: new FormControl('', [Validators.required])
   });
 
   saveRoom() {
-    if (this.roomId !== 0 && this.roomId !== undefined) {
+    debugger;
+    if (this.AddRooms.value.room_type_id) {
         this.repo.updateRoom(this.AddRooms.value)
         .subscribe(response => {
           if (response !== null) {

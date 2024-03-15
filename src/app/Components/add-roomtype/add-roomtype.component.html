@@ -23,7 +23,7 @@
                 <h2>CAPACITY</h2>
                 <div class="input">
                 <span class="icon mx-1"><i class="fa-solid fa-house-chimney-user"[ngClass]="{'text-danger':capacity?.invalid && capacity?.touched}"></i></span>
-                <input type="number" id="capacity" formControlName="capacity">
+                <input type="text" id="capacity" formControlName="capacity">
                 <i class="fa-solid fa-triangle-exclamation text-danger" *ngIf="capacity?.invalid && capacity?.touched"></i>
                 <div class="text-danger" *ngIf="capacity && capacity.invalid && capacity.touched">
                     Enter valid capacity

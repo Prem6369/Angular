@@ -6,8 +6,21 @@ import { Resort } from "../Model/ResortDetails/resortDetails";
 })
 export class ResortService {
   resorts!:Resort;
+  rooms:any;
 
   constructor() { }
+
+
+  addRoom(updatedRoom: any): void {
+    this.rooms=updatedRoom;
+  }
+
+  
+  getRoom(): any{
+    console.log(this.rooms)
+    return this.rooms;
+  }
+
 
   addResort(resortDetails: Resort): void {
     this.resorts=resortDetails;
@@ -16,6 +29,10 @@ export class ResortService {
   
   getResort(): any{
     return this.resorts;
+  }
+
+  resetRoom(){
+    this.rooms=''
   }
   
   resetService() {
