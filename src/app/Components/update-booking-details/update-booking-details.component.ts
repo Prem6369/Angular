@@ -11,6 +11,7 @@ import { Location } from '@angular/common';
 import { UpdatedBooking_details } from '../../Model/bookingDetails';
 import { ApiServiceRepo } from '../../Repository/resort_repository';
 import { SessionServiceService } from '../../Service/Session/session-service.service';
+import { encryptDecrypt } from '../../Service/EncryptDecrypt';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
     private guest: GuestService,
     private dateService: DateService,
     private _location: Location,
-    private sessionService:SessionServiceService
+    private sessionService:SessionServiceService,
   ) { }
 
   user_id!:number;
@@ -59,7 +60,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
   food_choice: string = '';
   employee_user_ids: string = '';
   AddMember: boolean = false;
-
   ngOnInit(): void {
     debugger;
     
@@ -70,6 +70,8 @@ export class UpdateBookingDetailsComponent implements OnInit {
       this.AddMember = params['AddMember'];
       this.resort_id_Checkin = params['ID']; 
     });
+
+
     this.user_id=this.sessionService.getUserId();
     this.updatedvalues = this.booking.getUpdatedBookings();
 
@@ -104,7 +106,8 @@ export class UpdateBookingDetailsComponent implements OnInit {
       }
     }
     else if (this.bookingIdFromRoom) {
-      this.booking_id = this.bookingIdFromRoom;
+      this.booking_id = this.bookingIdFromRoom;    
+
       this.getDate();
       this.updatedroom = this.booking.getUpdatedRoom();
       this.bookedRoomsArray = this.updatedroom.roomTypes_Req;
@@ -161,6 +164,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
 
   getBookingDetails() {
     debugger;
+
     this.repo.getBookingDetailsById(this.booking_id).subscribe(
       (response: any[]) => {
         this.booking_details = response[0];
@@ -320,7 +324,7 @@ addMember() {
       this.bookedRoomsArray.forEach((roomRequest: any) => {
         const roomTypeId = roomRequest.room_type_id;
         const resortID = btoa(roomRequest.resort_id); 
-
+        
         this.router.navigate(['/user/Resortrooms'], {
           queryParams:
             { ID: resortID, room_id: roomTypeId, bookingIdFromRoom: this.booking_id }
