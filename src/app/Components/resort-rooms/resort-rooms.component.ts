@@ -11,6 +11,7 @@ import { UserProfile } from '../../Model/userProfile/userProfile';
 import { ApiServiceRepo } from '../../Repository/resort_repository';
 import { Location } from '@angular/common';
 import { MatTabGroup } from '@angular/material/tabs';
+import { encryptDecrypt } from '../../Service/EncryptDecrypt';
 
 
 @Component({
@@ -64,11 +65,11 @@ export class ResortRoomsComponent implements OnInit  {
     private dateService: DateService, 
     private bookingService: BookingService,
      private guestService: GuestService,
-      private router: Router, 
+      private router: Router,
+      private encryptdecrypt:encryptDecrypt, 
       private _location: Location) { }
   check_in_date!: Date;
   check_out_date!: Date;
-  
 
   ngOnInit(): void {
 
@@ -76,6 +77,7 @@ export class ResortRoomsComponent implements OnInit  {
       this.Resort_id = params['ID'];
       this.booking_id =params['BookingId'];
       this.roomid =params ['room_id'];
+      
       this.roomcount =params['room_count']
       this.bookingIdFromRoom=params['bookingIdFromRoom']
       this.getResortDetails();

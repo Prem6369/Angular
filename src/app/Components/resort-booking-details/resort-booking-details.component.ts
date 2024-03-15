@@ -3,6 +3,8 @@ import { SessionServiceService } from '../../Service/Session/session-service.ser
 import { Booking } from '../../Model/BookingDetaills/Booking';
 import { ApiUserServiceRepo } from '../../Repository/user_repository';
 import { Router } from '@angular/router';
+import { encryptDecrypt } from '../../Service/EncryptDecrypt';
+
 
 @Component({
   selector: 'app-resort-booking-details',
@@ -20,7 +22,8 @@ export class ResortBookingDetailsComponent implements OnInit {
   constructor(
     private session: SessionServiceService,
     private repository: ApiUserServiceRepo,
-    private router:Router
+    private router:Router,
+    private encryptdecrypt:encryptDecrypt
   ) {}
 
   ngOnInit(): void {
@@ -47,9 +50,10 @@ export class ResortBookingDetailsComponent implements OnInit {
       }
     );
   }
-
+  
   navigateToUpdateBooking(booking_id:number)
   {
-    this.router.navigate(['/user/update-booking'],{ queryParams: { id:booking_id } })
-  }
+    const encryptedBookingId = this.encryptdecrypt.encrypt(booking_id);
+    this.router.navigate(['/user/update-booking'], { queryParams: { id: booking_id} });
+    }
 }
