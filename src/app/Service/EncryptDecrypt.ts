@@ -16,8 +16,12 @@ export class encryptDecrypt {
   }
 
   decrypt(ciphertext: string): any {
+    debugger;
+    
     const bytes = CryptoJS.AES.decrypt(ciphertext, this.secretKey);
     const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    console.log("decryptedData from service",decryptedData);
     return decryptedData;
   }
+
 }

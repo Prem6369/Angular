@@ -33,7 +33,7 @@ export class SessionServiceService {
 
   canActivate(): boolean {
     if (this.authentication) {   
-      if (this.role === 'admin' || this.role === 'approver' || this.role === 'user') {
+      if (this.role === 'admin' || this.role === 'Approver' || this.role === 'user') {
         return true;
       } else {
         this.router.navigate(['']);
@@ -47,6 +47,7 @@ export class SessionServiceService {
 
 
   AddSessionvalues(id:string,name:string){
+
     this.sessionvalues.push(id,name)
   }
 

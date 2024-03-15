@@ -47,6 +47,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
     private dateService: DateService,
     private _location: Location,
     private sessionService:SessionServiceService,
+    private encrytiondecryption:encryptDecrypt
   ) { }
 
   user_id!:number;
@@ -61,12 +62,37 @@ export class UpdateBookingDetailsComponent implements OnInit {
   employee_user_ids: string = '';
   AddMember: boolean = false;
   ngOnInit(): void {
+    debugger;
     this.route.queryParams.subscribe((params) => {
-      this.booking_id = +params['id'];
-      this.bookingIdFromRoom = +params['bookingIdFromRoom'];
+      debugger;
+      const bookingid: string = params['id'];
+      if (bookingid) {
+        try {
+          const decryptedBookingId = this.encrytiondecryption.decrypt(bookingid);
+          console.log("Decrypted booking id:", decryptedBookingId);
+          this.booking_id = decryptedBookingId;
+        } catch (error) {
+          console.error("Error decrypting booking id:", error);
+        }
+      }
+      debugger;
+      const bookingIdFromRoom: string = params['bookingIdFromRoom'];
+      if (bookingIdFromRoom) {
+        try {
+          debugger;
+          const decryptedBookingIdFromRoom = this.encrytiondecryption.decrypt(bookingIdFromRoom);
+          this.bookingIdFromRoom = decryptedBookingIdFromRoom;
+        } catch (error) {
+          console.error("Error decrypting booking id from room:", error);
+        }
+      }
       this.AddMember = params['AddMember'];
-      this.resort_id_Checkin = params['ID']; 
+      debugger;
+         this.resort_id_Checkin = params['ID'];;
+ 
     });
+
+
 
 
     this.user_id=this.sessionService.getUserId();
@@ -101,6 +127,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
       }
     }
     else if (this.bookingIdFromRoom) {
+      debugger;
       this.booking_id = this.bookingIdFromRoom;    
 
       this.getDate();
@@ -256,6 +283,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
   
 
   getEmployeeIds() {
+    debugger;
     this.EmployeeList.forEach((employee: { user_id: { toString: () => string; }; }, index: number) => {
       this.employee_user_ids += employee.user_id.toString();
       if (index < this.EmployeeList.length - 1) {
@@ -295,14 +323,17 @@ export class UpdateBookingDetailsComponent implements OnInit {
 
 addMember() {
   debugger;
+  const bookingid =this.encrytiondecryption.encrypt(this.booking_id);
   this.router.navigate(['/user/Resortrooms'],
-   {queryParams: { BookingId: this.booking_id, ID: this.resort_id_Checkin || this.resortid,selectedTab: 'tab2' },
+   {queryParams: { BookingId: bookingid, ID: this.resort_id_Checkin || this.resortid ,selectedTab: 'tab2' },
   });
 }
 
   changeCheckinout() {
+    const bookingid =this.encrytiondecryption.encrypt(this.booking_id);
     this.router.navigate(['/user/Resortlist'], {
-      queryParams: { booking_id: this.booking_id },
+
+      queryParams: { booking_id: bookingid },
     });
   }
 
@@ -314,9 +345,11 @@ addMember() {
         const roomTypeId = roomRequest.room_type_id;
         const resortID = btoa(roomRequest.resort_id); 
         
+        const roomid=this.encrytiondecryption.encrypt(roomTypeId);
+        const bookingid=this.encrytiondecryption.encrypt(this.booking_id);
         this.router.navigate(['/user/Resortrooms'], {
           queryParams:
-            { ID: resortID, room_id: roomTypeId, bookingIdFromRoom: this.booking_id }
+            { ID: resortID, room_id: roomid, bookingIdFromRoom: bookingid }
         });
       });
     }
@@ -325,12 +358,16 @@ addMember() {
   back() {
     this.guest.resetService();
     this.dateService.resetDate();
+    this.booking.resetBooking();
+
     this.router.navigate(['/user/booking-details'])
   }
 
   update() {
+    debugger;
     this.getEmployeeIds();
     this.setValue();
+    debugger;
     this.apiRepo.updateBookingDetails(this.bookingUpdate.value).subscribe(
       (response) => {
         if (response) {
@@ -345,10 +382,11 @@ addMember() {
         }
       }
     )
-
+    debugger;
     console.log("from update button", this.bookingUpdate.value);
     this.guest.resetService();
     this.dateService.resetDate();
+    this.booking.resetBooking();
   }
 
   getDate() {
@@ -393,6 +431,7 @@ addMember() {
   }
 
   getResortName(){
+    debugger;
     let finalResortId=this.resortid?(atob(this.resortid.toString())):(atob(this.resort_id_Checkin.toString()))
 
     this.apiRepo.getResortById(finalResortId).subscribe(
