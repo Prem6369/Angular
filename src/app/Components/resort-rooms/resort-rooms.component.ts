@@ -225,8 +225,6 @@ isTabDisabled(index: number): boolean {
 
     }
     else if(this.roomid){
-
-      debugger;
       const decryptId=(atob(this.Resort_id.toString()));
       this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
         room_type_id: value.room_type_id,

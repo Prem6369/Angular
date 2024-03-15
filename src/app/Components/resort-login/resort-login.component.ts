@@ -18,7 +18,7 @@ export class ResortLoginComponent implements OnInit {
     password: new FormControl(''),
   });
 
-
+  hide = true;
   Errormessage:string='';
 
 
@@ -43,6 +43,10 @@ export class ResortLoginComponent implements OnInit {
         this.session.AddSessionvalues(response.id,response.name);
       }
     });
+  }
+
+  togglePasswordVisibility() {
+    this.hide = !this.hide;
   }
 
 
