@@ -30,7 +30,7 @@ export class AdminProfileComponent implements OnInit {
     this.username = this.session.getUserName();
     this.repo.getUserProfile(this.user_id).subscribe((response) => {
           this.img=response.official_id_image_url;
-          console.log('profile',response);
+          console.log('admin profile',this.img);
           this.userlist=response;
         },
       );

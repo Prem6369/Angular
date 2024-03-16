@@ -39,6 +39,7 @@ export class AdminHeaderComponent implements OnInit {
       .subscribe(
         (response) => {
           this.img=response.official_id_image_url;
+          console.log('navbar image:',this.img);
           this.userlist=response;
           console.log(this.userlist.claySys_email);
         },
