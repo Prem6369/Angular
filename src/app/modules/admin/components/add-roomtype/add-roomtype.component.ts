@@ -26,19 +26,15 @@ export class AddRoomtypeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-   this.roomsTypes= this.resortRoom.getRoom();
-   console.log("roomsTypes",this.roomsTypes)
-
-   this.AddRooms.patchValue(
-    {
-      room_type_id:this.roomsTypes.room_type_id,
-      name: this.roomsTypes.name,
-      capacity:this.roomsTypes.capacity,
-      description:this.roomsTypes.description
+    this.roomsTypes = this.resortRoom.getRoom();
+    if (this.roomsTypes && this.roomsTypes.room_type_id) {
+      this.AddRooms.patchValue({
+        room_type_id: this.roomsTypes.room_type_id,
+        name: this.roomsTypes.name,
+        capacity: this.roomsTypes.capacity,
+        description: this.roomsTypes.description
+      });
     }
-   )
-   
-
   }
 
   AddRooms = new FormGroup({
@@ -60,14 +56,18 @@ export class AddRoomtypeComponent implements OnInit {
 
         });
     } else {
-      this.repo.insertRoom(this.AddRooms.value)
+  let room=this.AddRooms.value
+  delete room.room_type_id;
+    
+      this.repo.insertRoom(room)
         .subscribe(response => {
           if (response !== null) {
-          this.successMessage = true;
-          this.AddRooms.reset();
-        }
+            this.successMessage = true;
+            this.AddRooms.reset();
+          }
         });
     }
+    
   }
 
 

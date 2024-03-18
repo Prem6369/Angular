@@ -37,29 +37,28 @@ export class ChangeApproverComponent implements OnInit {
     this.repo.getBookingRequest(this.approverid).subscribe(
       (response) => {
         this.Bookings_list = response;
-        this.resortId = this.Bookings_list.map((booking) => booking.resort_id);
-        this.userId = this.Bookings_list.map((booking) => booking.user_id);
-        this.fetchResortNames(0);
-        this.getUserName(0);
+        console.log(" this.Bookings_list", this.Bookings_list);
+
+      
       }
     );
   }
 
 
-  fetchResortNames(index: number) {
-    if (index >= this.resortId.length) {
-      this.mergeResortNames();
-      return;
-    }
-    const resortId = this.resortId[index];
-    const params = resortId;
-    this.repo.getResortDetails(params)
-      .subscribe((response) => {
-        this.resortname.push(response.name);
-        this.resortimage.push(response.image_urls)
-        this.fetchResortNames(index + 1);
-      });
-  }
+  // fetchResortNames(index: number) {
+  //   if (index >= this.resortId.length) {
+  //     this.mergeResortNames();
+  //     return;
+  //   }
+  //   const resortId = this.resortId[index];
+  //   const params = resortId;
+  //   this.repo.getResortDetails(params)
+  //     .subscribe((response) => {
+  //       this.resortname.push(response.name);
+  //       this.resortimage.push(response.image_urls)
+  //       this.fetchResortNames(index + 1);
+  //     });
+  // }
 
 
   getUserName(userIndex: number) {

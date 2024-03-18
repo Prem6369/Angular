@@ -43,7 +43,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ResortRoomsComponent,
   ],
   imports: [
-    AsyncPipe,
+    // AsyncPipe,
     MatDateRangeInput,
     CommonModule,
     UserRoutingModule,

@@ -17,7 +17,7 @@
             <tr *ngFor="let data of Bookings_list;let i = index">
                 <td><span>{{i+1}}</span></td>
                 <td><span>{{ data.username }}</span></td>
-                <td><span>{{ data.resort_name }}</span></td>
+                <td><span>{{ data.name }}</span></td>
                 <td><span>{{ data.check_in_date| date:'dd/MM/yyyy' }}</span></td>
                 <td><span>{{ data.check_out_date| date:'dd/MM/yyyy' }}</span></td>
                 <td><span>{{ data.member_count }}</span></td>
