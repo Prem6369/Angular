@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl: string = `https://localhost:7036/api`;
+
+  private apiUrl: string = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -18,6 +20,7 @@ export class ApiService {
   }
 
   post(path: string, app: string, body?: any) {
+    debugger;
     const url = this.getFullAPIUrl(path, app);
     const headers = this.getHeaders();
     return this.httpClient.post<any>(url, body, { headers: headers });

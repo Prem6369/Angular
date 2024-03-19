@@ -8,21 +8,13 @@ import { ResortDetailsPreviewComponent } from './components/resort-details-previ
 import { RoomListComponent } from './components/room-list/room-list.component';
 import { UpdateResortDetailsComponent } from './components/update-resort-details/update-resort-details.component';
 import { AdminRoutingModule } from './admin-routing.module';
-import {MatTabsModule} from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDatepickerModule} from '@angular/material/datepicker';
-import { MatDateRangeInput } from '@angular/material/datepicker';
-import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core'; 
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import {AsyncPipe} from '@angular/common';
+import { provideNativeDateAdapter } from '@angular/material/core'; 
 import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 @NgModule({
   declarations: [
@@ -37,22 +29,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    // AsyncPipe,
-    // MatDateRangeInput,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    // MatTabsModule,
-    // MatDatepickerModule,
-    // MatNativeDateModule,
-    // MatFormFieldModule,
-    // MatButtonModule,
-    // MatAutocompleteModule,
     MatInputModule,
     MatChipsModule,
     MatIconModule,
-    // MatButtonToggleModule,
-    // MatTooltipModule
   ],
   providers: [provideNativeDateAdapter()],
 })

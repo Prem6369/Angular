@@ -21,7 +21,6 @@ import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import {AsyncPipe} from '@angular/common';
 import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
@@ -43,7 +42,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ResortRoomsComponent,
   ],
   imports: [
-    // AsyncPipe,
     MatDateRangeInput,
     CommonModule,
     UserRoutingModule,

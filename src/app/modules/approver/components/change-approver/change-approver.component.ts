@@ -3,6 +3,7 @@ import { SessionServiceService } from '../../../../core/service/Session/session-
 import { FormControl, FormGroup } from '@angular/forms';
 import { approver_repository } from '../../../../core/repository/approver_repository';
 
+
 @Component({
   selector: 'app-change-approver',
   templateUrl: './change-approver.component.html',
@@ -38,54 +39,10 @@ export class ChangeApproverComponent implements OnInit {
       (response) => {
         this.Bookings_list = response;
         console.log(" this.Bookings_list", this.Bookings_list);
-
       
       }
     );
   }
-
-
-  // fetchResortNames(index: number) {
-  //   if (index >= this.resortId.length) {
-  //     this.mergeResortNames();
-  //     return;
-  //   }
-  //   const resortId = this.resortId[index];
-  //   const params = resortId;
-  //   this.repo.getResortDetails(params)
-  //     .subscribe((response) => {
-  //       this.resortname.push(response.name);
-  //       this.resortimage.push(response.image_urls)
-  //       this.fetchResortNames(index + 1);
-  //     });
-  // }
-
-
-  getUserName(userIndex: number) {
-    if (userIndex >= this.userId.length) {
-      this.mergeResortNames();
-      return;
-    }
-    const userid = this.userId[userIndex];
-    const params = userid;
-    this.repo.getUserProfile(params).subscribe((response) => {
-      this.username.push(response.username);
-      this.getUserName(userIndex + 1);
-    });
-  }
-
-
-  mergeResortNames() {
-    this.Bookings_list.forEach((booking, index) => {
-      booking.resort_name = this.resortname[index];
-    });
-    this.Bookings_list.forEach((booking, userindex) => {
-      booking.username = this.username[userindex];
-    });
-
-  }
-
-
 
   onchange(id: number) {
     const value = {
