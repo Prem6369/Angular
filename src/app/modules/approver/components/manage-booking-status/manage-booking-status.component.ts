@@ -32,7 +32,7 @@ export class ManageBookingStatusComponent implements OnInit {
       (response) => {
         this.Bookings_list = response;
         console.log("this.Bookings_list",this.Bookings_list);
-            })
+            });
           }
   
 
