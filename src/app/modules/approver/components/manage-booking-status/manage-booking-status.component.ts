@@ -32,7 +32,6 @@ export class ManageBookingStatusComponent implements OnInit {
       (response) => {
         this.Bookings_list = response;
         console.log("this.Bookings_list",this.Bookings_list);
-
       }
     );
   }
@@ -40,12 +39,23 @@ export class ManageBookingStatusComponent implements OnInit {
   onchange($event: any, id: number, approverid: number) {
     debugger;
     const changestatus = $event.target.value;
-    const value = {
-      booking_id: id,
-      approver_id: approverid,
-      status: changestatus,
-      message: 'thankyou'
-    };
+    let value; // Declare value outside the if-else blocks
+    if(changestatus==='Confirmed'){
+        value = {
+            booking_id: id,
+            approver_id: approverid,
+            status: changestatus,
+            message: 'The booking was confirmed'
+        };
+    } else {
+        value = {
+            booking_id: id,
+            approver_id: approverid,
+            status: changestatus,
+            message: 'Booking cancelled'
+        };
+    }
+    
     this.repo.changeStatus(value).subscribe(
       (response) => {
         console.log('Response:', response);
