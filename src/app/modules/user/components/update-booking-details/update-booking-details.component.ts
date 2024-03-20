@@ -61,6 +61,8 @@ export class UpdateBookingDetailsComponent implements OnInit {
   food_choice: string = '';
   employee_user_ids: string = '';
   AddMember: boolean = false;
+
+
   ngOnInit(): void {
     debugger;
     this.route.queryParams.subscribe((params) => {
@@ -88,8 +90,8 @@ export class UpdateBookingDetailsComponent implements OnInit {
       }
       this.AddMember = params['AddMember'];
       debugger;
-         this.resort_id_Checkin = params['ID'];;
- 
+      this.resort_id_Checkin = params['ID'];;
+
     });
 
 
@@ -100,17 +102,19 @@ export class UpdateBookingDetailsComponent implements OnInit {
 
     if (this.updatedvalues && this.updatedvalues.roomTypes_Req.length !== 0) {
       this.populateFormFromUpdatedValues();
-      this.getMemebers();
+      this.getMembers();
       this.getDefaultValues();
       this.getResortName();
     }
     else if (this.AddMember) {
+      debugger;
       this.getDate();
-      this.getMemebers();
+      this.getMembers();
       this.getDefaultValues();
       this.getResortName();
 
       if (this.updatedvalues.roomTypes_Req.length !== 0) {
+        debugger;
         this.bookedRoomsArray = this.updatedvalues.roomTypes_Req;
         this.updateSelectedRooms();
         
@@ -120,7 +124,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
         this.bookedRoomsArray = this.updatedroom.roomTypes_Req;
         this.updateSelectedRooms();
         this.getDate();
-        this.getMemebers();
+        this.getMembers();
       }
       else {
         this.getBooking();
@@ -134,7 +138,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
       this.updatedroom = this.booking.getUpdatedRoom();
       this.bookedRoomsArray = this.updatedroom.roomTypes_Req;
       this.updateSelectedRooms();
-      this.getMemebers();
+      this.getMembers();
       this.getBooking();
       this.getResortName();
 
@@ -190,7 +194,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
     this.repo.getBookingDetailsById(this.booking_id).subscribe(
       (response: any[]) => {
         this.booking_details = response[0];
-        console.log("FirstResponse::",this.booking_details)
         this.patchValue(this.booking_details);
         this.EmployeeList = this.booking_details.employees;
         this.GuestList = this.booking_details.guests;
@@ -215,7 +218,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
     );
   }
 
-  getMemebers() {
+  getMembers() {
     this.EmployeeList = this.guest.getEmployee();
     this.GuestList = this.guest.getGuests();
     this.totalList = this.EmployeeList.concat(this.GuestList);

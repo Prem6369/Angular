@@ -53,6 +53,7 @@ export class ResortBookingDetailsComponent implements OnInit {
   
   navigateToUpdateBooking(booking_id:number)
   {
+    debugger;
     const encryptedBookingId = this.encryptdecrypt.encrypt(booking_id);
     this.router.navigate(['/user/update-booking'], { queryParams: { id: encryptedBookingId} });
     }

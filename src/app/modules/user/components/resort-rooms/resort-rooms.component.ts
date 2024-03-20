@@ -202,27 +202,36 @@ isTabDisabled(index: number): boolean {
   next() {
     debugger;
     this.getEmployeeIds();
-    if(this.booking_id){
-      const decryptId=(atob(this.Resort_id.toString()));
-      this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
-        room_type_id: value.room_type_id,
-        room_type_count: value.count,
-        name: value.name,
-        description: value.description,
-        resort_id:decryptId
-      }));
-      debugger;
-      const updatebooking={
-        resort_id:this.Resort_id,
-        check_in_date: this.check_in_date,
-        check_out_date: this.check_out_date,
-        roomTypes_Req: this.bookedRoomsArray
-      }
-      debugger;
+    if(this.booking_id)
+    {
+      if(this.selectedTabIndex ===1)
+      {
         const bookingid=this.encryptdecrypt.encrypt(this.booking_id);
-        this.bookingService.UpdatedBooking(updatebooking);
         this.router.navigate(['/user/update-booking'], { queryParams: { ID: this.Resort_id,id:bookingid,AddMember:true } }); 
-
+      }
+      else
+      {
+        const decryptId=(atob(this.Resort_id.toString()));
+        this.bookedRoomsArray = Object.entries(this.bookedRooms).map(([key, value]) => ({
+          room_type_id: value.room_type_id,
+          room_type_count: value.count,
+          name: value.name,
+          description: value.description,
+          resort_id:decryptId
+        }));
+        debugger;
+        const updatebooking={
+          resort_id:this.Resort_id,
+          check_in_date: this.check_in_date,
+          check_out_date: this.check_out_date,
+          roomTypes_Req: this.bookedRoomsArray
+        }
+        debugger;
+          const bookingid=this.encryptdecrypt.encrypt(this.booking_id);
+          this.bookingService.UpdatedBooking(updatebooking);
+          this.router.navigate(['/user/update-booking'], { queryParams: { ID: this.Resort_id,id:bookingid,AddMember:true } }); 
+      }
+     
     }
     else if(this.roomid){
       const decryptId=(atob(this.Resort_id.toString()));
@@ -273,10 +282,9 @@ isTabDisabled(index: number): boolean {
 
       this.router.navigate(['/user/booking-preview'], { queryParams: { ID: this.Resort_id } });
     }}
- 
-
 
   }
+
 
   removeMember(user_id: number) {
       const indexToRemove = this.total_list.findIndex(member => member.user_id === user_id || member.guest_user_id === user_id);

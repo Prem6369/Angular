@@ -36,6 +36,7 @@ export class BookingService {
   }
 
   resetBooking() {
+    debugger;
     this.updatedBooking = {
       check_in_date: new Date(0),
       check_out_date: new Date(0),
@@ -43,6 +44,4 @@ export class BookingService {
       roomTypes_Req:[]
     }
   }
-
-
 }
