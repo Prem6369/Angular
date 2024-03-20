@@ -1,23 +1,24 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserProfile } from '../../../../core/model/userProfile/userProfile'; 
+import { UserProfile } from '../../../../core/model/userProfile/userProfile';
 import { SessionServiceService } from '../../../../core/service/Session/session-service.service';
 import { ApiUserServiceRepo } from '../../../../core/repository/user_repository';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss'] 
+  styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
   userlist!: UserProfile;
   username: string = '';
-  user_id!:number;
-  img:string='';
+  user_id!: number;
+  img: string = '';
   constructor(
-    private router: Router, 
-    private session: SessionServiceService,private repository:ApiUserServiceRepo) {}
+    private router: Router,
+    private session: SessionServiceService,
+    private repository: ApiUserServiceRepo
+  ) {}
 
   ngOnInit(): void {
     this.getUserProfile();
@@ -27,13 +28,10 @@ export class UserProfileComponent implements OnInit {
     const sessionValues = this.session.GetSessionvalues();
     this.user_id = sessionValues[0];
     this.username = sessionValues[1];
-
-    this.repository.userProfileById(this.user_id).subscribe((response)=>{
-      this.img=response.official_id_image_url;
-      console.log('profile',response);
-      this.userlist=response;
-    })
-    
+    this.repository.userProfileById(this.user_id).subscribe((response) => {
+      this.img = response.official_id_image_url;
+      this.userlist = response;
+    });
   }
 
   homePage() {
@@ -42,6 +40,5 @@ export class UserProfileComponent implements OnInit {
 
   Logout() {
     this.session.logout();
-   
   }
 }

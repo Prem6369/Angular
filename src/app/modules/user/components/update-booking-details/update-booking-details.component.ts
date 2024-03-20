@@ -64,42 +64,34 @@ export class UpdateBookingDetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    debugger;
+    
     this.route.queryParams.subscribe((params) => {
-      debugger;
       const bookingid: string = params['id'];
       if (bookingid) {
         try {
           const decryptedBookingId = this.encrytiondecryption.decrypt(bookingid);
-          console.log("Decrypted booking id:", decryptedBookingId);
           this.booking_id = decryptedBookingId;
         } catch (error) {
           console.error("Error decrypting booking id:", error);
         }
       }
-      debugger;
+      
       const bookingIdFromRoom: string = params['bookingIdFromRoom'];
       if (bookingIdFromRoom) {
         try {
-          debugger;
+          
           const decryptedBookingIdFromRoom = this.encrytiondecryption.decrypt(bookingIdFromRoom);
           this.bookingIdFromRoom = decryptedBookingIdFromRoom;
         } catch (error) {
           console.error("Error decrypting booking id from room:", error);
         }
       }
-      this.AddMember = params['AddMember'];
-      debugger;
-      this.resort_id_Checkin = params['ID'];;
-
+      this.AddMember = params['AddMember'];      
+      this.resort_id_Checkin = params['ID'];
     });
-
-
-
 
     this.user_id=this.sessionService.getUserId();
     this.updatedvalues = this.booking.getUpdatedBookings();
-
     if (this.updatedvalues && this.updatedvalues.roomTypes_Req.length !== 0) {
       this.populateFormFromUpdatedValues();
       this.getMembers();
@@ -107,17 +99,13 @@ export class UpdateBookingDetailsComponent implements OnInit {
       this.getResortName();
     }
     else if (this.AddMember) {
-      debugger;
       this.getDate();
       this.getMembers();
       this.getDefaultValues();
       this.getResortName();
-
       if (this.updatedvalues.roomTypes_Req.length !== 0) {
-        debugger;
         this.bookedRoomsArray = this.updatedvalues.roomTypes_Req;
         this.updateSelectedRooms();
-        
       }
       else if (this.booking.getUpdatedRoom()) {
         this.updatedroom = this.booking.getUpdatedRoom();
@@ -131,9 +119,7 @@ export class UpdateBookingDetailsComponent implements OnInit {
       }
     }
     else if (this.bookingIdFromRoom) {
-      debugger;
       this.booking_id = this.bookingIdFromRoom;    
-
       this.getDate();
       this.updatedroom = this.booking.getUpdatedRoom();
       this.bookedRoomsArray = this.updatedroom.roomTypes_Req;
@@ -141,7 +127,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
       this.getMembers();
       this.getBooking();
       this.getResortName();
-
     }
     else {
       this.getBookingDetails();
@@ -189,8 +174,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
   })
 
   getBookingDetails() {
-    
-
     this.repo.getBookingDetailsById(this.booking_id).subscribe(
       (response: any[]) => {
         this.booking_details = response[0];
@@ -213,7 +196,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
         this.food_required_status=this.booking_details.food_required_status;
         this.message=this.booking_details.message;
         this.getResortName()
-
       }
     );
   }
@@ -260,7 +242,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
   patchValue(response: BookingResponse) {
     const formattedCheckInDate = response.check_in_date.split('T');
     const formattedCheckOutDate = response.check_out_date.split('T');
-
     this.bookingUpdate.patchValue({
       check_in_date: formattedCheckInDate[0],
       check_out_date: formattedCheckOutDate[0],
@@ -276,17 +257,14 @@ export class UpdateBookingDetailsComponent implements OnInit {
     if (lastName) {
       initials += lastName.charAt(0);
     }
-
     const colors = ['orange', 'lightgreen', 'skyblue', 'red'];
     const chosenColor = Math.floor(Math.random() * colors.length);
     const backgroundColor = colors[chosenColor];
-  
     return { initials: initials.toUpperCase(), backgroundColor };
   }
   
 
   getEmployeeIds() {
-    debugger;
     this.EmployeeList.forEach((employee: { user_id: { toString: () => string; }; }, index: number) => {
       this.employee_user_ids += employee.user_id.toString();
       if (index < this.EmployeeList.length - 1) {
@@ -297,7 +275,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
 
   removeRoom(roomId: number) {
     const indexToRemove = this.bookedRoomsArray.findIndex((room: any) => room.room_type_id === roomId);
-
     if (indexToRemove !== -1) {
       const roomToRemove = this.bookedRoomsArray[indexToRemove];
       if (roomToRemove) {
@@ -312,7 +289,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
 
   removeMember(user_id: number) {
     const indexToRemove = this.totalList.findIndex(member => member.user_id === user_id || member.guest_user_id === user_id);
-
     if (indexToRemove !== -1) {
         if (this.totalList[indexToRemove].hasOwnProperty('guest_user_id')) {
             this.GuestList.splice(this.GuestList.findIndex((member: { guest_user_id: number; }) => member.guest_user_id === user_id), 1);
@@ -325,7 +301,6 @@ export class UpdateBookingDetailsComponent implements OnInit {
 }
 
 addMember() {
-  debugger;
   const bookingid =this.encrytiondecryption.encrypt(this.booking_id);
   this.router.navigate(['/user/Resortrooms'],
    {queryParams: { BookingId: bookingid, ID: this.resort_id_Checkin || this.resortid ,selectedTab: 'tab2' },
@@ -335,19 +310,16 @@ addMember() {
   changeCheckinout() {
     const bookingid =this.encrytiondecryption.encrypt(this.booking_id);
     this.router.navigate(['/user/Resortlist'], {
-
       queryParams: { booking_id: bookingid },
     });
   }
 
   addRoom() {
     if (this.bookedRoomsArray.length > 0) {
-      debugger;
       this.booking.resetBooking();
       this.bookedRoomsArray.forEach((roomRequest: any) => {
         const roomTypeId = roomRequest.room_type_id;
         const resortID = btoa(roomRequest.resort_id); 
-        
         const roomid=this.encrytiondecryption.encrypt(roomTypeId);
         const bookingid=this.encrytiondecryption.encrypt(this.booking_id);
         this.router.navigate(['/user/Resortrooms'], {
@@ -362,19 +334,15 @@ addMember() {
     this.guest.resetService();
     this.dateService.resetDate();
     this.booking.resetBooking();
-
     this.router.navigate(['/user/booking-details'])
   }
 
   update() {
-    debugger;
     this.getEmployeeIds();
     this.setValue();
-    debugger;
     this.apiRepo.updateBookingDetails(this.bookingUpdate.value).subscribe(
       (response) => {
         if (response) {
-          console.log("updated response:",response)
           alert("Booking details updated successfully");
           this.guest.resetService();
           this.dateService.resetDate();
@@ -385,8 +353,6 @@ addMember() {
         }
       }
     )
-    debugger;
-    console.log("from update button", this.bookingUpdate.value);
     this.guest.resetService();
     this.dateService.resetDate();
     this.booking.resetBooking();
@@ -406,19 +372,14 @@ addMember() {
     });
   }
 
-
   setValue()
   {
-    debugger;
     this.roomTypes_Req = Object.entries(this.bookedRoomsArray).map(([key, value]) => ({
       room_type_id: value.room_type_id,
       room_type_count: value.room_type_count,
     }));
 
-    debugger;
-
     const finalResortId=this.resortid?Number(atob(this.resortid.toString())):Number(atob(this.resort_id_Checkin.toString()))
-
     this.bookingUpdate.patchValue({
       guests: this.GuestList,
       roomTypes_Req: this.roomTypes_Req,
@@ -434,9 +395,7 @@ addMember() {
   }
 
   getResortName(){
-    debugger;
     let finalResortId=this.resortid?(atob(this.resortid.toString())):(atob(this.resort_id_Checkin.toString()))
-
     this.apiRepo.getResortById(finalResortId).subscribe(
       (response)=>{
         this.resort_name=response.name;

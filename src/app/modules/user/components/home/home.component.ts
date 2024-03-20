@@ -12,6 +12,4 @@ export class HomeComponent {
   navigateToResort(){
     this.router.navigate(['/user/Resortlist']);
   }
-
-  
 }
