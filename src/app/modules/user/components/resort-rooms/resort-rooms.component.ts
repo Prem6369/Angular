@@ -287,6 +287,7 @@ isTabDisabled(index: number): boolean {
 
 
   removeMember(user_id: number) {
+    debugger;
       const indexToRemove = this.total_list.findIndex(member => member.user_id === user_id || member.guest_user_id === user_id);
 
       if (indexToRemove !== -1) {
