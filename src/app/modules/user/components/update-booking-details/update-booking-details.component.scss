@@ -1,3 +1,5 @@
+
+
 .readonly-toggle {
   pointer-events: none;
 }
@@ -58,11 +60,15 @@ section h2 {
   color: purple;
 }
 
+
 .initials {
   font-size: 20px;
   font-weight: bold;
   width: 50px;
   height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
   border-radius: 100px;
   text-transform: uppercase;

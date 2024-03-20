@@ -11,6 +11,7 @@ import { UserModule } from './modules/user/user.module';
 import { ApproverModule } from './modules/approver/approver.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ReusableComponentModule } from './shared/modules/reusable-component/reusable-component.module';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 
@@ -31,7 +32,8 @@ import { ReusableComponentModule } from './shared/modules/reusable-component/reu
     AdminModule,
     AuthModule,
     ReusableComponentModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxSkeletonLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
