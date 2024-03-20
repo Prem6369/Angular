@@ -7,10 +7,8 @@ import { GuestDetails } from '../../../../core/model/GuestDetails/guestDetails';
 import { BookingService } from '../../../../core/service/BookingService';
 import { GuestService } from '../../../../core/service/GuestService';
 import { SessionServiceService } from '../../../../core/service/Session/session-service.service';
-import { UserProfile } from '../../../../core/model/userProfile/userProfile';
 import { ApiServiceRepo } from '../../../../core/repository/resort_repository';
 import { Location } from '@angular/common';
-import { MatTabGroup } from '@angular/material/tabs';
 import { encryptDecrypt } from '../../../../core/service/EncryptDecrypt';
 
 
@@ -72,11 +70,7 @@ export class ResortRoomsComponent implements OnInit  {
   check_out_date!: Date;
 
   ngOnInit(): void {
-    debugger;
-
     this.route.queryParams.subscribe(params => {
-      debugger;
-
       this.Resort_id = params['ID'];
       const bookinid=params['BookingId'];
       if(bookinid){
@@ -86,23 +80,19 @@ export class ResortRoomsComponent implements OnInit  {
       if(roomid){
         this.roomid=this.encryptdecrypt.decrypt(roomid)
       }
-      debugger;
-
+  
       this.roomcount =params['room_count']
       const bookingidfromroom=params['bookingIdFromRoom'];
       if(bookingidfromroom){
         this.bookingIdFromRoom=this.encryptdecrypt.decrypt(bookingidfromroom);
       }
-      debugger;
-
+  
       const selectedTab = params['selectedTab'];
       if (selectedTab === 'tab2') {
-        debugger;
-        this.selectedTabIndex = 1; 
+            this.selectedTabIndex = 1; 
       }
     });
     this.getResortDetails();
-
     this.user_id = this.session.getUserId();
     this.initializer()
     this.calculateDayAndNight();
@@ -110,21 +100,16 @@ export class ResortRoomsComponent implements OnInit  {
   
  
   getResortDetails() {
-    debugger;
     const decrptyId = (atob(this.Resort_id.toString()))
-
     this.repository.getResortById(decrptyId).subscribe(
         (response) => {
           console.log("newRepo",response)
           this.img = response.image_urls;
           this.location = response.location;
           this.resortname = response.name;
-          debugger;
-
+      
           response.categories.forEach((category: any) => {
             this.Room_id = category.room_type_id;
-            debugger;
-
             this.Room_details.push({
               room_type_id: category.room_type_id,
               name: category.name,
@@ -133,17 +118,12 @@ export class ResortRoomsComponent implements OnInit  {
               description: category.description,
               resort_id:category.resort_id
             });  debugger;
-
-
           });
         },
-
       );
   }
 
   initializer() {
-    debugger;
-
     this.check_in_date = this.dateService.checkInDate;
     this.check_out_date = this.dateService.checkOutDate;
     this.total_guest = this.guestService.getGuests();
@@ -155,7 +135,6 @@ export class ResortRoomsComponent implements OnInit  {
   }
 
 isTabDisabled(index: number): boolean {
-
   if (this.booking_id || this.roomid) {
     return index !== this.selectedTabIndex;
   } else {
@@ -200,7 +179,6 @@ isTabDisabled(index: number): boolean {
 
 
   next() {
-    debugger;
     this.getEmployeeIds();
     if(this.booking_id)
     {
@@ -219,19 +197,16 @@ isTabDisabled(index: number): boolean {
           description: value.description,
           resort_id:decryptId
         }));
-        debugger;
-        const updatebooking={
+          const updatebooking={
           resort_id:this.Resort_id,
           check_in_date: this.check_in_date,
           check_out_date: this.check_out_date,
           roomTypes_Req: this.bookedRoomsArray
         }
-        debugger;
           const bookingid=this.encryptdecrypt.encrypt(this.booking_id);
           this.bookingService.UpdatedBooking(updatebooking);
           this.router.navigate(['/user/update-booking'], { queryParams: { ID: this.Resort_id,id:bookingid,AddMember:true } }); 
       }
-     
     }
     else if(this.roomid){
       const decryptId=(atob(this.Resort_id.toString()));
@@ -246,8 +221,6 @@ isTabDisabled(index: number): boolean {
         resort_id: this.Resort_id,
         roomTypes_Req: this.bookedRoomsArray
       }
-      debugger;
-
       this.dateService.addCheckin(this.check_in_date);
       this.dateService.addCheckout(this.check_out_date);
       this.bookingService.Updatedrooms(updatedroom);
@@ -255,12 +228,10 @@ isTabDisabled(index: number): boolean {
       const bookingid=this.encryptdecrypt.encrypt(this.booking_id);
       if(this.bookedRoomsArray.length>0){
         this.router.navigate(['/user/update-booking'], { queryParams: { id:bookingid ,bookingIdFromRoom: bookingIdFromRoom ,ID: this.Resort_id } });
-
       }
       else{
         alert("please select the room")
       }
-
     }
     else{ 
       debugger;  
@@ -279,7 +250,6 @@ isTabDisabled(index: number): boolean {
         Total_List: this.total_list,
       };
       this.bookingService.addBooking(booking_details);
-
       this.router.navigate(['/user/booking-preview'], { queryParams: { ID: this.Resort_id } });
     }}
 
@@ -289,7 +259,6 @@ isTabDisabled(index: number): boolean {
   removeMember(user_id: number) {
     debugger;
       const indexToRemove = this.total_list.findIndex(member => member.user_id === user_id || member.guest_user_id === user_id);
-
       if (indexToRemove !== -1) {
         if (this.total_list[indexToRemove].hasOwnProperty('guest_user_id')) {
             this.total_guest.splice(this.total_guest.findIndex((member: { guest_user_id: number; }) => member.guest_user_id === user_id), 1);
@@ -305,7 +274,6 @@ isTabDisabled(index: number): boolean {
 
 
   editGuest(guest_user_id: number) {
-    debugger;
     if(this.booking_id)
     {
       const index=this.total_list.findIndex((member:any)=>member.guest_user_id===guest_user_id);
@@ -344,16 +312,9 @@ getInitials(firstName: string, lastName: string): { initials: string, background
     if (lastName) {
       initials += lastName.charAt(0);
     }
-  
- 
     const colors = ['orange', 'lightgreen', 'skyblue', 'red'];
     const chosenColor = Math.floor(Math.random() * colors.length);
     const backgroundColor = colors[chosenColor];
- 
     return { initials: initials.toUpperCase(), backgroundColor };
   }
-  
-
-
-
 }

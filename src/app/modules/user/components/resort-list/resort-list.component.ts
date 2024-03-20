@@ -13,10 +13,9 @@ import { encryptDecrypt } from '../../../../core/service/EncryptDecrypt';
   styleUrls: ['./resort-list.component.scss'],
 })
 export class ResortListComponent implements OnInit {
-
   resortlist: ResortDetails[] = [];
   Resort_id!: number;
-  booking_id!:number;
+  booking_id!: number;
 
   rangevalue = new FormGroup({
     check_in_date: new FormControl<Date | null>(
@@ -27,12 +26,14 @@ export class ResortListComponent implements OnInit {
     ),
   });
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private _location: Location,
     private router: Router,
     private dateService: DateService,
-    private encryptdecrypt:encryptDecrypt,
-    private repository: ApiServiceRepo) {
+    private encryptdecrypt: encryptDecrypt,
+    private repository: ApiServiceRepo
+  ) {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -43,17 +44,14 @@ export class ResortListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getResort();
-    this.route.queryParams.subscribe(param=>{
-      const booking_id=param['booking_id'];
-      this.booking_id=this.encryptdecrypt.decrypt(booking_id);
-    })
+    this.route.queryParams.subscribe((param) => {
+      const booking_id = param['booking_id'];
+      this.booking_id = this.encryptdecrypt.decrypt(booking_id);
+    });
   }
 
-
-  getResort(){
-    this.repository.getAllResort().subscribe(
-    (response:any[])=>{
-      console.log("new repo calling:",response);
+  getResort() {
+    this.repository.getAllResort().subscribe((response: any[]) => {
       if (Array.isArray(response)) {
         response.forEach((resortObject) => {
           const newResortDetails = new ResortDetails(
@@ -71,12 +69,11 @@ export class ResortListComponent implements OnInit {
             resortObject.coordinates
           );
           this.resortlist.push(newResortDetails);
-          this.Resort_id=resortObject.resort_id
-
-        });}
+          this.Resort_id = resortObject.resort_id;
+        });
+      }
     });
   }
-
 
   getAvailableResortDetails() {
     const checkInDate = this.rangevalue.get('check_in_date')?.value;
@@ -91,27 +88,30 @@ export class ResortListComponent implements OnInit {
         );
         this.getResort();
       } else {
-      this.repository.getAvailableResort(checkInDate, checkOutDate).subscribe((response) => {
-        if (Array.isArray(response)) {
-          response.forEach((resortObject) => {
-            const newResortDetails = new ResortDetails(
-              resortObject.resort_id,
-              resortObject.name,
-              resortObject.description,
-              resortObject.location,
-              resortObject.amenities,
-              resortObject.image_urls,
-              resortObject.video_urls,
-              resortObject.status,
-              resortObject.created_date,
-              resortObject.last_modified_date,
-              resortObject.categories,
-              resortObject.coordinates
-            );
-            this.Resort_id=resortObject.resort_id
-            this.resortlist.push(newResortDetails);
+        this.repository
+          .getAvailableResort(checkInDate, checkOutDate)
+          .subscribe((response) => {
+            if (Array.isArray(response)) {
+              response.forEach((resortObject) => {
+                const newResortDetails = new ResortDetails(
+                  resortObject.resort_id,
+                  resortObject.name,
+                  resortObject.description,
+                  resortObject.location,
+                  resortObject.amenities,
+                  resortObject.image_urls,
+                  resortObject.video_urls,
+                  resortObject.status,
+                  resortObject.created_date,
+                  resortObject.last_modified_date,
+                  resortObject.categories,
+                  resortObject.coordinates
+                );
+                this.Resort_id = resortObject.resort_id;
+                this.resortlist.push(newResortDetails);
+              });
+            }
           });
-        }})
       }
     } else {
       alert('please select date');
@@ -121,32 +121,28 @@ export class ResortListComponent implements OnInit {
   nextpage(resortId: number) {
     const checkInDate = this.rangevalue.get('check_in_date')?.value;
     const checkOutDate = this.rangevalue.get('check_out_date')?.value;
-    const encryptId=(btoa(resortId.toString()));
-
-
+    const encryptId = btoa(resortId.toString());
     if (this.booking_id) {
       if (checkInDate != null && checkOutDate != null) {
         this.dateService.checkInDate = checkInDate;
         this.dateService.checkOutDate = checkOutDate;
-        const bookingid =this.encryptdecrypt.encrypt(this.booking_id);
-
-        this.router.navigate(['/user/Resortdetails'], { queryParams: { ID: encryptId,booking_id:bookingid } });
+        const bookingid = this.encryptdecrypt.encrypt(this.booking_id);
+        this.router.navigate(['/user/Resortdetails'], {
+          queryParams: { ID: encryptId, booking_id: bookingid },
+        });
+      }
+    } else {
+      if (checkInDate != null && checkOutDate != null) {
+        this.dateService.checkInDate = checkInDate;
+        this.dateService.checkOutDate = checkOutDate;
+        this.router.navigate(['/user/Resortdetails'], {
+          queryParams: { ID: encryptId },
+        });
+      } else {
+        console.error('Check-in date or check-out date is null or undefined.');
       }
     }
-    else
-    {
-      debugger;
-    if (checkInDate != null && checkOutDate != null) {
-      this.dateService.checkInDate = checkInDate;
-      this.dateService.checkOutDate = checkOutDate;
-
-      this.router.navigate(['/user/Resortdetails'], { queryParams: { ID: encryptId } });
-    } else {
-      console.error('Check-in date or check-out date is null or undefined.');
-    }
   }
-}
-
 
   clearDates() {
     this.rangevalue.reset();
@@ -161,5 +157,5 @@ export class ResortListComponent implements OnInit {
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+  }
 }

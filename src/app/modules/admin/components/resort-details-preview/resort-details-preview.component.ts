@@ -34,7 +34,6 @@ export class ResortDetailsPreviewComponent implements OnInit {
     const index = this.resort.categories.findIndex(room => room.room_type_id === room_type_id);
     if (index !== -1) {
       this.resort.categories.splice(index, 1);
-      console.log("Room deleted");
     } else {
       console.error('Room not found with room_type_id:', room_type_id);
     }
@@ -48,7 +47,6 @@ export class ResortDetailsPreviewComponent implements OnInit {
     this.resort.categories.forEach((category: any) => {
       delete category.name;
     });
-
     if (this.resort.resort_id !== 0) {
       this.repo.updateResort(this.resort).subscribe
         ((result) => {

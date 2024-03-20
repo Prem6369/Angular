@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-resort-signup',
   templateUrl: './resort-signup.component.html',
-  styleUrls: ['./resort-signup.component.scss']
+  styleUrls: ['./resort-signup.component.scss'],
 })
 export class ResortSignupComponent implements OnInit {
 
@@ -30,97 +30,85 @@ export class ResortSignupComponent implements OnInit {
     username: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+$')])
   });
 
-  constructor(private repository:apiLoginService,
-    private router:Router) {}
+  constructor(private repository: apiLoginService, private router: Router) {}
 
   ngOnInit() {}
 
   register() {
-    debugger;
-    if(this.newuser.valid){
-    this.setValues();
-    const formData = this.newuser.value; 
-  
-    this.repository.signup(formData).subscribe(
-      (response) => {
-        this.router.navigate([''])
-        this.newuser.reset(); 
-
-      },
-      (error) => {
-        console.error('Error occurred during registration:', error);
-      }
-    );
-  }
-  else{
-    alert('Please fill the all values')
+    if (this.newuser.valid) {
+      this.setValues();
+      const formData = this.newuser.value;
+      this.repository.signup(formData).subscribe(
+        (response) => {
+          this.router.navigate(['']);
+          this.newuser.reset();
+        },
+        (error) => {
+          console.error('Error occurred during registration:', error);
+        }
+      );
+    } else {
+      alert('Please fill the all values');
+    }
   }
 
-  
-  }
-  
-
-  setValues(){
+  setValues() {
     this.newuser.controls['allotted_stays'].setValue(0);
     this.newuser.controls['status'].setValue('active');
     this.newuser.controls['used_stays'].setValue(0);
-
   }
 
-  back(){
-    this.router.navigate([''])
+  back() {
+    this.router.navigate(['']);
   }
 
-  get firstname(){
-    return this.newuser.get('first_name')
+  get firstname() {
+    return this.newuser.get('first_name');
   }
 
-  get lastName(){
+  get lastName() {
     return this.newuser.get('last_name');
   }
-  get claySys_email(){
+  get claySys_email() {
     return this.newuser.get('claySys_email');
   }
-  get role(){
+  get role() {
     return this.newuser.get('role');
   }
-  get lead(){
+  get lead() {
     return this.newuser.get('lead');
   }
 
-  get employee_id(){
+  get employee_id() {
     return this.newuser.get('employee_id');
   }
-  get gender(){
+  get gender() {
     return this.newuser.get('gender');
   }
-  get age(){
+  get age() {
     return this.newuser.get('age');
   }
-  get PhoneNumber(){
+  get PhoneNumber() {
     return this.newuser.get('phone_number');
   }
-  
-  get Address(){
+
+  get Address() {
     return this.newuser.get('address');
   }
-  
-  get OfficialIdCardNo(){
+
+  get OfficialIdCardNo() {
     return this.newuser.get('official_id_card_no');
   }
 
-  get official_id_image_url(){
+  get official_id_image_url() {
     return this.newuser.get('official_id_image_url');
   }
-  
-  get claysys_id_card_image_url(){
+
+  get claysys_id_card_image_url() {
     return this.newuser.get('claysys_id_card_image_url');
   }
-  
-  get username(){
+
+  get username() {
     return this.newuser.get('username');
   }
-
-
-  
 }

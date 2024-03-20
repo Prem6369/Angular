@@ -11,35 +11,34 @@ import { apiLoginService } from '../../../../core/repository/login_repository';
   styleUrl: './resort-login.component.scss',
 })
 export class ResortLoginComponent implements OnInit {
-
-
   signInForm = new FormGroup({
     Username: new FormControl(''),
     password: new FormControl(''),
   });
 
   hide = true;
-  Errormessage:string='';
+  Errormessage: string = '';
 
+  constructor(
+    private guestService: GuestService,
+    private router: Router,
+    private session: SessionServiceService,
+    private repository: apiLoginService
+  ) {}
 
-  constructor(private guestService: GuestService,
-    private router: Router, 
-    private session:SessionServiceService,
-    private repository:apiLoginService) {}
-    
   ngOnInit(): void {
-    this.guestService.resetService()
+    this.guestService.resetService();
   }
 
   Login() {
     var Loginvalues = this.signInForm.value;
-    this.repository.signin(Loginvalues).subscribe((response)=>{
-      if("Unknow User"==response.name){
-        this.Errormessage='Incorrect Username and Password'
-      }else{
-        this.SuccessfullLogin(response.id,response.name,response.role)
+    this.repository.signin(Loginvalues).subscribe((response) => {
+      if ('Unknow User' == response.name) {
+        this.Errormessage = 'Incorrect Username and Password';
+      } else {
+        this.SuccessfullLogin(response.id, response.name, response.role);
 
-        this.session.AddSessionvalues(response.id,response.name);
+        this.session.AddSessionvalues(response.id, response.name);
       }
     });
   }
@@ -48,23 +47,16 @@ export class ResortLoginComponent implements OnInit {
     this.hide = !this.hide;
   }
 
-
-  SuccessfullLogin(id:number,name:string,role:string){
-    if(role==="user")
-    {
+  SuccessfullLogin(id: number, name: string, role: string) {
+    if (role === 'user') {
       this.router.navigate(['/user/Home']);
-    }
-    else if (role==="admin")
-    {
+    } else if (role === 'admin') {
       this.router.navigate(['/admin/home']);
-    }else if (role==="Approver"){
+    } else if (role === 'Approver') {
       this.router.navigate(['/approver/approverhome']);
+    } else {
+      this.router.navigate(['']);
     }
-    else{
-      this.router.navigate([''])
-
-    }
-    this.session.SetUserAuthentication(id,name,role);
-
+    this.session.SetUserAuthentication(id, name, role);
   }
 }

@@ -45,7 +45,6 @@ export class AddRoomtypeComponent implements OnInit {
   });
 
   saveRoom() {
-    debugger;
     if (this.AddRooms.value.room_type_id) {
         this.repo.updateRoom(this.AddRooms.value)
         .subscribe(response => {
@@ -53,12 +52,10 @@ export class AddRoomtypeComponent implements OnInit {
             this.updateMessage = true;
             this.AddRooms.reset();
           }
-
         });
     } else {
-  let room=this.AddRooms.value
-  delete room.room_type_id;
-    
+      let room=this.AddRooms.value
+      delete room.room_type_id;    
       this.repo.insertRoom(room)
         .subscribe(response => {
           if (response !== null) {

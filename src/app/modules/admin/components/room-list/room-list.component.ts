@@ -8,15 +8,15 @@ import { ResortService } from '../../../../core/service/resort_details';
 @Component({
   selector: 'app-room-list',
   templateUrl: './room-list.component.html',
-  styleUrl: './room-list.component.scss'
+  styleUrl: './room-list.component.scss',
 })
-
 export class RoomListComponent implements OnInit {
-
-  constructor(private repo: admin_resort_repository,
-    private encryptiondecryption:encryptDecrypt,
-    private RoomService:ResortService,
-    private router: Router) { }
+  constructor(
+    private repo: admin_resort_repository,
+    private encryptiondecryption: encryptDecrypt,
+    private RoomService: ResortService,
+    private router: Router
+  ) {}
 
   room: getRoomTypes[] = [];
 
@@ -24,25 +24,19 @@ export class RoomListComponent implements OnInit {
     this.getAllRooms();
   }
 
-
   getAllRooms() {
-    this.repo.getAllRoom().subscribe(
-      (response) => {
-        this.room = response;
-      }
-    )
+    this.repo.getAllRoom().subscribe((response) => {
+      this.room = response;
+    });
   }
 
   navigate(roomTypeId: number) {
- 
-    const selectedRoom = this.room.find(room => room.room_type_id === roomTypeId);
-
+    const selectedRoom = this.room.find(
+      (room) => room.room_type_id === roomTypeId
+    );
     this.RoomService.addRoom(selectedRoom);
-    
     if (selectedRoom) {
       this.router.navigate(['/admin/addroomtype']);
     }
   }
-
 }
-

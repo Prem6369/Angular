@@ -1,38 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserProfile } from '../../../../core/model/userProfile/userProfile'; 
+import { UserProfile } from '../../../../core/model/userProfile/userProfile';
 import { SessionServiceService } from '../../../../core/service/Session/session-service.service';
 import { approver_repository } from '../../../../core/repository/approver_repository';
 
 @Component({
   selector: 'app-approver-profile',
   templateUrl: './approver-profile.component.html',
-  styleUrl: './approver-profile.component.scss'
+  styleUrl: './approver-profile.component.scss',
 })
 export class ApproverProfileComponent implements OnInit {
-
   userlist!: UserProfile;
   username: string = '';
-  user_id!:number;
-  img:string='';
-  constructor(private repo: approver_repository,
-    private router: Router, 
-    private session: SessionServiceService) {}
+  user_id!: number;
+  img: string = '';
+  constructor(
+    private repo: approver_repository,
+    private router: Router,
+    private session: SessionServiceService
+  ) {}
 
   ngOnInit(): void {
     this.getUserProfile();
   }
 
-  
   getUserProfile() {
     this.user_id = this.session.getUserId();
     this.username = this.session.getUserName();
     this.repo.getUserProfile(this.user_id).subscribe((response) => {
-          this.img=response.official_id_image_url;
-          console.log('profile',response);
-          this.userlist=response;
-        },
-      );
+      this.img = response.official_id_image_url;
+      this.userlist = response;
+    });
   }
 
   homePage() {
@@ -41,7 +39,5 @@ export class ApproverProfileComponent implements OnInit {
 
   Logout() {
     this.session.logout();
-   
   }
-
 }
