@@ -1,6 +1,4 @@
-debugger;
 export const environment = {
-    production: true,
-    apiUrl: 'https://localhost:7036/api',
-  };
-  
+  production: false,
+  apiUrl: 'https://claysysresortapi.claysys.org/api',
+};

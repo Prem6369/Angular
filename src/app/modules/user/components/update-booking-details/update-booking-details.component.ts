@@ -319,7 +319,7 @@ addMember() {
       this.booking.resetBooking();
       this.bookedRoomsArray.forEach((roomRequest: any) => {
         const roomTypeId = roomRequest.room_type_id;
-        const resortID = btoa(roomRequest.resort_id); 
+        const resortID = btoa(roomRequest.resort_id);
         const roomid=this.encrytiondecryption.encrypt(roomTypeId);
         const bookingid=this.encrytiondecryption.encrypt(this.booking_id);
         this.router.navigate(['/user/Resortrooms'], {
@@ -328,7 +328,15 @@ addMember() {
         });
       });
     }
-   
+    else{
+      const roomid=this.encrytiondecryption.encrypt(2);
+      const resortID=this.resortid
+      const bookingid=this.encrytiondecryption.encrypt(this.booking_id);
+      this.router.navigate(['/user/Resortrooms'], {
+        queryParams:
+          { ID: resortID, room_id: roomid, bookingIdFromRoom: bookingid }
+      });
+    }
   }
   back() {
     this.guest.resetService();

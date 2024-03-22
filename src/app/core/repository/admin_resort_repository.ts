@@ -16,7 +16,6 @@ export class admin_resort_repository {
     }
 
     updateResort(resort: any) {
-        console.log("update respository done");
         return this.apiInvoker.put('updateresortdetails', 'resorts', resort);
     }
 

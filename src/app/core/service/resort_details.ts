@@ -17,7 +17,6 @@ export class ResortService {
 
   
   getRoom(): any{
-    console.log(this.rooms)
     return this.rooms;
   }
 

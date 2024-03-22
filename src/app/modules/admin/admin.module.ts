@@ -14,7 +14,8 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
-
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     MatChipsModule,
     MatIconModule,
+    ToastModule
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(),MessageService],
 })
 export class AdminModule { }

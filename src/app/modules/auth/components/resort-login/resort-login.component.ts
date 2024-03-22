@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SessionServiceService } from '../../../../core/service/Session/session-service.service';
 import { GuestService } from '../../../../core/service/GuestService';
 import { apiLoginService } from '../../../../core/repository/login_repository';
+import { encryptDecrypt } from '../../../../core/service/EncryptDecrypt';
 
 @Component({
   selector: 'app-resort-login',
@@ -23,10 +24,12 @@ export class ResortLoginComponent implements OnInit {
     private guestService: GuestService,
     private router: Router,
     private session: SessionServiceService,
-    private repository: apiLoginService
+    private repository: apiLoginService,
+    private auth:encryptDecrypt
   ) {}
 
   ngOnInit(): void {
+    this.auth.generateSecretKey();
     this.guestService.resetService();
   }
 

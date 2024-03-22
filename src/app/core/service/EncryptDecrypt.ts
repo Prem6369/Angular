@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import CryptoJS from 'crypto-js';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +9,7 @@ import CryptoJS from 'crypto-js';
 export class encryptDecrypt {
 
 
-  private secretKey = '212ad106-c1f3-41b0-bd0f-63bc8cd67547##1710396190171'; 
+  private secretKey =this.generateSecretKey(); 
   constructor() { }
 
   encrypt(data: string | number): string {
@@ -25,12 +26,27 @@ export class encryptDecrypt {
     try {
         const bytes = CryptoJS.AES.decrypt(ciphertext, this.secretKey);
         const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
-        console.log("decryptedData from service", decryptedData);
         return decryptedData;
     } catch (error) {
         console.error("Error during decryption:", error);
         return null; 
     }
+}
+
+ generateSecretKey(): string {
+  const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-#';
+  const length: number = 40;
+  const charactersLength: number = characters.length;
+  let randomString: string = '';
+  const randomArray: string[] = new Array(length);
+  
+  for (let i = 0; i < length; i++) {
+    const randomIndex: number = Math.floor(Math.random() * charactersLength);
+    randomArray[i] = characters.charAt(randomIndex);
+  }
+  
+  randomString = randomArray.join('');
+  return randomString;
 }
 
 

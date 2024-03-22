@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 import { admin_resort_repository } from '../../../../core/repository/admin_resort_repository';
 import { ResortService } from '../../../../core/service/resort_details';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-add-roomtype',
@@ -21,8 +21,8 @@ export class AddRoomtypeComponent implements OnInit {
   constructor(
     private repo: admin_resort_repository,
     private _location: Location,
-    private route: ActivatedRoute,
-    private resortRoom:ResortService
+    private resortRoom:ResortService,
+    private primeMessage:MessageService
   ) { }
 
   ngOnInit(): void {
@@ -49,7 +49,7 @@ export class AddRoomtypeComponent implements OnInit {
         this.repo.updateRoom(this.AddRooms.value)
         .subscribe(response => {
           if (response !== null) {
-            this.updateMessage = true;
+            this.primeMessage.add({ severity: 'success', detail: 'Room updated successfully' });
             this.AddRooms.reset();
           }
         });
@@ -59,7 +59,7 @@ export class AddRoomtypeComponent implements OnInit {
       this.repo.insertRoom(room)
         .subscribe(response => {
           if (response !== null) {
-            this.successMessage = true;
+            this.primeMessage.add({ severity: 'success', detail: 'Room added successfully' });
             this.AddRooms.reset();
           }
         });

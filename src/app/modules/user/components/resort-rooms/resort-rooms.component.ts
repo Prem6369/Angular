@@ -103,7 +103,6 @@ export class ResortRoomsComponent implements OnInit  {
     const decrptyId = (atob(this.Resort_id.toString()))
     this.repository.getResortById(decrptyId).subscribe(
         (response) => {
-          console.log("newRepo",response)
           this.img = response.image_urls;
           this.location = response.location;
           this.resortname = response.name;
@@ -117,7 +116,7 @@ export class ResortRoomsComponent implements OnInit  {
               capacity: category.capacity,
               description: category.description,
               resort_id:category.resort_id
-            });  debugger;
+            }); 
           });
         },
       );
@@ -257,7 +256,6 @@ isTabDisabled(index: number): boolean {
 
 
   removeMember(user_id: number) {
-    debugger;
       const indexToRemove = this.total_list.findIndex(member => member.user_id === user_id || member.guest_user_id === user_id);
       if (indexToRemove !== -1) {
         if (this.total_list[indexToRemove].hasOwnProperty('guest_user_id')) {

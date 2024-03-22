@@ -1,5 +1,4 @@
 export const environment = {
-    production: false,
-    apiUrl: 'https://claysysresortapi.claysys.org/api',
-  };
-  
+  production: true,
+  apiUrl: 'https://localhost:7036/api',
+};

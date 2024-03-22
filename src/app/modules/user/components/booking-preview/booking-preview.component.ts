@@ -104,10 +104,6 @@ export class BookingPreviewComponent implements OnInit {
       (response) => {
         this.img = response.image_urls;
         this.resortname = response.name;
-      },
-      (error) => {
-        console.error('Error fetching resort details:', error);
-        alert('Failed to fetch resort details. Please try again later.');
       }
     );
   }
